@@ -9,8 +9,11 @@ NAMES = {
 SPIRITS = {
     "WorkBot": "Basic pawn",
     "AeroBot": "Basic server, serving goo/oil and such to bots",
+    //...
+    "PioneerBot": "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors",
+    "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
     // ...
-    "RichBot": "Shiny metal ass",
+    "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
     // ...
     "PirateBot": "Needs to be unlocked, achieve ship mastery",
 }
