@@ -15,7 +15,7 @@ tileSet.src = "tiny16.png"
 var ZOOM = 1
 var ROT_OPTIONS = {
 	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
-    height: ~~(CAMERA_SIZE[1] * (1 / ZOOM)),
+    height: ~~((CAMERA_SIZE[1] + UI_HEIGHT) * (1 / ZOOM)),
     bg: 'transparent',
     fontSize: ~~(FONT_SIZE * ZOOM),
     /*
@@ -159,7 +159,7 @@ var camera = {
     "x": (_MAP.width_tiles >> 1) - (ROT_OPTIONS.width >> 1), // center camera, x,y coords of camera are its top-left corner
     "y": (_MAP.height_tiles >> 1) - (ROT_OPTIONS.height >> 1),
     "width": ROT_OPTIONS.width,
-    "height": ROT_OPTIONS.height
+    "height": ROT_OPTIONS.height - UI_HEIGHT
 }
 function update_camera(direction) {
     switch (direction) {
@@ -195,7 +195,7 @@ function update_camera(direction) {
 var _need_draw = true
 function update() {
     var action = inputQueue.shift() || ' '
-    if (action !== ' ') bos_debug("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
+    if (action !== ' ') debug_log("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
 
     //act(player, action)
     _need_draw = update_camera(action)
@@ -209,7 +209,7 @@ function update() {
 }
 
 async function draw() {
-    bos_rot_render(camera)
+    rot_render(camera)
 
     var _need_draw = false
 

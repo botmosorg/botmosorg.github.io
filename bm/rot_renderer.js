@@ -1,8 +1,8 @@
-function bos_rot_render(camera) {
+function rot_render(camera) {
     var map = MAPS[MAPS.current]
 
     // Render map
-    for (var y=0; y<camera.height; y++) {
+    for (var y=0 + UI_HEIGHT; y < camera.height + UI_HEIGHT; y++) {
         for (var x=0; x<camera.width; x++) {
             var tile = map_get(map, camera.x+x, camera.y+y)
 
@@ -41,6 +41,18 @@ function bos_rot_render(camera) {
     var entities = entities_get_for_map(MAPS.current)
     for (var i=0; i<entities.length; i++) {
         var entity = entities[i]
-        ROT_DISPLAY.drawOver(entity.x, entity.y, "@", "#fff");
+        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, "@", "#fff");
+    }
+
+    // Render UI lines
+    for (var i=0; i<UI_LINES.length; i++) {
+        let line = UI_LINES[i];
+        ROT_DISPLAY.drawText(0, i, "%c{white}%b{black}"+line, CAMERA_SIZE[0]);
+    }
+
+    // Render debug lines
+    for (var i=0; i<DEBUG_LINES.length; i++) {
+        let line = DEBUG_LINES[i];
+        ROT_DISPLAY.drawText(0, i + UI_HEIGHT, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
     }
 }
