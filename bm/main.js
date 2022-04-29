@@ -14,10 +14,10 @@ tileSet.src = "tiny16.png"
 
 var ZOOM = 1
 var ROT_OPTIONS = {
-	width: ~~(48 * (1 / ZOOM)),
-    height: ~~(32 * (1 / ZOOM)),
+	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
+    height: ~~(CAMERA_SIZE[1] * (1 / ZOOM)),
     bg: 'transparent',
-    fontSize: ~~(18 * ZOOM),
+    fontSize: ~~(FONT_SIZE * ZOOM),
     /*
     layout: 'tile',
     tileWidth: 16,

@@ -33,5 +33,5 @@ function entities_get_for_map(map_id) {
 }
 
 entities_store(character_create("player", ENTITY_TYPES.player, MAPS.current))
-ENTITIES.player.x = 2
-ENTITIES.player.y = 2
+ENTITIES.player.x = CAMERA_SIZE[0] / 2
+ENTITIES.player.y = CAMERA_SIZE[1] / 2
