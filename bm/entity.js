@@ -3,7 +3,7 @@ const ENTITY_TYPES = {
     "item":1
 }
 
-var ENTITIES = {
+let ENTITIES = {
 }
 
 function character_create(id, type, map_id) {

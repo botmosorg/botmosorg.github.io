@@ -221,3 +221,6 @@ draw()
 setInterval(function() {
   update()
 }, UPDATE_EVERY) // Once per second
+
+// window.onload = Game.init(); // Use this for init instead
+window.focus(); // focus on the canvas
