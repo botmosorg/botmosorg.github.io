@@ -1,5 +1,7 @@
 const MAP_SEED = 1337
 
+MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
+
 const GROUNDS = {
     "plain":0,
     "water":1,
