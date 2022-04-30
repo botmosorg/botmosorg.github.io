@@ -35,7 +35,8 @@ function create_tile(
     return {
         "ground": ground,
         "structure": structure,
-        "level": level
+        "level": level,
+        "entities": [], // items, objects, characters and player
     }
 }
 
