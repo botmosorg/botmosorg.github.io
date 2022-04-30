@@ -41,7 +41,7 @@ function rot_render(camera) {
     var entities = entities_get_for_map(MAPS.current)
     for (var i=0; i<entities.length; i++) {
         var entity = entities[i]
-        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, "@", "#fff");
+        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, MANIFEST.spirits.Spirit.icon, "#fff");
     }
 
     // Render UI lines
