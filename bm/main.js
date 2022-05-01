@@ -9,8 +9,10 @@ const UPDATE_EVERY = 50 // in ms
 
 var turn = 0
 
+/*
 var tileSet = document.createElement("img")
 tileSet.src = "tiny16.png"
+*/
 
 var ZOOM = 1
 var ROT_OPTIONS = {

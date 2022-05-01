@@ -6,29 +6,29 @@ function rot_render(camera) {
         for (var x=0; x<camera.width; x++) {
             var tile = map_get(map, camera.x+x, camera.y+y)
 
-            var bg_color = "black"
-            var fg_color = "black"
+            var bg_color = MANIFEST.terrains.void.color;
+            var fg_color = MANIFEST.terrains.void.color;
             var symbol = ""
 
             if (tile != null) {
-                if (tile.ground == GROUNDS.water) {
+                if (tile.ground === GROUNDS.water) {
                     bg_color = "blue"
                 }
-                if (tile.ground == GROUNDS.plain) {
+                if (tile.ground === GROUNDS.plain) {
                     bg_color = "green"
                 }
-                if (tile.ground == GROUNDS.mountain) {
+                if (tile.ground === GROUNDS.mountain) {
                     bg_color = "darkkhaki"
                 }
-                if (tile.structure == STRUCTURES.grass) {
-                    symbol = "."
-                    fg_color = "darkgreen"
+                if (tile.structure === STRUCTURES.grass) {
+                    symbol = MANIFEST.structures.grass.icon
+                    fg_color = MANIFEST.structures.grass.color;
                 }
-                if (tile.structure == STRUCTURES.tree) {
-                    symbol = "t"
-                    fg_color = "brown"
+                if (tile.structure === STRUCTURES.tree) {
+                    symbol = MANIFEST.structures.tree.icon;
+                    fg_color = MANIFEST.structures.tree.color;
                 }
-                if (tile.structure == STRUCTURES.wall) {
+                if (tile.structure === STRUCTURES.wall) {
                     bg_color = "gray"
                 }
             }
@@ -41,7 +41,7 @@ function rot_render(camera) {
     var entities = entities_get_for_map(MAPS.current)
     for (var i=0; i<entities.length; i++) {
         var entity = entities[i]
-        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, MANIFEST.spirits.Spirit.icon, "#fff");
+        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, MANIFEST.spirits.Spirit.icon, MANIFEST.spirits.Spirit.color);
     }
 
     // Render UI lines
