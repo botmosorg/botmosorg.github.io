@@ -38,6 +38,19 @@ class Structure {
 }
 
 const MANIFEST = {
+    /**
+     * From: https://www.color-hex.com/color-palette/8618
+     * Further inspiration: https://colorcodes.io/neon-color-codes/
+     */
+    "colors": {
+        "black": "#000",
+        "cybercyan": "#4deeea",
+        "cyberyellow": "#ffe700",
+        "cybermagenta": "#f000ff",
+        "cybergreen": "#74ee15",
+        "cyberblue": "#001eff",
+        "white": "#fff"
+    },
     "spirits": {
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@"),
         "WorkBot": new Spirit("WorkBot", "Basic pawn", "B"),
