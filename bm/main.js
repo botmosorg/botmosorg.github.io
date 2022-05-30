@@ -37,7 +37,6 @@ var ROT_OPTIONS = {
 var ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
-var inputQueue = []
 var player = {
     graphic: '@',
     color: 'goldenrod',
@@ -58,87 +57,6 @@ var map = {
         }
     }
 }
-
-/**
- * All keys ever supported:
- * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and TODO translated for convenience
- * - 4 buttons:     A: positive continue action, B: negative non-continue action, X and Y quick slots
- * - 2 shoulder buttons: redundancy
- * - ESC / START / menu key:    Open game menu
- */
-document.body.addEventListener("keydown", function(e) {
-    //var code = e.charCode;
-
-    /*
-    87 w, 38 up arrow
-    65 a, 37 left arrow
-    83 s, 40 down arrow
-    68 d, 39 right arrow
-
-    N ... move north
-    E
-    S
-    W
-    n ... turn north
-    e
-    s
-    w
-      ... wait turn
-    i ... interact
-    */
-    var code = e.keyCode
-    var action = ' '
-    switch (code) {
-        case 87:
-        case 38:
-            action = 'N'
-            break
-        case 65:
-        case 37:
-            action = 'W'
-            break
-        case 83:
-        case 40:
-            action = 'S'
-            break
-        case 68:
-        case 39:
-            action = 'E'
-            break
-        default:
-            action = ' '
-            //action = 'Unknown key: ' + code
-    }
-
-    //console.log('Action: ' + action)
-    inputQueue.push(action)
-})
-document.body.addEventListener("keyup", function(e) {
-    var code = e.keyCode
-    var action = ' '
-    switch (code) {
-        case 87:
-        case 38:
-            action = 'N'
-            break
-        case 65:
-        case 37:
-            action = 'W'
-            break
-        case 83:
-        case 40:
-            action = 'S'
-            break
-        case 68:
-        case 39:
-            action = 'E'
-            break
-        default:
-            action = ' '
-            //action = 'Unknown key: ' + code
-    }
-    inputQueue = inputQueue.filter(e => e !== action)
-})
 
 function act(entity, action) {
     var position = entity.pos
