@@ -125,5 +125,5 @@ function maps_store(map) {
 
 maps_store(map_create_arena())
 maps_store(create_map())
-//maps_set_current("simplex="+MAP_SEED)
-maps_set_current("arena")
+maps_set_current("simplex="+MAP_SEED)
+//maps_set_current("arena")

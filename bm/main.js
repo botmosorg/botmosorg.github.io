@@ -93,28 +93,24 @@ function update_camera(direction) {
         case 'N':
             if (camera.y > camera.y_min) {
                 camera.y -= 1
-                ENTITIES.player.y -= 1;
                 return true
             }
             break
         case 'W':
             if (camera.x > camera.x_min) {
                 camera.x -= 1
-                ENTITIES.player.x -= 1;
                 return true
             }
             break
         case 'S':
             if (camera.y < camera.y_max-1) {
                 camera.y += 1
-                ENTITIES.player.y += 1;
                 return true
             }
             break
         case 'E':
             if (camera.x < camera.x_max-1) {
                 camera.x += 1
-                ENTITIES.player.x += 1;
                 return true
             }
             break
