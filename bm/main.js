@@ -78,7 +78,7 @@ function act(entity, action) {
     entity.pos = {x: position.x, y: position.y}
 }
 
-var camera = {
+let camera = {
     "x_min": Math.min(0, (_MAP.width_tiles >> 1) - (ROT_OPTIONS.width >> 1)),
     "y_min": Math.min(0, (_MAP.height_tiles >> 1) - (ROT_OPTIONS.height >> 1)),
     "x_max": _MAP.width_tiles - ROT_OPTIONS.width,
@@ -93,24 +93,28 @@ function update_camera(direction) {
         case 'N':
             if (camera.y > camera.y_min) {
                 camera.y -= 1
+                ENTITIES.player.y -= 1;
                 return true
             }
             break
         case 'W':
             if (camera.x > camera.x_min) {
                 camera.x -= 1
+                ENTITIES.player.x -= 1;
                 return true
             }
             break
         case 'S':
             if (camera.y < camera.y_max-1) {
                 camera.y += 1
+                ENTITIES.player.y += 1;
                 return true
             }
             break
         case 'E':
             if (camera.x < camera.x_max-1) {
                 camera.x += 1
+                ENTITIES.player.x += 1;
                 return true
             }
             break
@@ -119,7 +123,7 @@ function update_camera(direction) {
     return false
 }
 
-var _need_draw = true
+let _need_draw = true
 function update() {
     var action = inputQueue.shift() || ' '
     if (action !== ' ') debug_log("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
@@ -133,15 +137,6 @@ function update() {
     if (_need_draw) {
         draw()
     }
-}
-
-async function draw() {
-    rot_render(camera)
-
-    var _need_draw = false
-
-    //ROT_DISPLAY.draw(player.pos.x, player.pos.y, player.graphic, null, null)
-    //ROT_DISPLAY.drawOver(player.pos.x, player.pos.y, player.graphic, 'transparent', 'transparent')
 }
 
 draw()

@@ -2,23 +2,11 @@ const MAP_SEED = 1337
 
 MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
 
-const GROUNDS = {
-    "plain":0,
+const TILES = {
+    "void":0,
     "water":1,
-    "mountain":2
-}
-const STRUCTURES = {
-    "none":0,
-    "wall":1,
-    "grass":2,
-    "bush":3,
-    "tree":4,
-    "portal":5
-}
-const LEVELS = {
-    "ground":0,
-    "low":-1,
-    "high":1
+    "rock":2,
+    "wall":3,
 }
 
 const CHUNK_SIZE = {
@@ -27,15 +15,10 @@ const CHUNK_SIZE = {
 }
 const MAP_SIZE = CHUNK_SIZE // in chunks
 
-function create_tile(
-    ground=0,
-    structure=0, // Any
-    level=0      // Height
-    ) {
+function create_tile(type=0, health=100) {
     return {
-        "ground": ground,
-        "structure": structure,
-        "level": level,
+        "type": type,
+        "health": health,
         "entities": [], // items, objects, characters and player
     }
 }
@@ -66,23 +49,19 @@ function create_map(seed=MAP_SEED) {
                 tile_y / _noise_skew
             )
 
-            var ground = 0
+            var tileType = 0
             var structure = 0
-            if (noise_val <= -0.5) {
-                ground = GROUNDS.water
-                structure = STRUCTURES.none
-            } else if (noise_val <= 0) {
-                ground = GROUNDS.plain
-                structure = STRUCTURES.grass
-            } else if (noise_val < 0.5) {
-                ground = GROUNDS.plain
-                structure = STRUCTURES.tree
-            } else {
-                ground = GROUNDS.mountain
-                structure = STRUCTURES.none
+            if (noise_val <= -0.5) { // water
+                tileType = TILES.water
+            } else if (noise_val <= 0) { // grass
+                tileType = TILES.void
+            } else if (noise_val < 0.5) { // tree
+                tileType = TILES.void
+            } else { // mountain
+                tileType = TILES.rock
             }
 
-            tiles.push(create_tile(ground, structure, LEVELS.ground))
+            tiles.push(create_tile(tileType))
         }
     }
 
@@ -98,9 +77,8 @@ function map_create_arena() {
     var map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height)
     var tiles = []
     map.create(function(x, y, wall) {
-        var ground = GROUNDS.plain
-        var structure = wall ? STRUCTURES.wall : STRUCTURES.none
-        tiles[y*CHUNK_SIZE.width + x] = create_tile(ground, structure, LEVELS.ground)
+        var tileType = wall ? TILES.wall : TILES.void
+        tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType)
     })
 
     var chunks = []
@@ -113,6 +91,17 @@ function map_create_arena() {
     }
 }
 
+class Map {
+    constructor(id, width, height) {
+        this.id = id;
+        this.width = width;
+        this.height = height;
+        this.backgroundColors = [];
+        this.foregroundColors = [];
+        this.symbols = [];
+    }
+}
+
 function map_get(map, tile_x, tile_y) {
     if (tile_x >= 0 && tile_x < map.width_tiles
         && tile_y >= 0 && tile_y < map.height_tiles) {
@@ -122,7 +111,7 @@ function map_get(map, tile_x, tile_y) {
     return null
 }
 
-var MAPS = {
+const MAPS = {
     "current": ""
 }
 
@@ -136,5 +125,5 @@ function maps_store(map) {
 
 maps_store(map_create_arena())
 maps_store(create_map())
-maps_set_current("simplex="+MAP_SEED)
-//maps_set_current("arena")
+//maps_set_current("simplex="+MAP_SEED)
+maps_set_current("arena")

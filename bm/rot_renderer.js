@@ -1,3 +1,6 @@
+function lookup_color(name) {
+    return MANIFEST.colors[name];
+}
 function rot_render(camera) {
     var map = MAPS[MAPS.current]
 
@@ -6,34 +9,34 @@ function rot_render(camera) {
         for (var x=0; x<camera.width; x++) {
             var tile = map_get(map, camera.x+x, camera.y+y)
 
-            var bg_color = MANIFEST.terrains.void.color;
-            var fg_color = MANIFEST.terrains.void.color;
-            var symbol = ""
+            var bg_color = MANIFEST.colors.black;
+            var fg_color = MANIFEST.colors.white;
+            var icon = ""
 
             if (tile != null) {
-                if (tile.ground === GROUNDS.water) {
-                    bg_color = "blue"
+                if (tile.type === TILES.water) {
+                    bg_color = lookup_color(MANIFEST.tiles.water.bg)
+                    fg_color = lookup_color(MANIFEST.tiles.water.fg)
+                    icon = MANIFEST.tiles.water.icon
                 }
-                if (tile.ground === GROUNDS.plain) {
-                    bg_color = "green"
+                if (tile.type === TILES.void) {
+                    bg_color = lookup_color(MANIFEST.tiles.void.bg)
+                    fg_color = lookup_color(MANIFEST.tiles.void.fg)
+                    icon = MANIFEST.tiles.void.icon
                 }
-                if (tile.ground === GROUNDS.mountain) {
-                    bg_color = "darkkhaki"
+                if (tile.type === TILES.rock) {
+                    bg_color = lookup_color(MANIFEST.tiles.rock.bg)
+                    fg_color = lookup_color(MANIFEST.tiles.rock.fg)
+                    icon = MANIFEST.tiles.rock.icon
                 }
-                if (tile.structure === STRUCTURES.grass) {
-                    symbol = MANIFEST.structures.grass.icon
-                    fg_color = MANIFEST.structures.grass.color;
-                }
-                if (tile.structure === STRUCTURES.tree) {
-                    symbol = MANIFEST.structures.tree.icon;
-                    fg_color = MANIFEST.structures.tree.color;
-                }
-                if (tile.structure === STRUCTURES.wall) {
-                    bg_color = "gray"
+                if (tile.type === TILES.wall) {
+                    bg_color = lookup_color(MANIFEST.tiles.wall.bg)
+                    fg_color = lookup_color(MANIFEST.tiles.wall.fg)
+                    icon = MANIFEST.tiles.wall.icon
                 }
             }
 
-            ROT_DISPLAY.draw(x, y, symbol, fg_color, bg_color)
+            ROT_DISPLAY.draw(x, y, icon, fg_color, bg_color)
         }
     }
 
@@ -55,4 +58,13 @@ function rot_render(camera) {
         let line = DEBUG_LINES[i];
         ROT_DISPLAY.drawText(0, i + UI_HEIGHT, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
     }
+}
+
+async function draw() {
+    rot_render(camera)
+
+    var _need_draw = false
+
+    //ROT_DISPLAY.draw(player.pos.x, player.pos.y, player.graphic, null, null)
+    //ROT_DISPLAY.drawOver(player.pos.x, player.pos.y, player.graphic, 'transparent', 'transparent')
 }

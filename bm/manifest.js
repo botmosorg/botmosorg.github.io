@@ -13,27 +13,13 @@ class Spirit {
         this.unlockCondition = null;
     }
 }
-class WorldObject {
-    constructor(name, description, icon, color) {
+class Tile {
+    constructor(name, description, icon=null, fg="white", bg="black") { // foreground, background colors
         this.name = name;
         this.description = description;
         this.icon = icon;
-        this.color = color;
-    }
-}
-class Terrain {
-    constructor(name, description, color) {
-        this.name = name;
-        this.description = description;
-        this.color = color;
-    }
-}
-class Structure {
-    constructor(name, description, icon, color) {
-        this.name = name;
-        this.description = description;
-        this.icon = icon;
-        this.color = color;
+        this.fg = fg;
+        this.bg = bg;
     }
 }
 
@@ -49,6 +35,7 @@ const MANIFEST = {
         "cybermagenta": "#f000ff",
         "cybergreen": "#74ee15",
         "cyberblue": "#001eff",
+        "gray": "#777",
         "white": "#fff"
     },
     "spirits": {
@@ -65,21 +52,24 @@ const MANIFEST = {
         */
     },
     "objects": {
-        "boulder": new WorldObject("boulder", "A movable rock", "b", "#777"),
-        "chest": new WorldObject("chest", "A chest. What might be inside?", "c", "goldenrod"),
-        "log": new WorldObject("log", "A movable tree trunk", "l", "brown"),
+        "boulder": new Tile("boulder", "A movable rock", "b", "#777"),
+        "chest": new Tile("chest", "A chest. What might be inside?", "c", "goldenrod"),
+        "log": new Tile("log", "A movable tree trunk", "l", "brown"),
     },
-    "terrains": {
-        "void": new Terrain("void", "Just nothing here", "#000"),
-        "water": null,
-        "grass": null,
-        "rocky": null,
-        "sand": null,
-        "swallowwater": null,
-        "deepwater": null
-    },
-    "structures": {
+    "tiles": {
+        "void": new Tile("void", "Just nothing here"),
+        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"),
+        "rock": new Tile("rock", "Hidden treasures may away", "^", "cyberyellow", "black"),
+        "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
+        "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
+        "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black")
+        /*
         "tree": new Structure("tree", "A tree", "t", "brown"),
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
+        */
     }
+}
+
+function read_color(name) {
+    return MANIFEST.colors[name];
 }
