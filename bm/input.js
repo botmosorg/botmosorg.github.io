@@ -43,7 +43,7 @@ document.body.addEventListener("keydown", function(e) {
         return; // Do nothing if event already handled
     }
 
-    var keyCode = e.keyCode;
+    let keyCode = e.keyCode;
     let code = e.code;
     let key = e.key;
     //console.log('KeyDown: ', code, key)
@@ -52,18 +52,26 @@ document.body.addEventListener("keydown", function(e) {
         case 87:
         case 38:
             action = 'N'
+            BM_INPUT.up = true;
+            updateInputQueue(e)
             break
         case 65:
         case 37:
             action = 'W'
+            BM_INPUT.left = true;
+            updateInputQueue(e)
             break
         case 83:
         case 40:
             action = 'S'
+            BM_INPUT.down = true;
+            updateInputQueue(e)
             break
         case 68:
         case 39:
             action = 'E'
+            BM_INPUT.right = true;
+            updateInputQueue(e)
             break
         default:
             action = ' '
@@ -71,10 +79,53 @@ document.body.addEventListener("keydown", function(e) {
     }
 
     //console.log('Action: ' + action)
-    inputQueue.push(action)
 
-    e.preventDefault();
 })
+let __lastAction = ''
+function updateInputQueue(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let action = ' ';
+
+    if (BM_INPUT.right) {
+        action = "E";
+    }
+    if (BM_INPUT.left) {
+        action = "W";
+    }
+    if (BM_INPUT.down) {
+        action = "S";
+    }
+    if (BM_INPUT.up) {
+        action = "N";
+    }
+
+    if (BM_INPUT.up && BM_INPUT.right) {
+        if (action === 'N' && __lastAction === 'N') {
+            action = 'E';
+        }
+    }
+    if (BM_INPUT.up && BM_INPUT.left) {
+        if (action === 'N' && __lastAction === 'N') {
+            action = 'W';
+        }
+    }
+    if (BM_INPUT.down && BM_INPUT.right) {
+        if (action === 'S' && __lastAction === 'S') {
+            action = 'E';
+        }
+    }
+    if (BM_INPUT.down && BM_INPUT.left) {
+        if (action === 'S' && __lastAction === 'S') {
+            action = 'W';
+        }
+    }
+
+    __lastAction = action;
+    inputQueue.push(action);
+}
+
 document.body.addEventListener("keyup", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -88,24 +139,29 @@ document.body.addEventListener("keyup", function(e) {
         case 87:
         case 38:
             action = 'N'
+            BM_INPUT.up = false;
+            updateInputQueue(e)
             break
         case 65:
         case 37:
             action = 'W'
+            BM_INPUT.left = false;
+            updateInputQueue(e)
             break
         case 83:
         case 40:
             action = 'S'
+            BM_INPUT.down = false;
+            updateInputQueue(e)
             break
         case 68:
         case 39:
             action = 'E'
+            BM_INPUT.right = false;
+            updateInputQueue(e)
             break
         default:
             action = ' '
             //action = 'Unknown key: ' + code
     }
-    inputQueue = inputQueue.filter(e => e !== action)
-
-    e.preventDefault();
 })
