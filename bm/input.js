@@ -81,6 +81,47 @@ document.body.addEventListener("keydown", function(e) {
     //console.log('Action: ' + action)
 
 })
+
+document.body.addEventListener("keyup", function(e) {
+    if (e.defaultPrevented) {
+        return; // Do nothing if event already handled
+    }
+
+    var keyCode = e.keyCode;
+    let code = e.code;
+    let key = e.key;
+    var action = ' '
+    switch (keyCode) {
+        case 87:
+        case 38:
+            action = 'N'
+            BM_INPUT.up = false;
+            updateInputQueue(e)
+            break
+        case 65:
+        case 37:
+            action = 'W'
+            BM_INPUT.left = false;
+            updateInputQueue(e)
+            break
+        case 83:
+        case 40:
+            action = 'S'
+            BM_INPUT.down = false;
+            updateInputQueue(e)
+            break
+        case 68:
+        case 39:
+            action = 'E'
+            BM_INPUT.right = false;
+            updateInputQueue(e)
+            break
+        default:
+            action = ' '
+            //action = 'Unknown key: ' + code
+    }
+})
+
 let __lastAction = ''
 function updateInputQueue(e) {
     e.preventDefault();
@@ -125,43 +166,3 @@ function updateInputQueue(e) {
     __lastAction = action;
     inputQueue.push(action);
 }
-
-document.body.addEventListener("keyup", function(e) {
-    if (e.defaultPrevented) {
-        return; // Do nothing if event already handled
-    }
-
-    var keyCode = e.keyCode;
-    let code = e.code;
-    let key = e.key;
-    var action = ' '
-    switch (keyCode) {
-        case 87:
-        case 38:
-            action = 'N'
-            BM_INPUT.up = false;
-            updateInputQueue(e)
-            break
-        case 65:
-        case 37:
-            action = 'W'
-            BM_INPUT.left = false;
-            updateInputQueue(e)
-            break
-        case 83:
-        case 40:
-            action = 'S'
-            BM_INPUT.down = false;
-            updateInputQueue(e)
-            break
-        case 68:
-        case 39:
-            action = 'E'
-            BM_INPUT.right = false;
-            updateInputQueue(e)
-            break
-        default:
-            action = ' '
-            //action = 'Unknown key: ' + code
-    }
-})
