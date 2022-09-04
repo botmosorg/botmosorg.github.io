@@ -119,25 +119,23 @@ function update_camera(direction) {
     return false
 }
 
-let _need_draw = true
-function update() {
+function _update() {
     var action = get_action();
     if (action !== ' ') debug_log("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
 
     //act(player, action)
-    _need_draw = update_camera(action)
-
     turn += 1
-
-    if (_need_draw) {
-        draw()
-    }
+    return update_camera(action)
 }
 
+let _need_draw = true;
 draw()
-setInterval(function() {
-  update()
-}, UPDATE_EVERY) // Once per second
+let _gameloop = setInterval(function() {
+  _need_draw = _update();
+  if (_need_draw) {
+    draw()
+  }
+}, UPDATE_EVERY)
 
 // window.onload = Game.init(); // Use this for init instead
 window.focus(); // focus on the canvas
