@@ -39,7 +39,6 @@ var _noise_skew = 55
 function create_map(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed)
     var noise = new ROT.Noise.Simplex()
-    var chunks = []
     var tiles = []
     for (var tile_y=0; tile_y<CHUNK_SIZE.height*MAP_SIZE.height; tile_y++) {
         for (var tile_x=0; tile_x<CHUNK_SIZE.width*MAP_SIZE.width; tile_x++) {
@@ -50,7 +49,6 @@ function create_map(seed=MAP_SEED) {
             )
 
             var tileType = 0
-            var structure = 0
             if (noise_val <= -0.5) { // water
                 tileType = TILES.water
             } else if (noise_val <= 0) { // grass
