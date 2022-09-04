@@ -5,7 +5,7 @@
  * - 2 shoulder buttons: redundancy
  * - ESC / START / menu key:    Open game menu
  */
-const BM_INPUT = {
+const _BM_INPUT = {
     up: false,
     right: false,
     down: false,
@@ -17,7 +17,7 @@ const BM_INPUT = {
     menu: false
 }
 
-let inputQueue = []
+let _inputQueue = []
 document.body.addEventListener("keydown", function(e) {
     /**
      * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
@@ -52,26 +52,26 @@ document.body.addEventListener("keydown", function(e) {
         case 87:
         case 38:
             action = 'N'
-            BM_INPUT.up = true;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.up = true;
+            _preventDefaultAndStopPropagation(e)
             break
         case 65:
         case 37:
             action = 'W'
-            BM_INPUT.left = true;
+            _BM_INPUT.left = true;
             updateInpupreventDefaultAndStopPropagationtQueue(e)
             break
         case 83:
         case 40:
             action = 'S'
-            BM_INPUT.down = true;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.down = true;
+            _preventDefaultAndStopPropagation(e)
             break
         case 68:
         case 39:
             action = 'E'
-            BM_INPUT.right = true;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.right = true;
+            _preventDefaultAndStopPropagation(e)
             break
         default:
             action = ' '
@@ -95,26 +95,26 @@ document.body.addEventListener("keyup", function(e) {
         case 87:
         case 38:
             action = 'N'
-            BM_INPUT.up = false;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.up = false;
+            _preventDefaultAndStopPropagation(e)
             break
         case 65:
         case 37:
             action = 'W'
-            BM_INPUT.left = false;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.left = false;
+            _preventDefaultAndStopPropagation(e)
             break
         case 83:
         case 40:
             action = 'S'
-            BM_INPUT.down = false;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.down = false;
+            _preventDefaultAndStopPropagation(e)
             break
         case 68:
         case 39:
             action = 'E'
-            BM_INPUT.right = false;
-            preventDefaultAndStopPropagation(e)
+            _BM_INPUT.right = false;
+            _preventDefaultAndStopPropagation(e)
             break
         default:
             action = ' '
@@ -122,56 +122,56 @@ document.body.addEventListener("keyup", function(e) {
     }
 })
 
-function preventDefaultAndStopPropagation(e) {
+function _preventDefaultAndStopPropagation(e) {
     e.preventDefault();
     e.stopPropagation();
 }
 
-let __lastAction = ''
-function updateInputQueue() {
+let _lastAction = ''
+function _updateInputQueue() {
     let action = ' ';
 
-    if (BM_INPUT.right) {
+    if (_BM_INPUT.right) {
         action = "E";
     }
-    if (BM_INPUT.left) {
+    if (_BM_INPUT.left) {
         action = "W";
     }
-    if (BM_INPUT.down) {
+    if (_BM_INPUT.down) {
         action = "S";
     }
-    if (BM_INPUT.up) {
+    if (_BM_INPUT.up) {
         action = "N";
     }
 
-    if (BM_INPUT.up && BM_INPUT.right) {
-        if (action === 'N' && __lastAction === 'N') {
+    if (_BM_INPUT.up && _BM_INPUT.right) {
+        if (action === 'N' && _lastAction === 'N') {
             action = 'E';
         }
     }
-    if (BM_INPUT.up && BM_INPUT.left) {
-        if (action === 'N' && __lastAction === 'N') {
+    if (_BM_INPUT.up && _BM_INPUT.left) {
+        if (action === 'N' && _lastAction === 'N') {
             action = 'W';
         }
     }
-    if (BM_INPUT.down && BM_INPUT.right) {
-        if (action === 'S' && __lastAction === 'S') {
+    if (_BM_INPUT.down && _BM_INPUT.right) {
+        if (action === 'S' && _lastAction === 'S') {
             action = 'E';
         }
     }
-    if (BM_INPUT.down && BM_INPUT.left) {
-        if (action === 'S' && __lastAction === 'S') {
+    if (_BM_INPUT.down && _BM_INPUT.left) {
+        if (action === 'S' && _lastAction === 'S') {
             action = 'W';
         }
     }
 
-    __lastAction = action;
-    inputQueue.push(action);
+    _lastAction = action;
+    _inputQueue.push(action);
 }
 
 function get_action() {
-    updateInputQueue();
-    let action = inputQueue.shift() || ' ';
-    inputQueue = [];
+    _updateInputQueue();
+    let action = _inputQueue.shift() || ' ';
+    _inputQueue = [];
     return action;
 }
