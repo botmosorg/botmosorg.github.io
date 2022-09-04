@@ -43,43 +43,36 @@ document.body.addEventListener("keydown", function(e) {
         return; // Do nothing if event already handled
     }
 
-    let keyCode = e.keyCode;
-    let code = e.code;
     let key = e.key;
-    //console.log('KeyDown: ', code, key)
-    var action = ' '
-    switch (keyCode) {
-        case 87:
-        case 38:
+    let action = ' ';
+    switch (key) {
+        case 'w':
+        case 'ArrowUp':
             action = 'N'
             _BM_INPUT.up = true;
             _preventDefaultAndStopPropagation(e)
             break
-        case 65:
-        case 37:
+        case 'a':
+        case 'ArrowLeft':
             action = 'W'
             _BM_INPUT.left = true;
-            updateInpupreventDefaultAndStopPropagationtQueue(e)
+            _preventDefaultAndStopPropagation(e)
             break
-        case 83:
-        case 40:
+        case 's':
+        case 'ArrowDown':
             action = 'S'
             _BM_INPUT.down = true;
             _preventDefaultAndStopPropagation(e)
             break
-        case 68:
-        case 39:
+        case 'd':
+        case 'ArrowRight':
             action = 'E'
             _BM_INPUT.right = true;
             _preventDefaultAndStopPropagation(e)
             break
         default:
-            action = ' '
-            //action = 'Unknown key: ' + code
+            action = ' ';
     }
-
-    //console.log('Action: ' + action)
-
 })
 
 document.body.addEventListener("keyup", function(e) {
@@ -87,31 +80,29 @@ document.body.addEventListener("keyup", function(e) {
         return; // Do nothing if event already handled
     }
 
-    var keyCode = e.keyCode;
-    let code = e.code;
     let key = e.key;
-    var action = ' '
-    switch (keyCode) {
-        case 87:
-        case 38:
+    let action = ' ';
+    switch (key) {
+        case 'w':
+        case 'ArrowUp':
             action = 'N'
             _BM_INPUT.up = false;
             _preventDefaultAndStopPropagation(e)
             break
-        case 65:
-        case 37:
+        case 'a':
+        case 'ArrowLeft':
             action = 'W'
             _BM_INPUT.left = false;
             _preventDefaultAndStopPropagation(e)
             break
-        case 83:
-        case 40:
+        case 's':
+        case 'ArrowDown':
             action = 'S'
             _BM_INPUT.down = false;
             _preventDefaultAndStopPropagation(e)
             break
-        case 68:
-        case 39:
+        case 'd':
+        case 'ArrowRight':
             action = 'E'
             _BM_INPUT.right = false;
             _preventDefaultAndStopPropagation(e)
