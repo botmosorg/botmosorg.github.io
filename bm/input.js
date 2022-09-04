@@ -109,7 +109,6 @@ document.body.addEventListener("keyup", function(e) {
             break
         default:
             action = ' '
-            //action = 'Unknown key: ' + code
     }
 })
 
