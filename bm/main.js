@@ -121,13 +121,12 @@ function update_camera(direction) {
 
 let _need_draw = true
 function update() {
-    var action = inputQueue.shift() || ' '
+    var action = get_action();
     if (action !== ' ') debug_log("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
 
     //act(player, action)
     _need_draw = update_camera(action)
 
-    inputQueue = []
     turn += 1
 
     if (_need_draw) {

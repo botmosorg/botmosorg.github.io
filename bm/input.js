@@ -53,25 +53,25 @@ document.body.addEventListener("keydown", function(e) {
         case 38:
             action = 'N'
             BM_INPUT.up = true;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         case 65:
         case 37:
             action = 'W'
             BM_INPUT.left = true;
-            updateInputQueue(e)
+            updateInpupreventDefaultAndStopPropagationtQueue(e)
             break
         case 83:
         case 40:
             action = 'S'
             BM_INPUT.down = true;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         case 68:
         case 39:
             action = 'E'
             BM_INPUT.right = true;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         default:
             action = ' '
@@ -96,25 +96,25 @@ document.body.addEventListener("keyup", function(e) {
         case 38:
             action = 'N'
             BM_INPUT.up = false;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         case 65:
         case 37:
             action = 'W'
             BM_INPUT.left = false;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         case 83:
         case 40:
             action = 'S'
             BM_INPUT.down = false;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         case 68:
         case 39:
             action = 'E'
             BM_INPUT.right = false;
-            updateInputQueue(e)
+            preventDefaultAndStopPropagation(e)
             break
         default:
             action = ' '
@@ -122,11 +122,13 @@ document.body.addEventListener("keyup", function(e) {
     }
 })
 
-let __lastAction = ''
-function updateInputQueue(e) {
+function preventDefaultAndStopPropagation(e) {
     e.preventDefault();
     e.stopPropagation();
+}
 
+let __lastAction = ''
+function updateInputQueue() {
     let action = ' ';
 
     if (BM_INPUT.right) {
@@ -165,4 +167,11 @@ function updateInputQueue(e) {
 
     __lastAction = action;
     inputQueue.push(action);
+}
+
+function get_action() {
+    updateInputQueue();
+    let action = inputQueue.shift() || ' ';
+    inputQueue = [];
+    return action;
 }
