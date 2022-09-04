@@ -81,17 +81,6 @@ function map_create_arena() {
     }
 }
 
-class Map {
-    constructor(id, width, height) {
-        this.id = id;
-        this.width = width;
-        this.height = height;
-        this.backgroundColors = [];
-        this.foregroundColors = [];
-        this.symbols = [];
-    }
-}
-
 function map_get(map, tile_x, tile_y) {
     if (tile_x >= 0 && tile_x < map.width_tiles
         && tile_y >= 0 && tile_y < map.height_tiles) {
