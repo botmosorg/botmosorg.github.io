@@ -40,6 +40,9 @@ const MANIFEST = {
         "gray": "#777",
         "white": "#fff"
     },
+    "colorcoding": {
+        "cybermagenta": "Enemy color"
+    },
     "spirits": {
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@"),
         "WorkBot": new Spirit("WorkBot", "Basic pawn", "B"),

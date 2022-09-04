@@ -14,22 +14,22 @@ function rot_render(camera) {
             var icon = ""
 
             if (tile != null) {
-                if (tile.type === TILES.water) {
+                if (tile.type === MANIFEST.tiles.water) {
                     bg_color = lookup_color(MANIFEST.tiles.water.bg)
                     fg_color = lookup_color(MANIFEST.tiles.water.fg)
                     icon = MANIFEST.tiles.water.icon
                 }
-                if (tile.type === TILES.void) {
+                if (tile.type === MANIFEST.tiles.void) {
                     bg_color = lookup_color(MANIFEST.tiles.void.bg)
                     fg_color = lookup_color(MANIFEST.tiles.void.fg)
                     icon = MANIFEST.tiles.void.icon
                 }
-                if (tile.type === TILES.rock) {
+                if (tile.type === MANIFEST.tiles.rock) {
                     bg_color = lookup_color(MANIFEST.tiles.rock.bg)
                     fg_color = lookup_color(MANIFEST.tiles.rock.fg)
                     icon = MANIFEST.tiles.rock.icon
                 }
-                if (tile.type === TILES.wall) {
+                if (tile.type === MANIFEST.tiles.wall) {
                     bg_color = lookup_color(MANIFEST.tiles.wall.bg)
                     fg_color = lookup_color(MANIFEST.tiles.wall.fg)
                     icon = MANIFEST.tiles.wall.icon

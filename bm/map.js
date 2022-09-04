@@ -2,24 +2,16 @@ const MAP_SEED = 1337
 
 MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
 
-const TILES = {
-    "void":0,
-    "water":1,
-    "rock":2,
-    "wall":3,
-}
-
 const CHUNK_SIZE = {
     "width": 16, // in tiles
     "height": 16
 }
 const MAP_SIZE = CHUNK_SIZE // in chunks
 
-function create_tile(type=0, health=100) {
+function create_tile(type=null, health=100) {
     return {
         "type": type,
-        "health": health,
-        "entities": [], // items, objects, characters and player
+        "health": health
     }
 }
 
@@ -50,13 +42,13 @@ function create_map(seed=MAP_SEED) {
 
             var tileType = 0
             if (noise_val <= -0.5) { // water
-                tileType = TILES.water
+                tileType = MANIFEST.tiles.water
             } else if (noise_val <= 0) { // grass
-                tileType = TILES.void
+                tileType = MANIFEST.tiles.void
             } else if (noise_val < 0.5) { // tree
-                tileType = TILES.void
+                tileType = MANIFEST.tiles.void
             } else { // mountain
-                tileType = TILES.rock
+                tileType = MANIFEST.tiles.rock
             }
 
             tiles.push(create_tile(tileType))
@@ -75,7 +67,7 @@ function map_create_arena() {
     var map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height)
     var tiles = []
     map.create(function(x, y, wall) {
-        var tileType = wall ? TILES.wall : TILES.void
+        var tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void
         tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType)
     })
 
