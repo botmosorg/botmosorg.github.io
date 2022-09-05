@@ -58,7 +58,7 @@ const MANIFEST = {
     },
     "tiles": {
         "void": new Tile("void", "Just nothing here"),
-        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"),
+        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may away", "▲", "cyberyellow", "black"), // ^ alternatively
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
