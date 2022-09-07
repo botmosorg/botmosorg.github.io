@@ -1,8 +1,10 @@
 "use strict";
 
+import { MANIFEST } from "./manifest.js";
+
 const MAP_SEED = 1337
 
-MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
+//const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
 
 const CHUNK_SIZE = {
     "width": 16, // in tiles
@@ -23,10 +25,6 @@ function create_chunk(tiles) {
         "height": CHUNK_SIZE.height,
         "tiles": tiles
     }
-}
-
-function chunk_get(chunk, tile_x, tile_y) {
-    return chunk.tiles[tile_y*CHUNK_SIZE.width+tile_x]
 }
 
 var _noise_skew = 55
@@ -83,7 +81,7 @@ function map_create_arena() {
     }
 }
 
-function map_get(map, tile_x, tile_y) {
+export function map_get(map, tile_x, tile_y) {
     if (tile_x >= 0 && tile_x < map.width_tiles
         && tile_y >= 0 && tile_y < map.height_tiles) {
         var tile_index = tile_y * map.width_tiles + tile_x
@@ -92,15 +90,15 @@ function map_get(map, tile_x, tile_y) {
     return null
 }
 
-const MAPS = {
+export const MAPS = {
     "current": ""
 }
 
-function maps_set_current(map_id) {
+export function maps_set_current(map_id) {
     MAPS["current"] = map_id
 }
 
-function maps_store(map) {
+export function maps_store(map) {
     MAPS[map.id] = map
 }
 

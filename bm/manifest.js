@@ -1,13 +1,5 @@
 "use strict";
 
-const NAMES = {
-    "BotMoses": "Teaches the new player",
-    "Betty": "Gambles a lot",
-    "Bender": "From the future, bowl head",
-    "Drak": "A now retired PioneerBot, who teaches the new player combat lessons",
-    "Oz": "A machinery wizard"
-}
-
 class Spirit {
     constructor(name, description, icon) {
         this.name = name;
@@ -27,7 +19,7 @@ class Tile {
     }
 }
 
-const MANIFEST = {
+export const MANIFEST = {
     /**
      * From: https://www.color-hex.com/color-palette/8618
      * Further inspiration: https://colorcodes.io/neon-color-codes/
@@ -44,6 +36,13 @@ const MANIFEST = {
     },
     "colorcoding": {
         "cybermagenta": "Enemy color"
+    },
+    "names": {
+        "BotMoses": "Teaches the new player",
+        "Betty": "Gambles a lot",
+        "Bender": "From the future, bowl head",
+        "Drak": "A now retired PioneerBot, who teaches the new player combat lessons",
+        "Oz": "A machinery wizard"
     },
     "spirits": {
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@"),
@@ -76,6 +75,6 @@ const MANIFEST = {
     }
 }
 
-function read_color(name) {
+export function read_color(name) {
     return MANIFEST.colors[name];
 }

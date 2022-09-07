@@ -1,5 +1,8 @@
 "use strict";
 
+import { CAMERA_SIZE } from "./camera.js";
+import { MAPS } from "./map.js";
+
 const ENTITY_TYPES = {
     "player":0,
     "item":1
@@ -22,7 +25,7 @@ function entities_store(entity) {
     ENTITIES[entity.id] = entity
 }
 
-function entities_get_for_map(map_id) {
+export function entities_get_for_map(map_id) {
     var entity_ids = Object.keys(ENTITIES)
     var entities_on_map = []
     for (var i=0; i<entity_ids.length; i++) {

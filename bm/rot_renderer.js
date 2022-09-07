@@ -1,5 +1,13 @@
 "use strict";
 
+import { CAMERA_SIZE } from "./camera.js";
+import { ROT_DISPLAY } from "./config.js";
+import { DEBUG_LINES } from "./debug.js";
+import { entities_get_for_map } from "./entity.js";
+import { MANIFEST } from "./manifest.js";
+import { MAPS, map_get } from "./map.js";
+import { UI_HEIGHT, UI_LINES } from "./ui.js";
+
 function lookup_color(name) {
     return MANIFEST.colors[name];
 }
@@ -62,7 +70,7 @@ function rot_render(camera) {
     }
 }
 
-async function draw() {
+export async function draw(camera) {
     rot_render(camera)
 
     var _need_draw = false

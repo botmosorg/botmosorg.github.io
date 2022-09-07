@@ -1,12 +1,12 @@
 "use strict";
 
-function debug_log(text) {
+export function debug_log(text) {
     console.log(text)
     debug_overlay(text);
 }
 
 // Max latest lines are shown
-const DEBUG_LINES = []
+export const DEBUG_LINES = []
 const LATEST_N_LINES = 2
 function debug_overlay(line) {
     DEBUG_LINES.push(line)

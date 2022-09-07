@@ -1,4 +1,12 @@
 "use strict";
+
+import { ROT_OPTIONS } from "./config.js";
+import { debug_log } from "./debug.js";
+import { get_action } from "./input.js";
+import { MAPS } from "./map.js";
+import { draw } from "./rot_renderer.js";
+import { UI_HEIGHT } from "./ui.js";
+
 /*
 https://ondras.github.io/rot.js/hp/
 */
@@ -15,28 +23,8 @@ var tileSet = document.createElement("img")
 tileSet.src = "tiny16.png"
 */
 
-var ZOOM = 1
-var ROT_OPTIONS = {
-	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
-    height: ~~((CAMERA_SIZE[1] + UI_HEIGHT) * (1 / ZOOM)),
-    bg: 'transparent',
-    fontSize: ~~(FONT_SIZE * ZOOM),
-    /*
-    layout: 'tile',
-    tileWidth: 16,
-    tileHeight: 16,
-    tileSet: tileSet,
-    tileMap: {
-        "#": [2*16, 0],
-        ".": [0*16, 8*16],
-        '@': [192, 0]
-    },
-    */
-    //fontStyle: 'bold',
-    forceSquareRatio: true
-}
-var ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
-document.body.appendChild(ROT_DISPLAY.getContainer())
+
+
 
 var player = {
     graphic: '@',
@@ -130,11 +118,11 @@ function _update() {
 }
 
 let _need_draw = true;
-draw()
+draw(camera)
 let _gameloop = setInterval(function() {
   _need_draw = _update();
   if (_need_draw) {
-    draw()
+    draw(camera)
   }
 }, UPDATE_EVERY)
 

@@ -161,7 +161,7 @@ function _updateInputQueue() {
     _inputQueue.push(action);
 }
 
-function get_action() {
+export function get_action() {
     _updateInputQueue();
     let action = _inputQueue.shift() || ' ';
     _inputQueue = [];
