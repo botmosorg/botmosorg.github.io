@@ -1,3 +1,5 @@
+"use strict";
+
 const ENTITY_TYPES = {
     "player":0,
     "item":1

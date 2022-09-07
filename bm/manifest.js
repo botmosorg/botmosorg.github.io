@@ -1,3 +1,5 @@
+"use strict";
+
 const NAMES = {
     "BotMoses": "Teaches the new player",
     "Betty": "Gambles a lot",

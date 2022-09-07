@@ -1,3 +1,4 @@
+"use strict";
 /*
 https://ondras.github.io/rot.js/hp/
 */

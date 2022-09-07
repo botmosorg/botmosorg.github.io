@@ -1,3 +1,5 @@
+"use strict";
+
 function lookup_color(name) {
     return MANIFEST.colors[name];
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 function debug_log(text) {
     console.log(text)
     debug_overlay(text);

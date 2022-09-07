@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * All keys ever supported:
  * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and TODO translated for convenience

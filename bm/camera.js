@@ -1,4 +1,6 @@
 
+"use strict";
+
 const WINDOW_WIDTH_IN_PX = window.innerWidth
 const WINDOW_HEIGHT_IN_PX = window.innerHeight
 const FONT_SIZE = 18
