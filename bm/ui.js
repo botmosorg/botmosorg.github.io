@@ -1,5 +1,5 @@
 "use strict";
 
 export const UI_LINES = [
-    "BOTMOS: STATUS ACTIONS ... PlAcEhOlDeRs ... ... ...",
+    "H: 40, E: 40, BOTMOS Placeholders ... ... ...",
 ]
