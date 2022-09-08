@@ -19,14 +19,6 @@ function create_tile(type=null, health=100) {
     }
 }
 
-function create_chunk(tiles) {
-    return {
-        "width": CHUNK_SIZE.width,
-        "height": CHUNK_SIZE.height,
-        "tiles": tiles
-    }
-}
-
 var _noise_skew = 55
 function create_map(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed)
@@ -71,8 +63,6 @@ function map_create_arena() {
         tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType)
     })
 
-    var chunks = []
-    chunks.push(create_chunk(tiles))
     return {
         "id": "arena",
         "width_tiles": CHUNK_SIZE.width,
