@@ -6,37 +6,12 @@ import { get_action } from "./input.js";
 import { MAPS } from "./map.js";
 import { draw } from "./rot_renderer.js";
 
-var _MAP = MAPS[MAPS.current]
+let _MAP = MAPS[MAPS.current]
 
 //const UPDATE_EVERY = 500 // in ms
 const UPDATE_EVERY = 50 // in ms
 
-var turn = 0
-
-/*
-var tileSet = document.createElement("img")
-tileSet.src = "tiny16.png"
-*/
-var player = {
-    graphic: '@',
-    color: 'goldenrod',
-    pos: {x: ROT_OPTIONS.width >> 1, y: ROT_OPTIONS.height >> 1 }
-}
-var map = {
-    id: 'starter',
-    width: 256,
-    height: 256,
-    tiles: [],
-    objects: [],
-    characters: {
-        'player': {
-            pos: {
-                x: 64,
-                y: 64
-            }
-        }
-    }
-}
+let turn = 0
 
 function act(entity, action) {
     var position = entity.pos
@@ -105,7 +80,7 @@ function _update() {
 
     //act(player, action)
     turn += 1
-    return update_camera(action)
+    return update_camera(action) || action !== ' '
 }
 
 let _need_draw = true;

@@ -1,7 +1,11 @@
-
 "use strict";
 
 import { CAMERA_SIZE, FONT_SIZE } from "./camera.js";
+
+/*
+var tileSet = document.createElement("img")
+tileSet.src = "tiny16.png"
+*/
 
 export const UI_HEIGHT = 1
 export const ZOOM = 1
