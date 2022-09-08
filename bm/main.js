@@ -1,15 +1,10 @@
 "use strict";
 
-import { ROT_OPTIONS } from "./config.js";
+import { ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { debug_log } from "./debug.js";
 import { get_action } from "./input.js";
 import { MAPS } from "./map.js";
 import { draw } from "./rot_renderer.js";
-import { UI_HEIGHT } from "./ui.js";
-
-/*
-https://ondras.github.io/rot.js/hp/
-*/
 
 var _MAP = MAPS[MAPS.current]
 
@@ -22,10 +17,6 @@ var turn = 0
 var tileSet = document.createElement("img")
 tileSet.src = "tiny16.png"
 */
-
-
-
-
 var player = {
     graphic: '@',
     color: 'goldenrod',

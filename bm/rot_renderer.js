@@ -1,12 +1,16 @@
 "use strict";
 
 import { CAMERA_SIZE } from "./camera.js";
-import { ROT_OPTIONS } from "./config.js";
+import { ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { entities_get_for_map } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { MAPS, map_get } from "./map.js";
-import { UI_HEIGHT, UI_LINES } from "./ui.js";
+import { UI_LINES } from "./ui.js";
+
+/*
+https://ondras.github.io/rot.js/hp/
+*/
 
 const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())

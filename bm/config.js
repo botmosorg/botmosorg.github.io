@@ -2,8 +2,8 @@
 "use strict";
 
 import { CAMERA_SIZE, FONT_SIZE } from "./camera.js";
-import { UI_HEIGHT } from "./ui.js";
 
+export const UI_HEIGHT = 1
 export const ZOOM = 1
 export const ROT_OPTIONS = {
 	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
