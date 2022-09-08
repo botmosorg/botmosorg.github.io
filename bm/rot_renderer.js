@@ -1,7 +1,6 @@
 "use strict";
 
-import { CAMERA_SIZE } from "./camera.js";
-import { ROT_OPTIONS, UI_HEIGHT } from "./config.js";
+import { CAMERA_SIZE, ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { entities_get_for_map } from "./entity.js";
 import { MANIFEST } from "./manifest.js";

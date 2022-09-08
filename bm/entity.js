@@ -1,6 +1,6 @@
 "use strict";
 
-import { CAMERA_SIZE } from "./camera.js";
+import { CAMERA_SIZE } from "./config.js";
 import { MAPS } from "./map.js";
 
 const ENTITY_TYPES = {
