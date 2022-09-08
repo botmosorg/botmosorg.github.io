@@ -24,6 +24,3 @@ export const ROT_OPTIONS = {
     //fontStyle: 'bold',
     forceSquareRatio: true
 }
-
-export const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
-document.body.appendChild(ROT_DISPLAY.getContainer())
