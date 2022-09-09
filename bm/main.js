@@ -76,7 +76,7 @@ function update_camera(direction) {
 
 function _update() {
     var action = get_action();
-    if (action !== ' ') debug_log("Turn: " + turn + ", action: " + action + ", camera: (" + camera.x + ',' + camera.y + ')')
+    if (action !== ' ') debug_log("Trn: " + turn + ", act: " + action + ", cam: (" + camera.x + ',' + camera.y + ')')
 
     //act(player, action)
     turn += 1
