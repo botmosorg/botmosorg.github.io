@@ -76,7 +76,3 @@ export const MANIFEST = {
         */
     }
 }
-
-export function read_color(name) {
-    return MANIFEST.colors[name];
-}
