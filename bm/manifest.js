@@ -60,7 +60,7 @@ export const MANIFEST = {
         */
     },
     "tiles": {
-        "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray", "black") : new Tile("void", "Just nothing here"),
+        "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may away", "▲", "cyberyellow", "black"), // ^ alternatively
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
