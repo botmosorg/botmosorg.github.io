@@ -29,27 +29,10 @@ function rot_render(camera) {
             var fg_color = MANIFEST.colors.white;
             var icon = ""
 
-            if (tile != null) {
-                if (tile.type === MANIFEST.tiles.water) {
-                    bg_color = lookup_color(MANIFEST.tiles.water.bg)
-                    fg_color = lookup_color(MANIFEST.tiles.water.fg)
-                    icon = MANIFEST.tiles.water.icon
-                }
-                if (tile.type === MANIFEST.tiles.void) {
-                    bg_color = lookup_color(MANIFEST.tiles.void.bg)
-                    fg_color = lookup_color(MANIFEST.tiles.void.fg)
-                    icon = MANIFEST.tiles.void.icon
-                }
-                if (tile.type === MANIFEST.tiles.rock) {
-                    bg_color = lookup_color(MANIFEST.tiles.rock.bg)
-                    fg_color = lookup_color(MANIFEST.tiles.rock.fg)
-                    icon = MANIFEST.tiles.rock.icon
-                }
-                if (tile.type === MANIFEST.tiles.wall) {
-                    bg_color = lookup_color(MANIFEST.tiles.wall.bg)
-                    fg_color = lookup_color(MANIFEST.tiles.wall.fg)
-                    icon = MANIFEST.tiles.wall.icon
-                }
+            if (tile != null && tile.type != null) {
+                bg_color = lookup_color(tile.type.bg)
+                fg_color = lookup_color(tile.type.fg)
+                icon = tile.type.icon
             }
 
             ROT_DISPLAY.draw(x, y, icon, fg_color, bg_color)

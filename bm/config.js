@@ -8,7 +8,7 @@ tileSet.src = "tiny16.png"
 export const UI_HEIGHT = 1
 export const ZOOM = 1
 
-export const SHOW_GRID = 1
+export const SHOW_GRID = true
 
 const WINDOW_WIDTH_IN_PX = window.innerWidth
 const WINDOW_HEIGHT_IN_PX = window.innerHeight
