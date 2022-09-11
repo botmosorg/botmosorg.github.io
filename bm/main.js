@@ -9,7 +9,8 @@ import { draw } from "./rot_renderer.js";
 let _MAP = MAPS[MAPS.current]
 
 //const UPDATE_EVERY = 500 // in ms
-const UPDATE_EVERY = 50 // in ms
+//const UPDATE_EVERY = 50 // in ms
+const UPDATE_EVERY = 100 // in ms
 
 let turn = 0
 

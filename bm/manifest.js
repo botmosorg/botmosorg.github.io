@@ -58,7 +58,7 @@ export const MANIFEST = {
         */
     },
     "tiles": {
-        "void": new Tile("void", "Just nothing here"),
+        "void": new Tile("void", "Just nothing here", ".", "gray", "black"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may away", "▲", "cyberyellow", "black"), // ^ alternatively
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
