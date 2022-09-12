@@ -87,7 +87,10 @@ function update_camera(direction) {
 
 function _update() {
     var action = get_action();
-    if (action !== ' ') debug_log("Trn: " + turn + ", act: " + action + ", cam: (" + camera.x + ',' + camera.y + ')')
+    if (action !== ' ') {
+        let player = STATE.entities[STATE.playerId];
+        debug_log("Trn: " + turn + ", act: " + action + ", cam: (" + camera.x + ',' + camera.y + "), plr: (" + player.x + "," + player.y + ")");
+    }
 
     act(STATE.entities[STATE.playerId], action)
     turn += 1
