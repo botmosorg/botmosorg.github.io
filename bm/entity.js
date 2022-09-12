@@ -32,3 +32,5 @@ export function entities_get_for_mapId(map_id) {
 
 _entities_store(create_character("player", MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
 STATE.playerId = "player";
+_entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
+_entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
