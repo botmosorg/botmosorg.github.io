@@ -3,10 +3,10 @@
 import { ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { debug_log } from "./debug.js";
 import { get_action } from "./input.js";
-import { MAPS } from "./map.js";
 import { draw } from "./rot_renderer.js";
+import { STATE } from "./state.js";
 
-let _MAP = MAPS[MAPS.current]
+let _MAP = STATE.maps[STATE.currentMapId]
 
 //const UPDATE_EVERY = 500 // in ms
 //const UPDATE_EVERY = 50 // in ms

@@ -2,9 +2,10 @@
 
 import { CAMERA_SIZE, ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
-import { entities_get_for_map } from "./entity.js";
+import { entities_get_for_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
-import { MAPS, map_get } from "./map.js";
+import { map_get } from "./map.js";
+import { STATE } from "./state.js";
 import { UI_LINES } from "./ui.js";
 
 /*
@@ -18,7 +19,7 @@ function lookup_color(name) {
     return MANIFEST.colors[name];
 }
 function rot_render(camera) {
-    var map = MAPS[MAPS.current]
+    let map = STATE.maps[STATE.currentMapId];
 
     // Render map
     for (var y=0 + UI_HEIGHT; y < camera.height + UI_HEIGHT; y++) {
@@ -40,10 +41,10 @@ function rot_render(camera) {
     }
 
     // Render entities
-    var entities = entities_get_for_map(MAPS.current)
-    for (var i=0; i<entities.length; i++) {
-        var entity = entities[i]
-        ROT_DISPLAY.drawOver(entity.x, entity.y + UI_HEIGHT, MANIFEST.spirits.Spirit.icon, MANIFEST.spirits.Spirit.color);
+    let entities = entities_get_for_mapId(STATE.currentMapId);
+    for (let i=0; i<entities.length; i++) {
+        let entity = entities[i];
+        ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y + UI_HEIGHT, entity.type.icon, MANIFEST.spirits.Spirit.color);
     }
 
     // Render UI lines

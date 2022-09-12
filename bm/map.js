@@ -1,6 +1,7 @@
 "use strict";
 
 import { MANIFEST } from "./manifest.js";
+import { STATE } from "./state.js";
 
 const MAP_SEED = 1337
 
@@ -20,7 +21,7 @@ function create_tile(type=null, health=100) {
 }
 
 var _noise_skew = 55
-function create_map(seed=MAP_SEED) {
+function create_map_overworld(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed)
     var noise = new ROT.Noise.Simplex()
     var tiles = []
@@ -55,7 +56,7 @@ function create_map(seed=MAP_SEED) {
     }
 }
 
-function map_create_arena() {
+function create_map_arena() {
     var map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height)
     var tiles = []
     map.create(function(x, y, wall) {
@@ -80,19 +81,15 @@ export function map_get(map, tile_x, tile_y) {
     return null
 }
 
-export const MAPS = {
-    "current": ""
-}
-
 export function maps_set_current(map_id) {
-    MAPS["current"] = map_id
+    STATE.currentMapId = map_id
 }
 
-export function maps_store(map) {
-    MAPS[map.id] = map
+function _maps_store(map) {
+    STATE.maps[map.id] = map
 }
 
-maps_store(map_create_arena())
-maps_store(create_map())
+_maps_store(create_map_arena())
+_maps_store(create_map_overworld())
 maps_set_current("simplex="+MAP_SEED)
 //maps_set_current("arena")
