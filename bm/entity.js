@@ -4,11 +4,11 @@ import { CAMERA_SIZE } from "./config.js";
 import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
-function create_character(id, type, map_id, x=0, y=0) {
+function create_character(id, type, mapId, x=0, y=0) {
     return {
         "id": id,
         "type": type,
-        "map_id": map_id,
+        "mapId": mapId,
         "x": x,
         "y": y
     }
@@ -23,7 +23,7 @@ export function get_entities_by_mapId(map_id) {
     var entities_on_map = []
     for (var i=0; i<entity_ids.length; i++) {
         var entity = STATE.entities[entity_ids[i]]
-        if (entity.map_id === map_id) {
+        if (entity.mapId === map_id) {
             entities_on_map.push(entity)
         }
     }

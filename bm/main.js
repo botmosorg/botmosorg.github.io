@@ -14,24 +14,34 @@ const UPDATE_EVERY = 100 // in ms
 
 let turn = 0
 
+function _entity_can_move(map, entity, dx, dy) {
+    let x = entity.x + dx;
+    let y = entity.y + dy;
+    return x >= 0 && x < 16*16 && y >= 0 && y < 16*16; // TODO map size hard-coded
+}
+function _entity_move(map, entity, dx, dy) {
+    if (_entity_can_move(map, entity, dx, dy)) {
+        entity.x += dx;
+        entity.y += dy;
+    }
+}
 function act(entity, action) {
-    var position = entity.pos
+    let map = STATE.maps[entity.mapId]
     switch (action) {
         case 'N':
-            if (position.y > 1) position.y -= 1
+            _entity_move(map, entity, 0, -1)
             break
         case 'W':
-            if (position.x > 1) position.x -= 1
+            _entity_move(map, entity, -1, 0)
             break
         case 'S':
-            if (position.y < ROT_OPTIONS.height-2) position.y += 1
+            _entity_move(map, entity, 0, 1)
             break
         case 'E':
-            if (position.x < ROT_OPTIONS.width-2) position.x += 1
+            _entity_move(map, entity, 1, 0)
             break
         default:
     }
-    entity.pos = {x: position.x, y: position.y}
 }
 
 let camera = {
@@ -79,7 +89,7 @@ function _update() {
     var action = get_action();
     if (action !== ' ') debug_log("Trn: " + turn + ", act: " + action + ", cam: (" + camera.x + ',' + camera.y + ')')
 
-    //act(player, action)
+    act(STATE.entities[STATE.playerId], action)
     turn += 1
     return update_camera(action) || action !== ' '
 }
