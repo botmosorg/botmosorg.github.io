@@ -48,13 +48,13 @@ function rot_render(camera) {
     }
 
     // Render UI lines
-    for (var i=0; i<UI_LINES.length; i++) {
+    for (let i=0; i<UI_LINES.length; i++) {
         let line = UI_LINES[i];
         ROT_DISPLAY.drawText(0, i, "%c{white}%b{black}"+line, CAMERA_SIZE[0]);
     }
 
     // Render debug lines
-    for (var i=0; i<DEBUG_LINES.length; i++) {
+    for (let i=0; i<DEBUG_LINES.length; i++) {
         let line = DEBUG_LINES[i];
         ROT_DISPLAY.drawText(0, i + UI_HEIGHT, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
     }
