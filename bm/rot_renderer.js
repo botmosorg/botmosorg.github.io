@@ -2,7 +2,7 @@
 
 import { CAMERA_SIZE, ROT_OPTIONS, UI_HEIGHT } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
-import { entities_get_for_mapId } from "./entity.js";
+import { get_entities_by_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { map_get } from "./map.js";
 import { STATE } from "./state.js";
@@ -41,7 +41,7 @@ function rot_render(camera) {
     }
 
     // Render entities
-    let entities = entities_get_for_mapId(STATE.currentMapId);
+    let entities = get_entities_by_mapId(STATE.currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
         ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y + UI_HEIGHT, entity.type.icon, MANIFEST.spirits.Spirit.color);

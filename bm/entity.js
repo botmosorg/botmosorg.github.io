@@ -18,7 +18,7 @@ function _entities_store(entity) {
     STATE.entities[entity.id] = entity
 }
 
-export function entities_get_for_mapId(map_id) {
+export function get_entities_by_mapId(map_id) {
     var entity_ids = Object.keys(STATE.entities)
     var entities_on_map = []
     for (var i=0; i<entity_ids.length; i++) {
