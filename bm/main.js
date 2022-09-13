@@ -14,13 +14,13 @@ const UPDATE_EVERY = 100 // in ms
 
 let turn = 0
 
-function _entity_can_move(map, entity, dx, dy) {
+function entity_can_move(map, entity, dx, dy) {
     let x = entity.x + dx;
     let y = entity.y + dy;
-    return x >= 0 && x < 16*16 && y >= 0 && y < 16*16; // TODO map size hard-coded
+    return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles;
 }
-function _entity_move(map, entity, dx, dy) {
-    if (_entity_can_move(map, entity, dx, dy)) {
+function entity_move(map, entity, dx, dy) {
+    if (entity_can_move(map, entity, dx, dy)) {
         entity.x += dx;
         entity.y += dy;
     }
@@ -29,16 +29,16 @@ function act(entity, action) {
     let map = STATE.maps[entity.mapId]
     switch (action) {
         case 'N':
-            _entity_move(map, entity, 0, -1)
+            entity_move(map, entity, 0, -1)
             break
         case 'W':
-            _entity_move(map, entity, -1, 0)
+            entity_move(map, entity, -1, 0)
             break
         case 'S':
-            _entity_move(map, entity, 0, 1)
+            entity_move(map, entity, 0, 1)
             break
         case 'E':
-            _entity_move(map, entity, 1, 0)
+            entity_move(map, entity, 1, 0)
             break
         default:
     }
