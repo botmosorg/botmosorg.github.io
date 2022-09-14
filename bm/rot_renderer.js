@@ -64,7 +64,4 @@ function rot_render(camera) {
 
 export async function draw(camera) {
     rot_render(camera)
-
-    //ROT_DISPLAY.draw(player.pos.x, player.pos.y, player.graphic, null, null)
-    //ROT_DISPLAY.drawOver(player.pos.x, player.pos.y, player.graphic, 'transparent', 'transparent')
 }
