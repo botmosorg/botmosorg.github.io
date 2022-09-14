@@ -39,7 +39,7 @@ function create_map_overworld(seed=MAP_SEED) {
             } else if (noise_val <= 0) { // grass
                 tileType = MANIFEST.tiles.void;
             } else if (noise_val < 0.5) { // tree
-                tileType = MANIFEST.tiles.void;
+                tileType = MANIFEST.tiles.tree;
             } else { // mountain
                 tileType = MANIFEST.tiles.rock;
             }
@@ -52,7 +52,10 @@ function create_map_overworld(seed=MAP_SEED) {
         "id": "simplex=" + seed,
         "width_tiles": MAP_SIZE.width * CHUNK_SIZE.width,
         "height_tiles": MAP_SIZE.height * CHUNK_SIZE.height,
-        "tiles": tiles
+        "tiles": tiles,
+        "getTile": function(x, y) {
+
+        }
     }
 }
 
