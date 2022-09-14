@@ -20,31 +20,31 @@ function create_tile(type=null, health=100) {
     }
 }
 
-var _noise_skew = 55
+let _noise_skew = 55;
 function create_map_overworld(seed=MAP_SEED) {
-    ROT.RNG.setSeed(seed)
-    var noise = new ROT.Noise.Simplex()
-    var tiles = []
-    for (var tile_y=0; tile_y<CHUNK_SIZE.height*MAP_SIZE.height; tile_y++) {
-        for (var tile_x=0; tile_x<CHUNK_SIZE.width*MAP_SIZE.width; tile_x++) {
+    ROT.RNG.setSeed(seed);
+    let noise = new ROT.Noise.Simplex();
+    let tiles = [];
+    for (let tile_y=0; tile_y<CHUNK_SIZE.height*MAP_SIZE.height; tile_y++) {
+        for (let tile_x=0; tile_x<CHUNK_SIZE.width*MAP_SIZE.width; tile_x++) {
             // Noise: water+none, plain+grass, plain+tree, mountain
-            var noise_val = noise.get(
+            let noise_val = noise.get(
                 tile_x / _noise_skew,
                 tile_y / _noise_skew
-            )
+            );
 
-            var tileType = 0
+            let tileType;
             if (noise_val <= -0.5) { // water
-                tileType = MANIFEST.tiles.water
+                tileType = MANIFEST.tiles.water;
             } else if (noise_val <= 0) { // grass
-                tileType = MANIFEST.tiles.void
+                tileType = MANIFEST.tiles.void;
             } else if (noise_val < 0.5) { // tree
-                tileType = MANIFEST.tiles.void
+                tileType = MANIFEST.tiles.void;
             } else { // mountain
-                tileType = MANIFEST.tiles.rock
+                tileType = MANIFEST.tiles.rock;
             }
 
-            tiles.push(create_tile(tileType))
+            tiles.push(create_tile(tileType));
         }
     }
 
@@ -57,11 +57,11 @@ function create_map_overworld(seed=MAP_SEED) {
 }
 
 function create_map_arena() {
-    var map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height)
-    var tiles = []
+    let map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
+    let tiles = [];
     map.create(function(x, y, wall) {
-        var tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void
-        tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType)
+        let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
+        tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType);
     })
 
     return {
@@ -75,10 +75,10 @@ function create_map_arena() {
 export function map_get(map, tile_x, tile_y) {
     if (tile_x >= 0 && tile_x < map.width_tiles
         && tile_y >= 0 && tile_y < map.height_tiles) {
-        var tile_index = tile_y * map.width_tiles + tile_x
-        return map.tiles[tile_index]
+        let tile_index = tile_y * map.width_tiles + tile_x;
+        return map.tiles[tile_index];
     }
-    return null
+    return null;
 }
 
 export function maps_set_current(map_id) {
