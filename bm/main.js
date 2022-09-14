@@ -1,6 +1,6 @@
 "use strict";
 
-import { ROT_OPTIONS, UI_HEIGHT } from "./config.js";
+import { ROT_OPTIONS } from "./config.js";
 import { debug_log } from "./debug.js";
 import { get_action } from "./input.js";
 import { draw } from "./rot_renderer.js";
@@ -44,66 +44,29 @@ function act(entity, action) {
     }
 }
 
-let camera = {
-    "x_min": Math.min(0, (_MAP.width_tiles >> 1) - (ROT_OPTIONS.width >> 1)),
-    "y_min": Math.min(0, (_MAP.height_tiles >> 1) - (ROT_OPTIONS.height >> 1)),
-    "x_max": _MAP.width_tiles - ROT_OPTIONS.width,
-    "y_max": _MAP.height_tiles - ROT_OPTIONS.height,
-    "x": (_MAP.width_tiles >> 1) - (ROT_OPTIONS.width >> 1), // center camera, x,y coords of camera are its top-left corner
-    "y": (_MAP.height_tiles >> 1) - (ROT_OPTIONS.height >> 1),
-    "width": ROT_OPTIONS.width,
-    "height": ROT_OPTIONS.height - UI_HEIGHT
-}
-function update_camera(direction) {
-    switch (direction) {
-        case 'N':
-            if (camera.y > camera.y_min) {
-                camera.y -= 1
-                return true
-            }
-            break
-        case 'W':
-            if (camera.x > camera.x_min) {
-                camera.x -= 1
-                return true
-            }
-            break
-        case 'S':
-            if (camera.y < camera.y_max-1) {
-                camera.y += 1
-                return true
-            }
-            break
-        case 'E':
-            if (camera.x < camera.x_max-1) {
-                camera.x += 1
-                return true
-            }
-            break
-        default:
+function follow_camera(entity) {
+    return {
+        "x": Math.min(Math.max(0, entity.x - Math.floor(ROT_OPTIONS.width / 2)), 256 - ROT_OPTIONS.width), // TODO Hardcoded map size
+        "y": Math.min(Math.max(0, entity.y - Math.floor(ROT_OPTIONS.height / 2)), 256 - ROT_OPTIONS.height), // TODO Hardcoded map size
+        "width": ROT_OPTIONS.width,
+        "height": ROT_OPTIONS.height
     }
-    return false
 }
 
 function _update() {
     var action = get_action();
     if (action !== ' ') {
         let player = STATE.entities[STATE.playerId];
-        debug_log("Trn: " + turn + ", act: " + action + ", cam: (" + camera.x + ',' + camera.y + "), plr: (" + player.x + "," + player.y + ")");
+        debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
     }
 
     act(STATE.entities[STATE.playerId], action)
     turn += 1
-    return update_camera(action) || action !== ' '
+    return follow_camera(STATE.entities[STATE.playerId])
 }
 
-let _need_draw = true;
-draw(camera)
 let _gameloop = setInterval(function() {
-  _need_draw = _update();
-  if (_need_draw) {
-    draw(camera)
-  }
+    draw(_update());
 }, UPDATE_EVERY)
 
 // window.onload = Game.init(); // Use this for init instead

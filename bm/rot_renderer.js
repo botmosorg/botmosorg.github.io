@@ -1,6 +1,6 @@
 "use strict";
 
-import { CAMERA_SIZE, ROT_OPTIONS, UI_HEIGHT } from "./config.js";
+import { CAMERA_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { get_entities_by_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
@@ -22,7 +22,7 @@ function rot_render(camera) {
     let map = STATE.maps[STATE.currentMapId];
 
     // Render map
-    for (var y=0 + UI_HEIGHT; y < camera.height + UI_HEIGHT; y++) {
+    for (var y=0; y < camera.height; y++) {
         for (var x=0; x<camera.width; x++) {
             var tile = map_get(map, camera.x+x, camera.y+y)
 
@@ -44,19 +44,21 @@ function rot_render(camera) {
     let entities = get_entities_by_mapId(STATE.currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y + UI_HEIGHT, entity.type.icon, MANIFEST.spirits.Spirit.color);
+        ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, MANIFEST.spirits.Spirit.color);
     }
 
     // Render UI lines
+    /*
     for (let i=0; i<UI_LINES.length; i++) {
         let line = UI_LINES[i];
         ROT_DISPLAY.drawText(0, i, "%c{white}%b{black}"+line, CAMERA_SIZE[0]);
     }
+    */
 
     // Render debug lines
     for (let i=0; i<DEBUG_LINES.length; i++) {
         let line = DEBUG_LINES[i];
-        ROT_DISPLAY.drawText(0, i + UI_HEIGHT, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
+        ROT_DISPLAY.drawText(0, i, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
     }
 }
 

@@ -2,7 +2,7 @@
 
 export function debug_log(text) {
     console.log(text)
-    debug_overlay(text);
+    //debug_overlay(text);
 }
 
 // Max latest lines are shown
