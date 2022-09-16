@@ -55,12 +55,12 @@ function follow_camera(entity) {
 
 function _update() {
     var action = get_action();
+    act(STATE.entities[STATE.playerId], action)
     if (action !== ' ') {
         let player = STATE.entities[STATE.playerId];
         debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
     }
 
-    act(STATE.entities[STATE.playerId], action)
     turn += 1
     return follow_camera(STATE.entities[STATE.playerId])
 }
