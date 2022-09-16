@@ -1,0 +1,78 @@
+"use strict";
+
+import { ROT_OPTIONS } from "./config.js";
+import { debug_log } from "./debug.js";
+import { entities_store, create_character } from "./entity.js";
+import { get_action } from "./input.js";
+import { MANIFEST } from "./manifest.js";
+import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
+import { STATE } from "./state.js";
+
+export default class Game {
+    init() {
+        maps_store(create_map_arena())
+        maps_store(create_map_overworld())
+        maps_set_current("simplex="+MAP_SEED)
+        //maps_set_current("arena")
+
+        entities_store(create_character("player", MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
+        STATE.playerId = "player";
+        entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
+        entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
+    }
+    update(dt) {
+        let action = get_action();
+        act(STATE.entities[STATE.playerId], action)
+        if (action !== ' ') {
+            let player = STATE.entities[STATE.playerId];
+            debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
+        }
+
+        turn += 1
+        return follow_camera(STATE.entities[STATE.playerId])
+    }
+    turn() {
+
+    }
+}
+
+let turn = 0
+
+function entity_can_move(map, entity, dx, dy) {
+    let x = entity.x + dx;
+    let y = entity.y + dy;
+    return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles;
+}
+function entity_move(map, entity, dx, dy) {
+    if (entity_can_move(map, entity, dx, dy)) {
+        entity.x += dx;
+        entity.y += dy;
+    }
+}
+function act(entity, action) {
+    let map = STATE.maps[entity.mapId]
+    switch (action) {
+        case 'N':
+            entity_move(map, entity, 0, -1)
+            break
+        case 'W':
+            entity_move(map, entity, -1, 0)
+            break
+        case 'S':
+            entity_move(map, entity, 0, 1)
+            break
+        case 'E':
+            entity_move(map, entity, 1, 0)
+            break
+        default:
+    }
+}
+
+function follow_camera(entity) {
+    return {
+        "x": Math.min(Math.max(0, entity.x - Math.floor(ROT_OPTIONS.width / 2)), 256 - ROT_OPTIONS.width), // TODO Hardcoded map size
+        "y": Math.min(Math.max(0, entity.y - Math.floor(ROT_OPTIONS.height / 2)), 256 - ROT_OPTIONS.height), // TODO Hardcoded map size
+        "width": ROT_OPTIONS.width,
+        "height": ROT_OPTIONS.height
+    }
+}

@@ -3,7 +3,7 @@
 import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
-const MAP_SEED = 1337
+export const MAP_SEED = 1337
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
 
@@ -21,7 +21,7 @@ function create_tile(type=null, health=100) {
 }
 
 let _noise_skew = 55;
-function create_map_overworld(seed=MAP_SEED) {
+export function create_map_overworld(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed);
     let noise = new ROT.Noise.Simplex();
     let tiles = [];
@@ -59,7 +59,7 @@ function create_map_overworld(seed=MAP_SEED) {
     }
 }
 
-function create_map_arena() {
+export function create_map_arena() {
     let map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
     let tiles = [];
     map.create(function(x, y, wall) {
@@ -88,11 +88,8 @@ export function maps_set_current(map_id) {
     STATE.currentMapId = map_id
 }
 
-function _maps_store(map) {
+export function maps_store(map) {
     STATE.maps[map.id] = map
 }
 
-_maps_store(create_map_arena())
-_maps_store(create_map_overworld())
-maps_set_current("simplex="+MAP_SEED)
-//maps_set_current("arena")
+

@@ -4,7 +4,7 @@ import { CAMERA_SIZE } from "./config.js";
 import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
-function create_character(id, type, mapId, x=0, y=0) {
+export function create_character(id, type, mapId, x=0, y=0) {
     return {
         "id": id,
         "type": type,
@@ -14,7 +14,7 @@ function create_character(id, type, mapId, x=0, y=0) {
     }
 }
 
-function _entities_store(entity) {
+export function entities_store(entity) {
     STATE.entities[entity.id] = entity
 }
 
@@ -30,7 +30,7 @@ export function get_entities_by_mapId(map_id) {
     return entities_on_map
 }
 
-_entities_store(create_character("player", MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
+entities_store(create_character("player", MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
 STATE.playerId = "player";
-_entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
-_entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
+entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
+entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
