@@ -8,6 +8,7 @@ import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
 import { STATE } from "./state.js";
 
+let turn = 0
 export default class Game {
     init() {
         maps_store(create_map_arena())
@@ -36,8 +37,6 @@ export default class Game {
         turn += 1
     }
 }
-
-let turn = 0
 
 function entity_can_move(map, entity, dx, dy) {
     let x = entity.x + dx;
