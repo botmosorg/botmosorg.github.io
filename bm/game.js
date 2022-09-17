@@ -22,17 +22,18 @@ export default class Game {
     }
     update(dt) {
         let action = get_action();
-        act(STATE.entities[STATE.playerId], action)
         if (action !== ' ') {
+            this.turn(action);
             let player = STATE.entities[STATE.playerId];
             debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
         }
 
-        turn += 1
         return follow_camera(STATE.entities[STATE.playerId])
-    }
-    turn() {
 
+    }
+    turn(action) {
+        act(STATE.entities[STATE.playerId], action)
+        turn += 1
     }
 }
 
