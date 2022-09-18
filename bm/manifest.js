@@ -2,6 +2,12 @@
 
 import { SHOW_GRID } from "./config.js"
 
+class Command {
+    constructor(key, description) {
+        this.key = key;
+        this.description = description;
+    }
+}
 class Spirit {
     constructor(name, description, icon) {
         this.name = name;
@@ -41,14 +47,14 @@ export const MANIFEST = {
         "cybermagenta": "Enemy color"
     },
     "commands": {
-        "N": "Move/interact north",
-        "E": "Move/interact east",
-        "S": "Move/interact south",
-        "W": "Move/interact west",
-        "A": "Interact, primary action", // unused
-        "B": "Take a break, cancel", // space bar
-        "X": "Secondary action", // unused
-        "Y": "Tertiary action", // unused
+        "N": new Command("N", "Move/interact north"),
+        "E": new Command("E", "Move/interact east"),
+        "S": new Command("S", "Move/interact south"),
+        "W": new Command("W", "Move/interact west"),
+        "A": new Command("A", "Interact, primary action"), // unused
+        "B": new Command("B", "Take a break, cancel"), // space bar
+        "X": new Command("X", "Secondary action"), // unused
+        "Y": new Command("Y", "Tertiary action"), // unused
     },
     "names": {
         "BotMoses": "Teaches the new player",

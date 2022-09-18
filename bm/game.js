@@ -26,7 +26,7 @@ export default class Game {
         if (action !== null) {
             this.turn(action);
             let player = STATE.entities[STATE.playerId];
-            debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
+            debug_log("Trn: " + turn + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
         }
 
         return follow_camera(STATE.entities[STATE.playerId])
