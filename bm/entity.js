@@ -29,8 +29,3 @@ export function get_entities_by_mapId(map_id) {
     }
     return entities_on_map
 }
-
-entities_store(create_character("player", MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
-STATE.playerId = "player";
-entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
-entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
