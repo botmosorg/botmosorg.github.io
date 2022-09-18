@@ -33,38 +33,37 @@ export default class Game {
 
     }
     turn(action) {
-        act(STATE.entities[STATE.playerId], action)
+        this.act(STATE.entities[STATE.playerId], action)
         turn += 1
     }
-}
-
-function entity_can_move(map, entity, dx, dy) {
-    let x = entity.x + dx;
-    let y = entity.y + dy;
-    return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles;
-}
-function entity_move(map, entity, dx, dy) {
-    if (entity_can_move(map, entity, dx, dy)) {
-        entity.x += dx;
-        entity.y += dy;
+    act(entity, action) {
+        let map = STATE.maps[entity.mapId]
+        switch (action) {
+            case MANIFEST.commands.N:
+                this.entity_move(map, entity, 0, -1)
+                break
+            case MANIFEST.commands.W:
+                this.entity_move(map, entity, -1, 0)
+                break
+            case MANIFEST.commands.S:
+                this.entity_move(map, entity, 0, 1)
+                break
+            case MANIFEST.commands.E:
+                this.entity_move(map, entity, 1, 0)
+                break
+            default:
+        }
     }
-}
-function act(entity, action) {
-    let map = STATE.maps[entity.mapId]
-    switch (action) {
-        case MANIFEST.commands.N:
-            entity_move(map, entity, 0, -1)
-            break
-        case MANIFEST.commands.W:
-            entity_move(map, entity, -1, 0)
-            break
-        case MANIFEST.commands.S:
-            entity_move(map, entity, 0, 1)
-            break
-        case MANIFEST.commands.E:
-            entity_move(map, entity, 1, 0)
-            break
-        default:
+    entity_move(map, entity, dx, dy) {
+        if (this.entity_can_move(map, entity, dx, dy)) {
+            entity.x += dx;
+            entity.y += dy;
+        }
+    }
+    entity_can_move(map, entity, dx, dy) {
+        let x = entity.x + dx;
+        let y = entity.y + dy;
+        return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles;
     }
 }
 
