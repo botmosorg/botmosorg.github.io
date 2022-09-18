@@ -38,7 +38,7 @@ document.body.addEventListener("keydown", function(e) {
     e
     s
     w
-      ... wait turn
+    b ... break, wait turn
     i ... interact
     */
     if (e.defaultPrevented) {
