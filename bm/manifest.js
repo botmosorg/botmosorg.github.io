@@ -79,8 +79,8 @@ export const MANIFEST = {
     "tiles": {
         "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"), // ≋ alternatively
-        "rock": new Tile("rock", "Hidden treasures may away", "^", "white", "cyberyellow"), // ^ alternatively
-        "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "cybergreen"), // ^ alternatively
+        "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "cyberyellow"), // ▲ alternatively
+        "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "cybergreen"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black"),
