@@ -63,7 +63,8 @@ export default class Game {
     entity_can_move(map, entity, dx, dy) {
         let x = entity.x + dx;
         let y = entity.y + dy;
-        return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles;
+        return x >= 0 && x < map.width_tiles && y >= 0 && y < map.height_tiles
+            && map.getTile(x, y).type !== MANIFEST.tiles.rock;
     }
 }
 

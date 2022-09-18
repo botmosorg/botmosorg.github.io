@@ -54,7 +54,7 @@ export function create_map_overworld(seed=MAP_SEED) {
         "height_tiles": MAP_SIZE.height * CHUNK_SIZE.height,
         "tiles": tiles,
         "getTile": function(x, y) {
-
+            return _tiles_get(tiles, MAP_SIZE.width * CHUNK_SIZE.width, MAP_SIZE.height * CHUNK_SIZE.height, x, y);
         }
     }
 }
@@ -71,7 +71,10 @@ export function create_map_arena() {
         "id": "arena",
         "width_tiles": CHUNK_SIZE.width,
         "height_tiles": CHUNK_SIZE.height,
-        "tiles": tiles
+        "tiles": tiles,
+        "getTile": function(x, y) {
+            return _tiles_get(tiles, CHUNK_SIZE.width, CHUNK_SIZE.height, x, y);
+        }
     }
 }
 
@@ -80,6 +83,14 @@ export function map_get(map, tile_x, tile_y) {
         && tile_y >= 0 && tile_y < map.height_tiles) {
         let tile_index = tile_y * map.width_tiles + tile_x;
         return map.tiles[tile_index];
+    }
+    return null;
+}
+export function _tiles_get(tiles, width_tiles, height_tiles, tile_x, tile_y) {
+    if (tile_x >= 0 && tile_x < width_tiles
+        && tile_y >= 0 && tile_y < height_tiles) {
+        let tile_index = tile_y * width_tiles + tile_x;
+        return tiles[tile_index];
     }
     return null;
 }
