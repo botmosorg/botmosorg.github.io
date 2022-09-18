@@ -23,7 +23,7 @@ export default class Game {
     }
     update(dt) {
         let action = get_action();
-        if (action !== ' ') {
+        if (action !== null) {
             this.turn(action);
             let player = STATE.entities[STATE.playerId];
             debug_log("Trn: " + turn + ", act: " + action + ", plr: (" + player.x + "," + player.y + ")");
@@ -52,16 +52,16 @@ function entity_move(map, entity, dx, dy) {
 function act(entity, action) {
     let map = STATE.maps[entity.mapId]
     switch (action) {
-        case 'N':
+        case MANIFEST.commands.N:
             entity_move(map, entity, 0, -1)
             break
-        case 'W':
+        case MANIFEST.commands.W:
             entity_move(map, entity, -1, 0)
             break
-        case 'S':
+        case MANIFEST.commands.S:
             entity_move(map, entity, 0, 1)
             break
-        case 'E':
+        case MANIFEST.commands.E:
             entity_move(map, entity, 1, 0)
             break
         default:

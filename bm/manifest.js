@@ -40,6 +40,16 @@ export const MANIFEST = {
     "colorcoding": {
         "cybermagenta": "Enemy color"
     },
+    "commands": {
+        "N": "Move/interact north",
+        "E": "Move/interact east",
+        "S": "Move/interact south",
+        "W": "Move/interact west",
+        "A": "Interact, primary action", // unused
+        "B": "Take a break, cancel", // space bar
+        "X": "Secondary action", // unused
+        "Y": "Tertiary action", // unused
+    },
     "names": {
         "BotMoses": "Teaches the new player",
         "Betty": "Gambles a lot",

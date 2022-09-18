@@ -1,9 +1,11 @@
 "use strict";
 
+import { MANIFEST } from "./manifest.js";
+
 /**
  * All keys ever supported:
  * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and TODO translated for convenience
- * - 4 buttons:     A: positive continue action, B: negative non-continue action, C and D quick slots
+ * - 4 buttons:     A: positive continue action, B: negative non-continue action, X and Y quick slots
  * - 2 shoulder buttons: redundancy
  * - ESC / START / menu key:    Open game menu
  */
@@ -21,59 +23,37 @@ const _BM_INPUT = {
 
 let _inputQueue = []
 document.body.addEventListener("keydown", function(e) {
-    /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
-     */
-    /*
-    87 w, 38 up arrow
-    65 a, 37 left arrow
-    83 s, 40 down arrow
-    68 d, 39 right arrow
-
-    N ... move north
-    E
-    S
-    W
-    n ... turn north
-    e
-    s
-    w
-    b ... break, wait turn
-    i ... interact
-    */
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
     }
 
     let key = e.key;
-    let action = ' ';
     switch (key) {
         case 'w':
         case 'ArrowUp':
-            action = 'N'
             _BM_INPUT.up = true;
             _preventDefaultAndStopPropagation(e)
             break
         case 'a':
         case 'ArrowLeft':
-            action = 'W'
             _BM_INPUT.left = true;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
         case 's':
         case 'ArrowDown':
-            action = 'S'
             _BM_INPUT.down = true;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
         case 'd':
         case 'ArrowRight':
-            action = 'E'
             _BM_INPUT.right = true;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
+        case ' ':
+            _BM_INPUT.b = true;
+            _preventDefaultAndStopPropagation(e);
+            break;
         default:
-            action = ' ';
     }
 })
 
@@ -83,34 +63,32 @@ document.body.addEventListener("keyup", function(e) {
     }
 
     let key = e.key;
-    let action = ' ';
     switch (key) {
         case 'w':
         case 'ArrowUp':
-            action = 'N'
             _BM_INPUT.up = false;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
         case 'a':
         case 'ArrowLeft':
-            action = 'W'
             _BM_INPUT.left = false;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
         case 's':
         case 'ArrowDown':
-            action = 'S'
             _BM_INPUT.down = false;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
         case 'd':
         case 'ArrowRight':
-            action = 'E'
             _BM_INPUT.right = false;
-            _preventDefaultAndStopPropagation(e)
-            break
+            _preventDefaultAndStopPropagation(e);
+            break;
+        case ' ':
+            _BM_INPUT.b = false;
+            _preventDefaultAndStopPropagation(e);
+            break;
         default:
-            action = ' '
     }
 })
 
@@ -119,42 +97,46 @@ function _preventDefaultAndStopPropagation(e) {
     e.stopPropagation();
 }
 
-let _lastAction = ''
+let _lastAction = null;
 function _updateInputQueue() {
-    let action = ' ';
+    let action = null;
 
     if (_BM_INPUT.right) {
-        action = "E";
+        action = MANIFEST.commands.E;
     }
     if (_BM_INPUT.left) {
-        action = "W";
+        action = MANIFEST.commands.W;
     }
     if (_BM_INPUT.down) {
-        action = "S";
+        action = MANIFEST.commands.S;
     }
     if (_BM_INPUT.up) {
-        action = "N";
+        action = MANIFEST.commands.N;
     }
 
     if (_BM_INPUT.up && _BM_INPUT.right) {
-        if (action === 'N' && _lastAction === 'N') {
-            action = 'E';
+        if (action === MANIFEST.commands.N && _lastAction === MANIFEST.commands.N) {
+            action = MANIFEST.commands.E;
         }
     }
     if (_BM_INPUT.up && _BM_INPUT.left) {
-        if (action === 'N' && _lastAction === 'N') {
-            action = 'W';
+        if (action === MANIFEST.commands.N && _lastAction === MANIFEST.commands.N) {
+            action = MANIFEST.commands.W;
         }
     }
     if (_BM_INPUT.down && _BM_INPUT.right) {
-        if (action === 'S' && _lastAction === 'S') {
-            action = 'E';
+        if (action === MANIFEST.commands.S && _lastAction === MANIFEST.commands.S) {
+            action = MANIFEST.commands.E;
         }
     }
     if (_BM_INPUT.down && _BM_INPUT.left) {
-        if (action === 'S' && _lastAction === 'S') {
-            action = 'W';
+        if (action === MANIFEST.commands.S && _lastAction === MANIFEST.commands.S) {
+            action = MANIFEST.commands.W;
         }
+    }
+
+    if (_BM_INPUT.b) {
+        action = MANIFEST.commands.B;
     }
 
     _lastAction = action;
@@ -163,7 +145,7 @@ function _updateInputQueue() {
 
 export function get_action() {
     _updateInputQueue();
-    let action = _inputQueue.shift() || ' ';
+    let action = _inputQueue.shift() || null;
     _inputQueue = [];
     return action;
 }
