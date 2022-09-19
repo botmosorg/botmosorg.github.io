@@ -34,7 +34,7 @@ class Map {
             let tile_index = y * this.widthTiles + x;
             return this._tiles[tile_index];
         }
-        return null;
+        return {};
     }
 
     setTile(x, y, tileType) {
@@ -76,7 +76,7 @@ export function create_map_overworld(seed=MAP_SEED) {
         MAP_SIZE.width * CHUNK_SIZE.width,
         MAP_SIZE.height * CHUNK_SIZE.height,
         tiles
-    )
+    );
 
     map.setTile(127, 125, MANIFEST.tiles.portal)
 
@@ -84,22 +84,23 @@ export function create_map_overworld(seed=MAP_SEED) {
 }
 
 export function create_map_arena() {
-    let map = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
+    let rotMap = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
     let tiles = [];
-    map.create(function(x, y, wall) {
+    rotMap.create(function(x, y, wall) {
         let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
         tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType);
     })
 
-    return {
-        "id": "arena",
-        "width_tiles": CHUNK_SIZE.width,
-        "height_tiles": CHUNK_SIZE.height,
-        "tiles": tiles,
-        "getTile": function(x, y) {
-            return _tiles_get(tiles, CHUNK_SIZE.width, CHUNK_SIZE.height, x, y);
-        }
-    }
+    let map = new Map(
+        "arena",
+        CHUNK_SIZE.width,
+        CHUNK_SIZE.height,
+        tiles
+    );
+
+    map.setTile(1, 0, MANIFEST.tiles.portal);
+
+    return map;
 }
 
 export function _tiles_get(tiles, width_tiles, height_tiles, tile_x, tile_y) {
