@@ -87,7 +87,7 @@ export const MANIFEST = {
         "boulder": new Tile("boulder", "A movable rock", "o", "gray"),
         "chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
         "item": new Tile("item", "An item lying on the ground", "i", "cyberyellow"),
-        "portal": new Tile("portal", "Gateway to another map", "□", "cyberyellow"),
+        "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
         /*
         "tree": new Structure("tree", "A tree", "t", "brown"),
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
