@@ -20,6 +20,29 @@ function create_tile(type=null, health=100) {
     }
 }
 
+class Map {
+    constructor(id, width_tiles, height_tiles, tiles=null) {
+        this.id = id;
+        this.widthTiles = width_tiles;
+        this.heightTiles = height_tiles;
+        this._tiles = tiles;
+    }
+
+    getTile(x, y) {
+        if (x >= 0 && x < this.widthTiles
+            && y >= 0 && y < this.heightTiles) {
+            let tile_index = y * this.widthTiles + x;
+            return this._tiles[tile_index];
+        }
+        return null;
+    }
+
+    setTile(x, y, tileType) {
+        let tileIndex = y * this.widthTiles + x;
+        this._tiles[tileIndex] = create_tile(tileType);
+    }
+}
+
 let _noise_skew = 55;
 export function create_map_overworld(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed);
@@ -48,15 +71,16 @@ export function create_map_overworld(seed=MAP_SEED) {
         }
     }
 
-    return {
-        "id": "simplex=" + seed,
-        "width_tiles": MAP_SIZE.width * CHUNK_SIZE.width,
-        "height_tiles": MAP_SIZE.height * CHUNK_SIZE.height,
-        "tiles": tiles,
-        "getTile": function(x, y) {
-            return _tiles_get(tiles, MAP_SIZE.width * CHUNK_SIZE.width, MAP_SIZE.height * CHUNK_SIZE.height, x, y);
-        }
-    }
+    let map = new Map(
+        "simplex=" + seed,
+        MAP_SIZE.width * CHUNK_SIZE.width,
+        MAP_SIZE.height * CHUNK_SIZE.height,
+        tiles
+    )
+
+    map.setTile(127, 125, MANIFEST.tiles.portal)
+
+    return map;
 }
 
 export function create_map_arena() {
@@ -78,21 +102,8 @@ export function create_map_arena() {
     }
 }
 
-export function map_get(map, tile_x, tile_y) {
-    if (tile_x >= 0 && tile_x < map.width_tiles
-        && tile_y >= 0 && tile_y < map.height_tiles) {
-        let tile_index = tile_y * map.width_tiles + tile_x;
-        return map.tiles[tile_index];
-    }
-    return null;
-}
 export function _tiles_get(tiles, width_tiles, height_tiles, tile_x, tile_y) {
-    if (tile_x >= 0 && tile_x < width_tiles
-        && tile_y >= 0 && tile_y < height_tiles) {
-        let tile_index = tile_y * width_tiles + tile_x;
-        return tiles[tile_index];
-    }
-    return null;
+
 }
 
 export function maps_set_current(map_id) {

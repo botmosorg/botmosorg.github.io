@@ -4,9 +4,7 @@ import { CAMERA_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { get_entities_by_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
-import { map_get } from "./map.js";
 import { STATE } from "./state.js";
-import { UI_LINES } from "./ui.js";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -24,7 +22,7 @@ function rot_render(camera) {
     // Render map
     for (var y=0; y < camera.height; y++) {
         for (var x=0; x<camera.width; x++) {
-            var tile = map_get(map, camera.x+x, camera.y+y)
+            var tile = map.getTile(camera.x+x, camera.y+y)
 
             var bg_color = MANIFEST.colors.black;
             var fg_color = MANIFEST.colors.white;
