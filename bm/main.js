@@ -8,10 +8,10 @@ import { draw } from "./rot_renderer.js";
 const UPDATE_EVERY = 100 // in ms
 
 let game = new Game();
-game.init();
+window.onload = game.init();
+
 let _gameloop = setInterval(function() {
     draw(game.update());
 }, UPDATE_EVERY)
 
-// window.onload = Game.init(); // Use this for init instead
 window.focus(); // focus on the canvas
