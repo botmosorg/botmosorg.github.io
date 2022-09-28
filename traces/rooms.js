@@ -1,13 +1,14 @@
 "use strict";
 
 class Room {
-    constructor(id, neighbours) {
+    constructor(id, intros, neighbours) {
         this.id = id;
-        this.neighbours = neighbours
+        this.intros = intros;
+        this.neighbours = neighbours;
     }
 }
 
 export const ROOMS = {
-    "Pod": new Room("Pod", ["Hallway"]),
-    "Hallway": new Room("Hallway", ["Pod"])
+    "Pod": new Room("Pod", ["Standard bot storage pod, nothing here really."], ["Hallway"]),
+    "Hallway": new Room("Hallway", ["The hallway, lots of bots on their way to work."], ["Pod"])
 }

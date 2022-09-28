@@ -8,10 +8,12 @@ const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
 const _logLines = [];
-let _room = ROOMS.Pod;
+
 export default class Game {
     constructor() {
+        this._room = ROOMS.Pod;
         this._steps = 0;
+        this._lastInfo = "";
     }
     init() {
         let game = this;
@@ -51,33 +53,35 @@ export default class Game {
         });
 
         this.log("Booting up...")
-        this.log("You are in zone " + _room.id + " at " + this._steps + " steps.")
+        this.log("You are in zone " + this._room.id + " at " + this._steps + " steps.")
         this.log("Use arrow keys to move around, press space to repeat last info.")
         this.log("")
-        this.log("What do you want to do?")
+        this._lastInfo = this._room.intros[0];
+        this.log(this._lastInfo);
+        this.draw();
     }
     up() {
         this._steps += 1;
-        this.log("Going up");
+        this.draw();
     }
     down() {
         this._steps += 1;
-        this.log("Going down");
+        this.draw();
     }
     left() {
         this._steps += 1;
-        this.log("Going left");
+        this.draw();
     }
     right() {
         this._steps += 1;
-        this.log("Going right");
+        this.draw();
     }
     repeatLastInfo() {
-        this.log("What do you want to do?");
+        this.log(this._lastInfo);
+        this.draw();
     }
     log(text) {
         _logLines.push(text);
-        this.draw();
         speak(text);
         while (_logLines.length >= ROT_OPTIONS.height - 1) {
             _logLines.shift();
@@ -97,7 +101,7 @@ export default class Game {
             }
         }
         */
-        ROT_DISPLAY.drawText(0, 0, "%c{#fff}" + "@" + _room.id + " " + this._steps, ROT_OPTIONS.width);
+        ROT_DISPLAY.drawText(0, 0, "%c{#fff}" + "@" + this._room.id + " " + this._steps, ROT_OPTIONS.width);
         for (let y=0; y < ROT_OPTIONS.height - 1; y++) {
             if (_logLines[y] !== undefined) {
                 ROT_DISPLAY.drawText(0, y+1, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // clear line
