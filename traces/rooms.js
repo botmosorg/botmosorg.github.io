@@ -8,6 +8,6 @@ class Room {
 }
 
 export const ROOMS = {
-    "pod": new Room("pod", ["hallway"]),
-    "hallway": new Room("hallway", ["pod"])
+    "Pod": new Room("Pod", ["Hallway"]),
+    "Hallway": new Room("Hallway", ["Pod"])
 }
