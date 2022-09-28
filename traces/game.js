@@ -51,8 +51,8 @@ export default class Game {
         });
 
         this.log("Booting up...")
-        this.log("You are in zone " + _room.id + ".")
-        this.log("And you have done " + this._steps + " steps.")
+        this.log("You are in zone " + _room.id + " at " + this._steps + " steps.")
+        this.log("Use arrow keys to move around, press space to repeat last info.")
         this.log("")
         this.log("What do you want to do?")
     }
