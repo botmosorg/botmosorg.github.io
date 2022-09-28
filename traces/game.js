@@ -11,6 +11,9 @@ export default class Game {
     init() {
         this.log("Booting up...")
         this.log("What do you want to do?")
+        this.log("")
+        this.log("Up: go to next room")
+        this.log("Down: remain here")
     }
     update(dt) {
     }
@@ -23,9 +26,22 @@ export default class Game {
         }
     }
     async draw() {
-        for (var y=0; y < ROT_OPTIONS.height; y++) {
+        /*
+        for (let y=0; y < ROT_OPTIONS.height; y++) {
+            for (let x=0; x < ROT_OPTIONS.width; x++) {
+                let bgcolor = "red"
+                if (y < ROT_OPTIONS.height / 2 && x + y < ROT_OPTIONS.width / 2 ) {
+                    bgcolor = "yellow"
+                } else if () {
+
+                }
+                ROT_DISPLAY.draw(x,  y, "", "#0f0", bgcolor);
+            }
+        }
+        */
+        for (let y=0; y < ROT_OPTIONS.height; y++) {
             if (_logLines[y] !== undefined) {
-                ROT_DISPLAY.drawText(0, y, "%b{black}%c{#0f0}" + _logLines[y], ROT_OPTIONS.width);
+                ROT_DISPLAY.drawText(0, y, "%c{#0f0}" + _logLines[y], ROT_OPTIONS.width);
             }
         }
     }
