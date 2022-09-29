@@ -23,8 +23,8 @@ export const ROOMS = {
     }),
     "Hallway": new Room("Hallway", {
         0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
-        23: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"]),
-        46: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"])
+        10: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"]),
+        20: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"])
     }),
     "Central": new Room("Central", {
         0: new Option(["The central plaza."], ["Down: Go to Hallway", "Hallway"]),

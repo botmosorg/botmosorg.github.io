@@ -13,6 +13,7 @@ export default class Game {
     constructor() {
         this._room = ROOMS.Pod;
         this._steps = 0;
+        this._optionIndex = 0;
         this._lastInfo = [];
     }
     init() {
@@ -77,6 +78,10 @@ export default class Game {
             }
         )
         let option = this._room.options[biggestSmallerThanStepCount];
+        if (biggestSmallerThanStepCount > this._optionIndex) {
+            this._optionIndex = biggestSmallerThanStepCount;
+            this.announce(option)
+        }
         let movementOption = option[direction];
         if (movementOption !== null) {
             this.enter(ROOMS[movementOption[1]])
@@ -84,17 +89,21 @@ export default class Game {
         this.draw();
     }
     enter(room) {
-        let defaultOption = room.options["0"]
         this._lastInfo = [];
         this._steps = 0;
+        this._optionIndex = 0;
+        let defaultOption = room.options[this._optionIndex]
         this.log("");
-        this.logWithLastInfo(defaultOption.intros[0])
-        if (defaultOption.up !== null) this.logWithLastInfo(defaultOption.up[0]);
-        if (defaultOption.left !== null) this.logWithLastInfo(defaultOption.left[0]);
-        if (defaultOption.right !== null) this.logWithLastInfo(defaultOption.right[0]);
-        if (defaultOption.down !== null) this.logWithLastInfo(defaultOption.down[0]);
+        this.announce(defaultOption)
         this._room = room;
         this.draw();
+    }
+    announce(option) {
+        this.logWithLastInfo(option.intros[0])
+        if (option.up !== null) this.logWithLastInfo(option.up[0]);
+        if (option.left !== null) this.logWithLastInfo(option.left[0]);
+        if (option.right !== null) this.logWithLastInfo(option.right[0]);
+        if (option.down !== null) this.logWithLastInfo(option.down[0]);
     }
     repeatLastInfo() {
         this._lastInfo.forEach(line => this.log(line));
