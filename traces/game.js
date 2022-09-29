@@ -80,11 +80,15 @@ export default class Game {
         this.log(text);
     }
     async draw() {
-        ROT_DISPLAY.drawText(0, 0, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // clear line
+        // Clear lines
+        for (let y=0; y < ROT_OPTIONS.height; y++) {
+            ROT_DISPLAY.drawText(0, y, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width);
+        }
+        // Draw "UI"
         ROT_DISPLAY.drawText(0, 0, "%c{#fff}" + "@" + this._room.id + " " + this._steps, ROT_OPTIONS.width);
+        // Draw log
         for (let y=0; y < ROT_OPTIONS.height - 1; y++) {
             if (_logLines[y] !== undefined) {
-                ROT_DISPLAY.drawText(0, y+1, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // clear line
                 ROT_DISPLAY.drawText(0, y+1, "%c{#0f0}" + _logLines[y], ROT_OPTIONS.width);
             }
         }
