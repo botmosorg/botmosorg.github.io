@@ -80,7 +80,8 @@ export default class Game {
         }
         let movementOption = option[direction];
         if (movementOption !== null) {
-            this.enter(ROOMS[movementOption[1]])
+            this.enter(ROOMS[movementOption[1]]);
+            return;
         }
         this.draw();
     }
