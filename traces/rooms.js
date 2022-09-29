@@ -43,6 +43,5 @@ export const ROOMS = {
     "Command Unit": new Room("Command Unit", {
         0: new Option(["The Command Unit. Unfortunately, the gate is closed."], ["Down: Go to Central plaza", "Central"])
     }),
-    "Prison": new Room("Prison", {
-    }),
+    "Prison": new Room("Prison"),
 }
