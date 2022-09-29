@@ -24,11 +24,11 @@ export const ROOMS = {
     "Hallway": new Room("Hallway", {
         0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
         10: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"]),
-        20: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"])
+        20: new Option(["You are back at your Pod door."], ["Down: Enter your Pod", "Pod"])
     }),
     "Central": new Room("Central", {
         0: new Option(["The central plaza."], ["Down: Go to Hallway", "Hallway"], ["Left: Go to Factory", "Factory"], ["Right: Go to Bot Bar", "Bot Bar"]),
-        100: new Option(["The central plaza."], ["Down: Go to Hallway", "Hallway"], ["Left: Go to Factory", "Factory"], ["Right: Go to Bot Bar", "Bot Bar"], ["Up: Go to Command Unit", "Command Unit"]),
+        100: new Option(["The upper central plaza."], ["Down: Go to Hallway", "Hallway"], ["Left: Go to Factory", "Factory"], ["Right: Go to Bot Bar", "Bot Bar"], ["Up: Go to Command Unit", "Command Unit"]),
     }),
     "Factory": new Room("Factory", {
         0: new Option(["The Factory producing all types of Bots and accessories. Now get to work!"]),
