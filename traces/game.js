@@ -61,10 +61,6 @@ export default class Game {
         this.log("You are in zone " + this._room.id + " at " + this._steps + " steps.")
         this.log("Use arrow keys to move around, press space to repeat last info.")
         this.enter(this._room);
-        /*
-        this._lastInfo = this._room.intros[0];
-        this.log(this._lastInfo);
-        */
     }
     move(direction) {
         this._steps += 1;
