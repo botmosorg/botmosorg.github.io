@@ -25,21 +25,25 @@ export default class Game {
             let key = e.key;
             switch (key) {
                 case 'w':
+                case 'k':
                 case 'ArrowUp':
                     game.move("up");
                     _preventDefaultAndStopPropagation(e);
                     break;
                 case 'a':
+                case 'h':
                 case 'ArrowLeft':
                     game.move("left");
                     _preventDefaultAndStopPropagation(e);
                     break;
                 case 's':
+                case 'j':
                 case 'ArrowDown':
                     game.move("down");
                     _preventDefaultAndStopPropagation(e);
                     break;
                 case 'd':
+                case 'l':
                 case 'ArrowRight':
                     game.move("right");
                     _preventDefaultAndStopPropagation(e);
@@ -55,7 +59,6 @@ export default class Game {
         this.log("Booting up...")
         this.log("You are in zone " + this._room.id + " at " + this._steps + " steps.")
         this.log("Use arrow keys to move around, press space to repeat last info.")
-        this.log("")
         this.enter(this._room);
         /*
         this._lastInfo = this._room.intros[0];
@@ -64,11 +67,27 @@ export default class Game {
     }
     move(direction) {
         this._steps += 1;
+        const stepThresholds = Object.keys(this._room.options).map(elem => parseInt(elem));
+        let biggestSmallerThanStepCount = 0;
+        stepThresholds.forEach(
+            threshold => {
+                if (threshold > biggestSmallerThanStepCount && this._steps >= threshold) {
+                    biggestSmallerThanStepCount = threshold;
+                }
+            }
+        )
+        let option = this._room.options[biggestSmallerThanStepCount];
+        let movementOption = option[direction];
+        if (movementOption !== null) {
+            this.enter(ROOMS[movementOption[1]])
+        }
         this.draw();
     }
     enter(room) {
         let defaultOption = room.options["0"]
         this._lastInfo = [];
+        this._steps = 0;
+        this.log("");
         this.logWithLastInfo(defaultOption.intros[0])
         if (defaultOption.up !== null) this.logWithLastInfo(defaultOption.up[0]);
         if (defaultOption.left !== null) this.logWithLastInfo(defaultOption.left[0]);
@@ -106,6 +125,7 @@ export default class Game {
             }
         }
         */
+        ROT_DISPLAY.drawText(0, 0, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // clear line
         ROT_DISPLAY.drawText(0, 0, "%c{#fff}" + "@" + this._room.id + " " + this._steps, ROT_OPTIONS.width);
         for (let y=0; y < ROT_OPTIONS.height - 1; y++) {
             if (_logLines[y] !== undefined) {
