@@ -33,7 +33,7 @@ export const ROOMS = {
     "Factory": new Room("Factory", {
         0: new Option(["The Factory producing all types of Bots and accessories. Now get to work!"]),
         100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"]),
-        200: new Option(["Work work work. Your co-bots "], ["Down: Go to Central plaza", "Central"], ["Left: Go to Bot Racing Pit", "Bot Racing Pit"])
+        200: new Option(["Work work work. Your co-bots invite you to a Bot Race, for fun."], ["Down: Go to Central plaza", "Central"], ["Left: Go to Bot Racing Pit", "Bot Racing Pit"])
     }),
     "Bot Bar": new Room("Bot Bar", {
         0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave Bar", "Central"]),
