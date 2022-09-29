@@ -1,10 +1,9 @@
 "use strict";
 
 class Room {
-    constructor(id, intros, neighbours) {
+    constructor(id, options) {
         this.id = id;
-        this.intros = intros;
-        this.neighbours = neighbours;
+        this.options = options;
     }
 }
 
@@ -19,6 +18,11 @@ class Option {
 }
 
 export const ROOMS = {
-    "Pod": new Room("Pod", ["Standard bot storage pod, nothing here really."], ["Hallway"]),
-    "Hallway": new Room("Hallway", ["The hallway, lots of bots on their way to work."], ["Pod"])
+    "Pod": new Room("Pod", {
+        0: new Option(["Standard bot storage pod, nothing here really."], ["Down: Leave for the Hallway", "Hallway"])
+    }),
+    "Hallway": new Room("Hallway", {
+        0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"])
+    }),
+    "Central": new Room("Central")
 }
