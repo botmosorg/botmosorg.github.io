@@ -19,7 +19,7 @@ class Option {
 
 export const ROOMS = {
     "Pod": new Room("Pod", {
-        0: new Option(["Standard bot storage Pod, nothing here really."], ["Down: Leave for the Hallway", "Hallway"])
+        0: new Option(["Standard bot storage Pod, nothing here really.", "Standard bot storage Pod, home."], ["Down: Leave for the Hallway", "Hallway"])
     }),
     "Hallway": new Room("Hallway", {
         0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
@@ -34,6 +34,8 @@ export const ROOMS = {
         0: new Option(["The Factory producing all types of Bots and accessories. Now get to work!"]),
         100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"])
     }),
-    "Bot Bar": new Room("Bot Bar"),
+    "Bot Bar": new Room("Bot Bar", {
+        0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave bar", "Central"])
+    }),
     "Command Unit": new Room("Command Unit"),
 }

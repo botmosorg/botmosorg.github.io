@@ -95,7 +95,7 @@ export default class Game {
     }
     announce(option) {
         this._lastInfo = [];
-        this.logWithLastInfo(option.intros[0])
+        this.logWithLastInfo(pickRandom(option.intros))
         if (option.up !== null) this.logWithLastInfo(option.up[0]);
         if (option.left !== null) this.logWithLastInfo(option.left[0]);
         if (option.right !== null) this.logWithLastInfo(option.right[0]);
@@ -131,4 +131,8 @@ export default class Game {
 function _preventDefaultAndStopPropagation(e) {
     e.preventDefault();
     e.stopPropagation();
+}
+
+function pickRandom(items) {
+    return items[Math.floor(Math.random() * items.length)];
 }
