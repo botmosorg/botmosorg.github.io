@@ -89,6 +89,7 @@ export default class Game {
         // Draw log
         for (let y=0; y < ROT_OPTIONS.height - 1; y++) {
             if (_logLines[y] !== undefined) {
+                ROT_DISPLAY.drawText(0, y+1, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // Clear line
                 ROT_DISPLAY.drawText(0, y+1, "%c{#0f0}" + _logLines[y], ROT_OPTIONS.width);
             }
         }
