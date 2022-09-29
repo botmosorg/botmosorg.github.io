@@ -89,7 +89,6 @@ export default class Game {
         this.draw();
     }
     enter(room) {
-        this._lastInfo = [];
         this._steps = 0;
         this._optionIndex = 0;
         let defaultOption = room.options[this._optionIndex]
@@ -99,6 +98,7 @@ export default class Game {
         this.draw();
     }
     announce(option) {
+        this._lastInfo = [];
         this.logWithLastInfo(option.intros[0])
         if (option.up !== null) this.logWithLastInfo(option.up[0]);
         if (option.left !== null) this.logWithLastInfo(option.left[0]);
