@@ -112,19 +112,6 @@ export default class Game {
         this.log(text);
     }
     async draw() {
-        /*
-        for (let y=0; y < ROT_OPTIONS.height; y++) {
-            for (let x=0; x < ROT_OPTIONS.width; x++) {
-                let bgcolor = "red"
-                if (y < ROT_OPTIONS.height / 2 && x + y < ROT_OPTIONS.width / 2 ) {
-                    bgcolor = "yellow"
-                } else if () {
-
-                }
-                ROT_DISPLAY.draw(x,  y, "", "#0f0", bgcolor);
-            }
-        }
-        */
         ROT_DISPLAY.drawText(0, 0, "%c{#000}" + "#".repeat(ROT_OPTIONS.width), ROT_OPTIONS.width); // clear line
         ROT_DISPLAY.drawText(0, 0, "%c{#fff}" + "@" + this._room.id + " " + this._steps, ROT_OPTIONS.width);
         for (let y=0; y < ROT_OPTIONS.height - 1; y++) {
