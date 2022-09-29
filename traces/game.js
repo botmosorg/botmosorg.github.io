@@ -17,49 +17,11 @@ export default class Game {
         this._lastInfo = [];
     }
     init() {
-        let game = this;
-        document.body.addEventListener("keyup", function(e) {
-            if (e.defaultPrevented) {
-                return; // Do nothing if event already handled
-            }
+        _addEventListeners(this);
 
-            let key = e.key;
-            switch (key) {
-                case 'w':
-                case 'k':
-                case 'ArrowUp':
-                    game.move("up");
-                    _preventDefaultAndStopPropagation(e);
-                    break;
-                case 'a':
-                case 'h':
-                case 'ArrowLeft':
-                    game.move("left");
-                    _preventDefaultAndStopPropagation(e);
-                    break;
-                case 's':
-                case 'j':
-                case 'ArrowDown':
-                    game.move("down");
-                    _preventDefaultAndStopPropagation(e);
-                    break;
-                case 'd':
-                case 'l':
-                case 'ArrowRight':
-                    game.move("right");
-                    _preventDefaultAndStopPropagation(e);
-                    break;
-                case ' ':
-                    game.repeatLastInfo();
-                    _preventDefaultAndStopPropagation(e);
-                    break;
-                default:
-            }
-        });
-
-        this.log("Booting up...")
-        this.log("You are in zone " + this._room.id + " at " + this._steps + " steps.")
-        this.log("Use arrow keys to move around, press space to repeat last info.")
+        this.log("Booting up...");
+        this.log("You are in zone " + this._room.id + " at " + this._steps + " steps.");
+        this.log("Use arrow keys to move around, press space to repeat last info.");
         this.enter(this._room);
     }
     move(direction) {
@@ -127,6 +89,71 @@ export default class Game {
             }
         }
     }
+}
+
+function _addEventListeners(game) {
+    document.body.addEventListener("keyup", function(e) {
+        if (e.defaultPrevented) {
+            return; // Do nothing if event already handled
+        }
+
+        let key = e.key;
+        switch (key) {
+            case 'w':
+            case 'k':
+            case 'ArrowUp':
+                game.move("up");
+                _preventDefaultAndStopPropagation(e);
+                break;
+            case 'a':
+            case 'h':
+            case 'ArrowLeft':
+                game.move("left");
+                _preventDefaultAndStopPropagation(e);
+                break;
+            case 's':
+            case 'j':
+            case 'ArrowDown':
+                game.move("down");
+                _preventDefaultAndStopPropagation(e);
+                break;
+            case 'd':
+            case 'l':
+            case 'ArrowRight':
+                game.move("right");
+                _preventDefaultAndStopPropagation(e);
+                break;
+            case ' ':
+                game.repeatLastInfo();
+                _preventDefaultAndStopPropagation(e);
+                break;
+            default:
+        }
+    });
+    document.body.addEventListener("click", function(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        const width = document.body.clientWidth;
+        const widthThird = width / 3;
+        const height = document.body.clientHeight;
+        const heightThird = height / 3;
+        if (x >= widthThird && x < 2 * widthThird && y < heightThird) {
+            game.move("up");
+            _preventDefaultAndStopPropagation(e);
+        } else if (x < widthThird && y >= heightThird && y < 2 * heightThird) {
+            game.move("left");
+            _preventDefaultAndStopPropagation(e);
+        } else if (x >= 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
+            game.move("right");
+            _preventDefaultAndStopPropagation(e);
+        } else if (x >= widthThird && x < 2 * widthThird && y >= 2 * heightThird) {
+            game.move("down");
+            _preventDefaultAndStopPropagation(e);
+        } else if (x >= widthThird && x < 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
+            game.repeatLastInfo();
+            _preventDefaultAndStopPropagation(e);
+        }
+    });
 }
 
 function _preventDefaultAndStopPropagation(e) {
