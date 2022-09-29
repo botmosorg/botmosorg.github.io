@@ -35,7 +35,8 @@ export const ROOMS = {
         100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"])
     }),
     "Bot Bar": new Room("Bot Bar", {
-        0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave bar", "Central"])
+        0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave bar", "Central"]),
+        100: new Option(["You sense a connection with one of the serving AeroBots, but it's probably too much goo."], ["Down: Leave bar", "Central"])
     }),
     "Command Unit": new Room("Command Unit", {
         0: new Option(["The Command Unit. Unfortunately, the gate is closed."], ["Down: Go to Central plaza", "Central"])
