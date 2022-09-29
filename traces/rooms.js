@@ -35,10 +35,10 @@ export const ROOMS = {
         100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"])
     }),
     "Bot Bar": new Room("Bot Bar", {
-        0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave bar", "Central"]),
-        100: new Option(["You sense a connection with one of the serving AeroBots, but it's probably too much goo."], ["Down: Leave bar", "Central"]),
-        150: new Option(["You are spending too much time here, soon they'll call the sweepers."], ["Down: Leave bar", "Central"]),
-        166: new Option(["The sweepers were called, you are arrested!"], ["Down: Go to Prison", "Prison"], ["Left: Go to Prison", "Prison"], ["Right: Go to Prison", "Prison"])
+        0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave Bar", "Central"]),
+        50: new Option(["You sense a connection with one of the serving AeroBots, but it's probably too much goo."], ["Down: Leave Bar", "Central"]),
+        100: new Option(["You are spending too much time here, soon they'll call the sweepers."], ["Down: Leave Bar", "Central"]),
+        110: new Option(["The sweepers were called, you are arrested!"], ["Down: Go to Prison", "Prison"], ["Left: Go to Prison", "Prison"], ["Right: Go to Prison", "Prison"])
     }),
     "Command Unit": new Room("Command Unit", {
         0: new Option(["The Command Unit. Unfortunately, the gate is closed."], ["Down: Go to Central plaza", "Central"])
