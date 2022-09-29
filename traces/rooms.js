@@ -23,8 +23,8 @@ export const ROOMS = {
     }),
     "Hallway": new Room("Hallway", {
         0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
-        10: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"], ["Right: Leave for Central plaza", "Central"]),
-        20: new Option(["You are back at your Pod door."], ["Down: Enter your Pod", "Pod"])
+        10: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"]),
+        20: new Option(["You are back at your Pod door. Running in circles, huh?"], ["Down: Enter your Pod", "Pod"])
     }),
     "Central": new Room("Central", {
         0: new Option(["The central plaza."], ["Down: Go to storage Hallway", "Hallway"], ["Left: Go to Factory", "Factory"], ["Right: Go to Bot Bar", "Bot Bar"]),
@@ -32,7 +32,8 @@ export const ROOMS = {
     }),
     "Factory": new Room("Factory", {
         0: new Option(["The Factory producing all types of Bots and accessories. Now get to work!"]),
-        100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"])
+        100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"]),
+        200: new Option(["Work work work. Your co-bots "], ["Down: Go to Central plaza", "Central"], ["Left: Go to Bot Racing Pit", "Bot Racing Pit"])
     }),
     "Bot Bar": new Room("Bot Bar", {
         0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave Bar", "Central"]),
@@ -44,4 +45,5 @@ export const ROOMS = {
         0: new Option(["The Command Unit. Unfortunately, the gate is closed."], ["Down: Go to Central plaza", "Central"])
     }),
     "Prison": new Room("Prison"),
+    "Bot Racing Pit": new Room("Bot Racing Pit"),
 }
