@@ -1,6 +1,6 @@
 "use strict";
 
-import { CAMERA_SIZE, ROT_OPTIONS } from "./config.js";
+import { ROT_OPTIONS } from "./config.js";
 import { ROOMS } from "./rooms.js";
 import { speak } from "./tts.js"
 
