@@ -38,7 +38,8 @@ export default class Game {
         let option = this._room.options[biggestSmallerThanStepCount];
         if (biggestSmallerThanStepCount > this._optionIndex) {
             this._optionIndex = biggestSmallerThanStepCount;
-            this.announce(option)
+            this.announce(option);
+            return;
         }
         let movementOption = option[direction];
         if (movementOption !== null) {
@@ -52,9 +53,8 @@ export default class Game {
         this._optionIndex = 0;
         let defaultOption = room.options[this._optionIndex]
         this.log("");
-        this.announce(defaultOption)
         this._room = room;
-        this.draw();
+        this.announce(defaultOption)
     }
     announce(option) {
         this._lastInfo = [];
@@ -63,6 +63,7 @@ export default class Game {
         if (option.left !== null) this.logWithLastInfo(option.left[0]);
         if (option.right !== null) this.logWithLastInfo(option.right[0]);
         if (option.down !== null) this.logWithLastInfo(option.down[0]);
+        this.draw();
     }
     repeatLastInfo() {
         this._lastInfo.forEach(line => this.log(line));
