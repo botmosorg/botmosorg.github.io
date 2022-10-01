@@ -19,7 +19,9 @@ class Option {
 
 export const ROOMS = {
     "Pod": new Room("Pod", {
-        0: new Option(["Standard bot storage Pod, nothing here really.", "Standard bot storage Pod, home."], ["Down: Leave for the Hallway", "Hallway"])
+        0: new Option(["Standard bot storage Pod, nothing here really.", "Standard bot storage Pod, home."], ["Down: Leave for the Hallway", "Hallway"]),
+        10: new Option(["You're running in circles in your Pod, maybe follow the Hallway instead."], ["Down: Leave for the Hallway", "Hallway"]),
+        50: new Option(["Bored in your Pod? Visit the Bot Bar to recharge with finest goo!"], ["Down: Leave for the Hallway", "Hallway"])
     }),
     "Hallway": new Room("Hallway", {
         0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
