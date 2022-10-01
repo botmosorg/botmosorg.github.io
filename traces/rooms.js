@@ -24,8 +24,8 @@ export const ROOMS = {
         50: new Option(["Bored in your Pod? Visit the Bot Bar to recharge with finest goo!"], ["Down: Leave for the Hallway", "Hallway"])
     }),
     "Hallway": new Room("Hallway", {
-        0: new Option(["The hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
-        10: new Option(["End of the hallway."], null, ["Left: Leave for Central plaza", "Central"]),
+        0: new Option(["The Hallway, lots of bots on their way to work."], ["Down: Go to your Pod", "Pod"]),
+        10: new Option(["End of the Hallway."], null, ["Left: Leave for Central plaza", "Central"]),
         20: new Option(["You are back at your Pod door. Running in circles, huh?"], ["Down: Enter your Pod", "Pod"])
     }),
     "Central": new Room("Central", {
