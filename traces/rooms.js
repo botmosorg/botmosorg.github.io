@@ -34,9 +34,9 @@ export const ROOMS = {
     }),
     "Factory": new Room("Factory", {
         0: new Option(["The Factory producing all types of Bots and accessories. Now get to work!"]),
-        50: new Option(["Work still not done, keep pressing those buttons!"]),
+        50: new Option(["Work still not done, keep pressing those buttons!", "Work, work, work!"]),
         100: new Option(["Minimum work done. You may leave now."], ["Down: Go to Central plaza", "Central"]),
-        150: new Option(["Work work work. Your co-bots invite you to a Bot Race, for fun."], ["Down: Go to Central plaza", "Central"], ["Left: Go to Bot Racing Pit", "Bot Racing Pit"]),
+        150: new Option(["You are done working. Your co-bots invite you to a Bot Race, for fun."], ["Down: Go to Central plaza", "Central"], ["Left: Go to Bot Racing Pit", "Bot Racing Pit"]),
         200: new Option(["No supervisor is there and the Factory Control Room door is open."], ["Down: Go to Central plaza", "Central"], ["Left: Go to Factory Control Room", "Factory Control Room"])
     }),
     "Factory Control Room": new Room("Factory Control Room", {
@@ -56,6 +56,7 @@ export const ROOMS = {
         200: new Option(["Time done. You may leave now.", "Time done, finally!"], ["Down: Go to Central plaza", "Central"])
     }),
     "Bot Racing Pit": new Room("Bot Racing Pit", {
-        0: new Option(["Bot races keep the morale up.", "Now this is Bot racing!"], ["Down: Go to Central plaza", "Central"])
+        0: new Option(["Bot races keep the morale up."], ["Down: Go to Central plaza", "Central"]),
+        10: new Option(["Now this is Bot racing!"], ["Down: Go to Central plaza", "Central"]),
     }),
 }
