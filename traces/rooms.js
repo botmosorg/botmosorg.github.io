@@ -48,7 +48,7 @@ export const ROOMS = {
     }),
     "Prison": new Room("Prison", {
         0: new Option(["The Prison. Now do your time!", "The Prison interior is almost like that of a Pod, not much here."]),
-        300: new Option(["Time done. You may leave now."], ["Down: Go to Central plaza", "Central"])
+        200: new Option(["Time done. You may leave now.", "Time done, finally!"], ["Down: Go to Central plaza", "Central"])
     }),
     "Bot Racing Pit": new Room("Bot Racing Pit", {
         0: new Option(["Bot races keep the morale up.", "Now this is Bot racing!"], ["Down: Go to Central plaza", "Central"])
