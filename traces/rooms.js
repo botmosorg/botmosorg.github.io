@@ -18,6 +18,7 @@ class Option {
 }
 
 export const ROOMS = {
+    /* WorkBot chain */
     "Pod": new Room("Pod", {
         0: new Option(["Standard bot storage Pod, nothing here really.", "Standard bot storage Pod, home."], ["Down: Leave for the Hallway", "Hallway"]),
         10: new Option(["You're running in circles in your Pod, maybe follow the Hallway instead."], ["Down: Leave for the Hallway", "Hallway"]),
@@ -40,7 +41,7 @@ export const ROOMS = {
         200: new Option(["No supervisor is there and the Factory Control Room door is open."], ["Down: Go to Central plaza", "Central"], ["Left: Go to Factory Control Room", "Factory Control Room"])
     }),
     "Factory Control Room": new Room("Factory Control Room", {
-        0: new Option(["Controls which type of bot gets produced. Do you want to re-fit to a different model?"], ["Down: Go to Central plaza", "Central"], ["Left: Re-fit to AeroBot", "Central"], ["Right: Re-fit to Pioneer", "Central"]),
+        0: new Option(["Controls which type of bot gets produced. Do you want to re-fit to a different model?"], ["Down: Go to Central plaza", "Central"], ["Left: Re-fit to AeroBot", "AeroBot Assembly"], ["Right: Re-fit to Pioneer", "Pioneer Assembly"]),
     }),
     "Bot Bar": new Room("Bot Bar", {
         0: new Option(["The Bot Bar: get your fill of delicious goo and recharge!"], ["Down: Leave Bar", "Central"]),
@@ -58,5 +59,15 @@ export const ROOMS = {
     "Bot Racing Pit": new Room("Bot Racing Pit", {
         0: new Option(["Bot races keep the morale up."], ["Down: Go to Central plaza", "Central"]),
         10: new Option(["Now this is Bot racing!"], ["Down: Go to Central plaza", "Central"]),
+    }),
+    /* AeroBot chain */
+    "AeroBot Assembly": new Room("AeroBot Assembly", {
+        0: new Option(["On the assembly line, your hull is made more aerodynamic."]),
+        10: new Option(["Remember your purpose: be aerodynamic and serve goo!"], null, ["Left: Leave for Bot Bar", "TODO"])
+    }),
+    /* Pioneer chain */
+    "Pioneer Assembly": new Room("Pioneer Assembly", {
+        0: new Option(["On the assembly line, your hull is augmented with armor plates and weapons."]),
+        10: new Option(["All Pioneers prepare for draft!"], null, ["Left: Leave for Hall of Warriors", "TODO"]),
     }),
 }
