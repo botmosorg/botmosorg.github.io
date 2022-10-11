@@ -68,6 +68,13 @@ export const ROOMS = {
     /* Pioneer chain */
     "Pioneer Assembly": new Room("Pioneer Assembly", {
         0: new Option(["On the assembly line, your hull is augmented with armor plates and weapons."]),
-        10: new Option(["All Pioneers prepare for draft!"], null, ["Left: Leave for Hall of Warriors", "TODO"]),
+        10: new Option(["All Pioneers prepare for draft!"], null, ["Left: Leave for Hall of Warriors", "Hall of Warriors"]),
     }),
+    "Hall of Warriors": new Room("Hall of Warriors", {
+        0: new Option(["A long hallway decorated with the busts of famous Pioneers."]),
+        10: new Option(["End of the hallway, draft awaits."], null, ["Left: Get drafted", "Draft Hall"]),
+    }),
+    "Draft Hall": new Room("Draft Hall", {
+        0: new Option(["You are fit for service in the fleet."], ["Down: Leave for Hall of Warriors"]),
+    })
 }
