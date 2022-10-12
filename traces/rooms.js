@@ -71,8 +71,11 @@ export const ROOMS = {
         10: new Option(["All Pioneers prepare for draft!"], null, ["Left: Leave for Hall of Warriors", "Hall of Warriors"]),
     }),
     "Hall of Warriors": new Room("Hall of Warriors", {
-        0: new Option(["A long hallway decorated with the busts of famous Pioneers."]),
+        0: new Option(["A long hallway decorated with the busts of famous Pioneers."], ["Down: Go to your Pod", "Pioneer Pod"]),
         10: new Option(["End of the hallway, draft awaits."], null, ["Left: Get drafted", "Draft Hall"]),
+    }),
+    "Pioneer Pod": new Room("Pioneer Pod", {
+        0: new Option(["A bit spacier than standard bot storage."], ["Down: Leave for Hall of Warriors", "Hall of Warriors"]),
     }),
     "Draft Hall": new Room("Draft Hall", {
         0: new Option(["You are fit for service in the fleet."], ["Down: Leave for Hall of Warriors"]),
