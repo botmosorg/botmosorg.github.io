@@ -63,7 +63,11 @@ export const ROOMS = {
     /* AeroBot chain */
     "AeroBot Assembly": new Room("AeroBot Assembly", {
         0: new Option(["On the assembly line, your hull is made more aerodynamic."]),
-        10: new Option(["Remember your purpose: be aerodynamic and serve goo!"], null, ["Left: Leave for Bot Bar", "TODO"])
+        10: new Option(["Remember your purpose: be aerodynamic and serve goo!"], null, ["Left: Leave for Bot Bar", "Bot Bar_A"])
+    }),
+    "Bot Bar_A": new Room("Bot Bar", {
+        0: new Option(["Lots of underpowered WorkBots. You are serving them goo."]),
+        10: new Option(["Game over. If you think, this game should continue, please write to botmos at oliz dot io!"])
     }),
     /* Pioneer chain */
     "Pioneer Assembly": new Room("Pioneer Assembly", {
@@ -78,6 +82,9 @@ export const ROOMS = {
         0: new Option(["A bit spacier than standard bot storage."], ["Down: Leave for Hall of Warriors", "Hall of Warriors"]),
     }),
     "Draft Hall": new Room("Draft Hall", {
-        0: new Option(["You are fit for service in the fleet."], ["Down: Leave for Hall of Warriors"]),
+        0: new Option(["You are fit for service in the fleet."], ["Down: Leave for Hall of Warriors", "Hall of Warriors"], ["Left: Board drop ship", "Drop Ship"]),
+    }),
+    "Drop Ship": new Room("Drop Ship", {
+        0: new Option(["Game over. If you think, this game should continue, please write to botmos at oliz dot io!"])
     })
 }
