@@ -1,14 +1,16 @@
 "use strict";
 
+import { debug_log } from "./debug.js";
 import { STATE } from "./state.js";
 
-export function create_character(id, type, mapId, x=0, y=0) {
+export function create_character(id, type, mapId, x=0, y=0, options={}) {
     return {
         "id": id,
         "type": type,
         "mapId": mapId,
         "x": x,
-        "y": y
+        "y": y,
+        "options": options
     }
 }
 
@@ -34,4 +36,12 @@ export function get_entity_at(mapId, x, y) {
         return entities_at_pos[0]
     }
     return null
+}
+
+export function interact(entityA, entityB) {
+    if (entityA.options.faction === entityB.options.faction) {
+        debug_log("Interaction!")
+    } else {
+        debug_log("COMBAT!")
+    }
 }

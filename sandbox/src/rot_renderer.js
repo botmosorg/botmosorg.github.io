@@ -39,10 +39,12 @@ function rot_render(camera) {
     }
 
     // Render entities
+    let playerEntity = STATE.entities[STATE.playerId];
     let entities = get_entities_by_mapId(STATE.currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, MANIFEST.spirits.Spirit.color);
+        let entityColor = playerEntity.options.faction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
+        ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, entityColor);
     }
 
     // Render UI lines

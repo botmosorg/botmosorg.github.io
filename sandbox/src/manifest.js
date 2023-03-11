@@ -8,12 +8,19 @@ class Command {
         this.description = description;
     }
 }
+class Faction {
+    constructor(name, description, color) {
+        this.name = name;
+        this.description = description;
+        this.color = color;
+    }
+}
 class Spirit {
     constructor(name, description, icon) {
         this.name = name;
         this.description = description;
         this.icon = icon;
-        this.color = "#fff"; // Default white, different color = different faction or fashion
+        this.color = "white"; // Default white, different color = different faction or fashion
         this.unlockCondition = null;
     }
 }
@@ -55,6 +62,10 @@ export const MANIFEST = {
         "B": new Command("B", "Take a break, cancel"), // space bar
         "X": new Command("X", "Secondary action"), // unused
         "Y": new Command("Y", "Tertiary action"), // unused
+    },
+    "factions": {
+        "Spirits": new Faction("Spirits", "Default player faction", "white"),
+        "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta")
     },
     "names": {
         "BotMoses": "Teaches the new player",
