@@ -3,7 +3,7 @@
 import { ROT_OPTIONS } from "./config.js";
 import { debug_log } from "./debug.js";
 import { entities_store, create_character } from "./entity.js";
-import { entityMoveOrInteract } from "./entity_map.js";
+import { entityInteractOrMove } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
@@ -42,16 +42,16 @@ export default class Game {
         let map = STATE.maps[entity.mapId]
         switch (action) {
             case MANIFEST.commands.N:
-                entityMoveOrInteract(map, entity, 0, -1)
+                entityInteractOrMove(map, entity, 0, -1)
                 break
             case MANIFEST.commands.W:
-                entityMoveOrInteract(map, entity, -1, 0)
+                entityInteractOrMove(map, entity, -1, 0)
                 break
             case MANIFEST.commands.S:
-                entityMoveOrInteract(map, entity, 0, 1)
+                entityInteractOrMove(map, entity, 0, 1)
                 break
             case MANIFEST.commands.E:
-                entityMoveOrInteract(map, entity, 1, 0)
+                entityInteractOrMove(map, entity, 1, 0)
                 break
             default:
         }

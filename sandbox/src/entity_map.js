@@ -5,7 +5,7 @@ import { get_entity_at } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_set_current } from "./map.js"
 
-export function entityMoveOrInteract(map, entity, dx, dy) {
+export function entityInteractOrMove(map, entity, dx, dy) {
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
