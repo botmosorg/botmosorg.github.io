@@ -16,10 +16,6 @@ export function entities_store(entity) {
     STATE.entities[entity.id] = entity
 }
 
-export function entities_read(entityId) {
-    return STATE.entities[entityId]
-}
-
 export function get_entities_by_mapId(mapId) {
     var entity_ids = Object.keys(STATE.entities)
     var entities_on_map = []
