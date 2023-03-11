@@ -17,10 +17,10 @@ export function entities_store(entity) {
 }
 
 export function get_entities_by_mapId(mapId) {
-    var entity_ids = Object.keys(STATE.entities)
-    var entities_on_map = []
-    for (var i=0; i<entity_ids.length; i++) {
-        var entity = STATE.entities[entity_ids[i]]
+    let entity_ids = Object.keys(STATE.entities)
+    let entities_on_map = []
+    for (let i=0; i<entity_ids.length; i++) {
+        let entity = STATE.entities[entity_ids[i]]
         if (entity.mapId === mapId) {
             entities_on_map.push(entity)
         }
