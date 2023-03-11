@@ -3,6 +3,7 @@
 import { ROT_OPTIONS } from "./config.js";
 import { debug_log } from "./debug.js";
 import { entities_store, create_character } from "./entity.js";
+import { entityMoveOrInteract } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
@@ -41,52 +42,21 @@ export default class Game {
         let map = STATE.maps[entity.mapId]
         switch (action) {
             case MANIFEST.commands.N:
-                this.entityMoveOrInteract(map, entity, 0, -1)
+                entityMoveOrInteract(map, entity, 0, -1)
                 break
             case MANIFEST.commands.W:
-                this.entityMoveOrInteract(map, entity, -1, 0)
+                entityMoveOrInteract(map, entity, -1, 0)
                 break
             case MANIFEST.commands.S:
-                this.entityMoveOrInteract(map, entity, 0, 1)
+                entityMoveOrInteract(map, entity, 0, 1)
                 break
             case MANIFEST.commands.E:
-                this.entityMoveOrInteract(map, entity, 1, 0)
+                entityMoveOrInteract(map, entity, 1, 0)
                 break
             default:
         }
     }
-    entityMoveOrInteract(map, entity, dx, dy) {
-        // Check for collision:
-        /*
-        entity -> combat (hostile), interact (friendly)
-        tile -> mine (rock), block movement (wall)
 
-        if movement can happen:
-        move, pickup items on-tile movement, go through portals on-tile movement
-        */
-        if (this.entity_can_move(map, entity, dx, dy)) {
-            entity.x += dx;
-            entity.y += dy;
-
-            // Portal
-            let tile = map.getTile(entity.x, entity.y);
-            if (tile.type === MANIFEST.tiles.portal) {
-                maps_set_current(tile.options.mapId)
-                entity.x = tile.options.x;
-                entity.y = tile.options.y;
-                entity.mapId = tile.options.mapId;
-            }
-        }
-    }
-    entity_can_move(map, entity, dx, dy) {
-        let x = entity.x + dx;
-        let y = entity.y + dy;
-        let tileType = map.getTile(x, y).type;
-        return x >= 0 && x < map.widthTiles && y >= 0 && y < map.heightTiles
-            && tileType !== MANIFEST.tiles.rock
-            && tileType !== MANIFEST.tiles.wall
-            && tileType !== MANIFEST.tiles.weakwall;
-    }
 }
 
 function follow_camera(entity) {
