@@ -20,6 +20,7 @@ export default class Game {
         entities_store(create_character(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127))
         entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127))
         entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127))
+        entities_store(create_character("npc2", MANIFEST.spirits.WorkBot, "arena", 8, 8))
     }
     update(dt) {
         let action = get_action();
