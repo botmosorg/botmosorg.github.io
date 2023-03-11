@@ -1,7 +1,5 @@
 "use strict";
 
-import { CAMERA_SIZE } from "./config.js";
-import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
 export function create_character(id, type, mapId, x=0, y=0) {
@@ -16,6 +14,10 @@ export function create_character(id, type, mapId, x=0, y=0) {
 
 export function entities_store(entity) {
     STATE.entities[entity.id] = entity
+}
+
+export function entities_read(entityId) {
+    return STATE.entities[entityId]
 }
 
 export function get_entities_by_mapId(map_id) {

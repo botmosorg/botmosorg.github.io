@@ -13,10 +13,11 @@ const CHUNK_SIZE = {
 }
 const MAP_SIZE = CHUNK_SIZE // in chunks
 
-function create_tile(type=null, health=100) {
+function create_tile(type=null, health=100, options={}) {
     return {
         "type": type,
-        "health": health
+        "health": health,
+        "options": options
     }
 }
 
@@ -37,9 +38,9 @@ class Map {
         return {};
     }
 
-    setTile(x, y, tileType) {
+    setTile(x, y, tileType, options={}) {
         let tileIndex = y * this.widthTiles + x;
-        this._tiles[tileIndex] = create_tile(tileType);
+        this._tiles[tileIndex] = create_tile(tileType, 100, options);
     }
 }
 
@@ -78,7 +79,7 @@ export function create_map_overworld(seed=MAP_SEED) {
         tiles
     );
 
-    map.setTile(127, 125, MANIFEST.tiles.portal)
+    map.setTile(127, 125, MANIFEST.tiles.portal, {mapId: "arena", x: 1, y: 0})
 
     return map;
 }
@@ -98,7 +99,7 @@ export function create_map_arena() {
         tiles
     );
 
-    map.setTile(1, 0, MANIFEST.tiles.portal);
+    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "simplex=" + MAP_SEED, x: 127, y: 125});
 
     return map;
 }
