@@ -115,5 +115,3 @@ export function maps_set_current(map_id) {
 export function maps_store(map) {
     STATE.maps[map.id] = map
 }
-
-
