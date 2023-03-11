@@ -20,12 +20,12 @@ export function entities_read(entityId) {
     return STATE.entities[entityId]
 }
 
-export function get_entities_by_mapId(map_id) {
+export function get_entities_by_mapId(mapId) {
     var entity_ids = Object.keys(STATE.entities)
     var entities_on_map = []
     for (var i=0; i<entity_ids.length; i++) {
         var entity = STATE.entities[entity_ids[i]]
-        if (entity.mapId === map_id) {
+        if (entity.mapId === mapId) {
             entities_on_map.push(entity)
         }
     }
