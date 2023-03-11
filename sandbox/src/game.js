@@ -66,15 +66,15 @@ export default class Game {
         if (this.entity_can_move(map, entity, dx, dy)) {
             entity.x += dx;
             entity.y += dy;
-        }
 
-        // Portal
-        let tile = map.getTile(entity.x, entity.y);
-        if (tile.type === MANIFEST.tiles.portal) {
-            maps_set_current(tile.options.mapId)
-            entity.x = tile.options.x;
-            entity.y = tile.options.y;
-            entity.mapId = tile.options.mapId;
+            // Portal
+            let tile = map.getTile(entity.x, entity.y);
+            if (tile.type === MANIFEST.tiles.portal) {
+                maps_set_current(tile.options.mapId)
+                entity.x = tile.options.x;
+                entity.y = tile.options.y;
+                entity.mapId = tile.options.mapId;
+            }
         }
     }
     entity_can_move(map, entity, dx, dy) {
