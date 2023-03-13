@@ -1,5 +1,6 @@
 "use strict";
 
+import { combat_queue } from "./combat.js";
 import { debug_log } from "./debug.js";
 import { STATE } from "./state.js";
 
@@ -12,6 +13,11 @@ export function create_character(id, type, mapId, x=0, y=0, options={}) {
         "y": y,
         "options": options
     }
+}
+
+export function destroy_character(entityId) {
+    STATE.entities[entityId] = undefined
+    delete STATE.entities[entityId]
 }
 
 export function entities_store(entity) {
@@ -43,5 +49,6 @@ export function interact(entityA, entityB) {
         debug_log("Interaction!")
     } else {
         debug_log("COMBAT!")
+        combat_queue(entityA.id, entityB.id)
     }
 }

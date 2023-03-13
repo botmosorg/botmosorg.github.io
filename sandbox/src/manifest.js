@@ -15,6 +15,14 @@ class Faction {
         this.color = color;
     }
 }
+class Item {
+    constructor(name, description, icon, color="cyberyellow") {
+        this.name = name
+        this.description = description,
+        this.icon = icon
+        this.color = color
+    }
+}
 class Spirit {
     constructor(name, description, icon) {
         this.name = name;
@@ -66,6 +74,9 @@ export const MANIFEST = {
     "factions": {
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta")
+    },
+    "items": {
+        "energy": new Item("Energy", "Energy pack", "🗲", "cyberyellow")
     },
     "names": {
         "BotMoses": "Teaches the new player",
