@@ -17,6 +17,10 @@ export const CAMERA_SIZE = [
     Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE) - CAMERA_PADDING,
     Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE) - CAMERA_PADDING
 ]
+export const MAX_MAP_SIZE = {
+    WIDTH: 256,
+    HEIGHT: 256
+}
 
 export const ROT_OPTIONS = {
 	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),

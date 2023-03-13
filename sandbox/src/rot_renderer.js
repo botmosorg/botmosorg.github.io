@@ -1,6 +1,6 @@
 "use strict";
 
-import { CAMERA_SIZE, ROT_OPTIONS } from "./config.js";
+import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { get_entities_by_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
@@ -62,6 +62,15 @@ function rot_render(camera) {
     }
 }
 
-export async function draw(camera) {
-    rot_render(camera)
+export async function draw(entity) {
+    rot_render(camera_follow(entity))
+}
+
+function camera_follow(entity) {
+    return {
+        "x": Math.min(Math.max(0, entity.x - Math.floor(ROT_OPTIONS.width / 2)), MAX_MAP_SIZE.WIDTH - ROT_OPTIONS.width),
+        "y": Math.min(Math.max(0, entity.y - Math.floor(ROT_OPTIONS.height / 2)), MAX_MAP_SIZE.HEIGHT - ROT_OPTIONS.height),
+        "width": ROT_OPTIONS.width,
+        "height": ROT_OPTIONS.height
+    }
 }

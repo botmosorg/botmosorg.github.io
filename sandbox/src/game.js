@@ -1,6 +1,5 @@
 "use strict";
 
-import { ROT_OPTIONS } from "./config.js";
 import { debug_log } from "./debug.js";
 import { create_character, entities_store } from "./entity.js";
 import { entity_act } from "./entity_map.js";
@@ -36,15 +35,6 @@ export default class Game {
             debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
         }
 
-        return follow_camera(player)
-    }
-}
-
-function follow_camera(entity) {
-    return {
-        "x": Math.min(Math.max(0, entity.x - Math.floor(ROT_OPTIONS.width / 2)), 256 - ROT_OPTIONS.width), // TODO Hardcoded map size
-        "y": Math.min(Math.max(0, entity.y - Math.floor(ROT_OPTIONS.height / 2)), 256 - ROT_OPTIONS.height), // TODO Hardcoded map size
-        "width": ROT_OPTIONS.width,
-        "height": ROT_OPTIONS.height
+        return player
     }
 }
