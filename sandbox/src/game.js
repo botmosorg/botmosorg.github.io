@@ -31,8 +31,8 @@ export default class Game {
         let player = STATE.entities[STATE.playerId];
         if (action !== null) {
             entity_act(player, action)
-            this.turns += 1
             debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
+            this.turns += 1
         }
 
         return player
