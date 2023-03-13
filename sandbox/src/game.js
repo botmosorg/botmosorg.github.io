@@ -17,7 +17,6 @@ export default class Game {
         maps_store(create_map_arena())
         maps_store(create_map_overworld())
         maps_set_current("simplex="+MAP_SEED)
-        //maps_set_current("arena")
 
         STATE.playerId = "player";
         entities_store(create_character(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
@@ -26,12 +25,12 @@ export default class Game {
         entities_store(create_character("npc2", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates}))
     }
 
-    update(dt) {
+    update() {
         let action = get_action();
         let player = STATE.entities[STATE.playerId];
         if (action !== null) {
-            entity_act(player, action)
             debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
+            entity_act(player, action)
             this.turns += 1
         }
 
