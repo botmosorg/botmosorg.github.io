@@ -2,8 +2,8 @@
 
 import { ROT_OPTIONS } from "./config.js";
 import { debug_log } from "./debug.js";
-import { entities_store, create_character } from "./entity.js";
-import { entityInteractOrMove } from "./entity_map.js";
+import { create_character, entities_store } from "./entity.js";
+import { entity_act } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
@@ -26,40 +26,18 @@ export default class Game {
         entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127, {faction: MANIFEST.factions.Spirits}))
         entities_store(create_character("npc2", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates}))
     }
+
     update(dt) {
         let action = get_action();
+        let player = STATE.entities[STATE.playerId];
         if (action !== null) {
-            this.turn(action);
-            let player = STATE.entities[STATE.playerId];
+            entity_act(player, action)
+            this.turns += 1
             debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
         }
 
-        return follow_camera(STATE.entities[STATE.playerId])
-
+        return follow_camera(player)
     }
-    turn(action) {
-        this.act(STATE.entities[STATE.playerId], action)
-        this.turns += 1
-    }
-    act(entity, action) {
-        let map = STATE.maps[entity.mapId]
-        switch (action) {
-            case MANIFEST.commands.N:
-                entityInteractOrMove(map, entity, 0, -1)
-                break
-            case MANIFEST.commands.W:
-                entityInteractOrMove(map, entity, -1, 0)
-                break
-            case MANIFEST.commands.S:
-                entityInteractOrMove(map, entity, 0, 1)
-                break
-            case MANIFEST.commands.E:
-                entityInteractOrMove(map, entity, 1, 0)
-                break
-            default:
-        }
-    }
-
 }
 
 function follow_camera(entity) {
