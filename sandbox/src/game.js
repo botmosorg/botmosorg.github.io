@@ -7,6 +7,7 @@ import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
 import { STATE } from "./state.js";
+import { systems_update } from "./systems.js";
 
 export default class Game {
     constructor() {
@@ -18,7 +19,7 @@ export default class Game {
         maps_store(create_map_overworld())
         maps_set_current("simplex="+MAP_SEED)
 
-        STATE.playerId = "player";
+        STATE.playerId = "player"
         entities_store(create_character(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
         entities_store(create_character("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127, {faction: MANIFEST.factions.Spirits}))
         entities_store(create_character("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127, {faction: MANIFEST.factions.Spirits}))
@@ -26,11 +27,12 @@ export default class Game {
     }
 
     update() {
-        let action = get_action();
-        let player = STATE.entities[STATE.playerId];
+        let action = get_action()
+        let player = STATE.entities[STATE.playerId]
         if (action !== null) {
-            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
+            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")")
             entity_act(player, action)
+            systems_update()
             this.turns += 1
         }
 
