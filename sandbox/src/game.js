@@ -9,8 +9,11 @@ import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
 import { STATE } from "./state.js";
 
-let turn = 0
 export default class Game {
+    constructor() {
+        this.turns = 0
+    }
+
     init() {
         maps_store(create_map_arena())
         maps_store(create_map_overworld())
@@ -28,7 +31,7 @@ export default class Game {
         if (action !== null) {
             this.turn(action);
             let player = STATE.entities[STATE.playerId];
-            debug_log("Trn: " + turn + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
+            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")");
         }
 
         return follow_camera(STATE.entities[STATE.playerId])
@@ -36,7 +39,7 @@ export default class Game {
     }
     turn(action) {
         this.act(STATE.entities[STATE.playerId], action)
-        turn += 1
+        this.turns += 1
     }
     act(entity, action) {
         let map = STATE.maps[entity.mapId]
