@@ -79,7 +79,7 @@ export function create_map_overworld(seed=MAP_SEED) {
         tiles
     );
 
-    map.setTile(127, 125, MANIFEST.tiles.portal, {mapId: "arena", x: 1, y: 0})
+    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "arena", x: 1, y: 0})
 
     return map;
 }
