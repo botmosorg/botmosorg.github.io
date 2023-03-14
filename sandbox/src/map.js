@@ -99,7 +99,7 @@ export function create_map_arena() {
         tiles
     );
 
-    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "simplex=" + MAP_SEED, x: 127, y: 125});
+    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "simplex=" + MAP_SEED, x: 126, y: 121});
 
     return map;
 }
