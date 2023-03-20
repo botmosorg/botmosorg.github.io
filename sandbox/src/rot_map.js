@@ -1,48 +1,7 @@
 "use strict";
 
 import { MANIFEST } from "./manifest.js";
-//import { ROT } from "../lib/rot.js"
-import { STATE } from "./state.js";
-
-export const MAP_SEED = 1337
-
-//const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
-
-const CHUNK_SIZE = {
-    "width": 16, // in tiles
-    "height": 16
-}
-const MAP_SIZE = CHUNK_SIZE // in chunks
-
-function _tiles_create(type=null, options={}) {
-    return {
-        "type": type,
-        "options": options
-    }
-}
-
-class Map {
-    constructor(id, width_tiles, height_tiles, tiles=null) {
-        this.id = id;
-        this.widthTiles = width_tiles;
-        this.heightTiles = height_tiles;
-        this._tiles = tiles;
-    }
-
-    getTile(x, y) {
-        if (x >= 0 && x < this.widthTiles
-            && y >= 0 && y < this.heightTiles) {
-            let tile_index = y * this.widthTiles + x;
-            return this._tiles[tile_index];
-        }
-        return {};
-    }
-
-    setTile(x, y, tileType, options={}) {
-        let tileIndex = y * this.widthTiles + x;
-        this._tiles[tileIndex] = _tiles_create(tileType, options);
-    }
-}
+import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./maps.js"
 
 let _noise_skew = 55;
 export function maps_create_overworld(seed=MAP_SEED) {
@@ -68,7 +27,7 @@ export function maps_create_overworld(seed=MAP_SEED) {
                 tileType = MANIFEST.tiles.rock;
             }
 
-            tiles.push(_tiles_create(tileType));
+            tiles.push(tiles_create(tileType));
         }
     }
 
@@ -89,7 +48,7 @@ export function maps_create_arena() {
     let tiles = [];
     rotMap.create(function(x, y, wall) {
         let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
-        tiles[y*CHUNK_SIZE.width + x] = _tiles_create(tileType);
+        tiles[y*CHUNK_SIZE.width + x] = tiles_create(tileType);
     })
 
     let map = new Map(
@@ -102,12 +61,4 @@ export function maps_create_arena() {
     map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "simplex=" + MAP_SEED, x: 126, y: 121});
 
     return map;
-}
-
-export function maps_set_current(map_id) {
-    STATE.currentMapId = map_id
-}
-
-export function maps_store(map) {
-    STATE.maps[map.id] = map
 }
