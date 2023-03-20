@@ -14,7 +14,7 @@ const CHUNK_SIZE = {
 }
 const MAP_SIZE = CHUNK_SIZE // in chunks
 
-function create_tile(type=null, health=100, options={}) {
+function _tiles_create(type=null, health=100, options={}) {
     return {
         "type": type,
         "health": health,
@@ -41,7 +41,7 @@ class Map {
 
     setTile(x, y, tileType, options={}) {
         let tileIndex = y * this.widthTiles + x;
-        this._tiles[tileIndex] = create_tile(tileType, 100, options);
+        this._tiles[tileIndex] = _tiles_create(tileType, 100, options);
     }
 }
 
@@ -69,7 +69,7 @@ export function maps_create_overworld(seed=MAP_SEED) {
                 tileType = MANIFEST.tiles.rock;
             }
 
-            tiles.push(create_tile(tileType));
+            tiles.push(_tiles_create(tileType));
         }
     }
 
@@ -90,7 +90,7 @@ export function maps_create_arena() {
     let tiles = [];
     rotMap.create(function(x, y, wall) {
         let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
-        tiles[y*CHUNK_SIZE.width + x] = create_tile(tileType);
+        tiles[y*CHUNK_SIZE.width + x] = _tiles_create(tileType);
     })
 
     let map = new Map(
