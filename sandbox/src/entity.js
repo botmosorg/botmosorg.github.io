@@ -56,3 +56,7 @@ export function interact(entityA, entityB) {
         combat_queue(entityA.id, entityB.id)
     }
 }
+
+export function distance(entityA, entityB) {
+    return Math.abs(entityA.x - entityB.x) + Math.abs(entityA.y - entityB.y);
+}
