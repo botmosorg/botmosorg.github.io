@@ -62,3 +62,7 @@ function entity_can_move(map, entity, dx, dy) {
         && tileType !== MANIFEST.tiles.wall
         && tileType !== MANIFEST.tiles.weakwall;
 }
+
+export function distance(entityA, entityB) {
+    return Math.abs(entityA.x - entityB.x) + Math.abs(entityA.y - entityB.y);
+}

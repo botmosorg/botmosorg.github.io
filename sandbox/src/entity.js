@@ -44,6 +44,10 @@ export function get_entity_at(mapId, x, y) {
     return null
 }
 
+export function get_entity_by_id(entityId) {
+    return STATE.entities[entityId]
+}
+
 export function interact(entityA, entityB) {
     if (entityA.options.faction === entityB.options.faction) {
         debug_log("Interaction!")
