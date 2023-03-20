@@ -46,7 +46,7 @@ class Map {
 }
 
 let _noise_skew = 55;
-export function create_map_overworld(seed=MAP_SEED) {
+export function maps_create_overworld(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed);
     let noise = new ROT.Noise.Simplex();
     let tiles = [];
@@ -85,7 +85,7 @@ export function create_map_overworld(seed=MAP_SEED) {
     return map;
 }
 
-export function create_map_arena() {
+export function maps_create_arena() {
     let rotMap = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
     let tiles = [];
     rotMap.create(function(x, y, wall) {

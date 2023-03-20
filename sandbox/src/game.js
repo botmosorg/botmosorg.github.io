@@ -5,7 +5,7 @@ import { entities_create, entities_store } from "./entity.js";
 import { entity_act } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
-import { maps_store, maps_set_current, create_map_arena, create_map_overworld, MAP_SEED } from "./map.js"
+import { maps_store, maps_set_current, maps_create_arena, maps_create_overworld, MAP_SEED } from "./map.js"
 import { STATE } from "./state.js";
 import { systems_update } from "./systems.js";
 
@@ -15,8 +15,8 @@ export default class Game {
     }
 
     init() {
-        maps_store(create_map_arena())
-        maps_store(create_map_overworld())
+        maps_store(maps_create_arena())
+        maps_store(maps_create_overworld())
         maps_set_current("simplex="+MAP_SEED)
 
         STATE.playerId = "player"
