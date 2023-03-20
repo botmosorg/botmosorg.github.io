@@ -14,10 +14,9 @@ const CHUNK_SIZE = {
 }
 const MAP_SIZE = CHUNK_SIZE // in chunks
 
-function _tiles_create(type=null, health=100, options={}) {
+function _tiles_create(type=null, options={}) {
     return {
         "type": type,
-        "health": health,
         "options": options
     }
 }
@@ -41,19 +40,19 @@ class Map {
 
     setTile(x, y, tileType, options={}) {
         let tileIndex = y * this.widthTiles + x;
-        this._tiles[tileIndex] = _tiles_create(tileType, 100, options);
+        this._tiles[tileIndex] = _tiles_create(tileType, options);
     }
 }
 
 let _noise_skew = 55;
 export function maps_create_overworld(seed=MAP_SEED) {
     ROT.RNG.setSeed(seed);
-    let noise = new ROT.Noise.Simplex();
+    let rot_noise = new ROT.Noise.Simplex();
     let tiles = [];
     for (let tile_y=0; tile_y<CHUNK_SIZE.height*MAP_SIZE.height; tile_y++) {
         for (let tile_x=0; tile_x<CHUNK_SIZE.width*MAP_SIZE.width; tile_x++) {
             // Noise: water+none, plain+grass, plain+tree, mountain
-            let noise_val = noise.get(
+            let noise_val = rot_noise.get(
                 tile_x / _noise_skew,
                 tile_y / _noise_skew
             );
