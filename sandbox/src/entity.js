@@ -4,7 +4,7 @@ import { combat_queue } from "./combat.js";
 import { debug_log } from "./debug.js";
 import { STATE } from "./state.js";
 
-export function create_character(id, type, mapId, x=0, y=0, options={}) {
+export function entities_create(id, type, mapId, x=0, y=0, options={}) {
     return {
         "id": id,
         "type": type,
@@ -15,7 +15,7 @@ export function create_character(id, type, mapId, x=0, y=0, options={}) {
     }
 }
 
-export function destroy_character(entityId) {
+export function entities_destroy(entityId) {
     STATE.entities[entityId] = undefined
     delete STATE.entities[entityId]
 }
