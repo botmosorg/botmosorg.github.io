@@ -1,6 +1,6 @@
 "use strict";
 
-import { maps_create_overworld } from "../src/map.js";
+import { maps_create_overworld } from "../src/rot_map.js";
 
 var expect = chai.expect;
 

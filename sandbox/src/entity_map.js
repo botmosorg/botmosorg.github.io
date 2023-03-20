@@ -3,7 +3,7 @@
 import { debug_log } from "./debug.js";
 import { get_entity_at, interact } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
-import { maps_set_current } from "./map.js"
+import { maps_set_current } from "./rot_map.js"
 import { STATE } from "./state.js";
 
 export function entity_act(entity, action) {
@@ -61,8 +61,4 @@ function entity_can_move(map, entity, dx, dy) {
         && tileType !== MANIFEST.tiles.rock
         && tileType !== MANIFEST.tiles.wall
         && tileType !== MANIFEST.tiles.weakwall;
-}
-
-export function distance(entityA, entityB) {
-    return Math.abs(entityA.x - entityB.x) + Math.abs(entityA.y - entityB.y);
 }
