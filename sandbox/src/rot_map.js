@@ -1,7 +1,9 @@
 "use strict";
 
 import { MANIFEST } from "./manifest.js";
-import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./maps.js"
+import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./map.js";
+
+export const MAP_SEED = 1337
 
 let _noise_skew = 55;
 export function maps_create_overworld(seed=MAP_SEED) {

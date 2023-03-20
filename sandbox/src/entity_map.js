@@ -3,7 +3,7 @@
 import { debug_log } from "./debug.js";
 import { get_entity_at, interact } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
-import { maps_set_current } from "./rot_map.js"
+import { maps_set_current } from "./map.js"
 import { STATE } from "./state.js";
 
 export function entity_act(entity, action) {
