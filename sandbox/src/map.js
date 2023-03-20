@@ -105,10 +105,6 @@ export function create_map_arena() {
     return map;
 }
 
-export function _tiles_get(tiles, width_tiles, height_tiles, tile_x, tile_y) {
-
-}
-
 export function maps_set_current(map_id) {
     STATE.currentMapId = map_id
 }
