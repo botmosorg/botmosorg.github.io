@@ -1,5 +1,6 @@
 "use strict";
 
+import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
@@ -37,6 +38,28 @@ export class Map {
     setTile(x, y, tileType, options={}) {
         let tileIndex = y * this.widthTiles + x;
         this._tiles[tileIndex] = tiles_create(tileType, options);
+    }
+
+    asMovementMap() {
+        let movementMap = new Array(this.heightTiles);
+
+        for (let y=0; y < this.heightTiles; y++) {
+            movementMap[y] = new Array(this.widthTiles);
+            for (let x=0; x < this.widthTiles; x++) {
+                let tile_index = y * this.widthTiles + x;
+                let tile = this._tiles[tile_index];
+                let tileType = tile.type;
+                // 0 movable, 1 movement blocked
+                movementMap[y][x] = 0;
+                if (tileType === MANIFEST.tiles.rock
+                    || tileType === MANIFEST.tiles.wall
+                    || tileType === MANIFEST.tiles.weakwall) {
+                    movementMap[y][x] = 1;
+                }
+            }
+        }
+
+        return movementMap;
     }
 }
 
