@@ -12,7 +12,7 @@ import { debug_log } from "./debug.js";
  * @param {*} endY
  * @returns Array of x,y coordinates, null if no path was found
  */
-export function maps_a_star(movementMap, startX, startY, endX, endY) {
+export function a_star(movementMap, startX, startY, endX, endY) {
     let easystar = new EasyStar.js();
     easystar.setGrid(movementMap);
     easystar.setAcceptableTiles([0]);
