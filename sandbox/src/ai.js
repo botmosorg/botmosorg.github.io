@@ -1,6 +1,5 @@
 "use strict";
 
-import { debug_log } from "./debug.js";
 import { a_star } from "./easystar_astar.js";
 import { distance, entities_get, get_entities_by_mapId } from "./entity.js";
 import { entityInteractOrMove } from "./entity_map.js";
@@ -32,7 +31,6 @@ export function ai_update() {
         let distanceToPlayer = distance(playerEntity, entity)
         if (playerEntity.options.faction !== entity.options.faction
             && distanceToPlayer <= entityAI.aggroRange) {
-            debug_log("Player aggroing " + entityId)
             let movementMap = maps_get(STATE.currentMapId).asMovementMap()
             let path = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
             if (path !== null) {
