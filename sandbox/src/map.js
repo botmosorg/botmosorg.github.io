@@ -24,6 +24,7 @@ export class Map {
         this.widthTiles = width_tiles;
         this.heightTiles = height_tiles;
         this._tiles = tiles;
+        this._cacheMovementMap = null
     }
 
     getTile(x, y) {
@@ -36,11 +37,17 @@ export class Map {
     }
 
     setTile(x, y, tileType, options={}) {
+        this._cacheMovementMap = null;
+
         let tileIndex = y * this.widthTiles + x;
         this._tiles[tileIndex] = tiles_create(tileType, options);
     }
 
     asMovementMap() {
+        if (this._cacheMovementMap !== null) {
+            return this._cacheMovementMap;
+        }
+
         let movementMap = new Array(this.heightTiles);
 
         for (let y=0; y < this.heightTiles; y++) {
@@ -59,6 +66,7 @@ export class Map {
             }
         }
 
+        this._cacheMovementMap = movementMap;
         return movementMap;
     }
 }
