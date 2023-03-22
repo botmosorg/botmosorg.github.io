@@ -3,7 +3,7 @@
 import { debug_log } from "./debug.js";
 
 /**
- * A* algorithm.
+ * A* algorithm using https://github.com/prettymuchbryce/easystarjs
  *
  * @param {*} movementMap two-dimensional array of 0s (movable) and 1s (blocked)
  * @param {*} startX from
