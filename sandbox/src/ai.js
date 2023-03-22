@@ -1,11 +1,12 @@
 "use strict";
 
 import { a_star } from "./easystar_astar.js";
-import { distance, entities_get, get_entities_by_mapId } from "./entity.js";
+import { entities_get, get_entities_by_mapId } from "./entity.js";
 import { entityInteractOrMove } from "./entity_map.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_get } from "./map.js";
 import { STATE } from "./state.js";
+import { distance } from "./util.js";
 
 const _AIs = {}
 
@@ -28,7 +29,7 @@ export function ai_update() {
         let entityAI = _AIs[entityId]
 
         // First rough distance check, before
-        let distanceToPlayer = distance(playerEntity, entity)
+        let distanceToPlayer = distance(playerEntity.x, playerEntity.y, entity.x, entity.y)
         if (playerEntity.options.faction !== entity.options.faction
             && distanceToPlayer <= entityAI.aggroRange) {
             let movementMap = maps_get(STATE.currentMapId).asMovementMap()
