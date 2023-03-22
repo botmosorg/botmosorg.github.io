@@ -1,7 +1,5 @@
 "use strict";
 
-import { debug_log } from "./debug.js";
-
 /**
  * A* algorithm using https://github.com/prettymuchbryce/easystarjs
  *
@@ -16,11 +14,11 @@ export function a_star(movementMap, startX, startY, endX, endY) {
     let easystar = new EasyStar.js();
     easystar.setGrid(movementMap);
     easystar.setAcceptableTiles([0]);
+    easystar.enableSync();
     let foundPath = null;
     easystar.findPath(startX, startY, endX, endY, function (path) {
         foundPath = path;
     });
     easystar.calculate();
-    debug_log(foundPath)
     return foundPath;
 }

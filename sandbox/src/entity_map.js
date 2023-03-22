@@ -1,31 +1,30 @@
 "use strict";
 
 import { debug_log } from "./debug.js";
-import { get_entity_at, interact } from "./entity.js";
+import { get_entity_at, interactOrCombat } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_set_current } from "./map.js"
 import { STATE } from "./state.js";
 
 export function entity_act(entity, action) {
-    let map = STATE.maps[entity.mapId]
     switch (action) {
         case MANIFEST.commands.N:
-            entityInteractOrMove(map, entity, 0, -1)
+            entityInteractOrMove(entity, 0, -1)
             break
         case MANIFEST.commands.W:
-            entityInteractOrMove(map, entity, -1, 0)
+            entityInteractOrMove(entity, -1, 0)
             break
         case MANIFEST.commands.S:
-            entityInteractOrMove(map, entity, 0, 1)
+            entityInteractOrMove(entity, 0, 1)
             break
         case MANIFEST.commands.E:
-            entityInteractOrMove(map, entity, 1, 0)
+            entityInteractOrMove(entity, 1, 0)
             break
         default:
     }
 }
 
-function entityInteractOrMove(map, entity, dx, dy) {
+export function entityInteractOrMove(entity, dx, dy) {
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
@@ -34,9 +33,10 @@ function entityInteractOrMove(map, entity, dx, dy) {
     if movement can happen:
     move, pickup items on-tile movement, go through portals on-tile movement
     */
+    let map = STATE.maps[entity.mapId]
     let entity_at_target_position = get_entity_at(map.id, entity.x + dx, entity.y + dy)
     if (entity_at_target_position !== null) {
-        interact(entity, entity_at_target_position)
+        interactOrCombat(entity, entity_at_target_position)
 
     } else if (entity_can_move(map, entity, dx, dy)) {
         entity.x += dx;

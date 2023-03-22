@@ -24,6 +24,10 @@ export function entities_store(entity) {
     STATE.entities[entity.id] = entity
 }
 
+export function entities_get(entityId) {
+    return STATE.entities[entityId]
+}
+
 export function get_entities_by_mapId(mapId) {
     let entity_ids = Object.keys(STATE.entities)
     let entities_on_map = []
@@ -44,11 +48,7 @@ export function get_entity_at(mapId, x, y) {
     return null
 }
 
-export function get_entity_by_id(entityId) {
-    return STATE.entities[entityId]
-}
-
-export function interact(entityA, entityB) {
+export function interactOrCombat(entityA, entityB) {
     if (entityA.options.faction === entityB.options.faction) {
         debug_log("Interaction!")
     } else {

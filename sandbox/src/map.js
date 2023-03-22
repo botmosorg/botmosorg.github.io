@@ -63,10 +63,14 @@ export class Map {
     }
 }
 
-export function maps_set_current(map_id) {
-    STATE.currentMapId = map_id
+export function maps_set_current(mapId) {
+    STATE.currentMapId = mapId
 }
 
 export function maps_store(map) {
     STATE.maps[map.id] = map
+}
+
+export function maps_get(mapId) {
+    return STATE.maps[mapId]
 }

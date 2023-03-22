@@ -2,6 +2,12 @@
 
 import { SHOW_GRID } from "./config.js"
 
+class AI {
+    constructor(name, description) {
+        this.name = name;
+        this.description = description;
+    }
+}
 class Command {
     constructor(key, description) {
         this.key = key;
@@ -43,6 +49,9 @@ class Tile {
 }
 
 export const MANIFEST = {
+    "ais": {
+        "aggrorange": new AI("AggroRange", "Idles at a position and engages the player when coming into range")
+    },
     /**
      * From: https://www.color-hex.com/color-palette/8618
      * Further inspiration: https://colorcodes.io/neon-color-codes/
