@@ -6,7 +6,7 @@ import { entity_act } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current } from "./map.js"
-import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map.js"
+import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
 import { STATE } from "./state.js";
 import { systems_update } from "./systems.js";
 

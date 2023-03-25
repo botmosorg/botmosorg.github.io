@@ -32,7 +32,7 @@ export function ai_update() {
         let distanceToPlayer = distance(playerEntity.x, playerEntity.y, entity.x, entity.y)
         if (playerEntity.options.faction !== entity.options.faction
             && distanceToPlayer <= entityAI.aggroRange) {
-            let movementMap = maps_get(STATE.currentMapId).asMovementMap()
+            let movementMap = maps_get(STATE.currentMapId).asMovementMap() // TODO check for other entity positions to prevent lining up
             let path = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
             if (path !== null) {
                 path = path.slice(1) // First point in the path is current position of entity, skip it
