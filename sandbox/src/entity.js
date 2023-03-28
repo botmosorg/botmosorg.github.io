@@ -40,7 +40,7 @@ export function entities_get_by(mapId) {
     return entities_on_map
 }
 
-export function get_entity_at(mapId, x, y) {
+export function entities_get_at(mapId, x, y) {
     let entities_at_pos = entities_get_by(mapId).filter(e => e.x === x && e.y === y)
     if (entities_at_pos.length > 0) {
         return entities_at_pos[0]

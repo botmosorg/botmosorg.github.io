@@ -1,7 +1,7 @@
 "use strict";
 
 import { debug_log } from "./debug.js";
-import { get_entity_at, interactOrCombat } from "./entity.js";
+import { entities_get_at, interactOrCombat } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_set_current } from "./map.js"
 import { STATE } from "./state.js";
@@ -34,7 +34,7 @@ export function entityInteractOrMove(entity, dx, dy) {
     move, pickup items on-tile movement, go through portals on-tile movement
     */
     let map = STATE.maps[entity.mapId]
-    let entity_at_target_position = get_entity_at(map.id, entity.x + dx, entity.y + dy)
+    let entity_at_target_position = entities_get_at(map.id, entity.x + dx, entity.y + dy)
     if (entity_at_target_position !== null) {
         interactOrCombat(entity, entity_at_target_position)
 
