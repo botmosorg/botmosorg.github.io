@@ -42,6 +42,8 @@ export function entityInteractOrMove(entity, dx, dy) {
         entity.x += dx;
         entity.y += dy;
 
+        // TODO Item pickup
+
         // Portal
         let tile = map.getTile(entity.x, entity.y);
         if (tile.type === MANIFEST.tiles.portal) {

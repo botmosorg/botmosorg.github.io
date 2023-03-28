@@ -3,7 +3,7 @@
 import { STATE } from "./state.js";
 
 export function items_create(type, mapId, x=0, y=0) {
-    let id = mapId + x + y
+    let id = "item" + mapId + x + y
     return {
         "id": id,
         "type": type,
