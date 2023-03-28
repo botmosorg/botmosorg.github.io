@@ -28,7 +28,7 @@ export function entities_get(entityId) {
     return STATE.entities[entityId]
 }
 
-export function get_entities_by_mapId(mapId) {
+export function entities_get_by(mapId) {
     let entity_ids = Object.keys(STATE.entities)
     let entities_on_map = []
     for (let i=0; i<entity_ids.length; i++) {
@@ -41,7 +41,7 @@ export function get_entities_by_mapId(mapId) {
 }
 
 export function get_entity_at(mapId, x, y) {
-    let entities_at_pos = get_entities_by_mapId(mapId).filter(e => e.x === x && e.y === y)
+    let entities_at_pos = entities_get_by(mapId).filter(e => e.x === x && e.y === y)
     if (entities_at_pos.length > 0) {
         return entities_at_pos[0]
     }

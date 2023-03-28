@@ -1,7 +1,7 @@
 "use strict";
 
 import { a_star } from "./easystar_astar.js";
-import { entities_get, get_entities_by_mapId } from "./entity.js";
+import { entities_get, entities_get_by } from "./entity.js";
 import { entityInteractOrMove } from "./entity_map.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_get } from "./map.js";
@@ -58,7 +58,7 @@ export function ai_update() {
 }
 
 function _entityIdsToUpdate() {
-    let entities = get_entities_by_mapId(STATE.currentMapId);
+    let entities = entities_get_by(STATE.currentMapId);
     let entityIdsToUpdate = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];

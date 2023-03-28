@@ -3,7 +3,7 @@
 import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { items_get_by } from "./item.js";
-import { get_entities_by_mapId } from "./entity.js";
+import { entities_get_by } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
@@ -48,7 +48,7 @@ function rot_render(camera) {
 
     // Render entities
     let playerEntity = STATE.entities[STATE.playerId];
-    let entities = get_entities_by_mapId(STATE.currentMapId);
+    let entities = entities_get_by(STATE.currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
         let entityColor = playerEntity.options.faction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
