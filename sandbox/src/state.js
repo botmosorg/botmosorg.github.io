@@ -3,8 +3,10 @@
 export const STATE = {
     currentMapId: "",
     playerId: "",
-    maps: {
-    },
     entities: {
+    },
+    items: {
+    },
+    maps: {
     }
 }

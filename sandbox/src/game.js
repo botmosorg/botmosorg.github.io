@@ -4,6 +4,7 @@ import { debug_log } from "./debug.js";
 import { entities_create, entities_store } from "./entity.js";
 import { entity_act } from "./entity_map.js";
 import { get_action } from "./input.js";
+import { items_create, items_store } from "./item.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_store, maps_set_current } from "./map.js"
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
@@ -24,6 +25,7 @@ export default class Game {
         entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
         entities_store(entities_create("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127, {faction: MANIFEST.factions.Spirits}))
         entities_store(entities_create("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127, {faction: MANIFEST.factions.Spirits}))
+        items_store(items_create(MANIFEST.items.energy, STATE.currentMapId, 127, 130))
 
         entities_store(entities_create("enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates}))
         entities_store(entities_create("enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates}))

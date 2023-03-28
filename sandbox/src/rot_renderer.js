@@ -2,6 +2,7 @@
 
 import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
+import { items_get_by } from "./item.js";
 import { get_entities_by_mapId } from "./entity.js";
 import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
@@ -36,6 +37,13 @@ function rot_render(camera) {
 
             ROT_DISPLAY.draw(x, y, icon, fg_color, bg_color)
         }
+    }
+
+    // Render items
+    let items = items_get_by(STATE.currentMapId);
+    for (let i=0; i<items.length; i++) {
+        let item = items[i];
+        ROT_DISPLAY.drawOver(item.x-camera.x, item.y-camera.y, item.type.icon, lookup_color(item.type.color));
     }
 
     // Render entities
