@@ -32,6 +32,8 @@ export default class Game {
         entities_store(entities_create("enemy2", MANIFEST.spirits.WorkBot, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates}))
         entities_store(entities_create("enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates}))
         entities_store(entities_create("enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates}))
+        items_store(items_create(MANIFEST.items.energy, "arena", 7, 7))
+        items_store(items_create(MANIFEST.items.energy, "arena", 14, 14))
     }
 
     update() {
