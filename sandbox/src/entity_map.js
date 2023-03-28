@@ -2,6 +2,7 @@
 
 import { debug_log } from "./debug.js";
 import { entities_get_at, interactOrCombat } from "./entity.js";
+import { items_get_at, items_pickup } from "./item.js";
 import { MANIFEST } from "./manifest.js";
 import { maps_set_current } from "./map.js"
 import { STATE } from "./state.js";
@@ -42,7 +43,11 @@ export function entityInteractOrMove(entity, dx, dy) {
         entity.x += dx;
         entity.y += dy;
 
-        // TODO Item pickup
+        // Item pickup
+        let maybeItem = items_get_at(entity.mapId, entity.x, entity.y)
+        if (maybeItem) {
+            items_pickup(entity, maybeItem)
+        }
 
         // Portal
         let tile = map.getTile(entity.x, entity.y);

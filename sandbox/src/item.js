@@ -1,9 +1,10 @@
 "use strict";
 
+import { debug_log } from "./debug.js";
 import { STATE } from "./state.js";
 
 export function items_create(type, mapId, x=0, y=0) {
-    let id = "item" + mapId + x + y
+    let id = _items_id_create(mapId, x, y)
     return {
         "id": id,
         "type": type,
@@ -11,6 +12,10 @@ export function items_create(type, mapId, x=0, y=0) {
         "x": x,
         "y": y
     }
+}
+
+function _items_id_create(mapId, x, y) {
+    return "item" + mapId + x + y
 }
 
 export function items_destroy(itemId) {
@@ -32,4 +37,17 @@ export function items_get_by(mapId) {
         }
     }
     return itemsOnMap
+}
+
+export function items_get_at(mapId, x, y) {
+    let itemId = _items_id_create(mapId, x, y)
+    if (itemId in STATE.items) {
+        return STATE.items[itemId]
+    }
+    return null
+}
+
+export function items_pickup(entity, item) {
+    debug_log("Pickup item " + item.id + " by " + entity.id)
+    items_destroy(item.id)
 }
