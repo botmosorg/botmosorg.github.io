@@ -115,7 +115,7 @@ export const MANIFEST = {
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black"),
-        "boulder": new Tile("boulder", "A movable rock", "o", "gray"),
+        //"boulder": new Tile("boulder", "A movable rock", "o", "gray"),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
         //"item": new Tile("item", "An item lying on the ground", "i", "cyberyellow"),
         "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
