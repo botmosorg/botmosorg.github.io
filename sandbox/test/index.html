@@ -17,6 +17,11 @@
       mocha.setup('bdd');
       mocha.checkLeaks();
     </script>
+    <!-- Dependencies -->
+    <script src="../lib/rot.js"></script>
+    <script src="../lib/easystar-0.4.4.js"></script>
+
+    <script type="module" src="test.rot_map_generator.js"></script>
     <script type="module" src="test.util.js"></script>
     <script class="mocha-exec">
       mocha.run();
