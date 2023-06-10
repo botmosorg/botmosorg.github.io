@@ -16,7 +16,7 @@ let mapString = `! The first character defines the 'meta' character preceeding c
 !!# wall
 !!+ weakwall
 !!= chargepad
-!!O portal
+!!O portal arena 1 0
 ! This is the actual map data:
 ################
 #..............#
@@ -36,7 +36,7 @@ O..............O
 ################
 `
 
-describe('parse', function () {
+describe('map_parser::parse', function () {
     it('simple map parsing', function () {
         let map = parse(mapString);
 
@@ -45,6 +45,9 @@ describe('parse', function () {
         expect(map.heightTiles).to.equal(16);
         expect(map.getTile(0, 2).type.name).to.equal("portal");
         expect(map.getTile(15, 2).type.name).to.equal("portal");
+        expect(map.getTile(15, 2).options.mapId).to.equal("arena");
+        expect(map.getTile(15, 2).options.x).to.equal(1);
+        expect(map.getTile(15, 2).options.y).to.equal(0);
         expect(map.getTile(8, 8).type.name).to.equal("void");
         expect(map.getTile(15, 15).type.name).to.equal("wall");
     });

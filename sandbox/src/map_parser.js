@@ -33,7 +33,15 @@ export function parse(mapString) {
             for (let j = 0; j < line.length; j++) {
                 let character = line[j];
                 let tileTypeName = meta[character];
-                tiles.push(tiles_create(MANIFEST.tiles[tileTypeName]))
+                let options = {}
+                if (tileTypeName.startsWith("portal")) {
+                    let portalComponents = tileTypeName.split(" ")
+                    tileTypeName = "portal"
+                    options.mapId = portalComponents[1]
+                    options.x = Number(portalComponents[2])
+                    options.y = Number(portalComponents[3])
+                }
+                tiles.push(tiles_create(MANIFEST.tiles[tileTypeName], options))
             }
         }
     }
