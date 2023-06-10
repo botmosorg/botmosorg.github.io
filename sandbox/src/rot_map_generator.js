@@ -40,7 +40,7 @@ export function maps_create_overworld(seed=MAP_SEED) {
         tiles
     );
 
-    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "arena", x: 1, y: 0})
+    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "preloader", x: 0, y: 2})
 
     return map;
 }
@@ -60,7 +60,7 @@ export function maps_create_arena() {
         tiles
     );
 
-    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "simplex=" + MAP_SEED, x: 126, y: 121});
+    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "preloader", x: 15, y: 2});
 
     return map;
 }
