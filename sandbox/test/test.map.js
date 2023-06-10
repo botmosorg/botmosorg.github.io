@@ -1,6 +1,6 @@
 "use strict";
 
-import { parse } from "../src/map_parser.js";
+import { maps_parse } from "../src/map.js";
 
 var expect = chai.expect;
 
@@ -36,9 +36,9 @@ O..............O
 ################
 `
 
-describe('map_parser::parse', function () {
-    it('simple map parsing', function () {
-        let map = parse(mapString);
+describe('map', function () {
+    it('maps_parse', function () {
+        let map = maps_parse(mapString);
 
         expect(map.id).to.equal("preloader");
         expect(map.widthTiles).to.equal(16);
