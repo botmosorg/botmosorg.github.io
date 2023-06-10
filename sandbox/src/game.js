@@ -6,7 +6,7 @@ import { entity_act } from "./entity_map.js";
 import { get_action } from "./input.js";
 import { items_create, items_store } from "./item.js";
 import { MANIFEST } from "./manifest.js";
-import { maps_store, maps_set_current } from "./map.js"
+import { maps_parse, maps_store, maps_set_current } from "./map.js"
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
 import { STATE } from "./state.js";
 import { systems_update } from "./systems.js";
@@ -19,13 +19,13 @@ export default class Game {
     init() {
         maps_store(maps_create_arena())
         maps_store(maps_create_overworld())
-        maps_set_current("simplex="+MAP_SEED)
+        for (let mapId in MANIFEST.maps) {
+            maps_store(maps_parse(MANIFEST.maps[mapId]))
+        }
 
-        STATE.playerId = "player"
-        entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
-        entities_store(entities_create("npc0", MANIFEST.spirits.AeroBot, STATE.currentMapId, 130, 127, {faction: MANIFEST.factions.Spirits}))
-        entities_store(entities_create("npc1", MANIFEST.spirits.WorkBot, STATE.currentMapId, 124, 127, {faction: MANIFEST.factions.Spirits}))
-        items_store(items_create(MANIFEST.items.energy, STATE.currentMapId, 127, 130))
+        entities_store(entities_create("npc0", MANIFEST.spirits.AeroBot, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits}))
+        entities_store(entities_create("npc1", MANIFEST.spirits.WorkBot, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits}))
+        items_store(items_create(MANIFEST.items.energy, "simplex="+MAP_SEED, 127, 130))
 
         entities_store(entities_create("enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates}))
         entities_store(entities_create("enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates}))
@@ -34,6 +34,12 @@ export default class Game {
         entities_store(entities_create("enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates}))
         items_store(items_create(MANIFEST.items.energy, "arena", 7, 7))
         items_store(items_create(MANIFEST.items.energy, "arena", 14, 14))
+
+        STATE.playerId = "player"
+        //maps_set_current("simplex="+MAP_SEED)
+        //entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
+        maps_set_current("preloader")
+        entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
     }
 
     update() {
