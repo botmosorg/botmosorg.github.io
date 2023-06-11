@@ -39,12 +39,13 @@ class Spirit {
     }
 }
 class Tile {
-    constructor(name, description, icon=null, fg="white", bg="black") { // foreground, background colors
+    constructor(name, description, icon=null, fg="white", bg="black", energyDelta=0) { // foreground, background colors
         this.name = name;
         this.description = description;
         this.icon = icon;
         this.fg = fg;
         this.bg = bg;
+        this.energyDelta = energyDelta;
     }
 }
 
@@ -185,12 +186,12 @@ O..............D
     },
     "tiles": {
         "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
-        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue"), // ≋ alternatively
+        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "gray"), // ▲ alternatively
         "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "cybergreen"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
-        "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black"),
+        "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
         //"boulder": new Tile("boulder", "A movable rock", "o", "gray"),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
         //"item": new Tile("item", "An item lying on the ground", "i", "cyberyellow"),
