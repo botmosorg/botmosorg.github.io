@@ -9,7 +9,7 @@ import { MANIFEST } from "./manifest.js";
 import { maps_parse, maps_store, maps_set_current } from "./map.js"
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
 import { STATE } from "./state.js";
-import { systems_update } from "./systems.js";
+import { systems_per_turn_update } from "./systems.js";
 
 export default class Game {
     constructor() {
@@ -48,7 +48,7 @@ export default class Game {
         if (action !== null) {
             debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")")
             entity_act(player, action)
-            systems_update()
+            systems_per_turn_update()
             this.turns += 1
         }
 
