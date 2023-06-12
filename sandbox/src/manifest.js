@@ -22,11 +22,12 @@ class Faction {
     }
 }
 class Item {
-    constructor(name, description, icon, color="cyberyellow") {
+    constructor(name, description, icon, color="cyberyellow", energyDelta=0) {
         this.name = name
-        this.description = description,
+        this.description = description
         this.icon = icon
         this.color = color
+        this.energyDelta = energyDelta
     }
 }
 class Spirit {
@@ -86,7 +87,8 @@ export const MANIFEST = {
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta")
     },
     "items": {
-        "energy": new Item("Energy", "Energy pack", "🗲", "cyberyellow")
+        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
+        "energy": new Item("Energy", "Energy pack", "🗲", "cyberyellow", 10)
     },
     "maps": {
         "bot_dormitory": `!

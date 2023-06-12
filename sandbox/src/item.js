@@ -2,6 +2,7 @@
 
 import { debug_log } from "./debug.js";
 import { energy_queue } from "./energy.js";
+import { MANIFEST } from "./manifest.js";
 import { STATE } from "./state.js";
 
 export function items_create(type, mapId, x=0, y=0) {
@@ -12,7 +13,7 @@ export function items_create(type, mapId, x=0, y=0) {
         "mapId": mapId,
         "x": x,
         "y": y,
-        "energy": 10
+        "energy": type.energyDelta
     }
 }
 
