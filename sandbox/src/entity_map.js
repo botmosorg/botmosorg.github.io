@@ -76,6 +76,7 @@ function entity_can_move(map, entity, dx, dy) {
     let tileType = map.getTile(x, y).type;
     return x >= 0 && x < map.widthTiles && y >= 0 && y < map.heightTiles
         && tileType !== MANIFEST.tiles.rock
+        && tileType !== MANIFEST.tiles.closedportal
         && tileType !== MANIFEST.tiles.wall
         && tileType !== MANIFEST.tiles.weakwall;
 }
