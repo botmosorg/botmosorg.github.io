@@ -114,7 +114,7 @@ export function maps_parse(mapString) {
                 let character = line[j];
                 let tileTypeName = meta[character];
                 let options = {}
-                if (tileTypeName.startsWith("portal")) {
+                if (tileTypeName.startsWith("portal ")) {
                     let portalComponents = tileTypeName.split(" ")
                     tileTypeName = "portal"
                     options.mapId = portalComponents[1]

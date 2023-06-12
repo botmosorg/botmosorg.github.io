@@ -167,7 +167,7 @@ O.....=..+.....#
 !!# wall
 !!+ weakwall
 !!= chargepad
-!!C closedportal
+!!C portalclosed
 !!P portal preloader 15 13
 !!O portal bot_dormitory 2 31
 !!Q portal bot_dormitory 29 31
@@ -215,7 +215,7 @@ P..............................#
 !!# wall
 !!+ weakwall
 !!= chargepad
-!!C closedportal
+!!C portalclosed
 !!O portal simplex=1337 126 121
 !!A portal arena 1 0
 !!D portal bot_station 0 29
@@ -269,7 +269,7 @@ C..............D
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
         //"item": new Tile("item", "An item lying on the ground", "i", "cyberyellow"),
         "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
-        "closedportal": new Tile("closedportal", "Closed gateway to another map", "O", "black", "gray"), // □
+        "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "O", "black", "gray"), // □
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */
