@@ -5,12 +5,22 @@ import { debug_log } from "./debug.js";
 import { STATE } from "./state.js";
 
 export function entities_create(id, type, mapId, x=0, y=0, options={}) {
+    // TODO make energy entity type dependent
+    let energy = 10;
+    let energyMax = 10;
+    if (id.startsWith("player")) {
+        energy = 100;
+        energyMax = 100;
+    }
+
     return {
         "id": id,
         "type": type,
         "mapId": mapId,
         "x": x,
         "y": y,
+        "energy": energy,
+        "energyMax": energyMax,
         "options": options
     }
 }

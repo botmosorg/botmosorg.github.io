@@ -46,9 +46,9 @@ export default class Game {
         let action = get_action()
         let player = STATE.entities[STATE.playerId]
         if (action !== null) {
-            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.x + "," + player.y + ")")
             entity_act(player, action)
             systems_per_turn_update()
+            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             this.turns += 1
         }
 

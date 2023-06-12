@@ -1,6 +1,7 @@
 "use strict";
 
 import { debug_log } from "./debug.js";
+import { energy_queue } from "./energy.js";
 import { entities_get_at, interactOrCombat } from "./entity.js";
 import { items_get_at, items_pickup } from "./item.js";
 import { MANIFEST } from "./manifest.js";
@@ -57,6 +58,15 @@ export function entityInteractOrMove(entity, dx, dy) {
             entity.y = tile.options.y;
             entity.mapId = tile.options.mapId;
         }
+    }
+}
+
+export function entities_tile_energy_update() {
+    for (let entityId in STATE.entities) {
+        let entity = STATE.entities[entityId]
+        let map = STATE.maps[entity.mapId]
+        let tile = map.getTile(entity.x, entity.y)
+        energy_queue(entityId, tile.type.energyDelta)
     }
 }
 
