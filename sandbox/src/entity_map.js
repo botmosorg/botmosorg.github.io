@@ -52,7 +52,7 @@ export function entityInteractOrMove(entity, dx, dy) {
         // Portal
         let tile = map.getTile(entity.x, entity.y);
         if (tile.type === MANIFEST.tiles.portal) {
-            maps_set_current(tile.options.mapId)
+            maps_set_current(tile.options.mapId) // TODO: currently only player can pass portals
             entity.x = tile.options.x;
             entity.y = tile.options.y;
             entity.mapId = tile.options.mapId;
