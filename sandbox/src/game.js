@@ -45,11 +45,17 @@ export default class Game {
     update() {
         let action = get_action()
         let player = STATE.entities[STATE.playerId]
-        if (action !== null) {
-            entity_act(player, action)
-            systems_per_turn_update()
-            debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
-            this.turns += 1
+        if (player !== undefined) {
+            if (action !== null) {
+                entity_act(player, action)
+                systems_per_turn_update()
+                debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
+                this.turns += 1
+            }
+        } else {
+            maps_set_current("preloader")
+            entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+            player = STATE.entities[STATE.playerId]
         }
 
         return player

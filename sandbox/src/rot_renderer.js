@@ -47,11 +47,11 @@ function rot_render(camera) {
     }
 
     // Render entities
-    let playerEntity = STATE.entities[STATE.playerId];
+    let playerFaction = ((STATE.entities[STATE.playerId] || {}).options || {}).faction || undefined;
     let entities = entities_get_by(STATE.currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        let entityColor = playerEntity.options.faction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
+        let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
         ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, entityColor);
     }
 
@@ -70,6 +70,7 @@ function rot_render(camera) {
     }
 }
 
+let _previousCamera = undefined; // For entity death
 export async function draw(entity) {
     rot_render(camera_follow(entity))
 }
