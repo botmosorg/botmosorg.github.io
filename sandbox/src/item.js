@@ -1,6 +1,7 @@
 "use strict";
 
 import { debug_log } from "./debug.js";
+import { energy_queue } from "./energy.js";
 import { STATE } from "./state.js";
 
 export function items_create(type, mapId, x=0, y=0) {
@@ -10,7 +11,8 @@ export function items_create(type, mapId, x=0, y=0) {
         "type": type,
         "mapId": mapId,
         "x": x,
-        "y": y
+        "y": y,
+        "energy": 10
     }
 }
 
@@ -49,5 +51,6 @@ export function items_get_at(mapId, x, y) {
 
 export function items_pickup(entity, item) {
     debug_log("Pickup item " + item.id + " by " + entity.id)
+    energy_queue(entity.id, item.energy)
     items_destroy(item.id)
 }
