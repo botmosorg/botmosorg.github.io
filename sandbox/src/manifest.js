@@ -96,10 +96,7 @@ export const MANIFEST = {
 !!size 32 32
 !!. void
 !!~ water
-!!^ rock
-!!t tree
 !!# wall
-!!+ weakwall
 !!= chargepad
 !!O portal preloader 15 13
 ################################
