@@ -1,19 +1,19 @@
 /*!
  * @license
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2012-2020 Bryce Neal
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -312,9 +312,9 @@ this.bestGuessDistance=function(){return this.costSoFar+this.simpleDistanceToTar
 defaultCmp=function(x,y){return x<y?-1:x>y?1:0},
 /*
   Insert item x in list a, and keep it sorted assuming a is sorted.
-  
+
   If x is already in a, insert it to the right of the rightmost x.
-  
+
   Optional args lo (default 0) and hi (default a.length) bound the slice
   of a to be searched.
    */
@@ -329,7 +329,7 @@ heappush=function(array,item,cmp){return null==cmp&&(cmp=defaultCmp),array.push(
 heappop=function(array,cmp){var lastelt,returnitem;return null==cmp&&(cmp=defaultCmp),lastelt=array.pop(),array.length?(returnitem=array[0],array[0]=lastelt,_siftup(array,0,cmp)):returnitem=lastelt,returnitem},
 /*
   Pop and return the current smallest value, and add the new item.
-  
+
   This is more efficient than heappop() followed by heappush(), and can be
   more appropriate when using a fixed size heap. Note that the value
   returned may be larger than item! That constrains reasonable use of

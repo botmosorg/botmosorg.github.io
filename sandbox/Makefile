@@ -1,10 +1,13 @@
-.PHONY: all build test help
+.PHONY: all build clean test help
 
 all: build ## Main task for local dev
 	python3 -m http.server
 
 build: test ## Bunbles and minifies the project
 	bun script/bundle.ts
+
+clean: ## Cleans all artifacts
+	rm -rf build/
 
 test: ## Execute tests
 	bun test
