@@ -1,5 +1,7 @@
 "use strict";
 
+import { EasyStar } from "../lib/easystar-0.4.4.js"
+
 /**
  * A* algorithm using https://github.com/prettymuchbryce/easystarjs
  *

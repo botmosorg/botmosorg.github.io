@@ -1,5 +1,7 @@
 "use strict";
 
+import * as ROT from "../lib/rot.js"
+
 import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config.js";
 import { DEBUG_LINES } from "./debug.js";
 import { items_get_by } from "./item.js";
