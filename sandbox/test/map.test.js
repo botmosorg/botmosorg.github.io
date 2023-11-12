@@ -1,8 +1,8 @@
 "use strict";
 
-import { maps_parse } from "../src/map.js";
+import { describe, expect, test } from "bun:test";
 
-var expect = chai.expect;
+import { maps_parse } from "../src/map.js";
 
 let mapString = `! The first character defines the 'meta' character preceeding commands and comments, e.g. '!'
 ! This is a comment. Commands start with <meta>!, e.g.:
@@ -37,18 +37,18 @@ O..............O
 `
 
 describe('map', function () {
-    it('maps_parse', function () {
+    test('maps_parse', function () {
         let map = maps_parse(mapString);
 
-        expect(map.id).to.equal("preloader");
-        expect(map.widthTiles).to.equal(16);
-        expect(map.heightTiles).to.equal(16);
-        expect(map.getTile(0, 2).type.name).to.equal("portal");
-        expect(map.getTile(15, 2).type.name).to.equal("portal");
-        expect(map.getTile(15, 2).options.mapId).to.equal("arena");
-        expect(map.getTile(15, 2).options.x).to.equal(1);
-        expect(map.getTile(15, 2).options.y).to.equal(0);
-        expect(map.getTile(8, 8).type.name).to.equal("void");
-        expect(map.getTile(15, 15).type.name).to.equal("wall");
+        expect(map.id).toEqual("preloader");
+        expect(map.widthTiles).toEqual(16);
+        expect(map.heightTiles).toEqual(16);
+        expect(map.getTile(0, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).options.mapId).toEqual("arena");
+        expect(map.getTile(15, 2).options.x).toEqual(1);
+        expect(map.getTile(15, 2).options.y).toEqual(0);
+        expect(map.getTile(8, 8).type.name).toEqual("void");
+        expect(map.getTile(15, 15).type.name).toEqual("wall");
     });
 });
