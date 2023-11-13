@@ -88,7 +88,7 @@ export const MANIFEST = {
     },
     "items": {
         "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
-        "energy": new Item("Energy", "Energy pack", "🗲", "cyberyellow", 10)
+        "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) // 🗲
     },
     "maps": {
         "bot_bar": `!
