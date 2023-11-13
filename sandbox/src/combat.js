@@ -1,7 +1,6 @@
 "use strict";
 
 import { energy_queue } from "./energy.js";
-import { despawn_queue } from "./spawn.js";
 
 let _combatQueue = []
 export function combat_queue(entityId, otherEntityId) {
