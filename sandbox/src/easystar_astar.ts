@@ -1,5 +1,3 @@
-"use strict";
-
 // Inlined from ../lib/easystar-0.4.4.js
 
 /*!
@@ -377,7 +375,7 @@ nsmallest=function(array,n,cmp){var elem,los,result,_i,_j,_len,_ref,_ref1,_resul
  * @param {*} endY
  * @returns Array of x,y coordinates, null if no path was found
  */
-export function a_star(movementMap, startX, startY, endX, endY) {
+export function a_star(movementMap: number[][], startX: number, startY: number, endX: number, endY: number): {x: number, y: number}[] | null {
     let easystar = new EasyStar.js();
     easystar.setGrid(movementMap);
     easystar.setAcceptableTiles([0]);

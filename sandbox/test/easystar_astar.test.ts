@@ -2,7 +2,7 @@
 
 import { describe, expect, test } from "bun:test";
 
-import { a_star } from "../src/easystar_astar.js";
+import { a_star } from "../src/easystar_astar";
 
 describe('a_star', function () {
     test('should find path', function () {
@@ -13,7 +13,7 @@ describe('a_star', function () {
             [0, 0, 0, 0]
         ]
 
-        let path = a_star(map, 0, 0, 2, 2)
+        let path = a_star(map, 0, 0, 2, 2)!
 
         expect(path.length).toEqual(7)
         expect(path[0]).toEqual({x: 0, y: 0})
