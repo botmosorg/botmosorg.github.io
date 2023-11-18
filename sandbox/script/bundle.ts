@@ -1,3 +1,5 @@
+import Bun from "bun"
+
 let bundle = await Bun.build({
     entrypoints: ["./src/main.js"],
     outdir: "./build",
