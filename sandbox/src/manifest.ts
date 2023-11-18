@@ -1,15 +1,19 @@
-"use strict";
-
 import { SHOW_GRID } from "./config.js"
 
 export class AI {
-    constructor(name, description) {
+    name: string;
+    description: string;
+
+    constructor(name: string, description: string) {
         this.name = name;
         this.description = description;
     }
 }
-class Command {
-    constructor(key, description) {
+export class Command {
+    key: string;
+    description: string;
+
+    constructor(key: string, description: string) {
         this.key = key;
         this.description = description;
     }
@@ -39,7 +43,7 @@ class Spirit {
         this.unlockCondition = null;
     }
 }
-class Tile {
+export class Tile {
     constructor(name, description, icon=null, fg="white", bg="black", energyDelta=0) { // foreground, background colors
         this.name = name;
         this.description = description;

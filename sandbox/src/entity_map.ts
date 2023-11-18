@@ -1,14 +1,12 @@
-"use strict";
+import { debug_log } from "./debug";
+import { energy_queue } from "./energy";
+import { entities_get_at, interactOrCombat } from "./entity";
+import { items_get_at, items_pickup } from "./item";
+import { MANIFEST, Command } from "./manifest";
+import { maps_set_current } from "./map"
+import { STATE } from "./state";
 
-import { debug_log } from "./debug.js";
-import { energy_queue } from "./energy.js";
-import { entities_get_at, interactOrCombat } from "./entity.js";
-import { items_get_at, items_pickup } from "./item.js";
-import { MANIFEST } from "./manifest.js";
-import { maps_set_current } from "./map.js"
-import { STATE } from "./state.js";
-
-export function entity_act(entity, action) {
+export function entity_act(entity, action: Command) {
     switch (action) {
         case MANIFEST.commands.N:
             entityInteractOrMove(entity, 0, -1)
@@ -26,7 +24,7 @@ export function entity_act(entity, action) {
     }
 }
 
-export function entityInteractOrMove(entity, dx, dy) {
+export function entityInteractOrMove(entity, dx: number, dy: number) {
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
@@ -70,7 +68,7 @@ export function entities_tile_energy_update() {
     }
 }
 
-function entity_can_move(map, entity, dx, dy) {
+function entity_can_move(map, entity, dx: number, dy: number) {
     let x = entity.x + dx;
     let y = entity.y + dy;
     let tileType = map.getTile(x, y).type;

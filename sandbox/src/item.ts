@@ -1,9 +1,6 @@
-"use strict";
-
-import { debug_log } from "./debug.js";
-import { energy_queue } from "./energy.js";
-import { MANIFEST } from "./manifest.js";
-import { STATE } from "./state.js";
+import { debug_log } from "./debug";
+import { energy_queue } from "./energy";
+import { STATE } from "./state";
 
 export function items_create(type, mapId, x=0, y=0) {
     let id = _items_id_create(mapId, x, y)
@@ -17,7 +14,7 @@ export function items_create(type, mapId, x=0, y=0) {
     }
 }
 
-function _items_id_create(mapId, x, y) {
+function _items_id_create(mapId: string, x: number, y: number) {
     return "item" + mapId + x + y
 }
 
@@ -30,7 +27,7 @@ export function items_store(item) {
     STATE.items[item.id] = item
 }
 
-export function items_get_by(mapId) {
+export function items_get_by(mapId: string) {
     let itemIds = Object.keys(STATE.items)
     let itemsOnMap = []
     for (let i=0; i<itemIds.length; i++) {

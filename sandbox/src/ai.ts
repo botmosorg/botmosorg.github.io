@@ -1,10 +1,10 @@
 import { a_star } from "./easystar_astar";
-import { entities_get, entities_get_by } from "./entity.js";
-import { entityInteractOrMove } from "./entity_map.js";
-import { MANIFEST, AI } from "./manifest.js";
-import { maps_get } from "./map.js";
-import { STATE } from "./state.js";
-import { distance } from "./util.js";
+import { entities_get, entities_get_by } from "./entity";
+import { entityInteractOrMove } from "./entity_map";
+import { MANIFEST, AI } from "./manifest";
+import { maps_get } from "./map";
+import { STATE } from "./state";
+import { distance } from "./util";
 
 const _AIs = {}
 

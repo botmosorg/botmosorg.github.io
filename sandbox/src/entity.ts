@@ -1,10 +1,8 @@
-"use strict";
+import { combat_queue } from "./combat";
+import { debug_log } from "./debug";
+import { STATE } from "./state";
 
-import { combat_queue } from "./combat.js";
-import { debug_log } from "./debug.js";
-import { STATE } from "./state.js";
-
-export function entities_create(id, type, mapId, x=0, y=0, options={}) {
+export function entities_create(id: string, type: any, mapId: string, x=0, y=0, options={}) {
     // TODO make energy entity type dependent
     let energy = 10;
     let energyMax = 10;
@@ -25,22 +23,22 @@ export function entities_create(id, type, mapId, x=0, y=0, options={}) {
     }
 }
 
-export function entities_destroy(entityId) {
+export function entities_destroy(entityId: string) {
     STATE.entities[entityId] = undefined
     delete STATE.entities[entityId]
 }
 
-export function entities_store(entity) {
+export function entities_store(entity: any) {
     STATE.entities[entity.id] = entity
 }
 
-export function entities_get(entityId) {
+export function entities_get(entityId: string) {
     return STATE.entities[entityId]
 }
 
-export function entities_get_by(mapId) {
+export function entities_get_by(mapId: string) {
     let entity_ids = Object.keys(STATE.entities)
-    let entities_on_map = []
+    let entities_on_map: any[] = []
     for (let i=0; i<entity_ids.length; i++) {
         let entity = STATE.entities[entity_ids[i]]
         if (entity.mapId === mapId) {
@@ -50,7 +48,7 @@ export function entities_get_by(mapId) {
     return entities_on_map
 }
 
-export function entities_get_at(mapId, x, y) {
+export function entities_get_at(mapId: string, x: number, y: number) {
     let entities_at_pos = entities_get_by(mapId).filter(e => e.x === x && e.y === y)
     if (entities_at_pos.length > 0) {
         return entities_at_pos[0]

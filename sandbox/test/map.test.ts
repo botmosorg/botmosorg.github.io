@@ -1,8 +1,6 @@
-"use strict";
-
 import { describe, expect, test } from "bun:test";
 
-import { maps_parse } from "../src/map.js";
+import { maps_parse } from "../src/map";
 
 let mapString = `! The first character defines the 'meta' character preceeding commands and comments, e.g. '!'
 ! This is a comment. Commands start with <meta>!, e.g.:

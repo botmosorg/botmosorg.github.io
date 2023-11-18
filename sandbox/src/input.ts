@@ -1,6 +1,4 @@
-"use strict";
-
-import { MANIFEST } from "./manifest.js";
+import { MANIFEST, Command } from "./manifest";
 
 /**
  * All keys ever supported:
@@ -21,7 +19,7 @@ const _BM_INPUT = {
     menu: false
 }
 
-let _inputQueue = []
+let _inputQueue: Command[] = []
 document.body.addEventListener("keydown", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -97,9 +95,9 @@ function _preventDefaultAndStopPropagation(e) {
     e.stopPropagation();
 }
 
-let _lastAction = null;
+let _lastAction: Command | null = null;
 function _updateInputQueue() {
-    let action = null;
+    let action: Command | null = null;
 
     if (_BM_INPUT.right) {
         action = MANIFEST.commands.E;
@@ -140,7 +138,9 @@ function _updateInputQueue() {
     }
 
     _lastAction = action;
-    _inputQueue.push(action);
+    if (action !== null) {
+        _inputQueue.push(action);
+    }
 }
 
 export function get_action() {

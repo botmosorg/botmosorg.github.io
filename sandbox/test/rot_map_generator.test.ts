@@ -1,8 +1,6 @@
-"use strict";
-
 import { describe, expect, test } from "bun:test";
 
-import { maps_create_overworld } from "../src/rot_map_generator.js";
+import { maps_create_overworld } from "../src/rot_map_generator";
 
 describe('maps_create_overworld', function () {
     test('overworld map generation', function () {

@@ -2,7 +2,7 @@
 
 import { describe, expect, test } from "bun:test";
 
-import { distance } from "../src/util.js";
+import { distance } from "../src/util";
 
 describe('distance', function () {
     test('should compute horizontal distance between points', function () {

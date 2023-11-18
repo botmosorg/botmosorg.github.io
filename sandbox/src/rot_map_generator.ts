@@ -1,9 +1,7 @@
-"use strict";
-
 import * as ROT from "../lib/rot.js"
 
-import { MANIFEST } from "./manifest.js";
-import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./map.js";
+import { MANIFEST } from "./manifest";
+import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./map";
 
 export const MAP_SEED = 1337
 

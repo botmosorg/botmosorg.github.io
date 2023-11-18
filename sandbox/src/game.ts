@@ -1,15 +1,17 @@
-import { debug_log } from "./debug.js";
-import { entities_create, entities_store } from "./entity.js";
-import { entity_act } from "./entity_map.js";
-import { get_action } from "./input.js";
-import { items_create, items_store } from "./item.js";
-import { MANIFEST } from "./manifest.js";
-import { maps_parse, maps_store, maps_set_current } from "./map.js"
-import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
-import { STATE } from "./state.js";
+import { debug_log } from "./debug";
+import { entities_create, entities_store } from "./entity";
+import { entity_act } from "./entity_map";
+import { get_action } from "./input";
+import { items_create, items_store } from "./item";
+import { MANIFEST } from "./manifest";
+import { maps_parse, maps_store, maps_set_current } from "./map"
+import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
+import { STATE } from "./state";
 import { systems_per_turn_update } from "./systems";
 
 export default class Game {
+    turns: number;
+
     constructor() {
         this.turns = 0
     }

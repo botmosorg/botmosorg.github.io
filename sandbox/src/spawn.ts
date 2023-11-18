@@ -1,19 +1,19 @@
 import { ai_destroy } from "./ai";
-import { entities_destroy } from "./entity.js";
-import { items_store } from "./item.js";
+import { entities_destroy } from "./entity";
+import { items_store } from "./item";
 
-let _despawnQueue = []
-export function despawn_queue(entityId) {
+let _despawnQueue: string[] = []
+export function despawn_queue(entityId: string) {
     _despawnQueue.push(entityId)
 }
 
-let _itemSpawnQueue = []
-export function spawn_item_queue(item) {
+let _itemSpawnQueue: any[] = []
+export function spawn_item_queue(item: any) {
     _itemSpawnQueue.push(item)
 }
 
 export function despawn_update() {
-    let entityIdtoDespawn = undefined
+    let entityIdtoDespawn: string | undefined = undefined
     while (typeof(entityIdtoDespawn = _despawnQueue.shift()) !== 'undefined') {
         entities_destroy(entityIdtoDespawn)
         ai_destroy(entityIdtoDespawn)

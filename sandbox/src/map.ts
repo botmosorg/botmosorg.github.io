@@ -1,6 +1,6 @@
 "use strict";
 
-import { MANIFEST } from "./manifest.js";
+import { MANIFEST, Tile } from "./manifest.js";
 import { STATE } from "./state.js";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
@@ -11,7 +11,7 @@ export const CHUNK_SIZE = {
 }
 export const MAP_SIZE = CHUNK_SIZE // in chunks
 
-export function tiles_create(type=null, options={}) {
+export function tiles_create(type: Tile, options={}) {
     return {
         "type": type,
         "options": options
@@ -19,7 +19,13 @@ export function tiles_create(type=null, options={}) {
 }
 
 export class Map {
-    constructor(id, width_tiles, height_tiles, tiles=[]) {
+    id: string;
+    widthTiles: number;
+    heightTiles: number;
+    private _tiles: any[];
+    private _cacheMovementMap: any | null;
+
+    constructor(id: string, width_tiles: number, height_tiles: number, tiles=[]) {
         this.id = id;
         this.widthTiles = width_tiles;
         this.heightTiles = height_tiles;
@@ -27,7 +33,7 @@ export class Map {
         this._cacheMovementMap = null
     }
 
-    getTile(x, y) {
+    getTile(x: number, y: number) {
         if (x >= 0 && x < this.widthTiles
             && y >= 0 && y < this.heightTiles) {
             let tile_index = y * this.widthTiles + x;
@@ -117,9 +123,9 @@ export function maps_parse(mapString) {
                 if (tileTypeName.startsWith("portal ")) {
                     let portalComponents = tileTypeName.split(" ")
                     tileTypeName = "portal"
-                    options.mapId = portalComponents[1]
-                    options.x = Number(portalComponents[2])
-                    options.y = Number(portalComponents[3])
+                    options['mapId'] = portalComponents[1]
+                    options['x'] = Number(portalComponents[2])
+                    options['y'] = Number(portalComponents[3])
                 }
                 tiles.push(tiles_create(MANIFEST.tiles[tileTypeName], options))
             }

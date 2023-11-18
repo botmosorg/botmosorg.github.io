@@ -1,13 +1,11 @@
-"use strict";
-
 import * as ROT from "../lib/rot.js"
 
-import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config.js";
-import { DEBUG_LINES } from "./debug.js";
-import { items_get_by } from "./item.js";
-import { entities_get_by } from "./entity.js";
-import { MANIFEST } from "./manifest.js";
-import { STATE } from "./state.js";
+import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { DEBUG_LINES } from "./debug";
+import { items_get_by } from "./item";
+import { entities_get_by } from "./entity";
+import { MANIFEST } from "./manifest";
+import { STATE } from "./state";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -16,7 +14,7 @@ https://ondras.github.io/rot.js/hp/
 const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
-function lookup_color(name) {
+function lookup_color(name: string) {
     return MANIFEST.colors[name];
 }
 function rot_render(camera) {
