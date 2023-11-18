@@ -1,6 +1,4 @@
-"use strict";
-
-import { ai_update } from "./ai.js";
+import { ai_update } from "./ai";
 import { combat_update } from "./combat.js";
 import { energy_update } from "./energy.js";
 import { entities_tile_energy_update } from "./entity_map.js";

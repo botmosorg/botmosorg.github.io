@@ -1,6 +1,4 @@
-"use strict";
-
-import { ai_destroy } from "./ai.js";
+import { ai_destroy } from "./ai";
 import { entities_destroy } from "./entity.js";
 import { items_store } from "./item.js";
 
