@@ -369,10 +369,10 @@ nsmallest=function(array,n,cmp){var elem,los,result,_i,_j,_len,_ref,_ref1,_resul
  * A* algorithm using https://github.com/prettymuchbryce/easystarjs
  *
  * @param {*} movementMap two-dimensional array of 0s (movable) and 1s (blocked)
- * @param {*} startX from
- * @param {*} startY
- * @param {*} endX to
- * @param {*} endY
+ * @param {number} startX from
+ * @param {number} startY
+ * @param {number} endX to
+ * @param {number} endY
  * @returns Array of x,y coordinates, null if no path was found
  */
 export function a_star(movementMap: number[][], startX: number, startY: number, endX: number, endY: number): {x: number, y: number}[] | null {

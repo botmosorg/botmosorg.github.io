@@ -1,4 +1,4 @@
-import { SHOW_GRID } from "./config.js"
+import { SHOW_GRID } from "./config"
 
 export class AI {
     name: string;

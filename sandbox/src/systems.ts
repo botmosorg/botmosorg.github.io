@@ -1,8 +1,8 @@
 import { ai_update } from "./ai";
-import { combat_update } from "./combat.js";
-import { energy_update } from "./energy.js";
-import { entities_tile_energy_update } from "./entity_map.js";
-import { despawn_update, spawn_update } from "./spawn.js";
+import { combat_update } from "./combat";
+import { energy_update } from "./energy";
+import { entities_tile_energy_update } from "./entity_map";
+import { despawn_update, spawn_update } from "./spawn";
 
 export function systems_per_turn_update() {
     ai_update()
