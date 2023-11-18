@@ -1,5 +1,3 @@
-"use strict";
-
 import { debug_log } from "./debug.js";
 import { entities_create, entities_store } from "./entity.js";
 import { entity_act } from "./entity_map.js";
@@ -9,7 +7,7 @@ import { MANIFEST } from "./manifest.js";
 import { maps_parse, maps_store, maps_set_current } from "./map.js"
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator.js"
 import { STATE } from "./state.js";
-import { systems_per_turn_update } from "./systems.js";
+import { systems_per_turn_update } from "./systems";
 
 export default class Game {
     constructor() {
