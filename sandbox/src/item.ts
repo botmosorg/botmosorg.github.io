@@ -29,7 +29,7 @@ export function items_store(item) {
 
 export function items_get_by(mapId: string) {
     let itemIds = Object.keys(STATE.items)
-    let itemsOnMap = []
+    let itemsOnMap: any[] = []
     for (let i=0; i<itemIds.length; i++) {
         let item = STATE.items[itemIds[i]]
         if (item.mapId === mapId) {

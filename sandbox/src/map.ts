@@ -3,7 +3,7 @@
 import { MANIFEST, Tile } from "./manifest";
 import { STATE } from "./state";
 
-//const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelike
+//const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
 
 export const CHUNK_SIZE = {
     "width": 16, // in tiles
@@ -25,7 +25,7 @@ export class Map {
     private _tiles: any[];
     private _cacheMovementMap: any | null;
 
-    constructor(id: string, width_tiles: number, height_tiles: number, tiles=[]) {
+    constructor(id: string, width_tiles: number, height_tiles: number, tiles: any[]=[]) {
         this.id = id;
         this.widthTiles = width_tiles;
         this.heightTiles = height_tiles;
@@ -96,7 +96,7 @@ export function maps_parse(mapString) {
     let width = 0
     let height = 0
     let meta = {}
-    let tiles = [];
+    let tiles: any[] = [];
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i]
         if (line.startsWith(metaCharacter)) {
