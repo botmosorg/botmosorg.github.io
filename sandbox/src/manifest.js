@@ -2,7 +2,7 @@
 
 import { SHOW_GRID } from "./config.js"
 
-class AI {
+export class AI {
     constructor(name, description) {
         this.name = name;
         this.description = description;

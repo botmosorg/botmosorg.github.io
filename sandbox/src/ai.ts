@@ -1,9 +1,7 @@
-"use strict";
-
 import { a_star } from "./easystar_astar.js";
 import { entities_get, entities_get_by } from "./entity.js";
 import { entityInteractOrMove } from "./entity_map.js";
-import { MANIFEST } from "./manifest.js";
+import { MANIFEST, AI } from "./manifest.js";
 import { maps_get } from "./map.js";
 import { STATE } from "./state.js";
 import { distance } from "./util.js";
@@ -33,7 +31,7 @@ export function ai_update() {
         if (playerEntity.options.faction !== entity.options.faction
             && distanceToPlayer <= entityAI.aggroRange) {
             let movementMap = maps_get(STATE.currentMapId).asMovementMap() // TODO check for other entity positions to prevent lining up
-            let path = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
+            let path: any = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
             if (path !== null) {
                 path = path.slice(1) // First point in the path is current position of entity, skip it
 
@@ -58,8 +56,8 @@ export function ai_update() {
 }
 
 function _entityIdsToUpdate() {
-    let entities = entities_get_by(STATE.currentMapId);
-    let entityIdsToUpdate = []
+    let entities = entities_get_by(STATE.currentMapId)
+    let entityIdsToUpdate: string[] = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
         if (!entity.id.startsWith("player")) {
@@ -69,7 +67,17 @@ function _entityIdsToUpdate() {
     return entityIdsToUpdate
 }
 
-function ai_create(entityId, aiType) {
+interface _AI {
+    entityId: string,
+    type: any,
+    aggroRange: number,
+    startMap: string,
+    startX: number,
+    startY: number,
+    path: [] | null
+}
+
+function ai_create(entityId: string, aiType: AI): _AI {
     let entity = entities_get(entityId)
     return {
         entityId: entityId,
@@ -82,7 +90,7 @@ function ai_create(entityId, aiType) {
     }
 }
 
-export function ai_destroy(entityId) {
+export function ai_destroy(entityId: string) {
     _AIs[entityId] = undefined
     delete _AIs[entityId]
 }
