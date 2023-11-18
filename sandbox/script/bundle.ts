@@ -6,4 +6,8 @@ let bundle = await Bun.build({
     plugins: [ /* ... */ ]
   })
 
-console.log(bundle)
+if (!bundle.success) {
+  console.log(bundle)
+}
+
+export {}
