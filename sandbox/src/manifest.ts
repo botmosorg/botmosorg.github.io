@@ -19,14 +19,24 @@ export class Command {
     }
 }
 class Faction {
-    constructor(name, description, color) {
+    name: string;
+    description: string;
+    color: string;
+
+    constructor(name: string, description: string, color: string) {
         this.name = name;
         this.description = description;
         this.color = color;
     }
 }
 class Item {
-    constructor(name, description, icon, color="cyberyellow", energyDelta=0) {
+    name: string;
+    description: string;
+    icon: string;
+    color: string;
+    energyDelta: number;
+
+    constructor(name: string, description: string, icon: string, color: string="cyberyellow", energyDelta: number=0) {
         this.name = name
         this.description = description
         this.icon = icon
@@ -35,7 +45,13 @@ class Item {
     }
 }
 class Spirit {
-    constructor(name, description, icon) {
+    name: string;
+    description: string;
+    icon: string;
+    color: string;
+    unlockCondition: null;
+
+    constructor(name: string, description: string, icon: string) {
         this.name = name;
         this.description = description;
         this.icon = icon;
@@ -44,12 +60,19 @@ class Spirit {
     }
 }
 export class Tile {
-    constructor(name, description, icon=null, fg="white", bg="black", energyDelta=0) { // foreground, background colors
+    name: any;
+    description: any;
+    icon: any;
+    fg: string;
+    bg: string;
+    energyDelta: number;
+
+    constructor(name: string, description: string, icon: string=null, fg: string="white", bg: string="black", energyDelta: number=0) {
         this.name = name;
         this.description = description;
         this.icon = icon;
-        this.fg = fg;
-        this.bg = bg;
+        this.fg = fg; // foreground
+        this.bg = bg; // background
         this.energyDelta = energyDelta;
     }
 }
