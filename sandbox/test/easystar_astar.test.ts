@@ -1,5 +1,3 @@
-"use strict";
-
 import { describe, expect, test } from "bun:test";
 
 import { a_star } from "../src/easystar_astar";

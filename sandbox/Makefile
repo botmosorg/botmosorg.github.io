@@ -1,4 +1,4 @@
-.PHONY: all build clean test help
+.PHONY: all build clean install_dependencies test help
 
 all: build ## Main task for local dev
 	python3 -m http.server
@@ -8,6 +8,9 @@ build: test ## Bunbles and minifies the project
 
 clean: ## Cleans all artifacts
 	rm -rf build/
+
+install_dependencies: ## Install dependencies
+	bun install -d bun-types
 
 test: ## Execute tests
 	bun test
