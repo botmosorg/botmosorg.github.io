@@ -1,5 +1,5 @@
 import { debug_log } from "./debug";
-import { entities_create, entities_store } from "./entity";
+import { entities_create, entities_get, entities_store } from "./entity";
 import { entity_act } from "./entity_map";
 import { get_action } from "./input";
 import { items_create, items_store } from "./item";
@@ -45,7 +45,7 @@ export default class Game {
 
     update() {
         let action = get_action()
-        let player = STATE.entities[STATE.playerId]
+        let player = entities_get(STATE.playerId)
         if (player !== undefined) {
             if (action !== null) {
                 entity_act(player, action)
@@ -57,7 +57,7 @@ export default class Game {
             maps_set_current("preloader")
             let currentMapId = maps_get_current()
             entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
-            player = STATE.entities[STATE.playerId]
+            player = entities_get(STATE.playerId)
         }
 
         return player

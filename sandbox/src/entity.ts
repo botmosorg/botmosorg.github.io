@@ -1,6 +1,9 @@
 import { combat_queue } from "./combat";
 import { debug_log } from "./debug";
-import { STATE } from "./state";
+
+const _STATE = {
+    entities: {}
+}
 
 export function entities_create(id: string, type: any, mapId: string, x=0, y=0, options={}) {
     // TODO make energy entity type dependent
@@ -24,23 +27,27 @@ export function entities_create(id: string, type: any, mapId: string, x=0, y=0, 
 }
 
 export function entities_destroy(entityId: string) {
-    STATE.entities[entityId] = undefined
-    delete STATE.entities[entityId]
+    _STATE.entities[entityId] = undefined
+    delete _STATE.entities[entityId]
 }
 
 export function entities_store(entity: any) {
-    STATE.entities[entity.id] = entity
+    _STATE.entities[entity.id] = entity
+}
+
+export function entities_get_all() {
+    return _STATE.entities
 }
 
 export function entities_get(entityId: string) {
-    return STATE.entities[entityId]
+    return _STATE.entities[entityId]
 }
 
 export function entities_get_by(mapId: string) {
-    let entity_ids = Object.keys(STATE.entities)
+    let entity_ids = Object.keys(_STATE.entities)
     let entities_on_map: any[] = []
     for (let i=0; i<entity_ids.length; i++) {
-        let entity = STATE.entities[entity_ids[i]]
+        let entity = _STATE.entities[entity_ids[i]]
         if (entity.mapId === mapId) {
             entities_on_map.push(entity)
         }

@@ -1,10 +1,8 @@
-import { debug_log } from "./debug";
 import { energy_queue } from "./energy";
-import { entities_get_at, interactOrCombat } from "./entity";
+import { entities_get, entities_get_all, entities_get_at, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
 import { maps_set_current, maps_get } from "./map"
-import { STATE } from "./state";
 
 export function entity_act(entity, action: Command) {
     switch (action) {
@@ -60,8 +58,8 @@ export function entityInteractOrMove(entity, dx: number, dy: number) {
 }
 
 export function entities_tile_energy_update() {
-    for (let entityId in STATE.entities) {
-        let entity = STATE.entities[entityId]
+    for (let entityId in entities_get_all()) {
+        let entity = entities_get(entityId)
         let map = maps_get(entity.mapId)
         let tile = map.getTile(entity.x, entity.y)
         energy_queue(entityId, tile.type.energyDelta)

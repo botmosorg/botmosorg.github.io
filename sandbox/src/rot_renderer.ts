@@ -3,7 +3,7 @@ import * as ROT from "../lib/rot.js"
 import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by } from "./item";
-import { entities_get_by } from "./entity";
+import { entities_get, entities_get_by } from "./entity";
 import { MANIFEST } from "./manifest";
 import { maps_get, maps_get_current } from "./map";
 import { STATE } from "./state";
@@ -49,7 +49,7 @@ function rot_render(camera) {
     }
 
     // Render entities
-    let playerFaction = ((STATE.entities[STATE.playerId] || {}).options || {}).faction || undefined;
+    let playerFaction = ((entities_get(STATE.playerId) || {}).options || {}).faction || undefined;
     let entities = entities_get_by(currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
