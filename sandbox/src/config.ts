@@ -1,5 +1,3 @@
-"use strict";
-
 /*
 var tileSet = document.createElement("img")
 tileSet.src = "tiny16.png"

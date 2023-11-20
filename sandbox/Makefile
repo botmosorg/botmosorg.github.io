@@ -11,6 +11,7 @@ clean: ## Cleans all artifacts
 
 install_dependencies: ## Install dependencies
 	bun install -d bun-types
+	bun add @types/web -D
 
 test: ## Execute tests
 	bun test
