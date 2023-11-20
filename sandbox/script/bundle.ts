@@ -1,4 +1,4 @@
-import Bun from "bun"
+import * as Bun from "bun"
 
 let bundle = await Bun.build({
     entrypoints: ["./src/main.ts"],
