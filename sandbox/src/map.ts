@@ -1,9 +1,13 @@
 "use strict";
 
 import { MANIFEST, Tile } from "./manifest";
-import { STATE } from "./state";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
+
+const _STATE = {
+    currentMapId: '',
+    maps: {}
+}
 
 export const CHUNK_SIZE = {
     "width": 16, // in tiles
@@ -77,19 +81,23 @@ export class Map {
     }
 }
 
-export function maps_set_current(mapId) {
-    STATE.currentMapId = mapId
+export function maps_get_current(): string {
+    return _STATE.currentMapId
 }
 
-export function maps_store(map) {
-    STATE.maps[map.id] = map
+export function maps_set_current(mapId: string) {
+    _STATE.currentMapId = mapId
 }
 
-export function maps_get(mapId) {
-    return STATE.maps[mapId]
+export function maps_store(map: Map) {
+    _STATE.maps[map.id] = map
 }
 
-export function maps_parse(mapString) {
+export function maps_get(mapId: string) {
+    return _STATE.maps[mapId]
+}
+
+export function maps_parse(mapString: string) {
     let lines = mapString.split(/\r?\n/)
     let metaCharacter = mapString[0]
     let mapId = ""

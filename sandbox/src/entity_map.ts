@@ -3,7 +3,7 @@ import { energy_queue } from "./energy";
 import { entities_get_at, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
-import { maps_set_current } from "./map"
+import { maps_set_current, maps_get } from "./map"
 import { STATE } from "./state";
 
 export function entity_act(entity, action: Command) {
@@ -33,7 +33,7 @@ export function entityInteractOrMove(entity, dx: number, dy: number) {
     if movement can happen:
     move, pickup items on-tile movement, go through portals on-tile movement
     */
-    let map = STATE.maps[entity.mapId]
+    let map = maps_get(entity.mapId)
     let entity_at_target_position = entities_get_at(map.id, entity.x + dx, entity.y + dy)
     if (entity_at_target_position !== null) {
         interactOrCombat(entity, entity_at_target_position)
@@ -62,7 +62,7 @@ export function entityInteractOrMove(entity, dx: number, dy: number) {
 export function entities_tile_energy_update() {
     for (let entityId in STATE.entities) {
         let entity = STATE.entities[entityId]
-        let map = STATE.maps[entity.mapId]
+        let map = maps_get(entity.mapId)
         let tile = map.getTile(entity.x, entity.y)
         energy_queue(entityId, tile.type.energyDelta)
     }

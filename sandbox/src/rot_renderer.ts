@@ -5,6 +5,7 @@ import { DEBUG_LINES } from "./debug";
 import { items_get_by } from "./item";
 import { entities_get_by } from "./entity";
 import { MANIFEST } from "./manifest";
+import { maps_get, maps_get_current } from "./map";
 import { STATE } from "./state";
 
 /*
@@ -18,7 +19,8 @@ function lookup_color(name: string) {
     return MANIFEST.colors[name];
 }
 function rot_render(camera) {
-    let map = STATE.maps[STATE.currentMapId];
+    let currentMapId = maps_get_current();
+    let map = maps_get(currentMapId);
 
     // Render map
     for (var y=0; y < camera.height; y++) {
@@ -40,7 +42,7 @@ function rot_render(camera) {
     }
 
     // Render items
-    let items = items_get_by(STATE.currentMapId);
+    let items = items_get_by(currentMapId);
     for (let i=0; i<items.length; i++) {
         let item = items[i];
         ROT_DISPLAY.drawOver(item.x-camera.x, item.y-camera.y, item.type.icon, lookup_color(item.type.color));
@@ -48,7 +50,7 @@ function rot_render(camera) {
 
     // Render entities
     let playerFaction = ((STATE.entities[STATE.playerId] || {}).options || {}).faction || undefined;
-    let entities = entities_get_by(STATE.currentMapId);
+    let entities = entities_get_by(currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;

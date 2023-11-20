@@ -4,7 +4,7 @@ import { entity_act } from "./entity_map";
 import { get_action } from "./input";
 import { items_create, items_store } from "./item";
 import { MANIFEST } from "./manifest";
-import { maps_parse, maps_store, maps_set_current } from "./map"
+import { maps_parse, maps_store, maps_set_current, maps_get_current } from "./map"
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
 import { STATE } from "./state";
 import { systems_per_turn_update } from "./systems";
@@ -39,7 +39,8 @@ export default class Game {
         //maps_set_current("simplex="+MAP_SEED)
         //entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
         maps_set_current("preloader")
-        entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+        let currentMapId = maps_get_current()
+        entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
     }
 
     update() {
@@ -54,7 +55,8 @@ export default class Game {
             }
         } else {
             maps_set_current("preloader")
-            entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+            let currentMapId = maps_get_current()
+            entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
             player = STATE.entities[STATE.playerId]
         }
 

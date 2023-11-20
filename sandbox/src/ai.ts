@@ -2,7 +2,7 @@ import { a_star } from "./easystar_astar";
 import { entities_get, entities_get_by } from "./entity";
 import { entityInteractOrMove } from "./entity_map";
 import { MANIFEST, AI } from "./manifest";
-import { maps_get } from "./map";
+import { maps_get, maps_get_current } from "./map";
 import { STATE } from "./state";
 import { distance } from "./util";
 
@@ -30,7 +30,7 @@ export function ai_update() {
         let distanceToPlayer = distance(playerEntity.x, playerEntity.y, entity.x, entity.y)
         if (playerEntity.options.faction !== entity.options.faction
             && distanceToPlayer <= entityAI.aggroRange) {
-            let movementMap = maps_get(STATE.currentMapId).asMovementMap() // TODO check for other entity positions to prevent lining up
+            let movementMap = maps_get(maps_get_current()).asMovementMap() // TODO check for other entity positions to prevent lining up
             let path: any = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
             if (path !== null) {
                 path = path.slice(1) // First point in the path is current position of entity, skip it
@@ -56,7 +56,7 @@ export function ai_update() {
 }
 
 function _entityIdsToUpdate() {
-    let entities = entities_get_by(STATE.currentMapId)
+    let entities = entities_get_by(maps_get_current())
     let entityIdsToUpdate: string[] = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
