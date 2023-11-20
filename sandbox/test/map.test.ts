@@ -34,8 +34,8 @@ O..............O
 ################
 `
 
-describe('map', function () {
-    test('maps_parse', function () {
+describe('maps_parse', function () {
+    test('should parse map', function () {
         let map = maps_parse(mapString);
 
         expect(map.id).toEqual("preloader");
