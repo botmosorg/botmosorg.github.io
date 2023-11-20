@@ -3,7 +3,7 @@ import { entities_get, entities_get_by } from "./entity";
 import { entityInteractOrMove } from "./entity_map";
 import { MANIFEST, AI } from "./manifest";
 import { maps_get, maps_get_current } from "./map";
-import { STATE } from "./state";
+import { players_get_current } from "./player";
 import { distance } from "./util";
 
 const _AIs = {}
@@ -20,7 +20,7 @@ export function ai_update() {
     }
 
     // Compute paths
-    let playerEntity = entities_get(STATE.playerId)
+    let playerEntity = entities_get(players_get_current())
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
         let entity = entities_get(entityId)

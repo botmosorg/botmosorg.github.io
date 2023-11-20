@@ -5,8 +5,8 @@ import { get_action } from "./input";
 import { items_create, items_store } from "./item";
 import { MANIFEST } from "./manifest";
 import { maps_parse, maps_store, maps_set_current, maps_get_current } from "./map"
+import { players_get_current } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
-import { STATE } from "./state";
 import { systems_per_turn_update } from "./systems";
 
 export default class Game {
@@ -35,17 +35,16 @@ export default class Game {
         items_store(items_create(MANIFEST.items.energy, "arena", 7, 7))
         items_store(items_create(MANIFEST.items.energy, "arena", 14, 14))
 
-        STATE.playerId = "player"
         //maps_set_current("simplex="+MAP_SEED)
-        //entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
+        //entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
         maps_set_current("preloader")
         let currentMapId = maps_get_current()
-        entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+        entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
     }
 
     update() {
         let action = get_action()
-        let player = entities_get(STATE.playerId)
+        let player = entities_get(players_get_current())
         if (player !== undefined) {
             if (action !== null) {
                 entity_act(player, action)
@@ -56,8 +55,8 @@ export default class Game {
         } else {
             maps_set_current("preloader")
             let currentMapId = maps_get_current()
-            entities_store(entities_create(STATE.playerId, MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
-            player = entities_get(STATE.playerId)
+            entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+            player = entities_get(players_get_current())
         }
 
         return player

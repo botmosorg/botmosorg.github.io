@@ -6,7 +6,7 @@ import { items_get_by } from "./item";
 import { entities_get, entities_get_by } from "./entity";
 import { MANIFEST } from "./manifest";
 import { maps_get, maps_get_current } from "./map";
-import { STATE } from "./state";
+import { players_get_current } from "./player";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -49,7 +49,7 @@ function rot_render(camera) {
     }
 
     // Render entities
-    let playerFaction = ((entities_get(STATE.playerId) || {}).options || {}).faction || undefined;
+    let playerFaction = ((entities_get(players_get_current()) || {}).options || {}).faction || undefined;
     let entities = entities_get_by(currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
