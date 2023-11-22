@@ -72,12 +72,11 @@ function rot_render(camera) {
     }
 }
 
-let _previousCamera = undefined; // For entity death
-export async function draw(entity) {
+export async function draw(entity: {x: number, y: number}) {
     rot_render(camera_follow(entity))
 }
 
-function camera_follow(entity) {
+function camera_follow(entity: {x: number, y: number}) {
     return {
         "x": Math.min(Math.max(0, entity.x - Math.floor(ROT_OPTIONS.width / 2)), MAX_MAP_SIZE.WIDTH - ROT_OPTIONS.width),
         "y": Math.min(Math.max(0, entity.y - Math.floor(ROT_OPTIONS.height / 2)), MAX_MAP_SIZE.HEIGHT - ROT_OPTIONS.height),

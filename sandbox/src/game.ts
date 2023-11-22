@@ -1,9 +1,8 @@
 import { debug_log } from "./debug";
 import { entities_create, entities_get, entities_store } from "./entity";
 import { entity_act } from "./entity_map";
-import { get_action } from "./input";
 import { items_create, items_store } from "./item";
-import { MANIFEST } from "./manifest";
+import { Command, MANIFEST } from "./manifest";
 import { maps_parse, maps_store, maps_set_current, maps_get_current } from "./map"
 import { players_get_current } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
@@ -42,11 +41,10 @@ export default class Game {
         entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
     }
 
-    update() {
-        let action = get_action()
+    update(action: Command | null) {
         let player = entities_get(players_get_current())
-        if (player !== undefined) {
-            if (action !== null) {
+        if (player) {
+            if (action) {
                 entity_act(player, action)
                 systems_per_turn_update()
                 debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")

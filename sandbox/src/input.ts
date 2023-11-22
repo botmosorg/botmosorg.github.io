@@ -20,6 +20,7 @@ const _BM_INPUT = {
 }
 
 let _inputQueue: Command[] = []
+let _callback = undefined
 document.body.addEventListener("keydown", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -52,6 +53,10 @@ document.body.addEventListener("keydown", function(e) {
             _preventDefaultAndStopPropagation(e);
             break;
         default:
+    }
+
+    if (_callback !== undefined) {
+        _callback(get_action())
     }
 })
 
@@ -141,6 +146,10 @@ function _updateInputQueue() {
     if (action !== null) {
         _inputQueue.push(action);
     }
+}
+
+export function onKeyDown(callback: Function) {
+    _callback = callback
 }
 
 export function get_action() {
