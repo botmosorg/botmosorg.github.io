@@ -21,6 +21,7 @@ const _BM_INPUT = {
 
 let _inputQueue: Command[] = []
 let _callback = undefined
+let timeOfLastActionInMs: number = 0
 document.body.addEventListener("keydown", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -55,7 +56,9 @@ document.body.addEventListener("keydown", function(e) {
         default:
     }
 
-    if (_callback !== undefined) {
+    const currentTimeInMs = new Date().getTime();
+    if (_callback !== undefined && currentTimeInMs - timeOfLastActionInMs >= 80) {
+        timeOfLastActionInMs = currentTimeInMs
         _callback(get_action())
     }
 })
