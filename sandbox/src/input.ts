@@ -56,7 +56,7 @@ document.body.addEventListener("keydown", function(e) {
         default:
     }
 
-    const currentTimeInMs = new Date().getTime();
+    const currentTimeInMs = Date.now();
     if (_callback !== undefined && currentTimeInMs - timeOfLastActionInMs >= 80) {
         timeOfLastActionInMs = currentTimeInMs
         _callback(get_action())
