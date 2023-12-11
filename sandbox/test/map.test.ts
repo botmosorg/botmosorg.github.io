@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 
 import { maps_parse } from "../src/map";
 
-let mapString = `! The first character defines the 'meta' character preceeding commands and comments, e.g. '!'
+const mapString = `! The first character defines the 'meta' character preceeding commands and comments, e.g. '!'
 ! This is a comment. Commands start with <meta>!, e.g.:
 !!id preloader
 !!size 16 16
@@ -34,9 +34,56 @@ O..............O
 ################
 `
 
+const mapMovement = `!
+!!id movement
+!!size 16 16
+!!. void
+!!~ water
+!!^ rock
+!!t tree
+!!# wall
+!!+ weakwall
+!!= chargepad
+!!O portal arena 1 0
+################
+#.============.#
+O......^^......O
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+#.....++++.....#
+O......tt......O
+#.~~~~~~~~~~~~.#
+################
+`
+
+describe('Map', function () {
+    test('should generate movement map', function () {
+        const map = maps_parse(mapMovement)
+
+        const movementMap = map.asMovementMap()
+
+        // movementMap[y][x]
+        expect(movementMap[1][0]).toEqual(1) // wall
+        expect(movementMap[7][7]).toEqual(1) // weakwall
+        expect(movementMap[2][7]).toEqual(1) // rock
+        expect(movementMap[1][1]).toEqual(0) // void
+        expect(movementMap[1][7]).toEqual(0) // chargepad
+        expect(movementMap[14][7]).toEqual(0) // water
+        expect(movementMap[13][7]).toEqual(0) // tree
+        expect(movementMap[2][0]).toEqual(0) // portal
+    })
+})
+
 describe('maps_parse', function () {
     test('should parse map', function () {
-        let map = maps_parse(mapString);
+        const map = maps_parse(mapString);
 
         expect(map.id).toEqual("preloader");
         expect(map.widthTiles).toEqual(16);
