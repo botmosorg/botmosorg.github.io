@@ -52,7 +52,7 @@ export class Map {
     }
 
     asMovementMap() {
-        if (this._cacheMovementMap !== null) {
+        if (!!this._cacheMovementMap) {
             return this._cacheMovementMap;
         }
 
