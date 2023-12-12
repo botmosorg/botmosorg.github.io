@@ -3,10 +3,10 @@ import * as ROT from "../lib/rot.js"
 import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by } from "./item";
-import { entities_get, entities_get_by } from "./entity";
+import { entities_get_by } from "./entity";
 import { MANIFEST } from "./manifest";
-import { maps_get, maps_get_current } from "./map";
 import { players_get_current } from "./player";
+import { State } from "./state.js";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -18,9 +18,9 @@ document.body.appendChild(ROT_DISPLAY.getContainer())
 function lookup_color(name: string) {
     return MANIFEST.colors[name];
 }
-function rot_render(camera) {
-    let currentMapId = maps_get_current();
-    let map = maps_get(currentMapId);
+function rot_render(state: State, camera) {
+    let currentMapId = state.currentMapId;
+    let map = state.maps[currentMapId];
 
     // Render map
     for (var y=0; y < camera.height; y++) {
@@ -49,8 +49,8 @@ function rot_render(camera) {
     }
 
     // Render entities
-    let playerFaction = ((entities_get(players_get_current()) || {}).options || {}).faction || undefined;
-    let entities = entities_get_by(currentMapId);
+    let playerFaction = ((state.entities[players_get_current()] || {}).options || {}).faction || undefined;
+    let entities = entities_get_by(state, currentMapId);
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
@@ -72,8 +72,11 @@ function rot_render(camera) {
     }
 }
 
-export async function draw(entity: {x: number, y: number}) {
-    rot_render(camera_follow(entity))
+export async function draw(state: State) {
+    const playerEntity = state.entities[players_get_current()]
+    const camera = camera_follow(playerEntity)
+
+    rot_render(state, camera)
 }
 
 function camera_follow(entity: {x: number, y: number}) {

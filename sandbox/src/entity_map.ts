@@ -1,28 +1,30 @@
 import { energy_queue } from "./energy";
-import { entities_get, entities_get_all, entities_get_at, interactOrCombat } from "./entity";
+import { entities_get_at, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
-import { maps_set_current, maps_get } from "./map"
+import { State } from "./state";
 
-export function entity_act(entity, action: Command) {
+export function entity_act(state: State, entity, action: Command): State {
     switch (action) {
         case MANIFEST.commands.N:
-            entityInteractOrMove(entity, 0, -1)
+            state = entityInteractOrMove(state, entity, 0, -1)
             break
         case MANIFEST.commands.W:
-            entityInteractOrMove(entity, -1, 0)
+            state = entityInteractOrMove(state, entity, -1, 0)
             break
         case MANIFEST.commands.S:
-            entityInteractOrMove(entity, 0, 1)
+            state = entityInteractOrMove(state, entity, 0, 1)
             break
         case MANIFEST.commands.E:
-            entityInteractOrMove(entity, 1, 0)
+            state = entityInteractOrMove(state, entity, 1, 0)
             break
         default:
     }
+
+    return state;
 }
 
-export function entityInteractOrMove(entity, dx: number, dy: number) {
+export function entityInteractOrMove(state: State, entity, dx: number, dy: number): State {
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
@@ -31,8 +33,8 @@ export function entityInteractOrMove(entity, dx: number, dy: number) {
     if movement can happen:
     move, pickup items on-tile movement, go through portals on-tile movement
     */
-    let map = maps_get(entity.mapId)
-    let entity_at_target_position = entities_get_at(map.id, entity.x + dx, entity.y + dy)
+    let map = state.maps[entity.mapId]
+    let entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
     if (entity_at_target_position !== null) {
         interactOrCombat(entity, entity_at_target_position)
 
@@ -49,24 +51,28 @@ export function entityInteractOrMove(entity, dx: number, dy: number) {
         // Portal
         let tile = map.getTile(entity.x, entity.y);
         if (tile.type === MANIFEST.tiles.portal) {
-            maps_set_current(tile.options.mapId) // TODO: currently only player can pass portals
+            state.currentMapId = tile.options.mapId // TODO: currently only player can pass portals
             entity.x = tile.options.x;
             entity.y = tile.options.y;
             entity.mapId = tile.options.mapId;
         }
     }
+
+    return state
 }
 
-export function entities_tile_energy_update() {
-    for (let entityId in entities_get_all()) {
-        let entity = entities_get(entityId)
-        let map = maps_get(entity.mapId)
+export function entities_tile_energy_update(state: State): State {
+    for (let entityId in state.entities) {
+        let entity = state.entities[entityId]
+        let map = state.maps[entity.mapId]
         let tile = map.getTile(entity.x, entity.y)
         energy_queue(entityId, tile.type.energyDelta)
     }
+
+    return state
 }
 
-function entity_can_move(map, entity, dx: number, dy: number) {
+function entity_can_move(map, entity, dx: number, dy: number): boolean {
     let x = entity.x + dx;
     let y = entity.y + dy;
     let tileType = map.getTile(x, y).type;

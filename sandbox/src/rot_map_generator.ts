@@ -2,11 +2,12 @@ import * as ROT from "../lib/rot.js"
 
 import { MANIFEST } from "./manifest";
 import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./map";
+import { State } from "./state.js";
 
 export const MAP_SEED = 1337
 
 let _noise_skew = 55;
-export function maps_create_overworld(seed=MAP_SEED) {
+export function maps_create_overworld(state: State, seed=MAP_SEED): State {
     ROT.RNG.setSeed(seed);
     let rot_noise = new ROT.Noise.Simplex();
     let tiles = [];
@@ -33,8 +34,9 @@ export function maps_create_overworld(seed=MAP_SEED) {
         }
     }
 
+    const mapId = "simplex=" + seed
     let map = new Map(
-        "simplex=" + seed,
+        mapId,
         MAP_SIZE.width * CHUNK_SIZE.width,
         MAP_SIZE.height * CHUNK_SIZE.height,
         tiles
@@ -42,10 +44,12 @@ export function maps_create_overworld(seed=MAP_SEED) {
 
     map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "preloader", x: 0, y: 2})
 
-    return map;
+    state.maps[mapId] = map;
+
+    return state;
 }
 
-export function maps_create_arena() {
+export function maps_create_arena(state: State): State {
     let rotMap = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
     let tiles = [];
     rotMap.create(function(x, y, wall) {
@@ -62,5 +66,7 @@ export function maps_create_arena() {
 
     map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "preloader", x: 15, y: 2});
 
-    return map;
+    state.maps["arena"] = map
+
+    return state;
 }

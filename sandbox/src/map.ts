@@ -2,11 +2,6 @@ import { MANIFEST, Tile } from "./manifest";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
 
-const _STATE = {
-    currentMapId: '',
-    maps: {}
-}
-
 export const CHUNK_SIZE = {
     "width": 16, // in tiles
     "height": 16
@@ -77,22 +72,6 @@ export class Map {
         this._cacheMovementMap = movementMap;
         return movementMap;
     }
-}
-
-export function maps_get_current(): string {
-    return _STATE.currentMapId
-}
-
-export function maps_set_current(mapId: string) {
-    _STATE.currentMapId = mapId
-}
-
-export function maps_store(map: Map) {
-    _STATE.maps[map.id] = map
-}
-
-export function maps_get(mapId: string) {
-    return _STATE.maps[mapId]
 }
 
 export function maps_parse(mapString: string) {

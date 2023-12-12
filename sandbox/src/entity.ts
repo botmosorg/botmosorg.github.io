@@ -1,11 +1,8 @@
 import { combat_queue } from "./combat";
 import { debug_log } from "./debug";
+import { State } from "./state";
 
-const _STATE = {
-    entities: {}
-}
-
-export function entities_create(id: string, type: any, mapId: string, x=0, y=0, options={}) {
+export function entities_create(state: State, id: string, type: any, mapId: string, x=0, y=0, options={}): State {
     // TODO make energy entity type dependent
     let energy = 10;
     let energyMax = 10;
@@ -14,7 +11,7 @@ export function entities_create(id: string, type: any, mapId: string, x=0, y=0, 
         energyMax = 100;
     }
 
-    return {
+    const entity = {
         "id": id,
         "type": type,
         "mapId": mapId,
@@ -24,30 +21,24 @@ export function entities_create(id: string, type: any, mapId: string, x=0, y=0, 
         "energyMax": energyMax,
         "options": options
     }
+
+    state.entities[entity.id] = entity
+
+    return state
 }
 
-export function entities_destroy(entityId: string) {
-    _STATE.entities[entityId] = undefined
-    delete _STATE.entities[entityId]
+export function entities_destroy(state: State, entityId: string) {
+    state.entities[entityId] = undefined
+    delete state.entities[entityId]
+
+    return state;
 }
 
-export function entities_store(entity: any) {
-    _STATE.entities[entity.id] = entity
-}
-
-export function entities_get_all() {
-    return _STATE.entities
-}
-
-export function entities_get(entityId: string) {
-    return _STATE.entities[entityId]
-}
-
-export function entities_get_by(mapId: string) {
-    let entity_ids = Object.keys(_STATE.entities)
+export function entities_get_by(state: State, mapId: string) {
+    let entity_ids = Object.keys(state.entities)
     let entities_on_map: any[] = []
     for (let i=0; i<entity_ids.length; i++) {
-        let entity = _STATE.entities[entity_ids[i]]
+        let entity = state.entities[entity_ids[i]]
         if (entity.mapId === mapId) {
             entities_on_map.push(entity)
         }
@@ -55,8 +46,8 @@ export function entities_get_by(mapId: string) {
     return entities_on_map
 }
 
-export function entities_get_at(mapId: string, x: number, y: number) {
-    let entities_at_pos = entities_get_by(mapId).filter(e => e.x === x && e.y === y)
+export function entities_get_at(state: State, mapId: string, x: number, y: number) {
+    let entities_at_pos = entities_get_by(state, mapId).filter(e => e.x === x && e.y === y)
     if (entities_at_pos.length > 0) {
         return entities_at_pos[0]
     }

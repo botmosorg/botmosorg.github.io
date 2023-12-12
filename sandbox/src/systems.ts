@@ -3,12 +3,15 @@ import { combat_update } from "./combat";
 import { energy_update } from "./energy";
 import { entities_tile_energy_update } from "./entity_map";
 import { despawn_update, spawn_update } from "./spawn";
+import { State } from "./state";
 
-export function systems_per_turn_update() {
-    ai_update()
+export function systems_per_turn_update(state: State): State {
+    state = ai_update(state)
     combat_update()
-    entities_tile_energy_update()
-    energy_update()
-    despawn_update()
+    state = entities_tile_energy_update(state)
+    state = energy_update(state)
+    state = despawn_update(state)
     spawn_update()
+
+    return state;
 }

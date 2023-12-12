@@ -5,13 +5,11 @@ import { draw } from "./rot_renderer";
 let game = new Game();
 
 window.onload = function() {
-    game.init()
-    draw({x: 0, y: 0})
+    draw(game.init())
 }
 
 onKeyDown(function(action) {
-    let entityToFollow = game.update(action);
-    draw(entityToFollow);
+    draw(game.update(action));
 })
 
 window.focus(); // focus on the canvas

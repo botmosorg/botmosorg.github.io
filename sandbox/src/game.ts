@@ -1,62 +1,63 @@
 import { debug_log } from "./debug";
-import { entities_create, entities_get, entities_store } from "./entity";
+import { entities_create } from "./entity";
 import { entity_act } from "./entity_map";
 import { items_create, items_store } from "./item";
 import { Command, MANIFEST } from "./manifest";
-import { maps_parse, maps_store, maps_set_current, maps_get_current } from "./map"
+import { maps_parse } from "./map"
 import { players_get_current } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
+import { State, states_create } from "./state";
 import { systems_per_turn_update } from "./systems";
 
 export default class Game {
     turns: number;
+    state: State;
 
     constructor() {
         this.turns = 0
+        this.state = states_create()
     }
 
-    init() {
-        maps_store(maps_create_arena())
-        maps_store(maps_create_overworld())
+    init(): State {
+        this.state = maps_create_arena(this.state)
+        this.state = maps_create_overworld(this.state)
+
         for (let mapId in MANIFEST.maps) {
-            maps_store(maps_parse(MANIFEST.maps[mapId]))
+            this.state.maps[mapId] = maps_parse(MANIFEST.maps[mapId])
         }
 
-        entities_store(entities_create("npc0", MANIFEST.spirits.AeroBot, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits}))
-        entities_store(entities_create("npc1", MANIFEST.spirits.WorkBot, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits}))
+        this.state = entities_create(this.state, "npc0", MANIFEST.spirits.AeroBot, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "npc1", MANIFEST.spirits.WorkBot, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
         items_store(items_create(MANIFEST.items.energy, "simplex="+MAP_SEED, 127, 130))
 
-        entities_store(entities_create("enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates}))
-        entities_store(entities_create("enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates}))
-        entities_store(entities_create("enemy2", MANIFEST.spirits.WorkBot, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates}))
-        entities_store(entities_create("enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates}))
-        entities_store(entities_create("enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates}))
+        this.state = entities_create(this.state, "enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates})
+        this.state = entities_create(this.state, "enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates})
+        this.state = entities_create(this.state, "enemy2", MANIFEST.spirits.WorkBot, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates})
+        this.state = entities_create(this.state, "enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates})
+        this.state = entities_create(this.state, "enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates})
         items_store(items_create(MANIFEST.items.energy, "arena", 7, 7))
         items_store(items_create(MANIFEST.items.energy, "arena", 14, 14))
 
-        //maps_set_current("simplex="+MAP_SEED)
-        //entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, STATE.currentMapId, 127, 127, {faction: MANIFEST.factions.Spirits}))
-        maps_set_current("preloader")
-        let currentMapId = maps_get_current()
-        entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
+        this.state.currentMapId = "preloader"
+        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
+
+        return this.state
     }
 
-    update(action: Command | null) {
-        let player = entities_get(players_get_current())
-        if (player) {
-            if (action) {
-                entity_act(player, action)
-                systems_per_turn_update()
-                debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
+    update(action: Command | null): State {
+        let player = this.state.entities[players_get_current()]
+        if (!!player) {
+            if (!!action) {
+                this.state = entity_act(this.state, player, action)
+                this.state = systems_per_turn_update(this.state)
                 this.turns += 1
+                debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
-            maps_set_current("preloader")
-            let currentMapId = maps_get_current()
-            entities_store(entities_create(players_get_current(), MANIFEST.spirits.Spirit, currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits}))
-            player = entities_get(players_get_current())
+            this.state.currentMapId = "preloader"
+            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
         }
 
-        return player
+        return this.state
     }
 }
