@@ -54,11 +54,15 @@ export function entities_get_at(state: State, mapId: string, x: number, y: numbe
     return null
 }
 
-export function interactOrCombat(entityA, entityB) {
+export function interactOrCombat(state: State, entityA, entityB) {
     if (entityA.options.faction === entityB.options.faction) {
         debug_log("Interaction!")
     } else {
         debug_log("COMBAT!")
-        combat_queue(entityA.id, entityB.id)
+        const entityId = entityA.id
+        const otherEntityId = entityB.id
+        state._combatQueue.push({entityId, otherEntityId})
     }
+
+    return state
 }

@@ -35,8 +35,8 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
     */
     let map = state.maps[entity.mapId]
     let entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
-    if (entity_at_target_position !== null) {
-        interactOrCombat(entity, entity_at_target_position)
+    if (!!entity_at_target_position) {
+        state = interactOrCombat(state, entity, entity_at_target_position)
 
     } else if (entity_can_move(map, entity, dx, dy)) {
         entity.x += dx;
