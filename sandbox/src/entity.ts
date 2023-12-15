@@ -1,4 +1,3 @@
-import { combat_queue } from "./combat";
 import { debug_log } from "./debug";
 import { State } from "./state";
 
