@@ -1,5 +1,5 @@
 import { debug_log } from "./debug";
-import { energy_queue } from "./energy";
+import { State } from "./state";
 
 const _STATE = {
     items: {}
@@ -50,8 +50,10 @@ export function items_get_at(mapId, x, y) {
     return null
 }
 
-export function items_pickup(entity, item) {
+export function items_pickup(state: State, entity, item): State {
     debug_log("Pickup item " + item.id + " by " + entity.id)
-    energy_queue(entity.id, item.energy)
+    state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
     items_destroy(item.id)
+
+    return state
 }

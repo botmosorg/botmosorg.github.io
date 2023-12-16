@@ -1,4 +1,3 @@
-import { energy_queue } from "./energy";
 import { entities_get_at, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
@@ -45,7 +44,7 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
         // Item pickup
         let maybeItem = items_get_at(entity.mapId, entity.x, entity.y)
         if (maybeItem) {
-            items_pickup(entity, maybeItem)
+            state = items_pickup(state, entity, maybeItem)
         }
 
         // Portal
@@ -66,7 +65,7 @@ export function entities_tile_energy_update(state: State): State {
         let entity = state.entities[entityId]
         let map = state.maps[entity.mapId]
         let tile = map.getTile(entity.x, entity.y)
-        energy_queue(entityId, tile.type.energyDelta)
+        state._energyQueue.push({entityId, energyDelta: tile.type.energyDelta})
     }
 
     return state
