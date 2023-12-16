@@ -42,7 +42,7 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
         entity.y += dy;
 
         // Item pickup
-        let maybeItem = items_get_at(entity.mapId, entity.x, entity.y)
+        let maybeItem = items_get_at(state, entity.mapId, entity.x, entity.y)
         if (maybeItem) {
             state = items_pickup(state, entity, maybeItem)
         }

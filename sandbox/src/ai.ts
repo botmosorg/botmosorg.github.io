@@ -6,16 +6,14 @@ import { players_get_current } from "./player";
 import { State } from "./state";
 import { distance } from "./util";
 
-const _AIs = {}
-
 export function ai_update(state: State): State {
     let entityIdsToUpdate = _entityIdsToUpdate(state)
 
     // Create AI if needed
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
-        if (!_AIs.hasOwnProperty(entityId)) {
-            _AIs[entityId] = ai_create(state, entityId, MANIFEST.ais.aggrorange)
+        if (!state._AIs.hasOwnProperty(entityId)) {
+            state._AIs[entityId] = _ai_create(state, entityId, MANIFEST.ais.aggrorange)
         }
     }
 
@@ -24,7 +22,7 @@ export function ai_update(state: State): State {
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
         let entity = state.entities[entityId]
-        let entityAI = _AIs[entityId]
+        let entityAI = state._AIs[entityId]
 
         // First rough distance check, before
         let distanceToPlayer = distance(playerEntity.x, playerEntity.y, entity.x, entity.y)
@@ -45,7 +43,7 @@ export function ai_update(state: State): State {
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         const entityId = entityIdsToUpdate[i];
         const entity = state.entities[entityId]
-        const entityAI = _AIs[entityId]
+        const entityAI = state._AIs[entityId]
         if (entityAI.path !== null) {
             const nextPosition = entityAI.path[0];
             const dx = nextPosition.x - entity.x;
@@ -79,7 +77,7 @@ interface _AI {
     path: [] | null
 }
 
-function ai_create(state: State, entityId: string, aiType: AI): _AI {
+function _ai_create(state: State, entityId: string, aiType: AI): _AI {
     let entity = state.entities[entityId]
     return {
         entityId: entityId,
@@ -92,7 +90,9 @@ function ai_create(state: State, entityId: string, aiType: AI): _AI {
     }
 }
 
-export function ai_destroy(entityId: string) {
-    _AIs[entityId] = undefined
-    delete _AIs[entityId]
+export function ai_destroy(state: State, entityId: string) {
+    state._AIs[entityId] = undefined
+    delete state._AIs[entityId]
+
+    return state
 }

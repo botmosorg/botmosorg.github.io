@@ -1,6 +1,5 @@
 import { items_create } from "./item";
 import { MANIFEST } from "./manifest";
-import { despawn_queue } from "./spawn";
 import { State } from "./state";
 
 export function energy_update(state: State): State {
@@ -9,8 +8,8 @@ export function energy_update(state: State): State {
         let entity = state.entities[energyChange.entityId]
         entity.energy = Math.min(entity.energy + energyChange.energyDelta, entity.energyMax);
         if (entity.energy <= 0) {
-            despawn_queue(entity.id);
-            state._itemSpawnQueue.push(items_create(MANIFEST.items.junk, entity.mapId, entity.x, entity.y))
+            state._despawnQueue.push(entity.id);
+            state = items_create(state, MANIFEST.items.junk, entity.mapId, entity.x, entity.y)
         }
     }
 

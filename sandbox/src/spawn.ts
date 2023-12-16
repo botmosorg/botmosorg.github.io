@@ -1,29 +1,17 @@
 import { ai_destroy } from "./ai";
 import { entities_destroy } from "./entity";
-import { items_store } from "./item";
 import { State } from "./state";
-
-let _despawnQueue: string[] = []
-export function despawn_queue(entityId: string) {
-    _despawnQueue.push(entityId)
-}
 
 export function despawn_update(state: State): State {
     let entityIdtoDespawn: string | undefined = undefined
-    while (typeof(entityIdtoDespawn = _despawnQueue.shift()) !== 'undefined') {
+    while (typeof(entityIdtoDespawn = state._despawnQueue.shift()) !== 'undefined') {
         state = entities_destroy(state, entityIdtoDespawn)
-        ai_destroy(entityIdtoDespawn)
+        ai_destroy(state, entityIdtoDespawn)
     }
 
     return state
 }
 
 export function spawn_update(state: State): State {
-    // Items
-    let itemToSpawn = undefined
-    while (typeof(itemToSpawn = state._itemSpawnQueue.shift()) !== 'undefined') {
-        items_store(itemToSpawn)
-    }
-
     return state
 }

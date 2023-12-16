@@ -42,7 +42,7 @@ function rot_render(state: State, camera) {
     }
 
     // Render items
-    let items = items_get_by(currentMapId);
+    let items = items_get_by(state, currentMapId);
     for (let i=0; i<items.length; i++) {
         let item = items[i];
         ROT_DISPLAY.drawOver(item.x-camera.x, item.y-camera.y, item.type.icon, lookup_color(item.type.color));

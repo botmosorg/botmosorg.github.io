@@ -1,13 +1,9 @@
 import { debug_log } from "./debug";
 import { State } from "./state";
 
-const _STATE = {
-    items: {}
-}
-
-export function items_create(type, mapId, x=0, y=0) {
-    let id = _items_id_create(mapId, x, y)
-    return {
+export function items_create(state: State, type, mapId, x=0, y=0) {
+    const id = _items_id_create(mapId, x, y)
+    const item = {
         "id": id,
         "type": type,
         "mapId": mapId,
@@ -15,26 +11,27 @@ export function items_create(type, mapId, x=0, y=0) {
         "y": y,
         "energy": type.energyDelta
     }
+    state.items[item.id] = item
+
+    return state
 }
 
 function _items_id_create(mapId: string, x: number, y: number) {
     return "item" + mapId + x + y
 }
 
-export function items_destroy(itemId) {
-    _STATE.items[itemId] = undefined
-    delete _STATE.items[itemId]
+export function items_destroy(state: State, itemId) {
+    state.items[itemId] = undefined
+    delete state.items[itemId]
+
+    return state
 }
 
-export function items_store(item) {
-    _STATE.items[item.id] = item
-}
-
-export function items_get_by(mapId: string) {
-    let itemIds = Object.keys(_STATE.items)
+export function items_get_by(state: State, mapId: string) {
+    let itemIds = Object.keys(state.items)
     let itemsOnMap: any[] = []
     for (let i=0; i<itemIds.length; i++) {
-        let item = _STATE.items[itemIds[i]]
+        let item = state.items[itemIds[i]]
         if (item.mapId === mapId) {
             itemsOnMap.push(item)
         }
@@ -42,10 +39,10 @@ export function items_get_by(mapId: string) {
     return itemsOnMap
 }
 
-export function items_get_at(mapId, x, y) {
+export function items_get_at(state: State, mapId, x, y) {
     let itemId = _items_id_create(mapId, x, y)
-    if (itemId in _STATE.items) {
-        return _STATE.items[itemId]
+    if (itemId in state.items) {
+        return state.items[itemId]
     }
     return null
 }
@@ -53,7 +50,7 @@ export function items_get_at(mapId, x, y) {
 export function items_pickup(state: State, entity, item): State {
     debug_log("Pickup item " + item.id + " by " + entity.id)
     state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
-    items_destroy(item.id)
+    items_destroy(state, item.id)
 
     return state
 }
