@@ -11,17 +11,14 @@ import { systems_per_turn_update } from "./systems";
 export default class Game {
     actionLog: Array<string>
     state: State;
-    turns: number;
 
     constructor() {
         this.actionLog = []
         this.state = states_create()
-        this.turns = 0
     }
 
     init(): State {
         this.actionLog = []
-        this.turns = 0
 
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
@@ -43,11 +40,12 @@ export default class Game {
                 this.state = entity_act(this.state, player, action)
                 this.state = systems_per_turn_update(this.state)
                 this.actionLog.push(action.key)
-                this.turns += 1
-                debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
+                debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
-            console.log("Game over! Actions: " + this.actionLog.join(''))
+            console.log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
+
+            this.actionLog = []
             this.state.currentMapId = "preloader"
             this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
         }
