@@ -1,7 +1,6 @@
 import { debug_log } from "./debug";
 import { entities_create } from "./entity";
 import { entity_act } from "./entity_map";
-import { items_create } from "./item";
 import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
 import { players_get_current } from "./player";
