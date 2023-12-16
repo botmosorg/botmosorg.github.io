@@ -30,7 +30,7 @@ export function ai_update(state: State): State {
             && distanceToPlayer <= entityAI.aggroRange) {
             let movementMap = state.maps[state.currentMapId].asMovementMap() // TODO check for other entity positions to prevent lining up
             let path: any = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
-            if (path !== null) {
+            if (!!path) {
                 path = path.slice(1) // First point in the path is current position of entity, skip it
 
                 // TODO check if player is in Line of Sight (distanceToPlayer === path.length)
@@ -44,7 +44,7 @@ export function ai_update(state: State): State {
         const entityId = entityIdsToUpdate[i];
         const entity = state.entities[entityId]
         const entityAI = state._AIs[entityId]
-        if (entityAI.path !== null) {
+        if (!!entityAI.path) {
             const nextPosition = entityAI.path[0];
             const dx = nextPosition.x - entity.x;
             const dy = nextPosition.y - entity.y;
