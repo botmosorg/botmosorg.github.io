@@ -10,6 +10,7 @@ import { systems_per_turn_update } from "./systems";
 
 export default class Game {
     turns: number;
+    actionLog: Array<string>
     state: State;
 
     constructor() {
@@ -37,10 +38,12 @@ export default class Game {
             if (!!action) {
                 this.state = entity_act(this.state, player, action)
                 this.state = systems_per_turn_update(this.state)
+                this.actionLog.push(action.key)
                 this.turns += 1
                 debug_log("Trn: " + this.turns + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
+            console.log("Game over! Actions: " + this.actionLog.join(''))
             this.state.currentMapId = "preloader"
             this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
         }
