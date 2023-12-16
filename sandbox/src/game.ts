@@ -9,16 +9,20 @@ import { State, states_create } from "./state";
 import { systems_per_turn_update } from "./systems";
 
 export default class Game {
-    turns: number;
     actionLog: Array<string>
     state: State;
+    turns: number;
 
     constructor() {
-        this.turns = 0
+        this.actionLog = []
         this.state = states_create()
+        this.turns = 0
     }
 
     init(): State {
+        this.actionLog = []
+        this.turns = 0
+
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
 
