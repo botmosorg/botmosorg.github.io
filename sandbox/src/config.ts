@@ -10,10 +10,9 @@ export const SHOW_GRID = true
 const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth : 0
 const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
 export const FONT_SIZE = 18
-const CAMERA_PADDING = 1
 export const CAMERA_SIZE = [
-    Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE) - CAMERA_PADDING,
-    Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE) - CAMERA_PADDING
+    Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE),
+    Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE)
 ]
 export const MAX_MAP_SIZE = {
     WIDTH: 256,
