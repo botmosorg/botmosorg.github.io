@@ -73,8 +73,9 @@ function rot_render(state: State, camera) {
 }
 
 export async function draw(state: State) {
-    const playerEntity = state.entities[players_get_current()]
-    const camera = camera_follow(playerEntity)
+    const maybePlayerEntity = state.entities[players_get_current()]
+    const cameraPosition = !!maybePlayerEntity ? maybePlayerEntity : {x: 0, y: 0}
+    const camera = camera_follow(cameraPosition)
 
     rot_render(state, camera)
 }
