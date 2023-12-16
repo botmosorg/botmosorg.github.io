@@ -8,11 +8,6 @@ export function despawn_queue(entityId: string) {
     _despawnQueue.push(entityId)
 }
 
-let _itemSpawnQueue: any[] = []
-export function spawn_item_queue(item: any) {
-    _itemSpawnQueue.push(item)
-}
-
 export function despawn_update(state: State): State {
     let entityIdtoDespawn: string | undefined = undefined
     while (typeof(entityIdtoDespawn = _despawnQueue.shift()) !== 'undefined') {
@@ -26,7 +21,7 @@ export function despawn_update(state: State): State {
 export function spawn_update(state: State): State {
     // Items
     let itemToSpawn = undefined
-    while (typeof(itemToSpawn = _itemSpawnQueue.shift()) !== 'undefined') {
+    while (typeof(itemToSpawn = state._itemSpawnQueue.shift()) !== 'undefined') {
         items_store(itemToSpawn)
     }
 
