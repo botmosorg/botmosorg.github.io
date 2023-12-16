@@ -23,10 +23,12 @@ export function despawn_update(state: State): State {
     return state
 }
 
-export function spawn_update() {
+export function spawn_update(state: State): State {
     // Items
     let itemToSpawn = undefined
     while (typeof(itemToSpawn = _itemSpawnQueue.shift()) !== 'undefined') {
         items_store(itemToSpawn)
     }
+
+    return state
 }
