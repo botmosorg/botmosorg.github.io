@@ -100,11 +100,11 @@ export const MANIFEST = {
         "cybermagenta": "Enemy color"
     },
     "commands": {
-        "N": new Command("N", "Move/interact north"),
-        "E": new Command("E", "Move/interact east"),
-        "S": new Command("S", "Move/interact south"),
-        "W": new Command("W", "Move/interact west"),
-        "A": new Command("A", "Interact, primary action"), // unused
+        "N": new Command("N", "Move/interact/combat north"),
+        "E": new Command("E", "Move/interact/combat east"),
+        "S": new Command("S", "Move/interact/combat south"),
+        "W": new Command("W", "Move/interact/combat west"),
+        "A": new Command("A", "Primary action, confirm"), // unused
         "B": new Command("B", "Take a break, cancel"), // space bar
         "X": new Command("X", "Secondary action"), // unused
         "Y": new Command("Y", "Tertiary action"), // unused
