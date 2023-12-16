@@ -1,5 +1,5 @@
 export interface State {
-    _combatQueue: Array<any>,
+    _combatQueue: Array<{entityId: string, otherEntityId: string}>,
     _energyQueue: Array<{entityId: string, energyDelta: number}>
     _itemSpawnQueue: Array<any>,
     currentMapId: string,
