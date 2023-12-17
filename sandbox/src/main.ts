@@ -12,4 +12,10 @@ onKeyDown(function(action) {
     draw(game.update(action));
 })
 
+if (!!!(window as any).replay) {
+    (window as any).replay = function(actions: string) {
+        draw(game.replay(actions))
+    }
+}
+
 window.focus(); // focus on the canvas
