@@ -56,12 +56,16 @@ document.body.addEventListener("keydown", function(e) {
         default:
     }
 
+    triggerCallback(get_action())
+})
+
+function triggerCallback(command: Command) {
     const currentTimeInMs = Date.now();
     if (_callback !== undefined && currentTimeInMs - timeOfLastActionInMs >= 80) {
         timeOfLastActionInMs = currentTimeInMs
-        _callback(get_action())
+        _callback(command)
     }
-})
+}
 
 document.body.addEventListener("keyup", function(e) {
     if (e.defaultPrevented) {
@@ -97,6 +101,34 @@ document.body.addEventListener("keyup", function(e) {
         default:
     }
 })
+
+/**
+ * Mouse/touch controls
+ */
+document.body.addEventListener("click", function(e) {
+    const x = e.clientX;
+    const y = e.clientY;
+    const width = document.body.clientWidth;
+    const widthThird = width / 3;
+    const height = document.body.clientHeight;
+    const heightThird = height / 3;
+    if (x >= widthThird && x < 2 * widthThird && y < heightThird) {
+        triggerCallback(MANIFEST.commands.N)
+        _preventDefaultAndStopPropagation(e);
+    } else if (x < widthThird && y >= heightThird && y < 2 * heightThird) {
+        triggerCallback(MANIFEST.commands.W)
+        _preventDefaultAndStopPropagation(e);
+    } else if (x >= 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
+        triggerCallback(MANIFEST.commands.E)
+        _preventDefaultAndStopPropagation(e);
+    } else if (x >= widthThird && x < 2 * widthThird && y >= 2 * heightThird) {
+        triggerCallback(MANIFEST.commands.S)
+        _preventDefaultAndStopPropagation(e);
+    } else if (x >= widthThird && x < 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
+        triggerCallback(MANIFEST.commands.B)
+        _preventDefaultAndStopPropagation(e);
+    }
+});
 
 function _preventDefaultAndStopPropagation(e) {
     e.preventDefault();
@@ -155,7 +187,7 @@ export function onKeyDown(callback: Function) {
     _callback = callback
 }
 
-export function get_action() {
+export function get_action(): Command {
     _updateInputQueue();
     let action = _inputQueue.shift() || null;
     _inputQueue = [];
