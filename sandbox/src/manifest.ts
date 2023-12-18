@@ -124,7 +124,7 @@ export const MANIFEST = {
 !!. void
 !!~ water
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!= chargepad
 !!O portal bot_station 23 16
 ################
@@ -190,7 +190,7 @@ O.....=..+.....#
 !!id bot_factory
 !!size 48 32
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!. void
 !!^ movenorth
 !!> moveeast
@@ -237,7 +237,7 @@ O.....=..+.....#
 !!. void
 !!~ water
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!= chargepad
 !!C portalclosed
 !!F portal bot_factory 2 31
@@ -287,7 +287,7 @@ P..............................#
 !!^ rock
 !!t tree
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!= chargepad
 !!C portalclosed
 !!O portal simplex=1337 126 121
@@ -337,7 +337,7 @@ C..............D
         "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "gray"), // ▲ alternatively
         "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "cybergreen"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
-        "weakwall": new Tile("weakwall", "A weakened wall", '+', "gray", "black"),
+        "wallweak": new Tile("wallweak", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
         //"boulder": new Tile("boulder", "A movable rock", "o", "gray"),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
