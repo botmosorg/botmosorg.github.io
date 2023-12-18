@@ -55,6 +55,16 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
             entity.y = tile.options.y;
             entity.mapId = tile.options.mapId;
         }
+
+        // Move{north, east, south, west} tile
+        if (tile.type.name.startsWith('move')) {
+            switch (tile.type.name) {
+                case 'movenorth': entity.y -= 1; break;
+                case 'moveeast': entity.x += 1; break;
+                case 'movesouth': entity.y += 1; break;
+                case 'movewest': entity.x -= 1; break;
+            }
+        }
     }
 
     return state
