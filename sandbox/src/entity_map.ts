@@ -89,6 +89,5 @@ function entity_can_move(map, entity, dx: number, dy: number): boolean {
     return x >= 0 && x < map.widthTiles && y >= 0 && y < map.heightTiles
         && tileType !== MANIFEST.tiles.rock
         && tileType !== MANIFEST.tiles.portalclosed
-        && tileType !== MANIFEST.tiles.wall
-        && tileType !== MANIFEST.tiles.wallweak;
+        && !tileType.name.startsWith('wall');
 }

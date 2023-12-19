@@ -12,11 +12,13 @@ const mapString = `! The first character defines the 'meta' character preceeding
 !!^ rock
 !!t tree
 !!# wall
+!!B wall B
+!!M wall M
 !!+ wallweak
 !!= chargepad
 !!O portal arena 1 0
 ! This is the actual map data:
-################
+#######BM#######
 #..............#
 O..............O
 #..............#
@@ -42,10 +44,12 @@ const mapMovement = `!
 !!^ rock
 !!t tree
 !!# wall
+!!B wall B
+!!M wall M
 !!+ wallweak
 !!= chargepad
 !!O portal arena 1 0
-################
+#######BM#######
 #.============.#
 O......^^......O
 #.....++++.....#
@@ -71,6 +75,7 @@ describe('Map', function () {
 
         // movementMap[y][x]
         expect(movementMap[1][0]).toEqual(1) // wall
+        expect(movementMap[7][0]).toEqual(1) // wall with sign
         expect(movementMap[7][7]).toEqual(1) // wallweak
         expect(movementMap[2][7]).toEqual(1) // rock
         expect(movementMap[1][1]).toEqual(0) // void
@@ -95,5 +100,9 @@ describe('maps_parse', function () {
         expect(map.getTile(15, 2).options.y).toEqual(0);
         expect(map.getTile(8, 8).type.name).toEqual("void");
         expect(map.getTile(15, 15).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).options.sign).toEqual("B");
+        expect(map.getTile(8, 0).type.name).toEqual("wall");
+        expect(map.getTile(8, 0).options.sign).toEqual("M");
     });
 });

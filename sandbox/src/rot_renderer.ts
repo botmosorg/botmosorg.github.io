@@ -31,10 +31,13 @@ function rot_render(state: State, camera) {
             var fg_color = MANIFEST.colors.white;
             var icon = ""
 
-            if (tile != null && tile.type != null) {
+            if (!!tile && !!tile.type) {
                 bg_color = lookup_color(tile.type.bg)
                 fg_color = lookup_color(tile.type.fg)
-                icon = tile.type.icon
+                if (!!tile.options.sign) {
+                    console.log("blub")
+                }
+                icon = tile.options.sign || tile.type.icon
             }
 
             ROT_DISPLAY.draw(x, y, icon, fg_color, bg_color)

@@ -104,13 +104,17 @@ export function maps_parse(mapString: string) {
             for (let j = 0; j < line.length; j++) {
                 let character = line[j];
                 let tileTypeName = meta[character];
+                let components = tileTypeName.split(" ")
                 let options = {}
                 if (tileTypeName.startsWith("portal ")) {
-                    let portalComponents = tileTypeName.split(" ")
                     tileTypeName = "portal"
-                    options['mapId'] = portalComponents[1]
-                    options['x'] = Number(portalComponents[2])
-                    options['y'] = Number(portalComponents[3])
+                    options['mapId'] = components[1]
+                    options['x'] = Number(components[2])
+                    options['y'] = Number(components[3])
+                }
+                if (tileTypeName.startsWith("wall ") && components.length >= 2) {
+                    tileTypeName = "wall"
+                    options['sign'] = components[1]
                 }
                 tiles.push(tiles_create(MANIFEST.tiles[tileTypeName], options))
             }
