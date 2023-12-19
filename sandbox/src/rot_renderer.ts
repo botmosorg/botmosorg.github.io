@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
-import { CAMERA_SIZE, ENEMY_COLORED_RED, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { BOTMOS_OPTIONS, CAMERA_SIZE, ENEMY_COLORED_RED, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by } from "./item";
 import { entities_get_by } from "./entity";
@@ -49,7 +49,8 @@ function rot_render(state: State, camera) {
     }
 
     // Render entities
-    const playerFaction = ((state.entities[players_get_current()] || {}).options || {}).faction || undefined;
+    const playerEntity = state.entities[players_get_current()]
+    const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
     const entities = entities_get_by(state, currentMapId);
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
@@ -60,13 +61,15 @@ function rot_render(state: State, camera) {
         ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, entityColor);
     }
 
-    // Render UI lines
-    /*
-    for (let i=0; i<UI_LINES.length; i++) {
-        let line = UI_LINES[i];
-        ROT_DISPLAY.drawText(0, i, "%c{white}%b{black}"+line, CAMERA_SIZE[0]);
+    // Render UI line
+    if (!!playerEntity && BOTMOS_OPTIONS.showUI) {
+        let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' ' + playerEntity.x + ',' + playerEntity.y
+        let uiLineYCoord = ROT_OPTIONS.height - 1
+        if (playerEntity.y-camera.y >= ROT_OPTIONS.height - 3) { // Player close to bottom of screen, flip UI line to top of screen
+            uiLineYCoord = 0
+        }
+        ROT_DISPLAY.drawText(0, uiLineYCoord, "%c{white}%b{black}" + line, camera.width);
     }
-    */
 
     // Render debug lines
     for (let i=0; i<DEBUG_LINES.length; i++) {

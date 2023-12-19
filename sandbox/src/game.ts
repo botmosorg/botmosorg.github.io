@@ -53,10 +53,10 @@ export default class Game {
                 this.state = entity_act(this.state, player, action)
                 this.state = systems_per_turn_update(this.state)
                 this.actionLog.push(action.key)
-                debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
+                //debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
-            console.log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
+            debug_log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
 
             this.actionLog = []
             this.state.currentMapId = "preloader"

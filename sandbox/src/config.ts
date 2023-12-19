@@ -19,6 +19,10 @@ export const MAX_MAP_SIZE = {
 export const SHOW_GRID = true
 export const ZOOM = 1
 
+export const BOTMOS_OPTIONS = {
+    showUI: true
+}
+
 export const ROT_OPTIONS = {
 	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
     height: ~~(CAMERA_SIZE[1] * (1 / ZOOM)),

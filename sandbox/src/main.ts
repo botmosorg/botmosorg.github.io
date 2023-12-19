@@ -1,3 +1,4 @@
+import { BOTMOS_OPTIONS } from "./config";
 import Game from "./game";
 import { onKeyDown } from "./input";
 import { draw } from "./rot_renderer";
@@ -12,9 +13,16 @@ onKeyDown(function(action) {
     draw(game.update(action));
 })
 
-if (!!!(window as any).replay) {
-    (window as any).replay = function(actions: string) {
+if (!!!(window as any).BMPlay) {
+    (window as any).BMPlay = function(actions: string) {
         draw(game.replay(actions))
+    }
+}
+
+if (!!!(window as any).BMToggleUI) {
+    (window as any).BMToggleUI = function() {
+        BOTMOS_OPTIONS.showUI = !BOTMOS_OPTIONS.showUI
+        draw(game.state)
     }
 }
 
