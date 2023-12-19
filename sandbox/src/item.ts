@@ -1,4 +1,5 @@
 import { debug_log } from "./debug";
+import { Entity } from "./entity";
 import { State } from "./state";
 
 export interface Item {
@@ -26,7 +27,7 @@ export function items_create(state: State, type, mapId, x=0, y=0): State {
 }
 
 function _items_id_create(mapId: string, x: number, y: number): string {
-    return "item" + mapId + x + y
+    return "item," + mapId + "," + x + "," + y
 }
 
 export function items_destroy(state: State, itemId: string) {
@@ -48,7 +49,7 @@ export function items_get_by(state: State, mapId: string): Array<Item> {
     return itemsOnMap
 }
 
-export function items_get_at(state: State, mapId: string, x: number, y: number) {
+export function items_get_at(state: State, mapId: string, x: number, y: number): Item | null {
     let itemId = _items_id_create(mapId, x, y)
     if (itemId in state.items) {
         return state.items[itemId]
@@ -56,7 +57,7 @@ export function items_get_at(state: State, mapId: string, x: number, y: number) 
     return null
 }
 
-export function items_pickup(state: State, entity, item): State {
+export function items_pickup(state: State, entity: Entity, item: Item): State {
     debug_log("Pickup item " + item.id + " by " + entity.id)
     state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
     items_destroy(state, item.id)
