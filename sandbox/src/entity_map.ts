@@ -1,6 +1,7 @@
-import { entities_get_at, entities_set_type, interactOrCombat } from "./entity";
+import { Entity, entities_get_at, entities_set_type, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
+import { Map } from "./map";
 import { State } from "./state";
 
 export function entity_act(state: State, entity, action: Command): State {
@@ -89,7 +90,7 @@ export function entities_tile_energy_update(state: State): State {
     return state
 }
 
-function entity_can_move(map, entity, dx: number, dy: number): boolean {
+function entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boolean {
     let x = entity.x + dx;
     let y = entity.y + dy;
     let tileType = map.getTile(x, y).type;
