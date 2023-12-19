@@ -14,10 +14,6 @@ export interface Entity {
 }
 
 export function entities_create(state: State, id: string, type: Spirit, mapId: string, x=0, y=0, options={}): State {
-    // TODO make energy entity type dependent
-    // TODO Externalize this
-
-
     const entity = {
         "id": id,
         "type": type,
@@ -55,7 +51,7 @@ export function entities_get_by(state: State, mapId: string): Array<Entity> {
     return entities_on_map
 }
 
-export function entities_get_at(state: State, mapId: string, x: number, y: number) {
+export function entities_get_at(state: State, mapId: string, x: number, y: number): Entity | null {
     let entities_at_pos = entities_get_by(state, mapId).filter(e => e.x === x && e.y === y)
     if (entities_at_pos.length > 0) {
         return entities_at_pos[0]
@@ -66,6 +62,7 @@ export function entities_get_at(state: State, mapId: string, x: number, y: numbe
 export function entities_set_type(entity: Entity, newType: Spirit) {
     entity.type = newType
 
+    // TODO make energy entity type dependent
     let energy = 10;
     let energyMax = 10;
     if (entity.type === MANIFEST.spirits.Cleaner) {
