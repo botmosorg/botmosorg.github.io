@@ -1,7 +1,16 @@
 import { debug_log } from "./debug";
 import { State } from "./state";
 
-export function items_create(state: State, type, mapId, x=0, y=0) {
+export interface Item {
+    id: string,
+    type: any,
+    mapId: string,
+    x: number,
+    y: number,
+    energy: number
+}
+
+export function items_create(state: State, type, mapId, x=0, y=0): State {
     const id = _items_id_create(mapId, x, y)
     const item = {
         "id": id,
@@ -16,20 +25,20 @@ export function items_create(state: State, type, mapId, x=0, y=0) {
     return state
 }
 
-function _items_id_create(mapId: string, x: number, y: number) {
+function _items_id_create(mapId: string, x: number, y: number): string {
     return "item" + mapId + x + y
 }
 
-export function items_destroy(state: State, itemId) {
+export function items_destroy(state: State, itemId: string) {
     state.items[itemId] = undefined
     delete state.items[itemId]
 
     return state
 }
 
-export function items_get_by(state: State, mapId: string) {
+export function items_get_by(state: State, mapId: string): Array<Item> {
     let itemIds = Object.keys(state.items)
-    let itemsOnMap: any[] = []
+    let itemsOnMap: Item[] = []
     for (let i=0; i<itemIds.length; i++) {
         let item = state.items[itemIds[i]]
         if (item.mapId === mapId) {
@@ -39,7 +48,7 @@ export function items_get_by(state: State, mapId: string) {
     return itemsOnMap
 }
 
-export function items_get_at(state: State, mapId, x, y) {
+export function items_get_at(state: State, mapId: string, x: number, y: number) {
     let itemId = _items_id_create(mapId, x, y)
     if (itemId in state.items) {
         return state.items[itemId]
