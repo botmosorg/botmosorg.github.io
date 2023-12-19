@@ -63,7 +63,7 @@ export class Map {
                 movementMap[y][x] = 0;
                 if (tileType === MANIFEST.tiles.rock
                     || tileType === MANIFEST.tiles.wall
-                    || tileType === MANIFEST.tiles.weakwall) {
+                    || tileType === MANIFEST.tiles.wallweak) {
                     movementMap[y][x] = 1;
                 }
             }

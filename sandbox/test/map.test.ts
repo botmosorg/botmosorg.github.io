@@ -12,7 +12,7 @@ const mapString = `! The first character defines the 'meta' character preceeding
 !!^ rock
 !!t tree
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!= chargepad
 !!O portal arena 1 0
 ! This is the actual map data:
@@ -42,7 +42,7 @@ const mapMovement = `!
 !!^ rock
 !!t tree
 !!# wall
-!!+ weakwall
+!!+ wallweak
 !!= chargepad
 !!O portal arena 1 0
 ################
@@ -71,7 +71,7 @@ describe('Map', function () {
 
         // movementMap[y][x]
         expect(movementMap[1][0]).toEqual(1) // wall
-        expect(movementMap[7][7]).toEqual(1) // weakwall
+        expect(movementMap[7][7]).toEqual(1) // wallweak
         expect(movementMap[2][7]).toEqual(1) // rock
         expect(movementMap[1][1]).toEqual(0) // void
         expect(movementMap[1][7]).toEqual(0) // chargepad

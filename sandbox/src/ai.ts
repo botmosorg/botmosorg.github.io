@@ -13,7 +13,7 @@ export function ai_update(state: State): State {
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
         if (!state._AIs.hasOwnProperty(entityId)) {
-            state._AIs[entityId] = _ai_create(state, entityId, MANIFEST.ais.aggrorange)
+            state._AIs[entityId] = _ai_create(state, entityId, state.entities[entityId].options.ai)
         }
     }
 
@@ -60,7 +60,7 @@ function _entityIdsToUpdate(state: State) {
     let entityIdsToUpdate: string[] = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        if (!entity.id.startsWith("player")) {
+        if (!entity.id.startsWith("player") && !!entity.options.ai) {
             entityIdsToUpdate.push(entity.id)
         }
     }
@@ -79,10 +79,17 @@ interface _AI {
 
 function _ai_create(state: State, entityId: string, aiType: AI): _AI {
     let entity = state.entities[entityId]
+    let aggroRange = 8
+    switch (aiType) {
+        case MANIFEST.ais.aggrorange: aggroRange = 8; break;
+        case MANIFEST.ais.aggrorangeshort: aggroRange = 2; break;
+        case MANIFEST.ais.guardian: aggroRange = 1; break;
+        default:
+    }
     return {
         entityId: entityId,
         type: aiType,
-        aggroRange: 8,
+        aggroRange: aggroRange,
         startMap: entity.mapId,
         startX: entity.x,
         startY: entity.y,

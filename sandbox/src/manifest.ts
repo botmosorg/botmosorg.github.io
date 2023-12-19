@@ -79,7 +79,9 @@ export class Tile {
 
 export const MANIFEST = {
     "ais": {
-        "aggrorange": new AI("AggroRange", "Idles at a position and engages the player when coming into range")
+        "aggrorange": new AI("aggrorange", "Idles at a position and engages the player when coming into range"),
+        "aggrorangeshort": new AI("aggrorangeshort", "Idles at a position and engages the player when coming into shorter range"),
+        "guardian": new AI("guardian", "Idles at a position and only fights back if engaged")
     },
     /**
      * From: https://www.color-hex.com/color-palette/8618
@@ -111,7 +113,8 @@ export const MANIFEST = {
     },
     "factions": {
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
-        "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta")
+        "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
+        "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {
         "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
@@ -292,7 +295,7 @@ O.....=..+.....#
 #...####.++..............#C##..#
 #........++....................#
 #+++++++++.....................#
-#++++++++......................#
+#+++++++++.+.+.+.+.+.+.+.+.+.++#
 #..............................#
 #..............................#
 #..#.#.#.#.#...................#
@@ -358,8 +361,9 @@ C..............D
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@"),
         "WorkBot": new Spirit("WorkBot", "Basic pawn", "B"),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A"),
-           /*
-        "PioneerBot": "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors",
+        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C"),
+        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W"),
+        /*
         "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
         // ...
         "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",

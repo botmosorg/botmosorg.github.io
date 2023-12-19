@@ -1,10 +1,20 @@
 import { debug_log } from "./debug";
+import { MANIFEST } from "./manifest";
 import { State } from "./state";
 
 export function entities_create(state: State, id: string, type: any, mapId: string, x=0, y=0, options={}): State {
     // TODO make energy entity type dependent
+    // TODO Externalize this
     let energy = 10;
     let energyMax = 10;
+    if (type === MANIFEST.spirits.Cleaner) {
+        energy = 50;
+        energyMax = 50;
+    }
+    if (type === MANIFEST.spirits.Pioneer) {
+        energy = 200;
+        energyMax = 200;
+    }
     if (id.startsWith("player")) {
         energy = 100;
         energyMax = 100;

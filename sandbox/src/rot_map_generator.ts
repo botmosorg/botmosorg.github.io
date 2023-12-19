@@ -74,11 +74,11 @@ export function maps_create_arena(state: State): State {
 
     state.maps["arena"] = map
 
-    state = entities_create(state, "enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates})
-    state = entities_create(state, "enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates})
-    state = entities_create(state, "enemy2", MANIFEST.spirits.WorkBot, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates})
-    state = entities_create(state, "enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates})
-    state = entities_create(state, "enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates})
+    state = entities_create(state, "enemy0", MANIFEST.spirits.WorkBot, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy1", MANIFEST.spirits.WorkBot, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy2", MANIFEST.spirits.WorkBot, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
     state = items_create(state, MANIFEST.items.energy, "arena", 7, 7)
     state = items_create(state, MANIFEST.items.energy, "arena", 14, 14)
 

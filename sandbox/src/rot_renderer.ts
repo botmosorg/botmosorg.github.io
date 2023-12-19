@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
-import { CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { CAMERA_SIZE, ENEMY_COLORED_RED, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by } from "./item";
 import { entities_get_by } from "./entity";
@@ -42,18 +42,21 @@ function rot_render(state: State, camera) {
     }
 
     // Render items
-    let items = items_get_by(state, currentMapId);
+    const items = items_get_by(state, currentMapId);
     for (let i=0; i<items.length; i++) {
         let item = items[i];
         ROT_DISPLAY.drawOver(item.x-camera.x, item.y-camera.y, item.type.icon, lookup_color(item.type.color));
     }
 
     // Render entities
-    let playerFaction = ((state.entities[players_get_current()] || {}).options || {}).faction || undefined;
-    let entities = entities_get_by(state, currentMapId);
+    const playerFaction = ((state.entities[players_get_current()] || {}).options || {}).faction || undefined;
+    const entities = entities_get_by(state, currentMapId);
     for (let i=0; i<entities.length; i++) {
-        let entity = entities[i];
-        let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
+        const entity = entities[i];
+        let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
+        if (ENEMY_COLORED_RED) {
+            entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
+        }
         ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, entityColor);
     }
 
