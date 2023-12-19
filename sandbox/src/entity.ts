@@ -10,7 +10,7 @@ export interface Entity {
     y: number,
     energy: number,
     energyMax: number,
-    options: object
+    options: any
 }
 
 export function entities_create(state: State, id: string, type: Spirit, mapId: string, x=0, y=0, options={}): State {
@@ -82,7 +82,7 @@ export function entities_set_type(entity: Entity, newType: Spirit) {
     entity.energyMax = energyMax
 }
 
-export function interactOrCombat(state: State, entityA, entityB) {
+export function interactOrCombat(state: State, entityA: Entity, entityB: Entity) {
     if (entityA.options.faction === entityB.options.faction) {
         debug_log("Interaction!")
     } else {
