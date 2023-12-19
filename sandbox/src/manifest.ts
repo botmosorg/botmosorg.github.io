@@ -44,7 +44,7 @@ class Item {
         this.energyDelta = energyDelta
     }
 }
-class Spirit {
+export class Spirit {
     name: string;
     description: string;
     icon: string;
@@ -278,13 +278,14 @@ O.....=..+.....#
 !!v movesouth
 !!< movewest
 !!C portalclosed
+!!A portal arena 1 0
 !!B portal bot_bar 0 5
 !!O portal bot_dormitory 2 31
 !!Q portal bot_dormitory 29 31
 !!F portal bot_factory 2 31
 !!E portal bot_factory 47 16
 !!S portal bot_stadium 45 15
-!!P portal preloader 15 13
+!!P portal botmos_hull_selection 15 13
 ################################
 #...########################...#
 #.......################.......#
@@ -292,7 +293,7 @@ O.....=..+.....#
 #...####.++....CC........####..#
 #...C###.++..............####..#
 #...C###.++..............####..#
-#...####.++..............#C##..#
+#...####.++..............#A##..#
 #........++....................#
 #+++++++++.....................#
 #+++++++++.+.+.+.+.+.+.+.+.+.++#
@@ -314,12 +315,12 @@ O.....=..+.....#
 #..###########.......########..#
 #.^###########.......########v.#
 #..#F#########.......#O####Q#..#
-P.^..<.<.<.<.<.<.<.<.<.......<.#
+#.^..<.<.<.<.<.<.<.<.<.......<.#
 #.............................~#
 ################################
 `,
-"preloader": `!
-!!id preloader
+"botmos_hull_selection": `!
+!!id botmos_hull_selection
 !!size 20 20
 !!. void
 !!~ water
@@ -331,34 +332,44 @@ P.^..<.<.<.<.<.<.<.<.<.......<.#
 !!t wall t
 !!M wall M
 !!s wall s
+!!C wall C
+!!h wall h
+!!e wall e
+!!y wall y
+!!u wall u
+!!r wall r
+!!l wall l
 !!= chargepad
 !!^ movenorth
 !!> moveeast
 !!v movesouth
 !!< movewest
-!!C portalclosed
+!!Q portalclosed
 !!O portal simplex=1337 126 121
 !!A portal arena 1 0
+!!a portalstartaerobot bot_factory 4 15
+!!b portalstartworkbot bot_factory 4 16
+!!? portalstart?
 !!D portal bot_station 0 29
 #######BotMos#######
-#.============.#####
-O.<<<<<<>>>>>>.A####
-#......^^......#####
-#......^^......#####
-#......^^......#####
-#......^^......#####
-#..............#####
-#.......v......#####
-#.......v......#####
-#.......v......#####
-#.......v......#####
-#.......v......#####
-C.......>>>>>>.D####
-#.~~~~~~~~~~~~.#####
+#.Choose.your.hull.#
 ####################
-####################
-####################
-####################
+#..................#
+#..................#
+#..........b..?....#
+#..................#
+#..................#
+#..........a..?....#
+#..................#
+#..................#
+#..........?..?....#
+#..................#
+#..................#
+#..........?..?....#
+#..................#
+#..................#
+#..........?..?....#
+#..................#
 ####################
 `
     },
@@ -400,6 +411,9 @@ C.......>>>>>>.D####
         "movewest": new Tile("movewest", "Moves you west", "<", "cyberyellow"),
         "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
         "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "O", "black", "gray"), // □
+        "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "B", "white"),
+        "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
+        "portalstart?": new Tile("portalstart?", "Not unlocked, yet!", "?", "white")
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */

@@ -40,8 +40,8 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.spirits.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.spirits.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
-        this.state.currentMapId = "preloader"
-        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
+        this.state.currentMapId = "botmos_hull_selection"
+        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
 
         return this.state
     }
@@ -59,8 +59,8 @@ export default class Game {
             debug_log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
 
             this.actionLog = []
-            this.state.currentMapId = "preloader"
-            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 7, 7, {faction: MANIFEST.factions.Spirits})
+            this.state.currentMapId = "botmos_hull_selection"
+            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
         }
 
         return this.state

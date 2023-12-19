@@ -34,9 +34,6 @@ function rot_render(state: State, camera) {
             if (!!tile && !!tile.type) {
                 bg_color = lookup_color(tile.type.bg)
                 fg_color = lookup_color(tile.type.fg)
-                if (!!tile.options.sign) {
-                    console.log("blub")
-                }
                 icon = tile.options.sign || tile.type.icon
             }
 

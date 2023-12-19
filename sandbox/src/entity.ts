@@ -1,24 +1,22 @@
 import { debug_log } from "./debug";
-import { MANIFEST } from "./manifest";
+import { MANIFEST, Spirit } from "./manifest";
 import { State } from "./state";
 
-export function entities_create(state: State, id: string, type: any, mapId: string, x=0, y=0, options={}): State {
+export interface Entity {
+    id: string,
+    type: Spirit,
+    mapId: string,
+    x: number,
+    y: number,
+    energy: number,
+    energyMax: number,
+    options: object
+}
+
+export function entities_create(state: State, id: string, type: Spirit, mapId: string, x=0, y=0, options={}): State {
     // TODO make energy entity type dependent
     // TODO Externalize this
-    let energy = 10;
-    let energyMax = 10;
-    if (type === MANIFEST.spirits.Cleaner) {
-        energy = 50;
-        energyMax = 50;
-    }
-    if (type === MANIFEST.spirits.Pioneer) {
-        energy = 200;
-        energyMax = 200;
-    }
-    if (id.startsWith("player")) {
-        energy = 100;
-        energyMax = 100;
-    }
+
 
     const entity = {
         "id": id,
@@ -26,10 +24,12 @@ export function entities_create(state: State, id: string, type: any, mapId: stri
         "mapId": mapId,
         "x": x,
         "y": y,
-        "energy": energy,
-        "energyMax": energyMax,
+        "energy": 10,
+        "energyMax": 10,
         "options": options
     }
+
+    entities_set_type(entity, type)
 
     state.entities[entity.id] = entity
 
@@ -43,9 +43,9 @@ export function entities_destroy(state: State, entityId: string) {
     return state;
 }
 
-export function entities_get_by(state: State, mapId: string) {
+export function entities_get_by(state: State, mapId: string): Array<Entity> {
     let entity_ids = Object.keys(state.entities)
-    let entities_on_map: any[] = []
+    let entities_on_map: Entity[] = []
     for (let i=0; i<entity_ids.length; i++) {
         let entity = state.entities[entity_ids[i]]
         if (entity.mapId === mapId) {
@@ -61,6 +61,28 @@ export function entities_get_at(state: State, mapId: string, x: number, y: numbe
         return entities_at_pos[0]
     }
     return null
+}
+
+export function entities_set_type(entity: Entity, newType: Spirit) {
+    entity.type = newType
+
+    let energy = 10;
+    let energyMax = 10;
+    if (entity.type === MANIFEST.spirits.Cleaner) {
+        energy = 50;
+        energyMax = 50;
+    }
+    if (entity.type === MANIFEST.spirits.Pioneer) {
+        energy = 200;
+        energyMax = 200;
+    }
+    if (entity.id.startsWith("player")) {
+        energy = 100;
+        energyMax = 100;
+    }
+
+    entity.energy = energy
+    entity.energyMax = energyMax
 }
 
 export function interactOrCombat(state: State, entityA, entityB) {

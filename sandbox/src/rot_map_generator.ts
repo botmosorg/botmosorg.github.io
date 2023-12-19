@@ -44,7 +44,7 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
         tiles
     );
 
-    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "preloader", x: 0, y: 2})
+    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "botmos_hull_selection", x: 8, y: 5})
 
     state.maps[mapId] = map;
 
@@ -70,7 +70,7 @@ export function maps_create_arena(state: State): State {
         tiles
     );
 
-    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "preloader", x: 15, y: 2});
+    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "bot_station", x: 26, y: 7});
 
     state.maps["arena"] = map
 

@@ -1,4 +1,4 @@
-import { entities_get_at, interactOrCombat } from "./entity";
+import { entities_get_at, entities_set_type, interactOrCombat } from "./entity";
 import { items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
 import { State } from "./state";
@@ -49,11 +49,18 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
 
         // Portal
         let tile = map.getTile(entity.x, entity.y);
-        if (tile.type === MANIFEST.tiles.portal && !!state.maps[tile.options.mapId]) {
+        if ((tile.type === MANIFEST.tiles.portal || tile.type.name.startsWith('portalstart')) && !!state.maps[tile.options.mapId]) {
             state.currentMapId = tile.options.mapId // TODO: currently only player can pass portals
             entity.x = tile.options.x;
             entity.y = tile.options.y;
             entity.mapId = tile.options.mapId;
+
+            // TODO: move elsewhere
+            switch (tile.type) {
+                case MANIFEST.tiles.portalstartaerobot: entities_set_type(entity, MANIFEST.spirits.AeroBot); break;
+                case MANIFEST.tiles.portalstartworkbot: entities_set_type(entity, MANIFEST.spirits.WorkBot); break;
+                default:
+            }
         }
 
         // Move{north, east, south, west} tile
