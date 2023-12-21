@@ -1,6 +1,7 @@
 import { debug_log } from "./debug";
 import { entities_create } from "./entity";
 import { entity_act } from "./entity_map";
+import { items_create } from "./item";
 import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
 import { players_get_current } from "./player";
@@ -27,7 +28,7 @@ export default class Game {
             this.state.maps[mapId] = maps_parse(MANIFEST.maps[mapId])
         }
 
-        // TODO Pupulate map entities elsewhere
+        // TODO Pupulate map entities and items elsewhere
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.spirits.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.spirits.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian1", MANIFEST.spirits.Cleaner, "bot_station", 12, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
@@ -39,6 +40,8 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian7", MANIFEST.spirits.Cleaner, "bot_station", 24, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.spirits.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.spirits.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+
+        this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 14, 8)
 
         this.state.currentMapId = "botmos_hull_selection"
         this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
