@@ -49,12 +49,14 @@ export class Spirit {
     description: string;
     icon: string;
     color: string;
+    energyMax: number;
     unlockCondition: null;
 
-    constructor(name: string, description: string, icon: string) {
+    constructor(name: string, description: string, icon: string, energyMax: number=100) {
         this.name = name;
         this.description = description;
         this.icon = icon;
+        this.energyMax = energyMax;
         this.color = "white"; // Default white, different color = different faction or fashion
         this.unlockCondition = null;
     }
@@ -455,11 +457,11 @@ Q..........?.......#
         "Oz": "A machinery wizard"
     },
     "spirits": {
-        "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@"),
-        "WorkBot": new Spirit("WorkBot", "Basic pawn", "B"),
-        "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A"),
-        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C"),
-        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W"),
+        "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
+        "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
+        "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
+        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C", 50),
+        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W", 200),
         /*
         "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
         // ...
