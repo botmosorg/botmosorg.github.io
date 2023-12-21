@@ -64,9 +64,9 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
     // TODO externalize
     if (item.type === MANIFEST.items.battery) {
         entity.energyMax += item.energy
-    } else {
-        state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
     }
+    state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
+
     items_destroy(state, item.id)
 
     return state
