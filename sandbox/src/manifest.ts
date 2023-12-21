@@ -117,8 +117,9 @@ export const MANIFEST = {
         "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {
-        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
-        "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) // 🗲
+        "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
+        "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
+        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1)
     },
     "maps": {
         "bot_bar": `!
@@ -457,7 +458,7 @@ Q..........?.......#
         "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "gray"), // ▲ alternatively
-        "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "cybergreen"),
+        "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "black"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "wallweak": new Tile("wallweak", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),

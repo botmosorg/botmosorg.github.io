@@ -56,7 +56,10 @@ function rot_render(state: State, camera) {
         const entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
         if (ENEMY_COLORED_RED) {
-            entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : MANIFEST.colors.cybermagenta;
+            entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
+        }
+        if (entity === playerEntity) {
+            entityColor = MANIFEST.colors.white
         }
         ROT_DISPLAY.drawOver(entity.x-camera.x, entity.y-camera.y, entity.type.icon, entityColor);
     }

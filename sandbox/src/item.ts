@@ -1,5 +1,6 @@
 import { debug_log } from "./debug";
 import { Entity } from "./entity";
+import { MANIFEST } from "./manifest";
 import { State } from "./state";
 
 export interface Item {
@@ -59,7 +60,13 @@ export function items_get_at(state: State, mapId: string, x: number, y: number):
 
 export function items_pickup(state: State, entity: Entity, item: Item): State {
     debug_log("Pickup item " + item.id + " by " + entity.id)
-    state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
+
+    // TODO externalize
+    if (item.type === MANIFEST.items.battery) {
+        entity.energyMax += item.energy
+    } else {
+        state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
+    }
     items_destroy(state, item.id)
 
     return state

@@ -50,7 +50,7 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
 
     state = entities_create(state, "npc0", MANIFEST.spirits.Pioneer, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
     state = entities_create(state, "npc1", MANIFEST.spirits.Pioneer, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
-    state = items_create(state, MANIFEST.items.energy, "simplex="+MAP_SEED, 127, 130)
+    state = items_create(state, MANIFEST.items.battery, "simplex="+MAP_SEED, 127, 130)
 
     return state;
 }
@@ -80,7 +80,7 @@ export function maps_create_arena(state: State): State {
     state = entities_create(state, "enemy3", MANIFEST.spirits.WorkBot, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
     state = entities_create(state, "enemy4", MANIFEST.spirits.WorkBot, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
     state = items_create(state, MANIFEST.items.energy, "arena", 7, 7)
-    state = items_create(state, MANIFEST.items.energy, "arena", 14, 14)
+    state = items_create(state, MANIFEST.items.battery, "arena", 14, 14)
 
     return state;
 }
