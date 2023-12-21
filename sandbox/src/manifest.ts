@@ -427,7 +427,7 @@ O..............#
 !!b portalstartworkbot bot_factory 4 16
 !!? portalstart?
 !!D portal bot_station 0 29
-##.===.BotMos.===.##
+##.....BotMos.....##
 #+Choose+your+hull+#
 #.================.#
 #..................#
