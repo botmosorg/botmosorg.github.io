@@ -41,7 +41,9 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.spirits.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.spirits.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
-        this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 14, 8)
+        this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 13, 8)
+        this.state = items_create(this.state, MANIFEST.items.junk, "bot_dormitory_hidden", 1, 2)
+        this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory_hidden", 2, 2)
 
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_factory", 4, 13)
         for (let y=2; y<=8; y++) {
