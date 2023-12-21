@@ -43,6 +43,13 @@ export default class Game {
 
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 14, 8)
 
+        this.state = items_create(this.state, MANIFEST.items.battery, "bot_factory", 4, 13)
+        for (let y=2; y<=8; y++) {
+            for (let x=2; x<=8; x++) {
+                this.state = items_create(this.state, MANIFEST.items.junk, "bot_factory", x, y)
+            }
+        }
+
         this.state.currentMapId = "botmos_hull_selection"
         this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
 
