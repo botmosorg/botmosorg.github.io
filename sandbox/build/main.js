@@ -290,6 +290,7 @@ O..............#
 !!Q portalclosed
 !!O portal simplex=1337 126 121
 !!A portal arena 1 0
+!!i portalhidden playground 18 0
 !!a portalstartaerobot bot_factory 4 15
 !!b portalstartworkbot bot_factory 4 16
 !!? portalstart?
@@ -313,6 +314,32 @@ O..............#
 Q..........?.......#
 #.............?....#
 #.~~~~~~~~~~~~~~~~.#
+##################i#
+`,playground:`!
+!!id playground
+!!size 20 20
+!!. void
+!!# wall
+!!O portal botmos_hull_selection 18 19
+##################O#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
 ####################
 `},names:{BotMoses:"Teaches the new player",Betty:"Gambles a lot",Bender:"From the future, bowl head",Drak:"A now retired PioneerBot, who teaches the new player combat lessons",Oz:"A machinery wizard"},spirits:{Spirit:new f0("Spirit","You are back in the machine mind, pick a new hull!","@",10),AeroBot:new f0("AeroBot","Basic server, serving energy goo and such to bots","A",80),WorkBot:new f0("WorkBot","Basic factory worker","B"),Cleaner:new f0("Cleaner","Advanced bot purging malfunctioning bots","C",50),Pioneer:new f0("Pioneer","Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors","W",200)},tiles:{void:k1?new Z0("void","Just nothing here",".","gray"):new Z0("void","Just nothing here"),water:new Z0("water","Rust and other dangers await","~","cybercyan","cyberblue",-2),rock:new Z0("rock","Hidden treasures may await","^","white","gray"),tree:new Z0("tree","Lots of trees make a forest","t","brown","black"),wall:new Z0("wall","A strong wall","#","gray","black"),wallweak:new Z0("wallweak","A weakened wall","+","gray","black"),chargepad:new Z0("chargepad","Recharges energy and health","=","cyberyellow","black",2),movenorth:new Z0("movenorth","Moves you north","^","cyberyellow"),moveeast:new Z0("moveeast","Moves you east",">","cyberyellow"),movesouth:new Z0("movesouth","Moves you south","v","cyberyellow"),movewest:new Z0("movewest","Moves you west","<","cyberyellow"),portal:new Z0("portal","Gateway to another map","O","cyberyellow","gray"),portalclosed:new Z0("portalclosed","Closed gateway to another map","O","black","gray"),portalhidden:new Z0("portalhidden","Hidden gateway to another map","#","gray","black"),portalstartworkbot:new Z0("portalstartworkbot","Start playing as a WorkBot","B","white"),portalstartaerobot:new Z0("portalstartaerobot","Start playing as a AeroBot","A","white"),"portalstart?":new Z0("portalstart?","Not unlocked, yet!","?","white")}};function Y0(z,P,W,O=0,R=0){const u={id:x1(W,O,R),type:P,mapId:W,x:O,y:R,energy:P.energyDelta};return z.items[u.id]=u,z}var x1=function(z,P,W){return"item,"+z+","+P+","+W};function KQ(z,P){return z.items[P]=void 0,delete z.items[P],z}function y1(z,P){let W=Object.keys(z.items),O=[];for(let R=0;R<W.length;R++){let A=z.items[W[R]];if(A.mapId===P)O.push(A)}return O}function _1(z,P,W,O){let R=x1(P,W,O);if(R in z.items)return z.items[R];return null}function p1(z,P,W){if(A0("Pickup item "+W.id+" by "+P.id),W.type===D.items.battery)P.energyMax+=W.energy;return z._energyQueue.push({entityId:P.id,energyDelta:W.energy}),KQ(z,W.id),z}function d1(z,P,W){switch(W){case D.commands.N:z=W0(z,P,0,-1);break;case D.commands.W:z=W0(z,P,-1,0);break;case D.commands.S:z=W0(z,P,0,1);break;case D.commands.E:z=W0(z,P,1,0);break;default:}return z}function W0(z,P,W,O){let R=z.maps[P.mapId],A=h1(z,R.id,P.x+W,P.y+O);if(A)z=m1(z,P,A);else if(qQ(R,P,W,O)){P.x+=W,P.y+=O;let u=_1(z,P.mapId,P.x,P.y);if(u)z=p1(z,P,u);let T=R.getTile(P.x,P.y);if((T.type===D.tiles.portal||T.type===D.tiles.portalhidden||T.type.name.startsWith("portalstart"))&&!!z.maps[T.options.mapId])switch(z.currentMapId=T.options.mapId,P.x=T.options.x,P.y=T.options.y,P.mapId=T.options.mapId,T.type){case D.tiles.portalstartaerobot:a0(P,D.spirits.AeroBot);break;case D.tiles.portalstartworkbot:a0(P,D.spirits.WorkBot);break;default:}if(T.type.name.startsWith("move"))switch(T.type.name){case"movenorth":z=W0(z,P,0,-1);break;case"moveeast":z=W0(z,P,1,0);break;case"movesouth":z=W0(z,P,0,1);break;case"movewest":z=W0(z,P,-1,0);break;default:}}return z}function c1(z){for(let P in z.entities){let W=z.entities[P],R=z.maps[W.mapId].getTile(W.x,W.y);z._energyQueue.push({entityId:P,energyDelta:R.type.energyDelta})}return z}var qQ=function(z,P,W,O){let R=P.x+W,A=P.y+O,u=z.getTile(R,A).type;return R>=0&&R<z.widthTiles&&A>=0&&A<z.heightTiles&&u!==D.tiles.rock&&u!==D.tiles.portalclosed&&!u.name.startsWith("wall")};function p0(z,P={}){return{type:z,options:P}}function l1(z){let P=z.split(/\r?\n/),W=z[0],O="",R=0,A=0,u={},T=[];for(let g=0;g<P.length;g++){let m=P[g];if(m.startsWith(W)){if(m.startsWith(W+"!id"))O=m.slice(5);else if(m.startsWith(W+"!size")){let y=m.split(" ").slice(1);R=Number(y[0]),A=Number(y[1])}else if(m.startsWith(W+"!")){let y=m[2],i=m.slice(4);u[y]=i}}else for(let y=0;y<m.length;y++){let i=m[y],r=u[i],Q0=r.split(" "),x={};if(r.startsWith("portal ")||r.startsWith("portalhidden ")||r.startsWith("portalstart"))r=Q0[0],x.mapId=Q0[1],x.x=Number(Q0[2]),x.y=Number(Q0[3]);if(r.startsWith("wall ")&&Q0.length>=2)r="wall",x.sign=Q0[1];T.push(p0(D.tiles[r],x))}}return new d0(O,R,A,T)}var O0={width:16,height:16},_0=O0;class d0{id;widthTiles;heightTiles;_tiles;_cacheMovementMap;constructor(z,P,W,O=[]){this.id=z,this.widthTiles=P,this.heightTiles=W,this._tiles=O,this._cacheMovementMap=null}getTile(z,P){if(z>=0&&z<this.widthTiles&&P>=0&&P<this.heightTiles){let W=P*this.widthTiles+z;return this._tiles[W]}return{}}setTile(z,P,W,O={}){this._cacheMovementMap=null;let R=P*this.widthTiles+z;this._tiles[R]=p0(W,O)}asMovementMap(){if(this._cacheMovementMap)return this._cacheMovementMap;let z=new Array(this.heightTiles);for(let P=0;P<this.heightTiles;P++){z[P]=new Array(this.widthTiles);for(let W=0;W<this.widthTiles;W++){let O=P*this.widthTiles+W,A=this._tiles[O].type;if(z[P][W]=0,A===D.tiles.rock||A===D.tiles.wall||A===D.tiles.wallweak)z[P][W]=1}}return this._cacheMovementMap=z,z}}function R0(){return"player"}var S0=T1(W1(),1);function r1(z,P=J1){S0.RNG.setSeed(P);let W=new S0.Noise.Simplex,O=[];for(let u=0;u<O0.height*_0.height;u++)for(let T=0;T<O0.width*_0.width;T++){let g=W.get(T/s1,u/s1),m;if(g<=-0.5)m=D.tiles.water;else if(g<=0)m=D.tiles.void;else if(g<0.5)m=D.tiles.tree;else m=D.tiles.rock;O.push(p0(m))}const R="simplex="+P;let A=new d0(R,_0.width*O0.width,_0.height*O0.height,O);return A.setTile(126,121,D.tiles.portal,{mapId:"bot_elevator",x:11,y:47}),z.maps[R]=A,z=J0(z,"npc0",D.spirits.Pioneer,"simplex="+J1,130,127,{faction:D.factions.Spirits}),z=J0(z,"npc1",D.spirits.Pioneer,"simplex="+J1,124,127,{faction:D.factions.Spirits}),z=Y0(z,D.items.battery,"simplex="+J1,127,130),z}function a1(z){let P=new S0.Map.Arena(O0.width,O0.height),W=[];P.create(function(R,A,u){let T=u?D.tiles.wall:D.tiles.void;W[A*O0.width+R]=p0(T)});let O=new d0("arena",O0.width,O0.height,W);return O.setTile(1,0,D.tiles.portal,{mapId:"bot_station",x:26,y:7}),z.maps.arena=O,z=J0(z,"enemy0",D.spirits.Cleaner,"arena",8,8,{faction:D.factions.Pyrates,ai:D.ais.aggrorange}),z=J0(z,"enemy1",D.spirits.Cleaner,"arena",9,8,{faction:D.factions.Pyrates,ai:D.ais.aggrorange}),z=J0(z,"enemy2",D.spirits.Cleaner,"arena",11,11,{faction:D.factions.Pyrates,ai:D.ais.aggrorange}),z=J0(z,"enemy3",D.spirits.Cleaner,"arena",6,6,{faction:D.factions.Pyrates,ai:D.ais.aggrorange}),z=J0(z,"enemy4",D.spirits.Cleaner,"arena",12,12,{faction:D.factions.Pyrates,ai:D.ais.aggrorange}),z=Y0(z,D.items.energy,"arena",7,7),z=Y0(z,D.items.battery,"arena",14,14),z}var J1=1337,s1=55;function o1(){return{_AIs:{},_combatQueue:[],_despawnQueue:[],_energyQueue:[],currentMapId:"",entities:{},items:{},maps:{}}}function i1(z,P,W,O,R){let A=new UQ.js;A.setGrid(z),A.setAcceptableTiles([0]),A.enableSync();let u=null;return A.findPath(P,W,O,R,function(T){u=T}),A.calculate(),u}/*!
  * @license
