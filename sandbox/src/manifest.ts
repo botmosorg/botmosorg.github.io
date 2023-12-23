@@ -311,6 +311,7 @@ O..............#
 ##O#############################################
 `,
 "bot_stadium": `!
+!Now this is botracing!
 !!id bot_stadium
 !!size 48 16
 !!# wall
