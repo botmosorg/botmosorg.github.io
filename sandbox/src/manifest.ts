@@ -401,6 +401,7 @@ _________##E###_
 !!id botmos_hull_selection
 !!size 20 20
 !!. void
+!!_ voidtrue
 !!~ water
 !!^ rock
 !!# wall
@@ -432,8 +433,8 @@ _________##E###_
 !!2 portalstartworkbot bot_factory 4 16
 !!? portalstart?
 !!D portal bot_station 0 29
-##.....BotMos.....##
-#.Choose.your.hull.#
+##_____BotMos_____##
+#_Choose_your_hull_#
 #.================.#
 #..................#
 #.....2.....Manual.#
@@ -450,7 +451,7 @@ _________##E###_
 #..................#
 #.....?............Q
 #..?...............#
-#.~~~~~~~~~~~~~~~~.#
+#~~~~~~~~~~~~~~~~~~#
 #i##################
 `,
 "manual": `!
