@@ -425,7 +425,7 @@ O..............#
 !!Q portalclosed
 !!] portal manual 0 5
 !!A portal arena 1 0
-!!i portalhidden playground 18 0
+!!i portalhidden playground 1 0
 !!1 portalstartaerobot bot_factory 4 15
 !!2 portalstartworkbot bot_factory 4 16
 !!? portalstart?
@@ -446,10 +446,10 @@ O..............#
 #.....?............#
 #..?...............#
 #..................#
-Q.....?............Q
+#.....?............Q
 #..?...............#
 #.~~~~~~~~~~~~~~~~.#
-##################i#
+#i##################
 `,
 "manual": `!
 !!id manual
@@ -570,8 +570,8 @@ Q.....?............Q
 !!size 20 20
 !!. void
 !!# wall
-!!O portal botmos_hull_selection 18 19
-##################O#
+!!O portal botmos_hull_selection 1 19
+#O##################
 #..................#
 #..................#
 #..................#
