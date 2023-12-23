@@ -29,6 +29,15 @@ export default class Game {
         }
 
         // TODO Pupulate map entities and items elsewhere
+        this.state = entities_create(this.state, "manual0", MANIFEST.spirits.Spirit, "manual", 4, 24, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual1", MANIFEST.spirits.AeroBot, "manual", 4, 25, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual2", MANIFEST.spirits.WorkBot, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual3", MANIFEST.spirits.Cleaner, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual4", MANIFEST.spirits.Pioneer, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
+        this.state = items_create(this.state, MANIFEST.items.junk, "manual", 4, 34)
+        this.state = items_create(this.state, MANIFEST.items.energy, "manual", 4, 35)
+        this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 36)
+
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.spirits.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.spirits.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian1", MANIFEST.spirits.Cleaner, "bot_station", 12, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
@@ -53,7 +62,7 @@ export default class Game {
         }
 
         this.state.currentMapId = "botmos_hull_selection"
-        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
 
         return this.state
     }
@@ -72,7 +81,7 @@ export default class Game {
 
             this.actionLog = []
             this.state.currentMapId = "botmos_hull_selection"
-            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 8, 5, {faction: MANIFEST.factions.Spirits})
+            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
         }
 
         return this.state
