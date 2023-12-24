@@ -6,9 +6,9 @@ describe('Game', () => {
         const game = new Game()
         game.init()
 
-        game.replay('SSSSSSSSSSSSSSWWW')
+        game.replay('NNNWWWWWBBBWWSSSSSSSSSSSSSSSSEEWE')
 
         expect(game.state.entities["player"]).toBeUndefined()
-        expect(game.actionLog.join('')).toBe('SSSSSSSSSSSSSSWWW')
+        expect(game.actionLog.join('')).toBe('NNNWWWWWBBBWWSSSSSSSSSSSSSSSSEEWE')
     })
 })

@@ -79,7 +79,6 @@ export default class Game {
         } else {
             debug_log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
 
-            this.actionLog = []
             this.state.currentMapId = "botmos_hull_selection"
             this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
         }
