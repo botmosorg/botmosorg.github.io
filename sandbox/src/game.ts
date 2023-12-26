@@ -1,7 +1,7 @@
 import { debug_log } from "./debug";
 import { entities_create } from "./entity";
 import { entity_act } from "./entity_map";
-import { items_create } from "./item";
+import { items_create, items_equip } from "./item";
 import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
 import { players_get_current } from "./player";
@@ -41,6 +41,7 @@ export default class Game {
         this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 37)
 
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.spirits.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
+        this.state = items_equip(this.state, "pioneerguardian0", MANIFEST.items.hammer)
         this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.spirits.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian1", MANIFEST.spirits.Cleaner, "bot_station", 12, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian2", MANIFEST.spirits.Cleaner, "bot_station", 14, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
