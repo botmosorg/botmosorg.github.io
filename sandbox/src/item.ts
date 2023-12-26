@@ -1,15 +1,19 @@
 import { debug_log } from "./debug";
 import { Entity } from "./entity";
-import { MANIFEST } from "./manifest";
+import { MANIFEST, Item as ItemType } from "./manifest";
 import { State } from "./state";
 
 export interface Item {
     id: string,
-    type: any,
+    type: ItemType,
     mapId: string,
     x: number,
     y: number,
     energy: number
+}
+
+interface EquippedItem {
+    type: ItemType
 }
 
 export function items_create(state: State, type, mapId, x=0, y=0): State {
@@ -58,16 +62,36 @@ export function items_get_at(state: State, mapId: string, x: number, y: number):
     return null
 }
 
+export function items_get_equipped(state: State, entityId: string): EquippedItem | null {
+    return state.tools[entityId]
+}
+
 export function items_pickup(state: State, entity: Entity, item: Item): State {
     debug_log("Pickup item " + item.id + " by " + entity.id)
 
     // TODO externalize
-    if (item.type === MANIFEST.items.battery) {
-        entity.energyMax += item.energy
+    if (_is_tool(item)) {
+        state = items_equip(state, entity.id, item.type)
+
+    } else {
+        if (item.type === MANIFEST.items.battery) {
+            entity.energyMax += item.energy
+        }
+        state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
     }
-    state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
 
     items_destroy(state, item.id)
 
     return state
+}
+
+export function items_equip(state: State, entityId: string, itemType: ItemType) {
+    let equippedItem: EquippedItem = {type: itemType}
+    state.tools[entityId] = equippedItem
+
+    return state
+}
+
+function _is_tool(item: Item) {
+    return item.type.energyCost < 0
 }

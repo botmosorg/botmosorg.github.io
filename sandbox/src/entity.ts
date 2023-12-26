@@ -25,7 +25,7 @@ export function entities_create(state: State, id: string, type: Spirit, mapId: s
         "options": options
     }
 
-    entities_set_type(entity, type)
+    state = entities_set_type(state, entity, type)
 
     state.entities[entity.id] = entity
 
@@ -59,10 +59,14 @@ export function entities_get_at(state: State, mapId: string, x: number, y: numbe
     return null
 }
 
-export function entities_set_type(entity: Entity, newType: Spirit) {
+export function entities_set_type(state: State, entity: Entity, newType: Spirit) {
     entity.type = newType
     entity.energy = newType.energyMax
     entity.energyMax = newType.energyMax
+
+    state.tools[entity.id] = undefined
+
+    return state
 }
 
 export function interactOrCombat(state: State, entityA: Entity, entityB: Entity) {

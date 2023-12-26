@@ -34,9 +34,11 @@ export default class Game {
         this.state = entities_create(this.state, "manual2", MANIFEST.spirits.WorkBot, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
         this.state = entities_create(this.state, "manual3", MANIFEST.spirits.Cleaner, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
         this.state = entities_create(this.state, "manual4", MANIFEST.spirits.Pioneer, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual5", MANIFEST.spirits.Spirit, "manual", 54, 34, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
         this.state = items_create(this.state, MANIFEST.items.junk, "manual", 4, 34)
         this.state = items_create(this.state, MANIFEST.items.energy, "manual", 4, 35)
         this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 36)
+        this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 37)
 
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.spirits.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.spirits.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
@@ -53,7 +55,9 @@ export default class Game {
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 13, 8)
         this.state = items_create(this.state, MANIFEST.items.junk, "bot_dormitory_hidden", 1, 2)
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory_hidden", 2, 2)
-
+        this.state = items_create(this.state, MANIFEST.items.shocker, "bot_bar", 10, 11)
+        this.state = items_create(this.state, MANIFEST.items.hammer, "bot_elevator", 12, 3)
+        this.state = items_create(this.state, MANIFEST.items.wrench, "bot_factory", 45, 19)
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_factory", 4, 13)
         for (let y=2; y<=8; y++) {
             for (let x=2; x<=8; x++) {

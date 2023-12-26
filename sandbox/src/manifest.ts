@@ -29,19 +29,32 @@ class Faction {
         this.color = color;
     }
 }
-class Item {
+export class Item {
     name: string;
     description: string;
     icon: string;
     color: string;
     energyDelta: number;
+    matter: number;
+    gold: number;
+    // Combat
+    damage: number; // Negative number: damage; positive number: heals
+    energyCost: number;
+    effects: Array<any>;
 
-    constructor(name: string, description: string, icon: string, color: string="cyberyellow", energyDelta: number=0) {
+    constructor(name: string, description: string, icon: string, color: string = "cyberyellow",
+                energyDelta: number = 0, matter: number= 0, gold: number=0,
+                damage: number = 0, energyCost: number = 0, effects=[]) {
         this.name = name
         this.description = description
         this.icon = icon
         this.color = color
         this.energyDelta = energyDelta
+        this.matter = matter
+        this.gold = gold
+        this.damage = damage
+        this.energyCost = energyCost
+        this.effects = effects
     }
 }
 export class Spirit {
@@ -121,7 +134,11 @@ export const MANIFEST = {
     "items": {
         "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
         "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
-        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1)
+        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
+        // Tools
+        "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2),
+        "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1),
+        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1)
     },
     "maps": {
         "bot_bar": `!
@@ -562,6 +579,8 @@ _________##E###_
 #^....Junk,_restores_minor_energy.............................................^#
 #^|...Energy,_restores_energy.................................................^#
 #^....Battery,_increases_maximum_energy.......................................^#
+#^|...Various_tools,_for_instance,_a_Wrench...................................^#
+#^............................................................................^#
 #^|...........................................................................^#
 #^..>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.^#
 #^|...........................................................................^#

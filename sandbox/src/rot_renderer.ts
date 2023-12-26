@@ -2,7 +2,7 @@ import * as ROT from "../lib/rot.js"
 
 import { BOTMOS_OPTIONS, CAMERA_SIZE, ENEMY_COLORED_RED, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
-import { items_get_by } from "./item";
+import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by } from "./entity";
 import { MANIFEST } from "./manifest";
 import { players_get_current } from "./player";
@@ -49,7 +49,8 @@ function rot_render(state: State, camera) {
     }
 
     // Render entities
-    const playerEntity = state.entities[players_get_current()]
+    const playerId = players_get_current()
+    const playerEntity = state.entities[playerId]
     const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
     const entities = entities_get_by(state, currentMapId);
     for (let i=0; i<entities.length; i++) {
@@ -66,7 +67,15 @@ function rot_render(state: State, camera) {
 
     // Render UI line
     if (!!playerEntity && BOTMOS_OPTIONS.showUI) {
-        let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' ' + playerEntity.x + ',' + playerEntity.y
+        let equippedItemText = ''
+        const equippedItem = items_get_equipped(state, playerId)
+        if (!!equippedItem) {
+            equippedItemText += equippedItem.type.name + ' '
+        }
+
+        let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' '
+                    + equippedItemText
+                    + playerEntity.x + ',' + playerEntity.y
         let uiLineYCoord = ROT_OPTIONS.height - 1
         if (playerEntity.y-camera.y >= ROT_OPTIONS.height - 3) { // Player close to bottom of screen, flip UI line to top of screen
             uiLineYCoord = 0

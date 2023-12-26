@@ -6,7 +6,8 @@ export interface State {
     currentMapId: string,
     entities: object,
     items: object,
-    maps: object
+    maps: object,
+    tools: object,
 }
 
 export function states_create(): State {
@@ -18,6 +19,7 @@ export function states_create(): State {
         currentMapId: "",
         entities: {},
         items: {},
-        maps: {}
+        maps: {},
+        tools: {}
     }
 }
