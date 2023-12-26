@@ -322,7 +322,7 @@ _________##E###_
 #i##################
 `,manual:`!
 !!id manual
-!!size 80 42
+!!size 80 44
 !!# wall
 !!+ wallweak
 !!. voidtrue
