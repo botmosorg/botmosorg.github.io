@@ -23,7 +23,7 @@ if (!!!(window as any).BMActionLog) {
 
 if (!!!(window as any).BMPlay) {
     (window as any).BMPlay = function (actions: string) {
-        draw(game.replay(actions))
+        draw(game.play(actions))
     }
 }
 

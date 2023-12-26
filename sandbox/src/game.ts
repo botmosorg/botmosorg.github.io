@@ -91,7 +91,7 @@ export default class Game {
         return this.state
     }
 
-    replay(actions: string): State {
+    play(actions: string): State {
         for (let i=0; i<actions.length; i++) {
             const action = actions[i]
             this.update(MANIFEST.commands[action])
