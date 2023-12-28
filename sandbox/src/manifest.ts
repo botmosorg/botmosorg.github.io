@@ -18,6 +18,15 @@ export class Command {
         this.description = description;
     }
 }
+class Effect {
+    name: string
+    description: string
+
+    constructor(name: string, description: string) {
+        this.name = name
+        this.description = description
+    }
+}
 class Faction {
     name: string;
     description: string;
@@ -114,7 +123,9 @@ export const MANIFEST = {
         "white": "#fff"
     },
     "colorcoding": {
-        "cybermagenta": "Enemy color"
+        "cybergreen": "Friendly color",
+        "cybermagenta": "Enemy color",
+        "cyberyellow": "Item or special effect color"
     },
     "commands": {
         "N": new Command("N", "Move/interact/combat north"),
@@ -126,6 +137,9 @@ export const MANIFEST = {
         "X": new Command("X", "Secondary action"), // unused
         "Y": new Command("Y", "Tertiary action"), // unused
     },
+    "effects": {
+        "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
+    },
     "factions": {
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
@@ -136,7 +150,7 @@ export const MANIFEST = {
         "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
         "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
         // Tools
-        "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2),
+        "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1),
         "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1)
     },

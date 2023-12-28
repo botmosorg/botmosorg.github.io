@@ -12,7 +12,7 @@ export interface Item {
     energy: number
 }
 
-interface EquippedItem {
+export interface EquippedItem {
     type: ItemType
 }
 

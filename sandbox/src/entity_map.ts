@@ -1,10 +1,10 @@
 import { Entity, entities_get_at, entities_set_type, interactOrCombat } from "./entity";
-import { items_get_at, items_pickup } from "./item";
+import { EquippedItem, items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
 import { Map } from "./map";
 import { State } from "./state";
 
-export function entity_act(state: State, entity, action: Command): State {
+export function entity_act(state: State, entity: Entity, action: Command): State {
     switch (action) {
         case MANIFEST.commands.N:
             state = entityInteractOrMove(state, entity, 0, -1)
@@ -24,7 +24,7 @@ export function entity_act(state: State, entity, action: Command): State {
     return state;
 }
 
-export function entityInteractOrMove(state: State, entity, dx: number, dy: number): State {
+export function entityInteractOrMove(state: State, entity: Entity, dx: number, dy: number): State {
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
@@ -33,8 +33,9 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
     if movement can happen:
     move, pickup items on-tile movement, go through portals on-tile movement
     */
-    let map = state.maps[entity.mapId]
-    let entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
+    const map = state.maps[entity.mapId]
+    const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
+    const tool: EquippedItem = state.tools[entity.id]
     if (!!entity_at_target_position) {
         state = interactOrCombat(state, entity, entity_at_target_position)
 
@@ -77,6 +78,11 @@ export function entityInteractOrMove(state: State, entity, dx: number, dy: numbe
                 default:
             }
         }
+
+    } else if (entity_can_crush_wallweak(map, entity, tool, dx, dy)) {
+        map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
+        state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
+
     }
 
     return state
@@ -101,4 +107,17 @@ function entity_can_move(map: Map, entity: Entity, dx: number, dy: number): bool
         && tileType !== MANIFEST.tiles.rock
         && tileType !== MANIFEST.tiles.portalclosed
         && !tileType.name.startsWith('wall');
+}
+
+function entity_can_crush_wallweak(map: Map, entity: Entity, tool: EquippedItem, dx: number, dy: number) {
+    const x = entity.x + dx;
+    const y = entity.y + dy;
+    const tileType = map.getTile(x, y).type;
+
+    if (!!tool) {
+        return tool.type.effects.includes(MANIFEST.effects.WallCrusher.name)
+                && tileType === MANIFEST.tiles.wallweak
+    }
+
+    return false
 }
