@@ -35,7 +35,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     */
     const map = state.maps[entity.mapId]
     const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
-    const tool: EquippedItem = state.tools[entity.id]
+    const tool: EquippedItem | undefined = state.tools[entity.id]
     if (!!entity_at_target_position) {
         state = interactOrCombat(state, entity, entity_at_target_position)
 
@@ -109,7 +109,7 @@ function entity_can_move(map: Map, entity: Entity, dx: number, dy: number): bool
         && !tileType.name.startsWith('wall');
 }
 
-function entity_can_crush_wallweak(map: Map, entity: Entity, tool: EquippedItem, dx: number, dy: number) {
+function entity_can_crush_wallweak(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number) {
     const x = entity.x + dx;
     const y = entity.y + dy;
     const tileType = map.getTile(x, y).type;
