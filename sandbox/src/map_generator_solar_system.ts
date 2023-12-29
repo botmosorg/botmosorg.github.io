@@ -10,7 +10,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
 
     const tiles = []
     for (let i=0; i < mapWidth*mapHeight; i++) {
-        tiles.push(tiles_create(MANIFEST.tiles.void))
+        tiles.push(tiles_create(MANIFEST.tiles.voidtrue))
     }
 
     const mapId = "solarsystem=" + seed
@@ -23,6 +23,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     state.maps[mapId] = map
 
     _circle(map, 127, 127, 126, MANIFEST.tiles.sun)
+    _fill(map, 127, 127, MANIFEST.tiles.sun)
 
     return state
 }

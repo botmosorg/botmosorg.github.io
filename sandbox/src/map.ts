@@ -1,4 +1,4 @@
-import { MANIFEST, Tile } from "./manifest";
+import { MANIFEST, Tile as TileType } from "./manifest";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
 
@@ -8,7 +8,12 @@ export const CHUNK_SIZE = {
 }
 export const MAP_SIZE = CHUNK_SIZE // in chunks
 
-export function tiles_create(type: Tile, options={}) {
+interface Tile {
+    type: TileType,
+    options: object
+}
+
+export function tiles_create(type: TileType, options={}): Tile {
     return {
         "type": type,
         "options": options
@@ -30,20 +35,32 @@ export class Map {
         this._cacheMovementMap = null
     }
 
-    getTile(x: number, y: number) {
+    getTile(x: number, y: number): Tile {
         if (x >= 0 && x < this.widthTiles
             && y >= 0 && y < this.heightTiles) {
             let tile_index = y * this.widthTiles + x;
             return this._tiles[tile_index];
         }
-        return {};
+
+        return undefined;
     }
 
-    setTile(x: number, y: number, tileType: Tile, options={}) {
+    setTile(x: number, y: number, tileType: TileType, options={}) {
         this._cacheMovementMap = null;
 
         let tileIndex = y * this.widthTiles + x;
         this._tiles[tileIndex] = tiles_create(tileType, options);
+    }
+
+    pasteOnto(map: Map, xOffset: number=0, yOffset: number=0) {
+        for (let j=0; j<map.heightTiles; j++) {
+            for (let i=0; i<map.widthTiles; i++) {
+                const tile = map.getTile(i, j)
+                if (tile.type !== MANIFEST.tiles.voidtrue) {
+                    this.setTile(i + xOffset, j + yOffset, tile.type, tile.options)
+                }
+            }
+        }
     }
 
     asMovementMap() {
