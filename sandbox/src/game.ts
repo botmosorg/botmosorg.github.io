@@ -4,6 +4,7 @@ import { entity_act } from "./entity_map";
 import { items_create, items_equip } from "./item";
 import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
+import { maps_create_solar_system } from "./map_generator_solar_system";
 import { players_get_current } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
 import { State, states_create } from "./state";
@@ -23,6 +24,7 @@ export default class Game {
 
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
+        this.state = maps_create_solar_system(this.state)
 
         for (let mapId in MANIFEST.maps) {
             this.state.maps[mapId] = maps_parse(MANIFEST.maps[mapId])
