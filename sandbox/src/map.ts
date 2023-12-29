@@ -39,7 +39,7 @@ export class Map {
         return {};
     }
 
-    setTile(x, y, tileType, options={}) {
+    setTile(x: number, y: number, tileType: Tile, options={}) {
         this._cacheMovementMap = null;
 
         let tileIndex = y * this.widthTiles + x;

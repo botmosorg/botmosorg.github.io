@@ -36,6 +36,8 @@ export function entities_destroy(state: State, entityId: string) {
     state.entities[entityId] = undefined
     delete state.entities[entityId]
 
+    state.tools[entityId] = undefined
+
     return state;
 }
 
