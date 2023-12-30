@@ -617,7 +617,7 @@ _________##E###_
 !!# wall
 !!= chargepad
 !!O portal botmos_hull_selection 1 19
-!!Q portal solarsystem=1337 0 0
+!!Q portal solarsystem=1337 448 448
 #O##################
 #=.................#
 #................Q.#
@@ -683,7 +683,10 @@ _________##E###_
         "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "B", "white"),
         "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
         "portalstart?": new Tile("portalstart?", "Not unlocked, yet!", "?", "white"),
-        "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100), // ≋ alternatively
+        "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
+        "spacetree": new Tile("spacetree", "Forest as seen from space", "", "brown", "brown"),
+        "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "", "cyberblue", "cyberblue"),
+        "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */

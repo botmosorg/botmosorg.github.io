@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { distance } from "../src/util";
+import { distance, range } from "../src/util";
 
 describe('distance', function () {
     test('should compute horizontal distance between points', function () {
@@ -24,4 +24,14 @@ describe('distance', function () {
 
         expect(dist).toEqual(3);
     });
+})
+
+describe('range', () => {
+    test('should range from 0 to length-1', () => {
+        const r = range(64)
+
+        expect(r.length).toBe(64)
+        expect(r[0]).toBe(0)
+        expect(r[63]).toBe(63)
+    })
 })

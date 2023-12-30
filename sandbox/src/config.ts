@@ -13,8 +13,8 @@ export const CAMERA_SIZE = [
     Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE)
 ]
 export const MAX_MAP_SIZE = {
-    WIDTH: 256,
-    HEIGHT: 256
+    WIDTH: 1024,
+    HEIGHT: 1024
 }
 export const SHOW_GRID = true
 export const ZOOM = 1
@@ -24,10 +24,10 @@ export const BOTMOS_OPTIONS = {
 }
 
 export const ROT_OPTIONS = {
-	width: ~~(CAMERA_SIZE[0] * (1 / ZOOM)),
-    height: ~~(CAMERA_SIZE[1] * (1 / ZOOM)),
+	width: Math.floor(CAMERA_SIZE[0] * (1 / ZOOM)),
+    height: Math.floor(CAMERA_SIZE[1] * (1 / ZOOM)),
     bg: 'transparent',
-    fontSize: ~~(FONT_SIZE * ZOOM),
+    fontSize: Math.floor(FONT_SIZE * ZOOM),
     /*
     layout: 'tile',
     tileWidth: 16,

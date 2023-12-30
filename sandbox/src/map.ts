@@ -35,14 +35,14 @@ export class Map {
         this._cacheMovementMap = null
     }
 
-    getTile(x: number, y: number): Tile {
+    getTile(x: number, y: number): Tile | any {
         if (x >= 0 && x < this.widthTiles
             && y >= 0 && y < this.heightTiles) {
             let tile_index = y * this.widthTiles + x;
             return this._tiles[tile_index];
         }
 
-        return undefined;
+        return {};
     }
 
     setTile(x: number, y: number, tileType: TileType, options={}) {
