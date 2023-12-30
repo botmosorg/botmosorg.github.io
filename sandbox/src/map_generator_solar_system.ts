@@ -21,7 +21,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     let consumedRadius = 64 + 64 // Sun + some padding
     let leftoverRadius = 512 - consumedRadius
     const radiusPerPlanet = Math.floor(leftoverRadius / numberOfPlanets)
-    console.log("# Planets: " + numberOfPlanets)
+    //console.log("# Planets: " + numberOfPlanets)
 
     for (let radius=consumedRadius; radius < 512; radius+=radiusPerPlanet) {
         let xPlanetCenter = rng.getItem([-1, 1]) * rng.getItem(range(radius))
@@ -36,7 +36,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
         _circle(planet, planetMapSizeHalf, planetMapSizeHalf, planetMapSizeHalf, tileType)
         _fill(planet, planetMapSizeHalf, planetMapSizeHalf, tileType)
         solarsystem.pasteOnto(planet, xPlanetCenter - (planetMapSizeHalf + 1), yPlanetCenter - (planetMapSizeHalf + 1))
-        console.log("PASTED! " + xPlanetCenter + " " + yPlanetCenter)
+        //console.log("PASTED! " + xPlanetCenter + " " + yPlanetCenter)
     }
 
     return state
