@@ -21,7 +21,7 @@ export class RNG {
      * @param a An array of items
      * @returns A random element of the array a
      */
-    getItem(a: Array<any>): any {
+    getItem<T>(a: Array<T>): T {
         return this._rotRng.getItem(a)
     }
 }
