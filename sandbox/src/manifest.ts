@@ -686,6 +686,8 @@ _________##E###_
         "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
         "spacetree": new Tile("spacetree", "Forest as seen from space", "", "brown", "brown"),
         "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "", "cyberblue", "cyberblue"),
+        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".", "white"),
+        "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".", "cyberyellow"),
         "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")

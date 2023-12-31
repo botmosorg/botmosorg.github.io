@@ -11,17 +11,19 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     solarsystem.id = "solarsystem=" + seed
     state.maps[solarsystem.id] = solarsystem
 
-    let sun = _emptyMap(128, 128, MANIFEST.tiles.voidtrue)
-    _circle(sun, 63, 63, 62, MANIFEST.tiles.sun)
-    _fill(sun, 63, 63, MANIFEST.tiles.sun)
-    solarsystem.pasteOnto(sun, 512 - 64, 512 - 64)
-
     const rng = new RNG(seed)
     const numberOfPlanets = rng.getItem([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     let consumedRadius = 64 + 64 // Sun + some padding
     let leftoverRadius = 512 - consumedRadius
     const radiusPerPlanet = Math.floor(leftoverRadius / numberOfPlanets)
     //console.log("# Planets: " + numberOfPlanets)
+
+    solarsystem = _randomizeVoidBackground(solarsystem, rng)
+
+    let sun = _emptyMap(128, 128, MANIFEST.tiles.voidtrue)
+    _circle(sun, 63, 63, 62, MANIFEST.tiles.sun)
+    _fill(sun, 63, 63, MANIFEST.tiles.sun)
+    solarsystem.pasteOnto(sun, 512 - 64, 512 - 64)
 
     for (let radius=consumedRadius; radius < 512; radius+=radiusPerPlanet) {
         let xPlanetCenter = rng.getItem([-1, 1]) * rng.getItem(range(radius))
@@ -55,6 +57,18 @@ function _emptyMap(widthTiles: number, heightTiles: number, tileType: Tile): Map
         heightTiles,
         tiles
     );
+
+    return map
+}
+
+function _randomizeVoidBackground(map: Map, rng: RNG): Map {
+    for (let j=0; j < map.heightTiles; j++) {
+        for (let i=0; i < map.widthTiles; i++) {
+            if (rng.getPercentage() <= 2) {
+                map.setTile(i, j, rng.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]))
+            }
+        }
+    }
 
     return map
 }
