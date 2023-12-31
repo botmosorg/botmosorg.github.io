@@ -64,7 +64,7 @@ function _emptyMap(widthTiles: number, heightTiles: number, tileType: Tile): Map
 function _randomizeVoidBackground(map: Map, rng: RNG): Map {
     for (let j=0; j < map.heightTiles; j++) {
         for (let i=0; i < map.widthTiles; i++) {
-            if (rng.getPercentage() <= 2) {
+            if (rng.getPercentage() <= 1) {
                 map.setTile(i, j, rng.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]))
             }
         }
