@@ -2,7 +2,7 @@ import { MANIFEST, Command } from "./manifest";
 
 /**
  * All keys ever supported:
- * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and TODO translated for convenience
+ * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and translated for convenience
  * - 4 buttons:     A: positive continue action, B: negative non-continue action, X and Y quick slots
  * - 2 shoulder buttons: redundancy
  * - ESC / START / menu key:    Open game menu
