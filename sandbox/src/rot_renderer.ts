@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
-import { BOTMOS_OPTIONS, CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by } from "./entity";
@@ -86,7 +86,7 @@ function rot_render(state: State, camera) {
     // Render debug lines
     for (let i=0; i<DEBUG_LINES.length; i++) {
         let line = DEBUG_LINES[i];
-        ROT_DISPLAY.drawText(0, i, "%c{green}%b{black}"+line, CAMERA_SIZE[0]);
+        ROT_DISPLAY.drawText(0, i, "%c{green}%b{black}"+line, camera.width);
     }
 }
 
@@ -99,6 +99,10 @@ export async function draw(state: State) {
     rot_render(state, camera)
 
     lastCameraPosition = cameraPosition
+}
+
+export async function resize(rotOptions: any) {
+    ROT_DISPLAY.setOptions(rotOptions)
 }
 
 function camera_follow(entity: {x: number, y: number}) {

@@ -1,12 +1,25 @@
-import { BOTMOS_OPTIONS } from "./config";
+import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config";
 import Game from "./game";
 import { onKeyDown } from "./input";
-import { draw } from "./rot_renderer";
+import { draw, resize } from "./rot_renderer";
 
 let game = new Game();
 
 window.onload = function() {
     draw(game.init())
+}
+
+window.onresize = function() {
+    const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth : 0
+    const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
+
+    BOTMOS_OPTIONS.cameraWidth = Math.floor(WINDOW_WIDTH_IN_PX / BOTMOS_OPTIONS.fontSize)
+    BOTMOS_OPTIONS.cameraHeight = Math.floor(WINDOW_HEIGHT_IN_PX / BOTMOS_OPTIONS.fontSize)
+    ROT_OPTIONS.width = Math.floor(BOTMOS_OPTIONS.cameraWidth * (1 / BOTMOS_OPTIONS.zoom))
+    ROT_OPTIONS.height = Math.floor(BOTMOS_OPTIONS.cameraHeight * (1 / BOTMOS_OPTIONS.zoom))
+
+    resize(ROT_OPTIONS)
+    draw(game.state)
 }
 
 onKeyDown(function(action) {

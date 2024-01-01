@@ -7,25 +7,23 @@ const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth :
 const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
 
 export const BOTMOS_OPTIONS = {
-    highlightEnemy: true,
+    cameraWidth: Math.floor(WINDOW_WIDTH_IN_PX / 18),
+    cameraHeight: Math.floor(WINDOW_HEIGHT_IN_PX / 18),
     fontSize: 18,
+    highlightEnemy: true,
     showGrid: true,
     showUI: true,
     zoom: 1
 }
 
-export const CAMERA_SIZE = [
-    Math.floor(WINDOW_WIDTH_IN_PX / BOTMOS_OPTIONS.fontSize),
-    Math.floor(WINDOW_HEIGHT_IN_PX / BOTMOS_OPTIONS.fontSize)
-]
 export const MAX_MAP_SIZE = {
     WIDTH: 1024,
     HEIGHT: 1024
 }
 
 export const ROT_OPTIONS = {
-	width: Math.floor(CAMERA_SIZE[0] * (1 / BOTMOS_OPTIONS.zoom)),
-    height: Math.floor(CAMERA_SIZE[1] * (1 / BOTMOS_OPTIONS.zoom)),
+	width: Math.floor(BOTMOS_OPTIONS.cameraWidth * (1 / BOTMOS_OPTIONS.zoom)),
+    height: Math.floor(BOTMOS_OPTIONS.cameraHeight * (1 / BOTMOS_OPTIONS.zoom)),
     bg: 'transparent',
     fontSize: Math.floor(BOTMOS_OPTIONS.fontSize * BOTMOS_OPTIONS.zoom),
     /*
