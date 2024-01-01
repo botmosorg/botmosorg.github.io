@@ -6,28 +6,28 @@ tileSet.src = "tiny16.png"
 const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth : 0
 const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
 
-export const ENEMY_COLORED_RED = true
-export const FONT_SIZE = 18
+export const BOTMOS_OPTIONS = {
+    highlightEnemy: true,
+    fontSize: 18,
+    showGrid: true,
+    showUI: true,
+    zoom: 1
+}
+
 export const CAMERA_SIZE = [
-    Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE),
-    Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE)
+    Math.floor(WINDOW_WIDTH_IN_PX / BOTMOS_OPTIONS.fontSize),
+    Math.floor(WINDOW_HEIGHT_IN_PX / BOTMOS_OPTIONS.fontSize)
 ]
 export const MAX_MAP_SIZE = {
     WIDTH: 1024,
     HEIGHT: 1024
 }
-export const SHOW_GRID = true
-export const ZOOM = 1
-
-export const BOTMOS_OPTIONS = {
-    showUI: true
-}
 
 export const ROT_OPTIONS = {
-	width: Math.floor(CAMERA_SIZE[0] * (1 / ZOOM)),
-    height: Math.floor(CAMERA_SIZE[1] * (1 / ZOOM)),
+	width: Math.floor(CAMERA_SIZE[0] * (1 / BOTMOS_OPTIONS.zoom)),
+    height: Math.floor(CAMERA_SIZE[1] * (1 / BOTMOS_OPTIONS.zoom)),
     bg: 'transparent',
-    fontSize: Math.floor(FONT_SIZE * ZOOM),
+    fontSize: Math.floor(BOTMOS_OPTIONS.fontSize * BOTMOS_OPTIONS.zoom),
     /*
     layout: 'tile',
     tileWidth: 16,

@@ -1,4 +1,4 @@
-import { SHOW_GRID } from "./config"
+import { BOTMOS_OPTIONS } from "./config";
 
 export class AI {
     name: string;
@@ -662,7 +662,7 @@ _________##E###_
         */
     },
     "tiles": {
-        "void": SHOW_GRID ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
+        "void": BOTMOS_OPTIONS.showGrid ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
         "voidtrue": new Tile("voidtrue", "Really nothing here and you shouldn't get there ever!"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
         "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "gray"), // ▲ alternatively

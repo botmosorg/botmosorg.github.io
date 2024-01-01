@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
-import { BOTMOS_OPTIONS, CAMERA_SIZE, ENEMY_COLORED_RED, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { BOTMOS_OPTIONS, CAMERA_SIZE, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by } from "./entity";
@@ -56,7 +56,7 @@ function rot_render(state: State, camera) {
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
-        if (ENEMY_COLORED_RED) {
+        if (BOTMOS_OPTIONS.highlightEnemy) {
             entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
         }
         if (entity === playerEntity) {
