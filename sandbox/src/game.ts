@@ -25,7 +25,6 @@ export default class Game {
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
         this.state = maps_create_solar_system(this.state)
-        //this.state.maps["simplex=1337"].pasteOnto(this.state.maps["solarsystem=1337"])
 
         for (let mapId in MANIFEST.maps) {
             this.state.maps[mapId] = maps_parse(MANIFEST.maps[mapId])
