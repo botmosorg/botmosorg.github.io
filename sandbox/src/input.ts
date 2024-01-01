@@ -14,8 +14,8 @@ const _BM_INPUT = {
     left: false,
     a: false,
     b: false,
-    c: false,
-    d: false,
+    x: false,
+    y: false,
     menu: false
 }
 
