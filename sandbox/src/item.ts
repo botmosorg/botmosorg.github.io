@@ -67,7 +67,7 @@ export function items_get_equipped(state: State, entityId: string): EquippedItem
 }
 
 export function items_pickup(state: State, entity: Entity, item: Item): State {
-    debug_log("Pickup item " + item.id + " by " + entity.id)
+    //debug_log("Pickup item " + item.id + " by " + entity.id)
 
     // TODO externalize
     if (_is_tool(item)) {

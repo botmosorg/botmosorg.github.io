@@ -79,9 +79,9 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
 
 export function interactOrCombat(state: State, entityA: Entity, entityB: Entity) {
     if (entityA.options.faction === entityB.options.faction) {
-        debug_log("Interaction!")
+        //debug_log("Interaction!")
     } else {
-        debug_log("COMBAT!")
+        //debug_log("COMBAT!")
         const entityId = entityA.id
         const otherEntityId = entityB.id
         state._combatQueue.push({entityId, otherEntityId})
