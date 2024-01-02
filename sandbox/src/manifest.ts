@@ -143,6 +143,7 @@ export const MANIFEST = {
     "factions": {
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
+        "Gaia": new Faction("Gaia", "For rocks etc.", "brown"),
         "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {
@@ -648,6 +649,7 @@ _________##E###_
         "Oz": "A machinery wizard"
     },
     "entities": {
+        "boulder": new Spirit("boulder", "A movable rock", "o", 10),
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
@@ -670,7 +672,6 @@ _________##E###_
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "wallweak": new Tile("wallweak", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
-        //"boulder": new Tile("boulder", "A movable rock", "o", "gray"),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
         //"item": new Tile("item", "An item lying on the ground", "i", "cyberyellow"),
         "movenorth": new Tile("movenorth", "Moves you north", "^", "cyberyellow"),

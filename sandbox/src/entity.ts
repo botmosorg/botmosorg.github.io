@@ -1,10 +1,10 @@
 import { debug_log } from "./debug";
-import { MANIFEST, Spirit } from "./manifest";
+import { MANIFEST, Spirit as EntityType } from "./manifest";
 import { State } from "./state";
 
 export interface Entity {
     id: string,
-    type: Spirit,
+    type: EntityType,
     mapId: string,
     x: number,
     y: number,
@@ -13,7 +13,7 @@ export interface Entity {
     options: any
 }
 
-export function entities_create(state: State, id: string, type: Spirit, mapId: string, x=0, y=0, options={}): State {
+export function entities_create(state: State, id: string, type: EntityType, mapId: string, x=0, y=0, options={}): State {
     const entity = {
         "id": id,
         "type": type,
@@ -30,6 +30,10 @@ export function entities_create(state: State, id: string, type: Spirit, mapId: s
     state.entities[entity.id] = entity
 
     return state
+}
+
+export function entities_create_boulder(state: State, mapId: string, x: number, y: number): State {
+    return entities_create(state, "boulder," + mapId + "," + x + "," + y, MANIFEST.entities.boulder, mapId, x, y, {faction: MANIFEST.factions.Gaia})
 }
 
 export function entities_destroy(state: State, entityId: string) {
@@ -61,12 +65,14 @@ export function entities_get_at(state: State, mapId: string, x: number, y: numbe
     return null
 }
 
-export function entities_set_type(state: State, entity: Entity, newType: Spirit) {
+export function entities_set_type(state: State, entity: Entity, newType: EntityType) {
     entity.type = newType
     entity.energy = newType.energyMax
     entity.energyMax = newType.energyMax
 
-    state.tools[entity.id] = undefined
+    if (newType !== MANIFEST.entities.boulder) {
+        state.tools[entity.id] = undefined
+    }
 
     return state
 }

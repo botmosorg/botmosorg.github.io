@@ -24,7 +24,7 @@ export function entity_act(state: State, entity: Entity, action: Command): State
     return state;
 }
 
-export function entityInteractOrMove(state: State, entity: Entity, dx: number, dy: number): State {
+export function entityInteractOrMove(state: State, entity: Entity, dx: number, dy: number, recursion=0): State { // TODO dirty hack with the recursion
     // Check for collision:
     /*
     entity -> combat (hostile), interact (friendly)
@@ -37,47 +37,18 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
     const tool: EquippedItem | undefined = state.tools[entity.id]
     if (!!entity_at_target_position) {
-        state = interactOrCombat(state, entity, entity_at_target_position)
+        if (entity_at_target_position.type === MANIFEST.entities.boulder) {
+            if (entity.type !== MANIFEST.entities.boulder && recursion <= 1) { // Boulder doesn't move another boulder
+                state = entityInteractOrMove(state, entity_at_target_position, dx, dy, recursion++)
+                state = entityInteractOrMove(state, entity, dx, dy, recursion++)
+            }
+        } else {
+            // Friend or foe
+            state = interactOrCombat(state, entity, entity_at_target_position)
+        }
 
     } else if (entity_can_move(map, entity, dx, dy)) {
-        entity.x += dx;
-        entity.y += dy;
-
-        // Item pickup
-        let maybeItem = items_get_at(state, entity.mapId, entity.x, entity.y)
-        if (!!maybeItem) {
-            state = items_pickup(state, entity, maybeItem)
-        }
-
-        // Portal
-        let tile = map.getTile(entity.x, entity.y);
-        if ((tile.type === MANIFEST.tiles.portal
-                || tile.type === MANIFEST.tiles.portalhidden
-                || tile.type.name.startsWith('portalstart'))
-            && !!state.maps[tile.options.mapId]) {
-            state.currentMapId = tile.options.mapId // TODO: currently only player can pass portals
-            entity.x = tile.options.x;
-            entity.y = tile.options.y;
-            entity.mapId = tile.options.mapId;
-
-            // TODO: move elsewhere
-            switch (tile.type) {
-                case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
-                case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
-                default:
-            }
-        }
-
-        // Move{north, east, south, west} tile
-        if (tile.type.name.startsWith('move')) {
-            switch (tile.type.name) {
-                case 'movenorth': state = entityInteractOrMove(state, entity, 0, -1); break;
-                case 'moveeast': state = entityInteractOrMove(state, entity, 1, 0); break;
-                case 'movesouth': state = entityInteractOrMove(state, entity, 0, 1); break;
-                case 'movewest': state = entityInteractOrMove(state, entity, -1, 0); break;
-                default:
-            }
-        }
+        state = _entity_move(state, map, entity, dx, dy)
 
     } else if (entity_can_crush_wallweak(map, entity, tool, dx, dy)) {
         map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
@@ -86,6 +57,49 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     }
 
     return state
+}
+
+function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: number): State {
+    entity.x += dx;
+    entity.y += dy;
+
+    // Item pickup
+    let maybeItem = items_get_at(state, entity.mapId, entity.x, entity.y);
+    if (!!maybeItem) {
+        state = items_pickup(state, entity, maybeItem);
+    }
+
+    // Portal
+    let tile = map.getTile(entity.x, entity.y);
+    if ((tile.type === MANIFEST.tiles.portal
+        || tile.type === MANIFEST.tiles.portalhidden
+        || tile.type.name.startsWith('portalstart'))
+        && !!state.maps[tile.options.mapId]) {
+        state.currentMapId = tile.options.mapId; // TODO: currently only player can pass portals
+        entity.x = tile.options.x;
+        entity.y = tile.options.y;
+        entity.mapId = tile.options.mapId;
+
+        // TODO: move elsewhere
+        switch (tile.type) {
+            case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
+            case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
+            default:
+        }
+    }
+
+    // Move{north, east, south, west} tile
+    if (tile.type.name.startsWith('move')) {
+        switch (tile.type.name) {
+            case 'movenorth': state = entityInteractOrMove(state, entity, 0, -1); break;
+            case 'moveeast': state = entityInteractOrMove(state, entity, 1, 0); break;
+            case 'movesouth': state = entityInteractOrMove(state, entity, 0, 1); break;
+            case 'movewest': state = entityInteractOrMove(state, entity, -1, 0); break;
+            default:
+        }
+    }
+
+    return state;
 }
 
 export function entities_tile_energy_update(state: State): State {

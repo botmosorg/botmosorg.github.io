@@ -56,7 +56,7 @@ function rot_render(state: State, camera) {
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
-        if (BOTMOS_OPTIONS.highlightEnemy) {
+        if (BOTMOS_OPTIONS.highlightEnemy && entity.type !== MANIFEST.entities.boulder) {
             entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
         }
         if (entity === playerEntity) {
