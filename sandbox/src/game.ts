@@ -71,6 +71,9 @@ export default class Game {
         // TODO Playground
         this.state = entities_create_boulder(this.state, "playground", 9, 9)
         this.state = entities_create_boulder(this.state, "playground", 10, 9)
+        for (let x=1; x<=18; x++) {
+            this.state = items_create(this.state, MANIFEST.items.battery, "playground", x, 18)
+        }
 
         this.state.currentMapId = "botmos_hull_selection"
         this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
