@@ -38,7 +38,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     const tool: EquippedItem | undefined = state.tools[entity.id]
     if (!!entity_at_target_position) {
         if (entity_at_target_position.type === MANIFEST.entities.boulder) {
-            if (entity.type !== MANIFEST.entities.boulder && recursion <= 1) { // Boulder doesn't move another boulder
+            if (entity.type !== MANIFEST.entities.boulder && recursion < 1) { // Boulder doesn't move another boulder
                 state = entityInteractOrMove(state, entity_at_target_position, dx, dy, recursion++)
                 state = entityInteractOrMove(state, entity, dx, dy, recursion++)
             }
@@ -49,6 +49,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
 
     } else if (entity_can_move(map, entity, dx, dy)) {
         state = _entity_move(state, map, entity, dx, dy)
+        state._energyQueue.push({entityId: entity.id, energyDelta: -1 * recursion}) // Pushing rocks
 
     } else if (entity_can_crush_wallweak(map, entity, tool, dx, dy)) {
         map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
@@ -75,7 +76,9 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
         || tile.type === MANIFEST.tiles.portalhidden
         || tile.type.name.startsWith('portalstart'))
         && !!state.maps[tile.options.mapId]) {
-        state.currentMapId = tile.options.mapId; // TODO: currently only player can pass portals
+        if (entity.id.startsWith("player")) {
+            state.currentMapId = tile.options.mapId;
+        }
         entity.x = tile.options.x;
         entity.y = tile.options.y;
         entity.mapId = tile.options.mapId;
