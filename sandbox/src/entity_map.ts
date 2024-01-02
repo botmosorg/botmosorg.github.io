@@ -62,8 +62,8 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
 
             // TODO: move elsewhere
             switch (tile.type) {
-                case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.spirits.AeroBot); break;
-                case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.spirits.WorkBot); break;
+                case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
+                case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
                 default:
             }
         }

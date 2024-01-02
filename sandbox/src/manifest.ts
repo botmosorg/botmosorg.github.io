@@ -647,7 +647,7 @@ _________##E###_
         "Drak": "A now retired PioneerBot, who teaches the new player combat lessons",
         "Oz": "A machinery wizard"
     },
-    "spirits": {
+    "entities": {
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),

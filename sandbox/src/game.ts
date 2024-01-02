@@ -31,29 +31,29 @@ export default class Game {
         }
 
         // TODO Pupulate map entities and items elsewhere
-        this.state = entities_create(this.state, "manual0", MANIFEST.spirits.Spirit, "manual", 4, 24, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual1", MANIFEST.spirits.AeroBot, "manual", 4, 25, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual2", MANIFEST.spirits.WorkBot, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual3", MANIFEST.spirits.Cleaner, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual4", MANIFEST.spirits.Pioneer, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual5", MANIFEST.spirits.Spirit, "manual", 54, 34, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+        this.state = entities_create(this.state, "manual0", MANIFEST.entities.Spirit, "manual", 4, 24, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual1", MANIFEST.entities.AeroBot, "manual", 4, 25, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual2", MANIFEST.entities.WorkBot, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual3", MANIFEST.entities.Cleaner, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual4", MANIFEST.entities.Pioneer, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual5", MANIFEST.entities.Spirit, "manual", 54, 34, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
         this.state = items_create(this.state, MANIFEST.items.junk, "manual", 4, 34)
         this.state = items_create(this.state, MANIFEST.items.energy, "manual", 4, 35)
         this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 36)
         this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 37)
 
-        this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.spirits.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
+        this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.entities.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = items_equip(this.state, "pioneerguardian0", MANIFEST.items.hammer)
-        this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.spirits.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian1", MANIFEST.spirits.Cleaner, "bot_station", 12, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian2", MANIFEST.spirits.Cleaner, "bot_station", 14, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian3", MANIFEST.spirits.Cleaner, "bot_station", 16, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian4", MANIFEST.spirits.Cleaner, "bot_station", 18, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian5", MANIFEST.spirits.Cleaner, "bot_station", 20, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian6", MANIFEST.spirits.Cleaner, "bot_station", 22, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian7", MANIFEST.spirits.Cleaner, "bot_station", 24, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.spirits.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
-        this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.spirits.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.entities.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian1", MANIFEST.entities.Cleaner, "bot_station", 12, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian2", MANIFEST.entities.Cleaner, "bot_station", 14, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian3", MANIFEST.entities.Cleaner, "bot_station", 16, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian4", MANIFEST.entities.Cleaner, "bot_station", 18, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian5", MANIFEST.entities.Cleaner, "bot_station", 20, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian6", MANIFEST.entities.Cleaner, "bot_station", 22, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian7", MANIFEST.entities.Cleaner, "bot_station", 24, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.entities.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
+        this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.entities.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 13, 8)
         this.state = items_create(this.state, MANIFEST.items.junk, "bot_dormitory_hidden", 1, 2)
@@ -69,7 +69,7 @@ export default class Game {
         }
 
         this.state.currentMapId = "botmos_hull_selection"
-        this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
 
         return this.state
     }
@@ -87,7 +87,7 @@ export default class Game {
             debug_log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
 
             this.state.currentMapId = "botmos_hull_selection"
-            this.state = entities_create(this.state, players_get_current(), MANIFEST.spirits.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+            this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
         }
 
         return this.state

@@ -48,8 +48,8 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
 
     state.maps[mapId] = map;
 
-    state = entities_create(state, "npc0", MANIFEST.spirits.Pioneer, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
-    state = entities_create(state, "npc1", MANIFEST.spirits.Pioneer, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
+    state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
+    state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
     state = items_create(state, MANIFEST.items.battery, "simplex="+MAP_SEED, 127, 130)
 
     return state;
@@ -74,11 +74,11 @@ export function maps_create_arena(state: State): State {
 
     state.maps["arena"] = map
 
-    state = entities_create(state, "enemy0", MANIFEST.spirits.Cleaner, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy1", MANIFEST.spirits.Cleaner, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy2", MANIFEST.spirits.Cleaner, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy3", MANIFEST.spirits.Cleaner, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy4", MANIFEST.spirits.Cleaner, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy0", MANIFEST.entities.Cleaner, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy1", MANIFEST.entities.Cleaner, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy2", MANIFEST.entities.Cleaner, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy3", MANIFEST.entities.Cleaner, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+    state = entities_create(state, "enemy4", MANIFEST.entities.Cleaner, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
     state = items_create(state, MANIFEST.items.energy, "arena", 7, 7)
     state = items_create(state, MANIFEST.items.battery, "arena", 14, 14)
 

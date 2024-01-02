@@ -42,7 +42,7 @@ describe('items', () => {
 
     test('should pickup item', () => {
         const itemId = 'item,,0,0'
-        let state = entities_create(states_create(), 'player', MANIFEST.spirits.Spirit, "", 0, 0)
+        let state = entities_create(states_create(), 'player', MANIFEST.entities.Spirit, "", 0, 0)
         state = items_create(state, MANIFEST.items.energy, "", 0, 0)
 
         state = items_pickup(state, state.entities['player'], state.items[itemId])
