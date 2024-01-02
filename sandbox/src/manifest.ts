@@ -141,7 +141,7 @@ export const MANIFEST = {
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
     },
     "entities": {
-        "boulder": new Spirit("boulder", "A movable rock", "o", 10),
+        "boulder": new Spirit("boulder", "A movable rock", "o", 2),
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
@@ -632,6 +632,7 @@ _________##E###_
 !!. void
 !!# wall
 !!= chargepad
+!!~ water
 !!O portal botmos_hull_selection 1 19
 !!Q portal solarsystem=1337 448 448
 #O##################
@@ -651,7 +652,7 @@ _________##E###_
 #..................#
 #..................#
 #..................#
-#..................#
+#........~.........#
 #..................#
 ####################
 `

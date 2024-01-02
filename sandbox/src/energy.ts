@@ -9,7 +9,9 @@ export function energy_update(state: State): State {
         entity.energy = Math.min(entity.energy + energyChange.energyDelta, entity.energyMax);
         if (entity.energy <= 0) {
             state._despawnQueue.push(entity.id);
-            state = items_create(state, MANIFEST.items.junk, entity.mapId, entity.x, entity.y)
+            if (entity.type !== MANIFEST.entities.boulder) { // Boulders don't leave remains
+                state = items_create(state, MANIFEST.items.junk, entity.mapId, entity.x, entity.y)
+            }
         }
     }
 
