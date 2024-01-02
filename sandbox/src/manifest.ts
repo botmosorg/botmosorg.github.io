@@ -140,6 +140,21 @@ export const MANIFEST = {
     "effects": {
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
     },
+    "entities": {
+        "boulder": new Spirit("boulder", "A movable rock", "o", 10),
+        "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
+        "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
+        "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
+        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C", 50),
+        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W", 200),
+        /*
+        "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
+        // ...
+        "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
+        // ...
+        "PirateBot": "Needs to be unlocked, achieve ship mastery",
+        */
+    },
     "factions": {
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
@@ -647,21 +662,6 @@ _________##E###_
         "Bender": "From the future, bowl head",
         "Drak": "A now retired PioneerBot, who teaches the new player combat lessons",
         "Oz": "A machinery wizard"
-    },
-    "entities": {
-        "boulder": new Spirit("boulder", "A movable rock", "o", 10),
-        "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
-        "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
-        "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
-        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C", 50),
-        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W", 200),
-        /*
-        "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
-        // ...
-        "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
-        // ...
-        "PirateBot": "Needs to be unlocked, achieve ship mastery",
-        */
     },
     "tiles": {
         "void": BOTMOS_OPTIONS.showGrid ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
