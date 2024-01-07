@@ -635,12 +635,13 @@ _________##E###_
 !!~ water
 !!O portal botmos_hull_selection 1 19
 !!Q portal solarsystem=1337 448 448
+!!P portal solarsystem=1337 30 17
 #O##################
 #=.................#
 #................Q.#
 #..................#
 #..................#
-#..................#
+#................P.#
 #..................#
 #..................#
 #..................#
@@ -688,6 +689,7 @@ _________##E###_
         "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
         "spacetree": new Tile("spacetree", "Forest as seen from space", "", "brown", "brown"),
         "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "", "cyberblue", "cyberblue"),
+        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", "", "gray", "gray"),
         "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".", "white"),
         "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".", "cyberyellow"),
         "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),

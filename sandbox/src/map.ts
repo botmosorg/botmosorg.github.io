@@ -24,10 +24,10 @@ export class Map {
     id: string;
     widthTiles: number;
     heightTiles: number;
-    private _tiles: any[];
+    private _tiles: Tile[];
     private _cacheMovementMap: any | null;
 
-    constructor(id: string, width_tiles: number, height_tiles: number, tiles: any[]=[]) {
+    constructor(id: string, width_tiles: number, height_tiles: number, tiles: Tile[]=[]) {
         this.id = id;
         this.widthTiles = width_tiles;
         this.heightTiles = height_tiles;
@@ -63,6 +63,54 @@ export class Map {
         }
     }
 
+    /**
+     * Down-samples this map to a smaller version, e.g. to view the map from space.
+     *
+     * @param targetWidthInTiles Target width of the new map in tiles
+     * @param targetHeightInTiles Target height of the new map in tiles
+     * @returns Transient down-sampled map
+     */
+    sample(targetWidthInTiles: number, targetHeightInTiles: number): Map {
+        const regionWidth = Math.floor(this.widthTiles / targetWidthInTiles)
+        const regionHeight = Math.floor(this.heightTiles / targetHeightInTiles)
+
+        const newTiles = []
+
+        for (let yRegion=0; yRegion < targetHeightInTiles; yRegion++) {
+            for (let xRegion=0; xRegion < targetWidthInTiles; xRegion++) {
+                const tileType2Occurrences = {}
+
+                for (let y=0; y < regionHeight; y++) {
+                    for (let x=0; x < regionWidth; x++) {
+                        const tile = this.getTile(xRegion * regionWidth + x, yRegion * regionHeight + y)
+
+                        if (!!tileType2Occurrences[tile.type.name]) {
+                            tileType2Occurrences[tile.type.name] += 1
+                        } else {
+                            tileType2Occurrences[tile.type.name] = 1
+                        }
+                    }
+                }
+
+                let mostOccurringTileTypeName = ""
+                let mostOccurrences = 0
+                for (const [key, value] of Object.entries<number>(tileType2Occurrences)) {
+                    if (value > mostOccurrences) {
+                        mostOccurringTileTypeName = key
+                        mostOccurrences = value
+                    }
+                }
+
+                const newTileTypeName = "space" + mostOccurringTileTypeName
+                const newTileType = MANIFEST.tiles[newTileTypeName] || MANIFEST.tiles.spacevoid
+
+                newTiles.push(tiles_create(newTileType))
+            }
+        }
+
+        return new Map("__sampled_" + targetWidthInTiles + "_" + targetHeightInTiles + "_" + this.id, targetWidthInTiles, targetHeightInTiles, newTiles);
+    }
+
     asMovementMap() {
         if (!!this._cacheMovementMap) {
             return this._cacheMovementMap;
@@ -91,7 +139,7 @@ export class Map {
     }
 }
 
-export function maps_parse(mapString: string) {
+export function maps_parse(mapString: string): Map {
     let lines = mapString.split(/\r?\n/)
     let metaCharacter = mapString[0]
     let mapId = ""
