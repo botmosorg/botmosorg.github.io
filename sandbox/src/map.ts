@@ -64,6 +64,25 @@ export class Map {
     }
 
     /**
+     * Only do this for square maps!
+     *
+     * @returns This map but in circular shape
+     */
+    circular(): Map {
+        let radius = Math.floor(Math.min(this.widthTiles, this.heightTiles) / 2)
+
+        for(let y=-radius; y<=radius; y++) {
+            for(let x=-radius; x<=radius; x++) {
+                if(x*x+y*y >= radius*radius) {
+                    this.setTile(x + radius - 1, y + radius - 1, MANIFEST.tiles.voidtrue)
+                }
+            }
+        }
+
+        return this
+    }
+
+    /**
      * Down-samples this map to a smaller version, e.g. to view the map from space.
      *
      * @param targetWidthInTiles Target width of the new map in tiles

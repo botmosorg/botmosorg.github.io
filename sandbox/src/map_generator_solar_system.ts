@@ -42,11 +42,11 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     }
 
     // TODO sampling test
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16))
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24), 0, 17)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32), 0, 42)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128), 0, 75)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256), 0, 204)
+    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular())
+    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17)
+    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32).circular(), 0, 42)
+    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128).circular(), 0, 75)
+    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256).circular(), 0, 204)
 
     return state
 }
