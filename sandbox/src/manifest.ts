@@ -132,10 +132,11 @@ export const MANIFEST = {
         "E": new Command("E", "Move/interact/combat east"),
         "S": new Command("S", "Move/interact/combat south"),
         "W": new Command("W", "Move/interact/combat west"),
-        "A": new Command("A", "Primary action, confirm"), // unused
-        "B": new Command("B", "Take a break, cancel"), // space bar
-        "X": new Command("X", "Secondary action"), // unused
-        "Y": new Command("Y", "Tertiary action"), // unused
+        "A": new Command("A", "Primary action, confirm"), // A/X
+        "B": new Command("B", "Take a break, cancel"), // B/Y/Z/space bar
+        "1": new Command("1", "Secondary action, first quick slot"), // unused
+        "2": new Command("2", "Tertiary action, second quick slot"), // unused
+        "M": new Command("M", "Menu") // unused
     },
     "effects": {
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")

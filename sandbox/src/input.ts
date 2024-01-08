@@ -3,7 +3,7 @@ import { MANIFEST, Command } from "./manifest";
 /**
  * All keys ever supported:
  * - Arrow keys:    Movement, 4 directional, diagonal movement is 2 turns and translated for convenience
- * - 4 buttons:     A: positive continue action, B: negative non-continue action, X and Y quick slots
+ * - 4 buttons:     A/X: positive continue action, B/Y/Z: negative non-continue action, 1 and 2 quick slots
  * - 2 shoulder buttons: redundancy
  * - ESC / START / menu key:    Open game menu
  */
@@ -14,8 +14,8 @@ const _BM_INPUT = {
     left: false,
     a: false,
     b: false,
-    x: false,
-    y: false,
+    one: false,
+    two: false,
     menu: false
 }
 
@@ -49,7 +49,13 @@ document.body.addEventListener("keydown", function(e) {
             _BM_INPUT.right = true;
             _preventDefaultAndStopPropagation(e);
             break;
+        case 'x':
+            _BM_INPUT.a = true;
+            _preventDefaultAndStopPropagation(e);
+            break;
         case ' ':
+        case 'y':
+        case 'z':
             _BM_INPUT.b = true;
             _preventDefaultAndStopPropagation(e);
             break;
@@ -94,7 +100,13 @@ document.body.addEventListener("keyup", function(e) {
             _BM_INPUT.right = false;
             _preventDefaultAndStopPropagation(e);
             break;
+        case 'x':
+            _BM_INPUT.a = false;
+            _preventDefaultAndStopPropagation(e);
+            break;
         case ' ':
+        case 'y':
+        case 'z':
             _BM_INPUT.b = false;
             _preventDefaultAndStopPropagation(e);
             break;
@@ -171,6 +183,10 @@ function _updateInputQueue() {
         if (action === MANIFEST.commands.S && _lastAction === MANIFEST.commands.S) {
             action = MANIFEST.commands.W;
         }
+    }
+
+    if (_BM_INPUT.a) {
+        action = MANIFEST.commands.A
     }
 
     if (_BM_INPUT.b) {
