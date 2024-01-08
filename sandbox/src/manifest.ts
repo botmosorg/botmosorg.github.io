@@ -141,7 +141,8 @@ export const MANIFEST = {
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
     },
     "entities": {
-        "boulder": new Spirit("boulder", "A movable rock", "o", 2),
+        "movableboulder": new Spirit("movableboulder", "A movable rock", "o", 2),
+        "movablebox": new Spirit("movablebox", "A movable box", "x", 2),
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
@@ -156,6 +157,7 @@ export const MANIFEST = {
         */
     },
     "factions": {
+        "Equipment": new Faction("Equipment", "For boxes etc.", "gray"),
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
         "Gaia": new Faction("Gaia", "For rocks etc.", "brown"),
@@ -184,10 +186,10 @@ export const MANIFEST = {
 #..............#
 #..............#
 #.....=..+++++.#
-#.....=..+.....#
+#.....=..+~....#
 O.....=..+.....#
 #..====..+.....#
-#..=...........#
+#..=.....+.....#
 #..=.....+.....#
 #..====..+.....#
 #.....=..+.....#

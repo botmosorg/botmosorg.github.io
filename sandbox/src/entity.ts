@@ -33,7 +33,11 @@ export function entities_create(state: State, id: string, type: EntityType, mapI
 }
 
 export function entities_create_boulder(state: State, mapId: string, x: number, y: number): State {
-    return entities_create(state, "boulder," + mapId + "," + x + "," + y, MANIFEST.entities.boulder, mapId, x, y, {faction: MANIFEST.factions.Gaia})
+    return entities_create(state, "boulder," + mapId + "," + x + "," + y, MANIFEST.entities.movableboulder, mapId, x, y, {faction: MANIFEST.factions.Gaia})
+}
+
+export function entities_create_box(state: State, mapId: string, x: number, y: number): State {
+    return entities_create(state, "box," + mapId + "," + x + "," + y, MANIFEST.entities.movablebox, mapId, x, y, {faction: MANIFEST.factions.Equipment})
 }
 
 export function entities_destroy(state: State, entityId: string) {
@@ -70,7 +74,7 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
     entity.energy = newType.energyMax
     entity.energyMax = newType.energyMax
 
-    if (newType !== MANIFEST.entities.boulder) {
+    if (!isMoveableObject(entity)) {
         state.tools[entity.id] = undefined
     }
 
@@ -88,4 +92,9 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
     }
 
     return state
+}
+
+export function isMoveableObject(entity: Entity) {
+    return entity.type === MANIFEST.entities.movableboulder
+        || entity.type === MANIFEST.entities.movablebox;
 }

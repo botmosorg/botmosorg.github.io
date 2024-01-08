@@ -1,5 +1,5 @@
 import { debug_log } from "./debug";
-import { Entity } from "./entity";
+import { Entity, isMoveableObject } from "./entity";
 import { MANIFEST, Item as ItemType } from "./manifest";
 import { State } from "./state";
 
@@ -69,7 +69,7 @@ export function items_get_equipped(state: State, entityId: string): EquippedItem
 export function items_pickup(state: State, entity: Entity, item: Item): State {
     //debug_log("Pickup item " + item.id + " by " + entity.id)
 
-    if (entity.type === MANIFEST.entities.boulder) { // Boulders don't pick up items
+    if (isMoveableObject(entity)) { // Boulders and boxes don't pick up items
         return state
     }
 

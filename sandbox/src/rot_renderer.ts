@@ -3,7 +3,7 @@ import * as ROT from "../lib/rot.js"
 import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
 import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
-import { entities_get_by } from "./entity";
+import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
 import { players_get_current } from "./player";
 import { State } from "./state.js";
@@ -56,7 +56,7 @@ function rot_render(state: State, camera) {
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
-        if (BOTMOS_OPTIONS.highlightEnemy && entity.type !== MANIFEST.entities.boulder) {
+        if (BOTMOS_OPTIONS.highlightEnemy && !isMoveableObject(entity)) {
             entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
         }
         if (entity === playerEntity) {

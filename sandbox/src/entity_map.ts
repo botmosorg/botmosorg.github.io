@@ -1,4 +1,4 @@
-import { Entity, entities_get_at, entities_set_type, interactOrCombat } from "./entity";
+import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { EquippedItem, items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
 import { Map } from "./map";
@@ -37,8 +37,8 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
     const tool: EquippedItem | undefined = state.tools[entity.id]
     if (!!entity_at_target_position) {
-        if (entity_at_target_position.type === MANIFEST.entities.boulder) {
-            if (entity.type !== MANIFEST.entities.boulder && recursion < 1) { // Boulder doesn't move another boulder
+        if (isMoveableObject(entity_at_target_position)) {
+            if (!isMoveableObject(entity) && recursion < 1) { // Boulder/box doesn't move another boulder/box
                 state = entityInteractOrMove(state, entity_at_target_position, dx, dy, recursion++)
                 state = entityInteractOrMove(state, entity, dx, dy, recursion++)
             }

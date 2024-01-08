@@ -1,5 +1,5 @@
 import { debug_log } from "./debug";
-import { entities_create, entities_create_boulder } from "./entity";
+import { entities_create, entities_create_boulder, entities_create_box } from "./entity";
 import { entity_act } from "./entity_map";
 import { items_create, items_equip } from "./item";
 import { Command, MANIFEST } from "./manifest";
@@ -67,6 +67,9 @@ export default class Game {
                 this.state = items_create(this.state, MANIFEST.items.junk, "bot_factory", x, y)
             }
         }
+
+        this.state = entities_create_box(this.state, "bot_bar", 14, 3)
+        this.state = entities_create_box(this.state, "bot_bar", 14, 12)
 
         // TODO Playground
         this.state = entities_create_boulder(this.state, "playground", 9, 9)
