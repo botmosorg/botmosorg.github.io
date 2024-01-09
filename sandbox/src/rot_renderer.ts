@@ -75,6 +75,7 @@ function rot_render(state: State, camera) {
 
         let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' '
                     + equippedItemText
+                    + "X:Wait Y:Wait"
         let uiLineYCoord = ROT_OPTIONS.height - 1
         if (playerEntity.y-camera.y >= ROT_OPTIONS.height - 3) { // Player close to bottom of screen, flip UI line to top of screen
             uiLineYCoord = 0
