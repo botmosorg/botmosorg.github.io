@@ -132,20 +132,33 @@ document.body.addEventListener("click", function(e) {
     const widthThird = width / 3;
     const height = document.body.clientHeight;
     const heightThird = height / 3;
+
     if (x >= widthThird && x < 2 * widthThird && y < heightThird) {
         triggerCallback(MANIFEST.commands.N)
         _preventDefaultAndStopPropagation(e);
+
+    } else if (x < widthThird && y < heightThird) {
+        triggerCallback(MANIFEST.commands.B)
+        _preventDefaultAndStopPropagation(e);
+
+    } else if (x >= 2 * widthThird && y < heightThird) {
+        triggerCallback(MANIFEST.commands.A)
+        _preventDefaultAndStopPropagation(e);
+
     } else if (x < widthThird && y >= heightThird && y < 2 * heightThird) {
         triggerCallback(MANIFEST.commands.W)
         _preventDefaultAndStopPropagation(e);
+
     } else if (x >= 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
         triggerCallback(MANIFEST.commands.E)
         _preventDefaultAndStopPropagation(e);
+
     } else if (x >= widthThird && x < 2 * widthThird && y >= 2 * heightThird) {
         triggerCallback(MANIFEST.commands.S)
         _preventDefaultAndStopPropagation(e);
+
     } else if (x >= widthThird && x < 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
-        triggerCallback(MANIFEST.commands.B)
+        triggerCallback(MANIFEST.commands.M)
         _preventDefaultAndStopPropagation(e);
     }
 });
