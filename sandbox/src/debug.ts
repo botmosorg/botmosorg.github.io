@@ -1,7 +1,7 @@
-export const DEBUG = true;
+import { BOTMOS_OPTIONS } from "./config"
 
 export function debug_log(text: string) {
-    if (DEBUG) {
+    if (BOTMOS_OPTIONS.debug) {
         console.log(text)
     }
     //debug_overlay(text);

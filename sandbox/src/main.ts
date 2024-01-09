@@ -40,6 +40,13 @@ if (!!!(window as any).BMPlay) {
     }
 }
 
+if (!!!(window as any).BMToggleDebug) {
+    (window as any).BMToggleDebug = function () {
+        BOTMOS_OPTIONS.debug = !BOTMOS_OPTIONS.debug
+        draw(game.state)
+    }
+}
+
 if (!!!(window as any).BMToggleUI) {
     (window as any).BMToggleUI = function () {
         BOTMOS_OPTIONS.showUI = !BOTMOS_OPTIONS.showUI

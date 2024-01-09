@@ -1,7 +1,7 @@
 import * as ROT from "../lib/rot.js"
 
 import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
-import { DEBUG, DEBUG_LINES } from "./debug";
+import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
@@ -94,7 +94,7 @@ function rot_render(state: State, camera) {
             if (!!equippedItem) {
                 lines.push("Tool: " + equippedItem.type.name)
             }
-            if (DEBUG) {
+            if (BOTMOS_OPTIONS.debug) {
                 lines.push("DEBUG Position: " + playerEntity.x + ',' + playerEntity.y)
                 lines.push("DEBUG Map: " + playerEntity.mapId)
             }

@@ -9,6 +9,7 @@ const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight
 export const BOTMOS_OPTIONS = {
     cameraWidth: Math.floor(WINDOW_WIDTH_IN_PX / 18),
     cameraHeight: Math.floor(WINDOW_HEIGHT_IN_PX / 18),
+    debug: true,
     fontSize: 18,
     highlightEnemy: true,
     showGrid: true,
