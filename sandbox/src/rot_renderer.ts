@@ -75,7 +75,6 @@ function rot_render(state: State, camera) {
 
         let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' '
                     + equippedItemText
-                    + playerEntity.x + ',' + playerEntity.y
         let uiLineYCoord = ROT_OPTIONS.height - 1
         if (playerEntity.y-camera.y >= ROT_OPTIONS.height - 3) { // Player close to bottom of screen, flip UI line to top of screen
             uiLineYCoord = 0
@@ -91,9 +90,13 @@ function rot_render(state: State, camera) {
         if (!!playerEntity) {
             lines.push("Hull: " + playerEntity.type.icon + " (" + playerEntity.type.name + ")")
             lines.push("Energy: " + playerEntity.energy + '/' + playerEntity.energyMax)
-            lines.push("Position: " + playerEntity.x + ',' + playerEntity.y)
+            const equippedItem = items_get_equipped(state, playerId)
+            if (!!equippedItem) {
+                lines.push("Tool: " + equippedItem.type.name)
+            }
             if (DEBUG) {
-                lines.push("DEBUG map: " + playerEntity.mapId)
+                lines.push("DEBUG Position: " + playerEntity.x + ',' + playerEntity.y)
+                lines.push("DEBUG Map: " + playerEntity.mapId)
             }
         }
         for (let i=0; i<lines.length; i++) {
