@@ -1,7 +1,7 @@
 import * as ROT from "../lib/rot.js"
 
 import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
-import { DEBUG_LINES } from "./debug";
+import { DEBUG, DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
@@ -81,6 +81,24 @@ function rot_render(state: State, camera) {
             uiLineYCoord = 0
         }
         ROT_DISPLAY.drawText(0, uiLineYCoord, "%c{white}%b{black}" + line, camera.width);
+    }
+
+    // Render menu
+    if (state._menuOpen) {
+        const lines = []
+        lines.push("BotMos Menu")
+        lines.push("")
+        if (!!playerEntity) {
+            lines.push("Hull: " + playerEntity.type.icon + " (" + playerEntity.type.name + ")")
+            lines.push("Energy: " + playerEntity.energy + '/' + playerEntity.energyMax)
+            lines.push("Position: " + playerEntity.x + ',' + playerEntity.y)
+            if (DEBUG) {
+                lines.push("DEBUG map: " + playerEntity.mapId)
+            }
+        }
+        for (let i=0; i<lines.length; i++) {
+            ROT_DISPLAY.drawText(0, i, "%c{#74ee15}%b{black}"+lines[i], camera.width);
+        }
     }
 
     // Render debug lines

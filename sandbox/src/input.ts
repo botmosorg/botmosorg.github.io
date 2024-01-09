@@ -59,6 +59,10 @@ document.body.addEventListener("keydown", function(e) {
             _BM_INPUT.b = true;
             _preventDefaultAndStopPropagation(e);
             break;
+        case 'm':
+            _BM_INPUT.menu = true;
+            _preventDefaultAndStopPropagation(e);
+            break;
         default:
     }
 
@@ -108,6 +112,10 @@ document.body.addEventListener("keyup", function(e) {
         case 'y':
         case 'z':
             _BM_INPUT.b = false;
+            _preventDefaultAndStopPropagation(e);
+            break;
+        case 'm':
+            _BM_INPUT.menu = false;
             _preventDefaultAndStopPropagation(e);
             break;
         default:
@@ -191,6 +199,10 @@ function _updateInputQueue() {
 
     if (_BM_INPUT.b) {
         action = MANIFEST.commands.B;
+    }
+
+    if (_BM_INPUT.menu) {
+        action = MANIFEST.commands.M;
     }
 
     _lastAction = action;

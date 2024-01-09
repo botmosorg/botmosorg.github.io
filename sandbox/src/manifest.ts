@@ -508,7 +508,7 @@ _________##E###_
 `,
 "manual": `!
 !!id manual
-!!size 80 50
+!!size 80 52
 !!# wall
 !!+ wallweak
 !!. voidtrue
@@ -574,8 +574,8 @@ _________##E###_
 !!z wall z
 !!, wall ,
 !!/ wall /
-!!( portal manual 9 14
-!!) portal manual 4 14
+!!( portal manual 9 16
+!!) portal manual 4 16
 !!] portalclosed
 !![ portal botmos_hull_selection 19 5
 ################################################################################
@@ -588,7 +588,9 @@ _________##E###_
 #^|.Move_around_using_arrow_keys_or_WASD......................................^#
 #^..Alternatively,_click/touch_on_the_top/left/bottom/right_screen_area.......^#
 #^|...........................................................................^#
-#^..Spacebar_or_click/touch_on_the_screen_center_to_skip_one_turn.............^#
+#^..M_opens_the_menu..........................................................^#
+#^|...........................................................................^#
+#^..Y_or_Z_or_Spacebar_or_click/touch_on_the_screen_center_to_skip_one_turn...^#
 #^|...........................................................................^#
 #^..^.<.|.>.move_you_automatically............................................^#
 #^|...........................................................................^#

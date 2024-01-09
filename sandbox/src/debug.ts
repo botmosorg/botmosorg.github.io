@@ -1,5 +1,9 @@
+export const DEBUG = true;
+
 export function debug_log(text: string) {
-    console.log(text)
+    if (DEBUG) {
+        console.log(text)
+    }
     //debug_overlay(text);
 }
 

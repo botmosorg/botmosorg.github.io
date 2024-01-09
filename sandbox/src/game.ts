@@ -31,16 +31,16 @@ export default class Game {
         }
 
         // TODO Pupulate map entities and items elsewhere
-        this.state = entities_create(this.state, "manual0", MANIFEST.entities.Spirit, "manual", 4, 24, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual1", MANIFEST.entities.AeroBot, "manual", 4, 25, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual2", MANIFEST.entities.WorkBot, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual3", MANIFEST.entities.Cleaner, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual4", MANIFEST.entities.Pioneer, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
-        this.state = entities_create(this.state, "manual5", MANIFEST.entities.Spirit, "manual", 54, 34, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-        this.state = items_create(this.state, MANIFEST.items.junk, "manual", 4, 34)
-        this.state = items_create(this.state, MANIFEST.items.energy, "manual", 4, 35)
-        this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 36)
-        this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 37)
+        this.state = entities_create(this.state, "manual0", MANIFEST.entities.Spirit, "manual", 4, 26, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual1", MANIFEST.entities.AeroBot, "manual", 4, 27, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual2", MANIFEST.entities.WorkBot, "manual", 4, 28, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual3", MANIFEST.entities.Cleaner, "manual", 4, 29, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual4", MANIFEST.entities.Pioneer, "manual", 4, 30, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "manual5", MANIFEST.entities.Spirit, "manual", 54, 36, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
+        this.state = items_create(this.state, MANIFEST.items.junk, "manual", 4, 36)
+        this.state = items_create(this.state, MANIFEST.items.energy, "manual", 4, 37)
+        this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 38)
+        this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 39)
 
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.entities.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = items_equip(this.state, "pioneerguardian0", MANIFEST.items.hammer)
@@ -88,8 +88,13 @@ export default class Game {
         let player = this.state.entities[players_get_current()]
         if (!!player) {
             if (!!action) {
-                this.state = entity_act(this.state, player, action)
-                this.state = systems_per_turn_update(this.state)
+                if (action === MANIFEST.commands.M) {
+                    this.state._menuOpen = !this.state._menuOpen
+                } else {
+                    this.state = entity_act(this.state, player, action)
+                    this.state = systems_per_turn_update(this.state)
+                }
+
                 this.actionLog.push(action.key)
                 //debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
