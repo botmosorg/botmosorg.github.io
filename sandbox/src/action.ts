@@ -13,6 +13,12 @@ export function actions_get(state: State, entity: Entity): Actions {
         "B": MANIFEST.actions.Wait
     }
 
+    const map = state.maps[entity.mapId]
+    const tile = map.getTile(entity.x, entity.y)
+    if (!!tile.options.mapId && 'x' in tile.options && 'y' in tile.options) { // Portal or landing
+        actions.A = MANIFEST.actions.Enter
+    }
+
     return actions
 }
 

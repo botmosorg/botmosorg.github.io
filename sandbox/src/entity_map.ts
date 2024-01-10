@@ -72,6 +72,11 @@ export function entityContextualAction(state: State, entity: Entity, command: Co
     const action = actions[command.key]
 
     switch (action) {
+        case MANIFEST.actions.Enter:
+            const map = state.maps[entity.mapId]
+            const tile = map.getTile(entity.x, entity.y)
+            state = enterPortalOrPlanet(state, entity, tile)
+            break
         case MANIFEST.actions.Wait:
             break
         default:
@@ -92,23 +97,9 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
 
     // Portal
     let tile = map.getTile(entity.x, entity.y);
-    if ((tile.type === MANIFEST.tiles.portal
-        || tile.type === MANIFEST.tiles.portalhidden
-        || tile.type.name.startsWith('portalstart'))
+    if (tile.type.name.startsWith('portal')
         && !!state.maps[tile.options.mapId]) {
-        if (entity.id.startsWith("player")) {
-            state.currentMapId = tile.options.mapId;
-        }
-        entity.x = tile.options.x;
-        entity.y = tile.options.y;
-        entity.mapId = tile.options.mapId;
-
-        // TODO: move elsewhere
-        switch (tile.type) {
-            case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
-            case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
-            default:
-        }
+        state = enterPortalOrPlanet(state, entity, tile)
     }
 
     // Move{north, east, south, west} tile
@@ -122,6 +113,23 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
         }
     }
 
+    return state;
+}
+
+function enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
+    if (entity.id.startsWith("player")) {
+        state.currentMapId = tile.options.mapId;
+    }
+    entity.x = tile.options.x;
+    entity.y = tile.options.y;
+    entity.mapId = tile.options.mapId;
+
+    // TODO: move elsewhere
+    switch (tile.type) {
+        case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
+        case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
+        default:
+    }
     return state;
 }
 

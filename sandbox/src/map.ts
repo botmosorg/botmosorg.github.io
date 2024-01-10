@@ -122,8 +122,13 @@ export class Map {
 
                 const newTileTypeName = "space" + mostOccurringTileTypeName
                 const newTileType = MANIFEST.tiles[newTileTypeName] || MANIFEST.tiles.spacevoid
+                const options = { // For landing from space
+                    'mapId': this.id,
+                    'x': xRegion * regionWidth,
+                    'y': yRegion * regionHeight
+                }
 
-                newTiles.push(tiles_create(newTileType))
+                newTiles.push(tiles_create(newTileType, options))
             }
         }
 

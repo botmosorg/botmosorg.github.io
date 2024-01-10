@@ -112,6 +112,7 @@ export class Tile {
 
 export const MANIFEST = {
     "actions": {
+        "Enter": new Action("Enter", "Enter a portal or plant atmosphere"),
         "Wait": new Action("Wait", "Wait one turn in place")
     },
     "ais": {
