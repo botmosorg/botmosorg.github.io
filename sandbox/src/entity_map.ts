@@ -18,6 +18,10 @@ export function entity_act(state: State, entity: Entity, action: Command): State
         case MANIFEST.commands.E:
             state = entityInteractOrMove(state, entity, 1, 0)
             break
+        case MANIFEST.commands.A:
+            break
+        case MANIFEST.commands.B:
+            break
         default:
     }
 
@@ -47,11 +51,11 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
             state = interactOrCombat(state, entity, entity_at_target_position)
         }
 
-    } else if (entity_can_move(map, entity, dx, dy)) {
+    } else if (_entity_can_move(map, entity, dx, dy)) {
         state = _entity_move(state, map, entity, dx, dy)
         state._energyQueue.push({entityId: entity.id, energyDelta: -1 * recursion}) // Pushing rocks
 
-    } else if (entity_can_crush_wallweak(map, entity, tool, dx, dy)) {
+    } else if (_entity_can_crush_wallweak(map, entity, tool, dx, dy)) {
         map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
@@ -116,7 +120,7 @@ export function entities_tile_energy_update(state: State): State {
     return state
 }
 
-function entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boolean {
+function _entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boolean {
     let x = entity.x + dx;
     let y = entity.y + dy;
     let tileType = map.getTile(x, y).type;
@@ -126,7 +130,7 @@ function entity_can_move(map: Map, entity: Entity, dx: number, dy: number): bool
         && !tileType.name.startsWith('wall');
 }
 
-function entity_can_crush_wallweak(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number) {
+function _entity_can_crush_wallweak(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number) {
     const x = entity.x + dx;
     const y = entity.y + dy;
     const tileType = map.getTile(x, y).type;
