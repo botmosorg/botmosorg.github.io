@@ -13,6 +13,10 @@ export function actions_get(state: State, entity: Entity): Actions {
         "B": MANIFEST.actions.Wait
     }
 
+    if (!!state.lastSpacePositionByEntity[entity.id]) {
+        actions.A = MANIFEST.actions.Launch
+    }
+
     const map = state.maps[entity.mapId]
     const tile = map.getTile(entity.x, entity.y)
     if (!!tile.options.mapId && 'x' in tile.options && 'y' in tile.options) { // Portal or landing

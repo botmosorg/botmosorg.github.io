@@ -2,7 +2,7 @@ import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { EquippedItem, items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
-import { Map } from "./map";
+import { Map, tiles_is_space_tile } from "./map";
 import { State } from "./state";
 
 export function entity_act(state: State, entity: Entity, command: Command): State {
@@ -75,8 +75,10 @@ export function entityContextualAction(state: State, entity: Entity, command: Co
         case MANIFEST.actions.Enter:
             const map = state.maps[entity.mapId]
             const tile = map.getTile(entity.x, entity.y)
-            state = enterPortalOrPlanet(state, entity, tile)
+            state = _enterPortalOrPlanet(state, entity, tile)
             break
+        case MANIFEST.actions.Launch:
+            state = _launchToSpace(state, entity)
         case MANIFEST.actions.Wait:
             break
         default:
@@ -99,7 +101,7 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
     let tile = map.getTile(entity.x, entity.y);
     if (tile.type.name.startsWith('portal')
         && !!state.maps[tile.options.mapId]) {
-        state = enterPortalOrPlanet(state, entity, tile)
+        state = _enterPortalOrPlanet(state, entity, tile)
     }
 
     // Move{north, east, south, west} tile
@@ -116,13 +118,20 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
     return state;
 }
 
-function enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
+function _enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
     if (entity.id.startsWith("player")) {
         state.currentMapId = tile.options.mapId;
     }
+    if (tiles_is_space_tile(tile)) {
+        state.lastSpacePositionByEntity[entity.id] = {
+            mapId: entity.mapId,
+            x: entity.x,
+            y: entity.y
+        }
+    }
+    entity.mapId = tile.options.mapId;
     entity.x = tile.options.x;
     entity.y = tile.options.y;
-    entity.mapId = tile.options.mapId;
 
     // TODO: move elsewhere
     switch (tile.type) {
@@ -131,6 +140,21 @@ function enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
         default:
     }
     return state;
+}
+
+function _launchToSpace(state: State, entity: Entity): State {
+    if (!!state.lastSpacePositionByEntity[entity.id]) {
+        if (entity.id.startsWith("player")) {
+            state.currentMapId = state.lastSpacePositionByEntity[entity.id].mapId;
+        }
+        entity.mapId = state.lastSpacePositionByEntity[entity.id].mapId;
+        entity.x = state.lastSpacePositionByEntity[entity.id].x;
+        entity.y = state.lastSpacePositionByEntity[entity.id].y;
+
+        state.lastSpacePositionByEntity[entity.id] = undefined
+        delete state.lastSpacePositionByEntity[entity.id]
+    }
+    return state
 }
 
 export function entities_tile_energy_update(state: State): State {

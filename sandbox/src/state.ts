@@ -7,6 +7,7 @@ export interface State {
     currentMapId: string,
     entities: object,
     items: object,
+    lastSpacePositionByEntity: object
     maps: object,
     tools: object,
 }
@@ -21,6 +22,7 @@ export function states_create(): State {
         currentMapId: "",
         entities: {},
         items: {},
+        lastSpacePositionByEntity: {},
         maps: {},
         tools: {}
     }

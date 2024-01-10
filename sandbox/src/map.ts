@@ -20,6 +20,10 @@ export function tiles_create(type: TileType, options={}): Tile {
     }
 }
 
+export function tiles_is_space_tile(tile: Tile): boolean {
+    return tile.type.name.startsWith("space")
+}
+
 export class Map {
     id: string;
     widthTiles: number;
