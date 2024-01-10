@@ -146,8 +146,8 @@ export class Map {
                 // 0 movable, 1 movement blocked
                 movementMap[y][x] = 0;
                 if (tileType === MANIFEST.tiles.rock
-                    || tileType === MANIFEST.tiles.wall
-                    || tileType === MANIFEST.tiles.wallweak) {
+                    || tileType === MANIFEST.tiles.portalclosed
+                    || tileType.name.startsWith("wall")) {
                     movementMap[y][x] = 1;
                 }
             }
