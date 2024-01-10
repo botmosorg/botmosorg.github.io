@@ -1,5 +1,14 @@
 import { BOTMOS_OPTIONS } from "./config";
 
+export class Action {
+    name: string
+    description: string
+
+    constructor(name: string, description: string) {
+        this.name = name;
+        this.description = description;
+    }
+}
 export class AI {
     name: string;
     description: string;
@@ -102,6 +111,9 @@ export class Tile {
 }
 
 export const MANIFEST = {
+    "actions": {
+        "Wait": new Action("Wait", "Wait one turn in place")
+    },
     "ais": {
         "aggrorange": new AI("aggrorange", "Idles at a position and engages the player when coming into range"),
         "aggrorangeshort": new AI("aggrorangeshort", "Idles at a position and engages the player when coming into shorter range"),

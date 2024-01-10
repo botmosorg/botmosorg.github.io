@@ -7,6 +7,7 @@ import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
 import { players_get_current } from "./player";
 import { State } from "./state.js";
+import { actions_get } from "./action.js";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -73,9 +74,10 @@ function rot_render(state: State, camera) {
             equippedItemText += equippedItem.type.name + ' '
         }
 
+        const actions = actions_get(state, playerEntity)
         let line = playerEntity.type.icon + ' ' + playerEntity.energy + '/' + playerEntity.energyMax + ' '
                     + equippedItemText
-                    + "X:Wait Y:Wait"
+                    + "X:" + actions.A.name + " Y:" + actions.B.name
         let uiLineYCoord = ROT_OPTIONS.height - 1
         if (playerEntity.y-camera.y >= ROT_OPTIONS.height - 3) { // Player close to bottom of screen, flip UI line to top of screen
             uiLineYCoord = 0

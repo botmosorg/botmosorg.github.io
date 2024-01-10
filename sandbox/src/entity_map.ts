@@ -1,11 +1,12 @@
+import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { EquippedItem, items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command } from "./manifest";
 import { Map } from "./map";
 import { State } from "./state";
 
-export function entity_act(state: State, entity: Entity, action: Command): State {
-    switch (action) {
+export function entity_act(state: State, entity: Entity, command: Command): State {
+    switch (command) {
         case MANIFEST.commands.N:
             state = entityInteractOrMove(state, entity, 0, -1)
             break
@@ -19,8 +20,10 @@ export function entity_act(state: State, entity: Entity, action: Command): State
             state = entityInteractOrMove(state, entity, 1, 0)
             break
         case MANIFEST.commands.A:
+            state = entityContextualAction(state, entity, MANIFEST.commands.A)
             break
         case MANIFEST.commands.B:
+            state = entityContextualAction(state, entity, MANIFEST.commands.B)
             break
         default:
     }
@@ -59,6 +62,19 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
         map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
+    }
+
+    return state
+}
+
+export function entityContextualAction(state: State, entity: Entity, command: Command): State {
+    const actions = actions_get(state, entity)
+    const action = actions[command.key]
+
+    switch (action) {
+        case MANIFEST.actions.Wait:
+            break
+        default:
     }
 
     return state
