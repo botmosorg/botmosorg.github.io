@@ -181,7 +181,8 @@ export const MANIFEST = {
     "items": {
         "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
         "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
-        "junk": new Item("Junk", "Broken bot", "%", "cyberyellow", 1),
+        "gold": new Item("Gold", "A gold coin", "g", "cyberyellow", 0, 0, 1),
+        "junk": new Item("Junk", "Broken bot", "%", "gray", 0, 1),
         // Tools
         "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1),
@@ -631,7 +632,7 @@ _________##E###_________________
 #^|...........................................................................^#
 #^..ITEMS.....................................................................^#
 #^|...........................................................................^#
-#^....Junk,_restores_minor_energy.............................................^#
+#^....Junk,_minor_matter_source...............................................^#
 #^|...Energy,_restores_energy.................................................^#
 #^....Battery,_increases_maximum_energy.......................................^#
 #^|...Various_tools,_e:g:_a_Wrench............................................^#

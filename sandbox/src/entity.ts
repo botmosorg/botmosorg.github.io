@@ -10,6 +10,8 @@ export interface Entity {
     y: number,
     energy: number,
     energyMax: number,
+    gold: number,
+    matter: number,
     options: any
 }
 
@@ -22,6 +24,8 @@ export function entities_create(state: State, id: string, type: EntityType, mapI
         "y": y,
         "energy": 10,
         "energyMax": 10,
+        "gold": 0,
+        "matter": 0,
         "options": options
     }
 
@@ -73,6 +77,8 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
     entity.type = newType
     entity.energy = newType.energyMax
     entity.energyMax = newType.energyMax
+    entity.gold = 0
+    entity.matter = 0
 
     if (!isMoveableObject(entity)) {
         state.tools[entity.id] = undefined

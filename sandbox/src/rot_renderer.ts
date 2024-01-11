@@ -93,6 +93,8 @@ function rot_render(state: State, camera) {
         if (!!playerEntity) {
             lines.push("Hull: " + playerEntity.type.icon + " (" + playerEntity.type.name + ")")
             lines.push("Energy: " + playerEntity.energy + '/' + playerEntity.energyMax)
+            lines.push("Gold: " + playerEntity.gold)
+            lines.push("Matter: " + playerEntity.matter)
             const equippedItem = items_get_equipped(state, playerId)
             if (!!equippedItem) {
                 lines.push("Tool: " + equippedItem.type.name)
