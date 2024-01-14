@@ -179,7 +179,7 @@ export function entities_tile_energy_update(state: State): State {
     return state
 }
 
-export function entitymapUpdatedEventSubscriber(state: State, payload: EntityMapUpdatedEvent): State {
+export function entity_map_entitymapUpdatedEvent_subscriber(state: State, payload: EntityMapUpdatedEvent): State {
     const entity = state.entities[payload.entityId]
 
     switch (payload.tileType) {

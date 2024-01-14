@@ -1,6 +1,6 @@
 import { debug_log } from "./debug";
 import { entities_create, entities_create_boulder, entities_create_box } from "./entity";
-import { entity_act, entitymapUpdatedEventSubscriber } from "./entity_map";
+import { entity_act, entity_map_entitymapUpdatedEvent_subscriber } from "./entity_map";
 import { subscribe } from "./events";
 import { items_create, items_equip } from "./item";
 import { Command, MANIFEST } from "./manifest";
@@ -20,7 +20,7 @@ export default class Game {
     init(): State {
         this.state = states_create()
 
-        this.state = subscribe(this.state, "entitymap.updated.event", entitymapUpdatedEventSubscriber)
+        this.state = subscribe(this.state, "entitymap.updated.event", entity_map_entitymapUpdatedEvent_subscriber)
 
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
