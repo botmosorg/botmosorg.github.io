@@ -1,3 +1,5 @@
+import { Command } from "./manifest"
+
 export interface State {
     _AIs: object,
     _combatQueue: Array<{entityId: string, otherEntityId: string}>,
@@ -5,6 +7,7 @@ export interface State {
     _energyQueue: Array<{entityId: string, energyDelta: number}>
     _eventSubscribers: object,
     _menuOpen: boolean,
+    actionLog: Array<string>
     currentMapId: string,
     entities: object,
     items: object,
@@ -21,6 +24,7 @@ export function states_create(): State {
         _energyQueue: [],
         _eventSubscribers: {},
         _menuOpen: false,
+        actionLog: [],
         currentMapId: "",
         entities: {},
         items: {},

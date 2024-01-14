@@ -9,7 +9,7 @@ describe('Game', () => {
         game.play('NNNWWWWWBBBWWSSSSSSSSSSSSSSSSEEWE')
 
         expect(game.state.entities["player"]).toBeUndefined()
-        expect(game.actionLog.join('')).toBe('NNNWWWWWBBBWWSSSSSSSSSSSSSSSSEEWE')
+        expect(game.state.actionLog.join('')).toBe('NNNWWWWWBBBWWSSSSSSSSSSSSSSSSEEWE')
     })
 
     test('should play through the manual', () => {

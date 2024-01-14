@@ -12,16 +12,13 @@ import { State, states_create } from "./state";
 import { systems_per_turn_update } from "./systems";
 
 export default class Game {
-    actionLog: Array<string>
     state: State;
 
     constructor() {
-        this.actionLog = []
-        this.state = states_create()
     }
 
     init(): State {
-        this.actionLog = []
+        this.state = states_create()
 
         this.state = subscribe(this.state, "entitymap.updated.event", entitymapUpdatedEventSubscriber)
 
@@ -101,11 +98,11 @@ export default class Game {
                     this.state = systems_per_turn_update(this.state)
                 }
 
-                this.actionLog.push(action.key)
+                this.state.actionLog.push(action.key)
                 //debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
-            debug_log("Game over! " + this.actionLog.length + " Turns: " + this.actionLog.join(''))
+            debug_log("Game over! " + this.state.actionLog.length + " Turns: " + this.state.actionLog.join(''))
 
             this.state.currentMapId = "botmos_hull_selection"
             this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})

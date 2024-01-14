@@ -29,7 +29,7 @@ onKeyDown(function(action) {
 // API Start
 if (!!!(window as any).BMActionLog) {
     (window as any).BMActionLog = function (): string {
-        const actions = game.actionLog.join('')
+        const actions = game.state.actionLog.join('')
         return actions
     }
 }
