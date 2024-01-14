@@ -9,8 +9,12 @@ import { State } from "./state";
 export interface EntityMapUpdatedEvent extends Event {
     entityId: string,
     oldMapId: string,
+    oldX: number,
+    oldY: number,
+    oldTileType: Tile
     newMapId: string,
-    tileType: Tile
+    newX: number,
+    newY: number,
 }
 
 export function entity_act(state: State, entity: Entity, command: Command): State {
@@ -107,8 +111,8 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
 
     // Portal
     let tile = map.getTile(entity.x, entity.y);
-    if (tile.type.name.startsWith('portal')
-        && !!state.maps[tile.options.mapId]) {
+    if (tile.type.name.startsWith('portal')) {
+        //&& !!state.maps[tile.options.mapId]) {
         state = _enterPortalOrPlanet(state, entity, tile)
     }
 
@@ -137,17 +141,22 @@ function _enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
             y: entity.y
         }
     }
-    const oldMapId = entity.mapId
+
+    const eventPayload: EntityMapUpdatedEvent = {
+        entityId: entity.id,
+        oldMapId: entity.mapId,
+        oldX: entity.x,
+        oldY: entity.y,
+        oldTileType: tile.type,
+        newMapId: tile.options.mapId,
+        newX: tile.options.x,
+        newY: tile.options.y
+    }
+
     entity.mapId = tile.options.mapId;
     entity.x = tile.options.x;
     entity.y = tile.options.y;
 
-    const eventPayload: EntityMapUpdatedEvent = {
-        entityId: entity.id,
-        oldMapId: oldMapId,
-        newMapId: entity.mapId,
-        tileType: tile.type
-    }
     state = publish(state, "entitymap.updated.event", eventPayload)
 
     return state;
@@ -182,7 +191,7 @@ export function entities_tile_energy_update(state: State): State {
 export function entity_map_entitymapUpdatedEvent_subscriber(state: State, payload: EntityMapUpdatedEvent): State {
     const entity = state.entities[payload.entityId]
 
-    switch (payload.tileType) {
+    switch (payload.oldTileType) {
         case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
         case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
         default:

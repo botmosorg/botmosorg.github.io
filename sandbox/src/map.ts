@@ -1,4 +1,7 @@
+import { entities_get_by } from "./entity";
+import { items_destroy, items_get_by } from "./item";
 import { MANIFEST, Tile as TileType } from "./manifest";
+import { State } from "./state";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
 
@@ -22,6 +25,25 @@ export function tiles_create(type: TileType, options={}): Tile {
 
 export function tiles_is_space_tile(tile: Tile): boolean {
     return tile.type.name.startsWith("space")
+}
+
+export function maps_destroy(state: State, mapId: string): State {
+    const items = items_get_by(state, mapId)
+    for (let i=0; i<items.length; i++) {
+        const item = items[i]
+        state = items_destroy(state, item.id)
+    }
+
+    const entities = entities_get_by(state, mapId)
+    for (let i=0; i<entities.length; i++) {
+        const entity = entities[i]
+        state._despawnQueue.push(entity.id)
+    }
+
+    state.maps[mapId] = undefined
+    delete state.maps[mapId]
+
+    return state
 }
 
 export class Map {

@@ -6,6 +6,7 @@ import { items_create, items_equip } from "./item";
 import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
 import { maps_create_solar_system } from "./map_generator_solar_system";
+import { map_shop_entitymapUpdatedEvent_subscriber } from "./map_shop";
 import { players_get_current } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
 import { State, states_create } from "./state";
@@ -21,6 +22,7 @@ export default class Game {
         this.state = states_create()
 
         this.state = subscribe(this.state, "entitymap.updated.event", entity_map_entitymapUpdatedEvent_subscriber)
+        this.state = subscribe(this.state, "entitymap.updated.event", map_shop_entitymapUpdatedEvent_subscriber)
 
         this.state = maps_create_arena(this.state)
         this.state = maps_create_overworld(this.state)
