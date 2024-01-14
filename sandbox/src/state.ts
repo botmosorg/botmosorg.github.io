@@ -3,6 +3,7 @@ export interface State {
     _combatQueue: Array<{entityId: string, otherEntityId: string}>,
     _despawnQueue: Array<string>,
     _energyQueue: Array<{entityId: string, energyDelta: number}>
+    _eventSubscribers: object,
     _menuOpen: boolean,
     currentMapId: string,
     entities: object,
@@ -18,6 +19,7 @@ export function states_create(): State {
         _combatQueue: [],
         _despawnQueue: [],
         _energyQueue: [],
+        _eventSubscribers: {},
         _menuOpen: false,
         currentMapId: "",
         entities: {},
