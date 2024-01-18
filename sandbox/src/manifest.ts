@@ -505,7 +505,7 @@ _________##E###_________________
 !!i portalhidden playground 1 0
 !!1 portalstartaerobot bot_factory 4 15
 !!2 portalstartworkbot bot_factory 4 16
-!!? portalstart?
+!!? _portalstart?
 !!D portal bot_station 0 29
 ##_____BotMos_____##
 #_Choose_your_hull_#
@@ -714,7 +714,7 @@ _________##E###_________________
         "portalhidden": new Tile("portalhidden", "Hidden gateway to another map", "#", "gray", "black"),
         "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "B", "white"),
         "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
-        "portalstart?": new Tile("portalstart?", "Not unlocked, yet!", "?", "white"),
+        "_portalstart?": new Tile("_portalstart?", "Not unlocked, yet!", "?", "white"),
         "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
         "spacetree": new Tile("spacetree", "Forest as seen from space", "", "brown", "brown"),
         "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~", "cybercyan", "cyberblue"),

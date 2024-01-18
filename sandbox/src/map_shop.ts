@@ -4,7 +4,7 @@ import { maps_destroy, maps_parse } from "./map";
 import { State } from "./state";
 
 const SHOP_INSTANCE_MAP: string = `!
-!!id shop_instance_
+!!id shop_instance
 !!size 48 16
 !!# wall
 !!. void
@@ -29,14 +29,14 @@ const SHOP_INSTANCE_MAP: string = `!
 `
 
 export function map_shop_entitymapUpdatedEvent_subscriber(state: State, payload: EntityMapUpdatedEvent): State {
-    if (payload.oldMapId.startsWith("shop_instance")) {
+    if (payload?.oldMapId?.startsWith("shop_instance")) {
         state = maps_destroy(state, payload.oldMapId)
 
         const newMap = state.maps[payload.newMapId]
         const previousTile = newMap.getTile(payload.newX, payload.newY)
         newMap.setTile(payload.newX, payload.newY, previousTile.type, {mapId: "shop_instance", x: payload.oldX, y: payload.oldY})
     }
-    if (payload.newMapId.startsWith("shop_instance")) {
+    if (payload?.newMapId?.startsWith("shop_instance")) {
         const map = maps_parse(SHOP_INSTANCE_MAP)
         map.id += "_" + payload.oldMapId + "_" + payload.entityId
         map.setTile(payload.newX, payload.newY, MANIFEST.tiles.portal, {mapId: payload.oldMapId, x: payload.oldX, y: payload.oldY})
