@@ -21,7 +21,11 @@ const _BM_INPUT = {
 
 let _inputQueue: Command[] = []
 let _callback = undefined
-let timeOfLastActionInMs: number = 0
+let _timeOfLastActionInMs: number = 0
+
+/**
+ * Keyboard controls
+ */
 document.body.addEventListener("keydown", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -66,13 +70,13 @@ document.body.addEventListener("keydown", function(e) {
         default:
     }
 
-    triggerCallback(get_action())
+    _triggerCallback(_get_action())
 })
 
-function triggerCallback(command: Command) {
+function _triggerCallback(command: Command) {
     const currentTimeInMs = Date.now();
-    if (_callback !== undefined && currentTimeInMs - timeOfLastActionInMs >= 80) {
-        timeOfLastActionInMs = currentTimeInMs
+    if (_callback !== undefined && currentTimeInMs - _timeOfLastActionInMs >= 80) {
+        _timeOfLastActionInMs = currentTimeInMs
         _callback(command)
     }
 }
@@ -134,31 +138,31 @@ document.body.addEventListener("click", function(e) {
     const heightThird = height / 3;
 
     if (x >= widthThird && x < 2 * widthThird && y < heightThird) {
-        triggerCallback(MANIFEST.commands.N)
+        _triggerCallback(MANIFEST.commands.N)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x < widthThird && y < heightThird) {
-        triggerCallback(MANIFEST.commands.B)
+        _triggerCallback(MANIFEST.commands.B)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= 2 * widthThird && y < heightThird) {
-        triggerCallback(MANIFEST.commands.A)
+        _triggerCallback(MANIFEST.commands.A)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x < widthThird && y >= heightThird && y < 2 * heightThird) {
-        triggerCallback(MANIFEST.commands.W)
+        _triggerCallback(MANIFEST.commands.W)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
-        triggerCallback(MANIFEST.commands.E)
+        _triggerCallback(MANIFEST.commands.E)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= widthThird && x < 2 * widthThird && y >= 2 * heightThird) {
-        triggerCallback(MANIFEST.commands.S)
+        _triggerCallback(MANIFEST.commands.S)
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= widthThird && x < 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
-        triggerCallback(MANIFEST.commands.M)
+        _triggerCallback(MANIFEST.commands.M)
         _preventDefaultAndStopPropagation(e);
     }
 });
@@ -224,13 +228,18 @@ function _updateInputQueue() {
     }
 }
 
-export function onKeyDown(callback: Function) {
-    _callback = callback
-}
-
-export function get_action(): Command {
+function _get_action(): Command {
     _updateInputQueue();
     let action = _inputQueue.shift() || null;
     _inputQueue = [];
     return action;
+}
+
+/**
+ * Gamepad controls
+ */
+// TODO
+
+export function onKeyDown(callback: Function) {
+    _callback = callback
 }
