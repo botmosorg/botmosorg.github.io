@@ -237,8 +237,56 @@ function _get_action(): Command {
 
 /**
  * Gamepad controls
+ *
+ * On Xbox/Playstation controllers, see https://gabrielromualdo.com/articles/2020-12-15-how-to-use-the-html5-gamepad-api
+ *
+ * Index | Button
+ * 0       A/X
+ * 1       B/O
+ * 2       X/Square
+ * 3       Y/Triangle
+ * 9       Show Menu
+ * 12      Up
+ * 13      Down
+ * 14      Left
+ * 15      Right
  */
-// TODO
+let _gamepadPollingInterval = undefined
+window.addEventListener("gamepadconnected", (e) => {
+    console.log(
+        "Gamepad connected at index %d: %s. %d buttons, %d axes",
+        e.gamepad?.index,
+        e.gamepad?.id,
+        e.gamepad?.buttons.length,
+        e.gamepad?.axes.length,
+    );
+    console.log(navigator.getGamepads()[e.gamepad?.index])
+
+    _gamepadPollingInterval = setInterval(function(){
+        let gamepad = navigator.getGamepads()[e.gamepad?.index];
+
+        _BM_INPUT.right = gamepad.buttons[15].pressed
+        _BM_INPUT.left = gamepad.buttons[14].pressed
+        _BM_INPUT.down = gamepad.buttons[13].pressed
+        _BM_INPUT.up = gamepad.buttons[12].pressed
+        _BM_INPUT.a = gamepad.buttons[0].pressed || gamepad.buttons[2].pressed
+        _BM_INPUT.b = gamepad.buttons[1].pressed || gamepad.buttons[3].pressed
+        _BM_INPUT.menu = gamepad.buttons[9].pressed
+
+        if (_BM_INPUT.right || _BM_INPUT.left || _BM_INPUT.down || _BM_INPUT.up || _BM_INPUT.a || _BM_INPUT.b || _BM_INPUT.menu) {
+            _triggerCallback(_get_action())
+        }
+      }, 100)
+});
+
+window.addEventListener("gamepaddisconnected", (e) => {
+    console.log(
+        "Gamepad disconnected from index %d: %s",
+        e.gamepad?.index,
+        e.gamepad?.id,
+    );
+    clearInterval(_gamepadPollingInterval)
+});
 
 export function onKeyDown(callback: Function) {
     _callback = callback
