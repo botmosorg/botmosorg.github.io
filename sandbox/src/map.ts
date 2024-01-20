@@ -1,4 +1,5 @@
-import { entities_get_by } from "./entity";
+import { ai_destroy } from "./ai";
+import { entities_destroy, entities_get_by } from "./entity";
 import { items_destroy, items_get_by } from "./item";
 import { MANIFEST, Tile as TileType } from "./manifest";
 import { State } from "./state";
@@ -37,7 +38,8 @@ export function maps_destroy(state: State, mapId: string): State {
     const entities = entities_get_by(state, mapId)
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i]
-        state._despawnQueue.push(entity.id)
+        state = entities_destroy(state, entity.id)
+        state = ai_destroy(state, entity.id)
     }
 
     state.maps[mapId] = undefined

@@ -53,6 +53,33 @@ export function items_create_junk(state: State, matter: number, mapId: string, x
     return state
 }
 
+/**
+ *
+ * @param state
+ * @param type
+ * @param mapId
+ * @param x
+ * @param y
+ * @param goldCost Negative to indicate a cost
+ * @param matterCost Negative to indicate a cost
+ */
+export function items_create_buyable(state: State, type: ItemType, mapId: string, x=0, y=0, goldCost: number, matterCost: number): State {
+    const id = _items_id_create(mapId, x, y)
+    const item = {
+        "id": id,
+        "type": type,
+        "mapId": mapId,
+        "x": x,
+        "y": y,
+        "energy": type.energyDelta,
+        "gold": goldCost,
+        "matter": matterCost
+    }
+    state.items[item.id] = item
+
+    return state
+}
+
 function _items_id_create(mapId: string, x: number, y: number): string {
     return "item," + mapId + "," + x + "," + y
 }
