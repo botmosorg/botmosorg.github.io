@@ -253,6 +253,7 @@ function _get_action(): Command {
  */
 let _gamepadPollingInterval = undefined
 window.addEventListener("gamepadconnected", (e) => {
+    /*
     console.log(
         "Gamepad connected at index %d: %s. %d buttons, %d axes",
         e.gamepad?.index,
@@ -261,6 +262,7 @@ window.addEventListener("gamepadconnected", (e) => {
         e.gamepad?.axes.length,
     );
     console.log(navigator.getGamepads()[e.gamepad?.index])
+    */
 
     _gamepadPollingInterval = setInterval(function(){
         let gamepad = navigator.getGamepads()[e.gamepad?.index];
@@ -280,11 +282,13 @@ window.addEventListener("gamepadconnected", (e) => {
 });
 
 window.addEventListener("gamepaddisconnected", (e) => {
+    /*
     console.log(
         "Gamepad disconnected from index %d: %s",
         e.gamepad?.index,
         e.gamepad?.id,
     );
+    */
     clearInterval(_gamepadPollingInterval)
 });
 
