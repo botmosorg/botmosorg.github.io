@@ -284,7 +284,7 @@ O.....=..+.....#
 !!= chargepad
 !!~ water
 !!O portal bot_station 4 6
-!!E portal simplex=1337 126 121
+!!E portal solarsystem=1337 584 401
 !!^ movenorth
 !!v movesouth
 ################________________

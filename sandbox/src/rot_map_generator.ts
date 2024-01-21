@@ -44,13 +44,14 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
         tiles
     );
 
-    map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "bot_elevator", x: 11, y: 47})
-
     state.maps[mapId] = map;
 
-    state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
-    state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
-    state = items_create(state, MANIFEST.items.battery, "simplex="+MAP_SEED, 127, 130)
+    if (seed === 1337) {
+        //map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "bot_elevator", x: 11, y: 47})
+        state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 130, 127, {faction: MANIFEST.factions.Spirits})
+        state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex="+MAP_SEED, 124, 127, {faction: MANIFEST.factions.Spirits})
+        state = items_create(state, MANIFEST.items.battery, "simplex="+MAP_SEED, 127, 130)
+    }
 
     return state;
 }

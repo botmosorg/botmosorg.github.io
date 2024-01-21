@@ -1,6 +1,7 @@
 import { MANIFEST, Tile } from "./manifest";
 import { Map, tiles_create } from "./map";
 import { RNG } from "./rng";
+import { maps_create_overworld } from "./rot_map_generator";
 import { State } from "./state";
 import { range } from "./util";
 
@@ -33,20 +34,39 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
 
         const planetMapSize = rng.getItem([16, 24, 32])
         const planetMapSizeHalf = Math.floor(planetMapSize / 2) - 1
+        state = maps_create_overworld(state, seed)
+        const planet = state.maps["simplex=" + seed].sample(planetMapSize, planetMapSize).circular()
+        /*
         let planet = _emptyMap(planetMapSize, planetMapSize, MANIFEST.tiles.voidtrue)
         const tileType = rng.getItem([MANIFEST.tiles.spacerock, MANIFEST.tiles.spacetree, MANIFEST.tiles.spacewater])
         _circle(planet, planetMapSizeHalf, planetMapSizeHalf, planetMapSizeHalf, tileType)
         _fill(planet, planetMapSizeHalf, planetMapSizeHalf, tileType)
+        */
         solarsystem.pasteOnto(planet, xPlanetCenter - (planetMapSizeHalf + 1), yPlanetCenter - (planetMapSizeHalf + 1))
+        seed++
         //console.log("PASTED! " + xPlanetCenter + " " + yPlanetCenter)
     }
 
     // TODO sampling test
+    /*
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular())
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32).circular(), 0, 42)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128).circular(), 0, 75)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256).circular(), 0, 204)
+    */
+
+    // Bot station
+    solarsystem.setTile(584, 401, MANIFEST.tiles.portal, {mapId: "bot_elevator", x: 11, y: 47})
+    solarsystem.setTile(584, 400, MANIFEST.tiles.wall)
+    solarsystem.setTile(583, 400, MANIFEST.tiles.wall)
+    solarsystem.setTile(585, 400, MANIFEST.tiles.wall)
+    solarsystem.setTile(584, 399, MANIFEST.tiles.wall)
+    solarsystem.setTile(583, 399, MANIFEST.tiles.wall)
+    solarsystem.setTile(585, 399, MANIFEST.tiles.wall)
+    solarsystem.setTile(584, 398, MANIFEST.tiles.wall)
+    solarsystem.setTile(583, 398, MANIFEST.tiles.wall)
+    solarsystem.setTile(585, 398, MANIFEST.tiles.wall)
 
     return state
 }

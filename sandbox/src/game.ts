@@ -8,7 +8,7 @@ import { maps_parse } from "./map"
 import { maps_create_solar_system } from "./map_generator_solar_system";
 import { map_shop_entitymapUpdatedEvent_subscriber } from "./map_shop";
 import { players_get_current_id } from "./player";
-import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
+import { maps_create_arena } from "./rot_map_generator"
 import { State, states_create } from "./state";
 import { systems_per_turn_update } from "./systems";
 
@@ -25,7 +25,6 @@ export default class Game {
         this.state = subscribe(this.state, "entitymap.updated.event", map_shop_entitymapUpdatedEvent_subscriber)
 
         this.state = maps_create_arena(this.state)
-        this.state = maps_create_overworld(this.state)
         this.state = maps_create_solar_system(this.state)
 
         for (let mapId in MANIFEST.maps) {

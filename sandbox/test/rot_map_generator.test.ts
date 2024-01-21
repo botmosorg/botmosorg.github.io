@@ -13,7 +13,7 @@ describe('maps_create_overworld', function () {
         expect(overworld.heightTiles).toEqual(256);
         expect(overworld.getTile(127, 127).type.name).toEqual("tree");
         expect(overworld.getTile(127, 128).type.name).toEqual("void");
-        expect(overworld.getTile(126, 121).type.name).toEqual("portal");
+        expect(overworld.getTile(126, 121).type.name).toEqual("rock");
         expect(overworld.getTile(135, 127).type.name).toEqual("water");
     });
 });

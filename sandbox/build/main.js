@@ -4949,7 +4949,7 @@ O.....=..+.....#
 !!= chargepad
 !!~ water
 !!O portal bot_station 4 6
-!!E portal simplex=1337 126 121
+!!E portal solarsystem=1337 584 401
 !!^ movenorth
 !!v movesouth
 ################________________
@@ -6431,8 +6431,62 @@ class RNG2 {
   }
 }
 
+// src/rot_map_generator.ts
+var ROT2 = __toESM(require_rot(), 1);
+function maps_create_overworld(state, seed = MAP_SEED) {
+  ROT2.RNG.setSeed(seed);
+  let rot_noise = new ROT2.Noise.Simplex;
+  let tiles = [];
+  for (let tile_y = 0;tile_y < CHUNK_SIZE.height * MAP_SIZE.height; tile_y++) {
+    for (let tile_x = 0;tile_x < CHUNK_SIZE.width * MAP_SIZE.width; tile_x++) {
+      let noise_val = rot_noise.get(tile_x / _noise_skew, tile_y / _noise_skew);
+      let tileType;
+      if (noise_val <= -0.5) {
+        tileType = MANIFEST.tiles.water;
+      } else if (noise_val <= 0) {
+        tileType = MANIFEST.tiles.void;
+      } else if (noise_val < 0.5) {
+        tileType = MANIFEST.tiles.tree;
+      } else {
+        tileType = MANIFEST.tiles.rock;
+      }
+      tiles.push(tiles_create(tileType));
+    }
+  }
+  const mapId = "simplex=" + seed;
+  let map3 = new Map(mapId, MAP_SIZE.width * CHUNK_SIZE.width, MAP_SIZE.height * CHUNK_SIZE.height, tiles);
+  state.maps[mapId] = map3;
+  if (seed === 1337) {
+    state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED, 130, 127, { faction: MANIFEST.factions.Spirits });
+    state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED, 124, 127, { faction: MANIFEST.factions.Spirits });
+    state = items_create(state, MANIFEST.items.battery, "simplex=" + MAP_SEED, 127, 130);
+  }
+  return state;
+}
+function maps_create_arena(state) {
+  let rotMap = new ROT2.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
+  let tiles = [];
+  rotMap.create(function(x, y, wall) {
+    let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
+    tiles[y * CHUNK_SIZE.width + x] = tiles_create(tileType);
+  });
+  let map3 = new Map("arena", CHUNK_SIZE.width, CHUNK_SIZE.height, tiles);
+  map3.setTile(1, 0, MANIFEST.tiles.portal, { mapId: "bot_station", x: 26, y: 7 });
+  state.maps["arena"] = map3;
+  state = entities_create(state, "enemy0", MANIFEST.entities.Cleaner, "arena", 8, 8, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+  state = entities_create(state, "enemy1", MANIFEST.entities.Cleaner, "arena", 9, 8, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+  state = entities_create(state, "enemy2", MANIFEST.entities.Cleaner, "arena", 11, 11, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+  state = entities_create(state, "enemy3", MANIFEST.entities.Cleaner, "arena", 6, 6, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+  state = entities_create(state, "enemy4", MANIFEST.entities.Cleaner, "arena", 12, 12, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+  state = items_create(state, MANIFEST.items.energy, "arena", 7, 7);
+  state = items_create(state, MANIFEST.items.battery, "arena", 14, 14);
+  return state;
+}
+var MAP_SEED = 1337;
+var _noise_skew = 55;
+
 // src/map_generator_solar_system.ts
-function maps_create_solar_system(state, seed = MAP_SEED) {
+function maps_create_solar_system(state, seed = MAP_SEED2) {
   let solarsystem = _emptyMap(1024, 1024, MANIFEST.tiles.void);
   solarsystem.id = "solarsystem=" + seed;
   state.maps[solarsystem.id] = solarsystem;
@@ -6453,17 +6507,21 @@ function maps_create_solar_system(state, seed = MAP_SEED) {
     yPlanetCenter += 512;
     const planetMapSize = rng2.getItem([16, 24, 32]);
     const planetMapSizeHalf = Math.floor(planetMapSize / 2) - 1;
-    let planet = _emptyMap(planetMapSize, planetMapSize, MANIFEST.tiles.voidtrue);
-    const tileType = rng2.getItem([MANIFEST.tiles.spacerock, MANIFEST.tiles.spacetree, MANIFEST.tiles.spacewater]);
-    _circle(planet, planetMapSizeHalf, planetMapSizeHalf, planetMapSizeHalf, tileType);
-    _fill(planet, planetMapSizeHalf, planetMapSizeHalf, tileType);
+    state = maps_create_overworld(state, seed);
+    const planet = state.maps["simplex=" + seed].sample(planetMapSize, planetMapSize).circular();
     solarsystem.pasteOnto(planet, xPlanetCenter - (planetMapSizeHalf + 1), yPlanetCenter - (planetMapSizeHalf + 1));
+    seed++;
   }
-  solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular());
-  solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17);
-  solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32).circular(), 0, 42);
-  solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128).circular(), 0, 75);
-  solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256).circular(), 0, 204);
+  solarsystem.setTile(584, 401, MANIFEST.tiles.portal, { mapId: "bot_elevator", x: 11, y: 47 });
+  solarsystem.setTile(584, 400, MANIFEST.tiles.wall);
+  solarsystem.setTile(583, 400, MANIFEST.tiles.wall);
+  solarsystem.setTile(585, 400, MANIFEST.tiles.wall);
+  solarsystem.setTile(584, 399, MANIFEST.tiles.wall);
+  solarsystem.setTile(583, 399, MANIFEST.tiles.wall);
+  solarsystem.setTile(585, 399, MANIFEST.tiles.wall);
+  solarsystem.setTile(584, 398, MANIFEST.tiles.wall);
+  solarsystem.setTile(583, 398, MANIFEST.tiles.wall);
+  solarsystem.setTile(585, 398, MANIFEST.tiles.wall);
   return state;
 }
 var _emptyMap = function(widthTiles, heightTiles, tileType) {
@@ -6472,29 +6530,29 @@ var _emptyMap = function(widthTiles, heightTiles, tileType) {
     tiles.push(tiles_create(tileType));
   }
   const mapId = "__temp";
-  const map3 = new Map(mapId, widthTiles, heightTiles, tiles);
-  return map3;
+  const map4 = new Map(mapId, widthTiles, heightTiles, tiles);
+  return map4;
 };
-var _randomizeVoidBackground = function(map3, rng2) {
-  for (let j = 0;j < map3.heightTiles; j++) {
-    for (let i = 0;i < map3.widthTiles; i++) {
+var _randomizeVoidBackground = function(map4, rng2) {
+  for (let j = 0;j < map4.heightTiles; j++) {
+    for (let i = 0;i < map4.widthTiles; i++) {
       if (rng2.getPercentage() <= 1) {
-        map3.setTile(i, j, rng2.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]));
+        map4.setTile(i, j, rng2.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]));
       }
     }
   }
-  return map3;
+  return map4;
 };
-var _circle = function(map3, x0, y0, radius, tileType) {
+var _circle = function(map4, x0, y0, radius, tileType) {
   let f = 1 - radius;
   let ddf_x = 1;
   let ddf_y = -2 * radius;
   let x = 0;
   let y = radius;
-  map3.setTile(x0, y0 + radius, tileType);
-  map3.setTile(x0, y0 - radius, tileType);
-  map3.setTile(x0 + radius, y0, tileType);
-  map3.setTile(x0 - radius, y0, tileType);
+  map4.setTile(x0, y0 + radius, tileType);
+  map4.setTile(x0, y0 - radius, tileType);
+  map4.setTile(x0 + radius, y0, tileType);
+  map4.setTile(x0 - radius, y0, tileType);
   while (x < y) {
     if (f >= 0) {
       y -= 1;
@@ -6504,20 +6562,20 @@ var _circle = function(map3, x0, y0, radius, tileType) {
     x += 1;
     ddf_x += 2;
     f += ddf_x;
-    map3.setTile(x0 + x, y0 + y, tileType);
-    map3.setTile(x0 - x, y0 + y, tileType);
-    map3.setTile(x0 + x, y0 - y, tileType);
-    map3.setTile(x0 - x, y0 - y, tileType);
-    map3.setTile(x0 + y, y0 + x, tileType);
-    map3.setTile(x0 - y, y0 + x, tileType);
-    map3.setTile(x0 + y, y0 - x, tileType);
-    map3.setTile(x0 - y, y0 - x, tileType);
+    map4.setTile(x0 + x, y0 + y, tileType);
+    map4.setTile(x0 - x, y0 + y, tileType);
+    map4.setTile(x0 + x, y0 - y, tileType);
+    map4.setTile(x0 - x, y0 - y, tileType);
+    map4.setTile(x0 + y, y0 + x, tileType);
+    map4.setTile(x0 - y, y0 + x, tileType);
+    map4.setTile(x0 + y, y0 - x, tileType);
+    map4.setTile(x0 - y, y0 - x, tileType);
   }
-  return map3;
+  return map4;
 };
-var _fill = function(map3, x, y, tileType) {
-  const xsize = map3.widthTiles;
-  const ysize = map3.heightTiles;
+var _fill = function(map4, x, y, tileType) {
+  const xsize = map4.widthTiles;
+  const ysize = map4.heightTiles;
   const Q = [];
   Q.push({ x, y });
   let node = undefined;
@@ -6527,15 +6585,15 @@ var _fill = function(map3, x, y, tileType) {
     if (node.x + 1 < xsize) {
       E = { x: node.x + 1, y: node.y };
     }
-    while (map3.getTile(W.x, W.y).type !== tileType) {
-      map3.setTile(W.x, W.y, tileType);
+    while (map4.getTile(W.x, W.y).type !== tileType) {
+      map4.setTile(W.x, W.y, tileType);
       if (W.y + 1 < ysize) {
-        if (map3.getTile(W.x, W.y + 1).type !== tileType) {
+        if (map4.getTile(W.x, W.y + 1).type !== tileType) {
           Q.push({ x: W.x, y: W.y + 1 });
         }
       }
       if (W.y - 1 >= 0) {
-        if (map3.getTile(W.x, W.y - 1).type !== tileType) {
+        if (map4.getTile(W.x, W.y - 1).type !== tileType) {
           Q.push({ x: W.x, y: W.y - 1 });
         }
       }
@@ -6545,15 +6603,15 @@ var _fill = function(map3, x, y, tileType) {
         break;
       }
     }
-    while (map3.getTile(E.x, E.y).type !== tileType) {
-      map3.setTile(E.x, E.y, tileType);
+    while (map4.getTile(E.x, E.y).type !== tileType) {
+      map4.setTile(E.x, E.y, tileType);
       if (E.y + 1 < ysize) {
-        if (map3.getTile(E.x, E.y + 1).type !== tileType) {
+        if (map4.getTile(E.x, E.y + 1).type !== tileType) {
           Q.push({ x: E.x, y: E.y + 1 });
         }
       }
       if (E.y - 1 >= 0) {
-        if (map3.getTile(E.x, E.y - 1).type !== tileType) {
+        if (map4.getTile(E.x, E.y - 1).type !== tileType) {
           Q.push({ x: E.x, y: E.y - 1 });
         }
       }
@@ -6564,9 +6622,9 @@ var _fill = function(map3, x, y, tileType) {
       }
     }
   }
-  return map3;
+  return map4;
 };
-var MAP_SEED = 1337;
+var MAP_SEED2 = 1337;
 
 // src/map_shop.ts
 function map_shop_entitymapUpdatedEvent_subscriber(state, payload) {
@@ -6577,24 +6635,24 @@ function map_shop_entitymapUpdatedEvent_subscriber(state, payload) {
     newMap.setTile(payload.newX, payload.newY, previousTile.type, { mapId: "shop_instance", x: payload.oldX, y: payload.oldY });
   }
   if (payload?.newMapId?.startsWith("shop_instance")) {
-    const map4 = maps_parse(SHOP_INSTANCE_MAP);
-    map4.id += "_" + payload.oldMapId + "_" + payload.entityId;
-    map4.setTile(payload.newX, payload.newY, MANIFEST.tiles.portal, { mapId: payload.oldMapId, x: payload.oldX, y: payload.oldY });
+    const map5 = maps_parse(SHOP_INSTANCE_MAP);
+    map5.id += "_" + payload.oldMapId + "_" + payload.entityId;
+    map5.setTile(payload.newX, payload.newY, MANIFEST.tiles.portal, { mapId: payload.oldMapId, x: payload.oldX, y: payload.oldY });
     const oldMap = state.maps[payload.oldMapId];
-    oldMap.setTile(payload.oldX, payload.oldY, payload.oldTileType, { mapId: map4.id, x: payload.newX, y: payload.newY });
-    const entity6 = state.entities[payload.entityId];
-    if (entity6.id.startsWith("player")) {
-      state.currentMapId = map4.id;
+    oldMap.setTile(payload.oldX, payload.oldY, payload.oldTileType, { mapId: map5.id, x: payload.newX, y: payload.newY });
+    const entity7 = state.entities[payload.entityId];
+    if (entity7.id.startsWith("player")) {
+      state.currentMapId = map5.id;
     }
-    entity6.mapId = map4.id;
-    entity6.x = payload.newX;
-    entity6.Y = payload.newY;
-    state.maps[map4.id] = map4;
-    state = items_create_buyable(state, MANIFEST.items.hammer, map4.id, 4, 4, 0, -200);
-    state = items_create_buyable(state, MANIFEST.items.battery, map4.id, 4, 6, 0, -200);
-    state = items_create_buyable(state, MANIFEST.items.gold, map4.id, 4, 8, 0, -1e4);
-    state = entities_create(state, map4.id + "_shopkeeper", MANIFEST.entities.AeroBot, map4.id, 6, 2, { faction: entity6.options.faction });
-    state = entities_create(state, map4.id + "_shopper", MANIFEST.entities.WorkBot, map4.id, 1, 12, { faction: entity6.options.faction });
+    entity7.mapId = map5.id;
+    entity7.x = payload.newX;
+    entity7.Y = payload.newY;
+    state.maps[map5.id] = map5;
+    state = items_create_buyable(state, MANIFEST.items.hammer, map5.id, 4, 4, 0, -200);
+    state = items_create_buyable(state, MANIFEST.items.battery, map5.id, 4, 6, 0, -200);
+    state = items_create_buyable(state, MANIFEST.items.gold, map5.id, 4, 8, 0, -1e4);
+    state = entities_create(state, map5.id + "_shopkeeper", MANIFEST.entities.AeroBot, map5.id, 6, 2, { faction: entity7.options.faction });
+    state = entities_create(state, map5.id + "_shopper", MANIFEST.entities.WorkBot, map5.id, 1, 12, { faction: entity7.options.faction });
   }
   return state;
 }
@@ -6677,59 +6735,6 @@ var SHOP_INSTANCE_MAP = `!
 #-............................................;#
 ################################################
 `;
-
-// src/rot_map_generator.ts
-var ROT2 = __toESM(require_rot(), 1);
-function maps_create_overworld(state, seed = MAP_SEED2) {
-  ROT2.RNG.setSeed(seed);
-  let rot_noise = new ROT2.Noise.Simplex;
-  let tiles = [];
-  for (let tile_y = 0;tile_y < CHUNK_SIZE.height * MAP_SIZE.height; tile_y++) {
-    for (let tile_x = 0;tile_x < CHUNK_SIZE.width * MAP_SIZE.width; tile_x++) {
-      let noise_val = rot_noise.get(tile_x / _noise_skew, tile_y / _noise_skew);
-      let tileType;
-      if (noise_val <= -0.5) {
-        tileType = MANIFEST.tiles.water;
-      } else if (noise_val <= 0) {
-        tileType = MANIFEST.tiles.void;
-      } else if (noise_val < 0.5) {
-        tileType = MANIFEST.tiles.tree;
-      } else {
-        tileType = MANIFEST.tiles.rock;
-      }
-      tiles.push(tiles_create(tileType));
-    }
-  }
-  const mapId = "simplex=" + seed;
-  let map5 = new Map(mapId, MAP_SIZE.width * CHUNK_SIZE.width, MAP_SIZE.height * CHUNK_SIZE.height, tiles);
-  map5.setTile(126, 121, MANIFEST.tiles.portal, { mapId: "bot_elevator", x: 11, y: 47 });
-  state.maps[mapId] = map5;
-  state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED2, 130, 127, { faction: MANIFEST.factions.Spirits });
-  state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED2, 124, 127, { faction: MANIFEST.factions.Spirits });
-  state = items_create(state, MANIFEST.items.battery, "simplex=" + MAP_SEED2, 127, 130);
-  return state;
-}
-function maps_create_arena(state) {
-  let rotMap = new ROT2.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
-  let tiles = [];
-  rotMap.create(function(x, y, wall) {
-    let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
-    tiles[y * CHUNK_SIZE.width + x] = tiles_create(tileType);
-  });
-  let map5 = new Map("arena", CHUNK_SIZE.width, CHUNK_SIZE.height, tiles);
-  map5.setTile(1, 0, MANIFEST.tiles.portal, { mapId: "bot_station", x: 26, y: 7 });
-  state.maps["arena"] = map5;
-  state = entities_create(state, "enemy0", MANIFEST.entities.Cleaner, "arena", 8, 8, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
-  state = entities_create(state, "enemy1", MANIFEST.entities.Cleaner, "arena", 9, 8, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
-  state = entities_create(state, "enemy2", MANIFEST.entities.Cleaner, "arena", 11, 11, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
-  state = entities_create(state, "enemy3", MANIFEST.entities.Cleaner, "arena", 6, 6, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
-  state = entities_create(state, "enemy4", MANIFEST.entities.Cleaner, "arena", 12, 12, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
-  state = items_create(state, MANIFEST.items.energy, "arena", 7, 7);
-  state = items_create(state, MANIFEST.items.battery, "arena", 14, 14);
-  return state;
-}
-var MAP_SEED2 = 1337;
-var _noise_skew = 55;
 
 // src/state.ts
 function states_create() {
@@ -6818,7 +6823,6 @@ class Game {
     this.state = subscribe(this.state, "entitymap.updated.event", entity_map_entitymapUpdatedEvent_subscriber);
     this.state = subscribe(this.state, "entitymap.updated.event", map_shop_entitymapUpdatedEvent_subscriber);
     this.state = maps_create_arena(this.state);
-    this.state = maps_create_overworld(this.state);
     this.state = maps_create_solar_system(this.state);
     for (let mapId in MANIFEST.maps) {
       this.state.maps[mapId] = maps_parse(MANIFEST.maps[mapId]);
