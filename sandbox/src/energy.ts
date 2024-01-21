@@ -1,6 +1,5 @@
 import { isMoveableObject } from "./entity";
 import { items_create_junk } from "./item";
-import { MANIFEST } from "./manifest";
 import { State } from "./state";
 
 export function energy_update(state: State): State {
