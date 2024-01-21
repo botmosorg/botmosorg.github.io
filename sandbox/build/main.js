@@ -6436,9 +6436,11 @@ var ROT2 = __toESM(require_rot(), 1);
 function maps_create_overworld(state, seed = MAP_SEED) {
   ROT2.RNG.setSeed(seed);
   let rot_noise = new ROT2.Noise.Simplex;
+  const mapWidthInTiles = CHUNK_SIZE.width * MAP_SIZE.width;
+  const mapHeightInTiles = CHUNK_SIZE.height * MAP_SIZE.height;
   let tiles = [];
-  for (let tile_y = 0;tile_y < CHUNK_SIZE.height * MAP_SIZE.height; tile_y++) {
-    for (let tile_x = 0;tile_x < CHUNK_SIZE.width * MAP_SIZE.width; tile_x++) {
+  for (let tile_y = 0;tile_y < mapHeightInTiles; tile_y++) {
+    for (let tile_x = 0;tile_x < mapWidthInTiles; tile_x++) {
       let noise_val = rot_noise.get(tile_x / _noise_skew, tile_y / _noise_skew);
       let tileType;
       if (noise_val <= -0.5) {
@@ -6454,12 +6456,33 @@ function maps_create_overworld(state, seed = MAP_SEED) {
     }
   }
   const mapId = "simplex=" + seed;
-  let map3 = new Map(mapId, MAP_SIZE.width * CHUNK_SIZE.width, MAP_SIZE.height * CHUNK_SIZE.height, tiles);
+  let map3 = new Map(mapId, mapWidthInTiles, mapHeightInTiles, tiles);
   state.maps[mapId] = map3;
   if (seed === 1337) {
     state = entities_create(state, "npc0", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED, 130, 127, { faction: MANIFEST.factions.Spirits });
     state = entities_create(state, "npc1", MANIFEST.entities.Pioneer, "simplex=" + MAP_SEED, 124, 127, { faction: MANIFEST.factions.Spirits });
     state = items_create(state, MANIFEST.items.battery, "simplex=" + MAP_SEED, 127, 130);
+  } else {
+    const rng2 = new RNG2(seed);
+    for (let tile_y = 0;tile_y < mapHeightInTiles; tile_y++) {
+      for (let tile_x = 0;tile_x < mapWidthInTiles; tile_x++) {
+        const tile = map3.getTile(tile_x, tile_y);
+        if (rng2.getPercentage() <= 1 && (tile.type === MANIFEST.tiles.void || tile.type === MANIFEST.tiles.tree)) {
+          const toGenerate = rng2.getItem(["pioneer", "junk", "matter"]);
+          switch (toGenerate) {
+            case "pioneer":
+              state = entities_create(state, map3.id + "_pioneer_" + tile_x + "_" + tile_y, MANIFEST.entities.Pioneer, map3.id, tile_x, tile_y, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange });
+              break;
+            case "junk":
+              state = items_create(state, MANIFEST.items.junk, mapId, tile_x, tile_y);
+              break;
+            case "matter":
+              state = items_create(state, MANIFEST.items.matter, mapId, tile_x, tile_y);
+              break;
+          }
+        }
+      }
+    }
   }
   return state;
 }
@@ -6490,22 +6513,22 @@ function maps_create_solar_system(state, seed = MAP_SEED2) {
   let solarsystem = _emptyMap(1024, 1024, MANIFEST.tiles.void);
   solarsystem.id = "solarsystem=" + seed;
   state.maps[solarsystem.id] = solarsystem;
-  const rng2 = new RNG2(seed);
-  const numberOfPlanets = rng2.getItem([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  const rng3 = new RNG2(seed);
+  const numberOfPlanets = rng3.getItem([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
   let consumedRadius = 128;
   let leftoverRadius = 512 - consumedRadius;
   const radiusPerPlanet = Math.floor(leftoverRadius / numberOfPlanets);
-  solarsystem = _randomizeVoidBackground(solarsystem, rng2);
+  solarsystem = _randomizeVoidBackground(solarsystem, rng3);
   let sun = _emptyMap(128, 128, MANIFEST.tiles.voidtrue);
   _circle(sun, 63, 63, 62, MANIFEST.tiles.sun);
   _fill(sun, 63, 63, MANIFEST.tiles.sun);
   solarsystem.pasteOnto(sun, 448, 448);
   for (let radius = consumedRadius;radius < 512; radius += radiusPerPlanet) {
-    let xPlanetCenter = rng2.getItem([-1, 1]) * rng2.getItem(range(radius));
-    let yPlanetCenter = rng2.getItem([-1, 1]) * Math.floor(Math.sqrt(radius * radius - xPlanetCenter * xPlanetCenter));
+    let xPlanetCenter = rng3.getItem([-1, 1]) * rng3.getItem(range(radius));
+    let yPlanetCenter = rng3.getItem([-1, 1]) * Math.floor(Math.sqrt(radius * radius - xPlanetCenter * xPlanetCenter));
     xPlanetCenter += 512;
     yPlanetCenter += 512;
-    const planetMapSize = rng2.getItem([16, 24, 32]);
+    const planetMapSize = rng3.getItem([16, 24, 32]);
     const planetMapSizeHalf = Math.floor(planetMapSize / 2) - 1;
     state = maps_create_overworld(state, seed);
     const planet = state.maps["simplex=" + seed].sample(planetMapSize, planetMapSize).circular();
@@ -6533,11 +6556,11 @@ var _emptyMap = function(widthTiles, heightTiles, tileType) {
   const map4 = new Map(mapId, widthTiles, heightTiles, tiles);
   return map4;
 };
-var _randomizeVoidBackground = function(map4, rng2) {
+var _randomizeVoidBackground = function(map4, rng3) {
   for (let j = 0;j < map4.heightTiles; j++) {
     for (let i = 0;i < map4.widthTiles; i++) {
-      if (rng2.getPercentage() <= 1) {
-        map4.setTile(i, j, rng2.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]));
+      if (rng3.getPercentage() <= 1) {
+        map4.setTile(i, j, rng3.getItem([MANIFEST.tiles.spacevoidstarwhite, MANIFEST.tiles.spacevoidstaryellow]));
       }
     }
   }
