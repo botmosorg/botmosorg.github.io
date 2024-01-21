@@ -150,7 +150,7 @@ export const MANIFEST = {
         "B": new Command("B", "Take a break, cancel"), // B/Y/Z/space bar
         "1": new Command("1", "Secondary action, first quick slot"), // unused
         "2": new Command("2", "Tertiary action, second quick slot"), // unused
-        "M": new Command("M", "Menu") // unused
+        "M": new Command("M", "Menu")
     },
     "effects": {
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
