@@ -5968,7 +5968,7 @@ var EasyStar = function(modules) {
 ]);
 
 // src/player.ts
-function players_get_current() {
+function players_get_current_id() {
   return "player";
 }
 
@@ -5989,7 +5989,7 @@ function ai_update(state) {
       state._AIs[entityId] = _ai_create(state, entityId, state.entities[entityId].options.ai);
     }
   }
-  let playerEntity = state.entities[players_get_current()];
+  let playerEntity = state.entities[players_get_current_id()];
   for (let i = 0;i < entityIdsToUpdate.length; i++) {
     let entityId = entityIdsToUpdate[i];
     let entity3 = state.entities[entityId];
@@ -6868,11 +6868,11 @@ class Game {
       this.state = items_create(this.state, MANIFEST.items.battery, "playground", x, 18);
     }
     this.state.currentMapId = "botmos_hull_selection";
-    this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, { faction: MANIFEST.factions.Spirits });
+    this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, { faction: MANIFEST.factions.Spirits });
     return this.state;
   }
   update(action2) {
-    let player3 = this.state.entities[players_get_current()];
+    let player3 = this.state.entities[players_get_current_id()];
     if (!!player3) {
       if (!!action2) {
         if (action2 === MANIFEST.commands.M) {
@@ -6886,7 +6886,7 @@ class Game {
     } else {
       debug_log("Game over! " + this.state.actionLog.length + " Turns: " + this.state.actionLog.join(""));
       this.state.currentMapId = "botmos_hull_selection";
-      this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, { faction: MANIFEST.factions.Spirits });
+      this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, { faction: MANIFEST.factions.Spirits });
     }
     return this.state;
   }
@@ -7147,7 +7147,7 @@ var rot_render = function(state2, camera) {
     let item9 = items[i];
     ROT_DISPLAY.drawOver(item9.x - camera.x, item9.y - camera.y, item9.type.icon, lookup_color(item9.type.color));
   }
-  const playerId = players_get_current();
+  const playerId = players_get_current_id();
   const playerEntity = state2.entities[playerId];
   const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
   const entities = entities_get_by(state2, currentMapId);
@@ -7204,7 +7204,7 @@ var rot_render = function(state2, camera) {
   }
 };
 async function draw(state2) {
-  const maybePlayerEntity = state2.entities[players_get_current()];
+  const maybePlayerEntity = state2.entities[players_get_current_id()];
   const cameraPosition = maybePlayerEntity ? maybePlayerEntity : lastCameraPosition;
   const camera = camera_follow(cameraPosition);
   rot_render(state2, camera);

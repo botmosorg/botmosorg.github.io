@@ -5,7 +5,7 @@ import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
-import { players_get_current } from "./player";
+import { players_get_current_id } from "./player";
 import { State } from "./state.js";
 import { actions_get } from "./action.js";
 
@@ -50,7 +50,7 @@ function rot_render(state: State, camera) {
     }
 
     // Render entities
-    const playerId = players_get_current()
+    const playerId = players_get_current_id()
     const playerEntity = state.entities[playerId]
     const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
     const entities = entities_get_by(state, currentMapId);
@@ -118,7 +118,7 @@ function rot_render(state: State, camera) {
 
 let lastCameraPosition = {x: 0, y: 0}
 export async function draw(state: State) {
-    const maybePlayerEntity = state.entities[players_get_current()]
+    const maybePlayerEntity = state.entities[players_get_current_id()]
     const cameraPosition = !!maybePlayerEntity ? maybePlayerEntity : lastCameraPosition
     const camera = camera_follow(cameraPosition)
 

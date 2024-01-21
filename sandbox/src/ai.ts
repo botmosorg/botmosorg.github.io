@@ -2,7 +2,7 @@ import { a_star } from "./easystar_astar";
 import { entities_get_by } from "./entity";
 import { entityInteractOrMove } from "./entity_map";
 import { MANIFEST, AI } from "./manifest";
-import { players_get_current } from "./player";
+import { players_get_current_id } from "./player";
 import { State } from "./state";
 import { distance } from "./util";
 
@@ -18,7 +18,7 @@ export function ai_update(state: State): State {
     }
 
     // Compute paths
-    let playerEntity = state.entities[players_get_current()]
+    let playerEntity = state.entities[players_get_current_id()]
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
         let entity = state.entities[entityId]

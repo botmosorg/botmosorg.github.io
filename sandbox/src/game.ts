@@ -7,7 +7,7 @@ import { Command, MANIFEST } from "./manifest";
 import { maps_parse } from "./map"
 import { maps_create_solar_system } from "./map_generator_solar_system";
 import { map_shop_entitymapUpdatedEvent_subscriber } from "./map_shop";
-import { players_get_current } from "./player";
+import { players_get_current_id } from "./player";
 import { maps_create_arena, maps_create_overworld, MAP_SEED } from "./rot_map_generator"
 import { State, states_create } from "./state";
 import { systems_per_turn_update } from "./systems";
@@ -84,13 +84,13 @@ export default class Game {
         }
 
         this.state.currentMapId = "botmos_hull_selection"
-        this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
 
         return this.state
     }
 
     update(action: Command | null): State {
-        let player = this.state.entities[players_get_current()]
+        let player = this.state.entities[players_get_current_id()]
         if (!!player) {
             if (!!action) {
                 if (action === MANIFEST.commands.M) {
@@ -107,7 +107,7 @@ export default class Game {
             debug_log("Game over! " + this.state.actionLog.length + " Turns: " + this.state.actionLog.join(''))
 
             this.state.currentMapId = "botmos_hull_selection"
-            this.state = entities_create(this.state, players_get_current(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+            this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
         }
 
         return this.state
