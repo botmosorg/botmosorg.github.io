@@ -1,4 +1,5 @@
 import { ai_destroy } from "./ai";
+import { BOTMOS_OPTIONS } from "./config";
 import { entities_destroy, entities_get_by } from "./entity";
 import { items_destroy, items_get_by } from "./item";
 import { MANIFEST, Tile as TileType } from "./manifest";
@@ -221,6 +222,9 @@ export function maps_parse(mapString: string): Map {
             for (let j = 0; j < line.length; j++) {
                 let character = line[j];
                 let tileTypeName = meta[character];
+                if (!!!tileTypeName && BOTMOS_OPTIONS.debug) {
+                    console.log("DEBUG Broken map: " + mapId)
+                }
                 let components = tileTypeName.split(" ")
                 let options = {}
                 if (tileTypeName.startsWith("portal ")
