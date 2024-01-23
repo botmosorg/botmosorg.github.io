@@ -2,6 +2,7 @@ import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config";
 import Game from "./game";
 import { onKeyDown } from "./input";
 import { draw, resize } from "./rot_renderer";
+import { State } from "./state";
 
 let game = new Game();
 
@@ -54,5 +55,24 @@ if (!!!(window as any).BMToggleUI) {
     }
 }
 // API End
+
+// DEBUG API Start
+if (BOTMOS_OPTIONS.debug) {
+    if (!!!(window as any).BMDebugState) {
+        (window as any).BMDebugState = function (): State {
+            return game.state
+        }
+    }
+    if (!!!(window as any).BMDebugStateSize) {
+        (window as any).BMDebugStateSize = function (): string {
+            const nrMaps = Object.keys(game.state.maps).length
+            const nrEntities = Object.keys(game.state.entities).length
+            const nrItems = Object.keys(game.state.items).length
+            const nrTools = Object.keys(game.state.tools).length
+            return `Maps: ${nrMaps}, Entities: ${nrEntities}, Items: ${nrItems}, Tools: ${nrTools}`
+        }
+    }
+}
+// DEBUG API End
 
 window.focus(); // focus on the canvas
