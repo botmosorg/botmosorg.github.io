@@ -24,7 +24,7 @@ export default class Game {
         this.state = subscribe(this.state, "entitymap.updated.event", entity_map_entitymapUpdatedEvent_subscriber)
         this.state = subscribe(this.state, "entitymap.updated.event", map_shop_entitymapUpdatedEvent_subscriber)
 
-        this.state = maps_create_arena(this.state)
+        //this.state = maps_create_arena(this.state)
         this.state = maps_create_solar_system(this.state)
 
         for (let mapId in MANIFEST.maps) {
