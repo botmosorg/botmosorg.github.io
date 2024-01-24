@@ -46,6 +46,7 @@ export default class Game {
         this.state = items_create(this.state, MANIFEST.items.battery, "manual", 4, 40)
         this.state = items_create(this.state, MANIFEST.items.wrench, "manual", 4, 41)
 
+        // Bot station
         this.state = entities_create(this.state, "pioneerguardian0", MANIFEST.entities.Pioneer, "bot_station", 8, 3, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
         this.state = items_equip(this.state, "pioneerguardian0", MANIFEST.items.hammer)
         this.state = entities_create(this.state, "cleanerguardian0", MANIFEST.entities.Cleaner, "bot_station", 10, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
@@ -59,6 +60,17 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.entities.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.entities.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
+        // Bot prison
+        this.state = entities_create(this.state, "cleanerjailer0", MANIFEST.entities.Cleaner, "bot_prison", 18, 11, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorange})
+        this.state = entities_create(this.state, "cleanerjailer1", MANIFEST.entities.Cleaner, "bot_prison", 17, 2, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorange})
+        this.state = entities_create(this.state, "cleanerjailer2", MANIFEST.entities.Cleaner, "bot_prison", 24, 5, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorange})
+        this.state = entities_create(this.state, "cleanerjailer3", MANIFEST.entities.Cleaner, "bot_prison", 29, 24, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorangeshort})
+        this.state = entities_create(this.state, "prisoner0", MANIFEST.entities.AeroBot, "bot_prison", 34, 22, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "prisoner1", MANIFEST.entities.WorkBot, "bot_prison", 9, 22, {faction: MANIFEST.factions.Spirits})
+        this.state = items_create(this.state, MANIFEST.items.broom, "bot_prison", 28, 1)
+        this.state = items_create(this.state, MANIFEST.items.battery, "bot_prison", 43, 30)
+        this.state = items_create(this.state, MANIFEST.items.matter, "bot_prison", 9, 30)
+
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 13, 8)
         this.state = items_create(this.state, MANIFEST.items.junk, "bot_dormitory_hidden", 1, 2)
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory_hidden", 2, 2)
@@ -66,6 +78,7 @@ export default class Game {
         this.state = items_create(this.state, MANIFEST.items.hammer, "bot_elevator", 12, 3)
         this.state = items_create(this.state, MANIFEST.items.wrench, "bot_factory", 45, 19)
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_factory", 4, 13)
+
         for (let y=2; y<=8; y++) {
             for (let x=2; x<=8; x++) {
                 this.state = items_create(this.state, MANIFEST.items.junk, "bot_factory", x, y)

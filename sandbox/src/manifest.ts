@@ -186,9 +186,10 @@ export const MANIFEST = {
         "junk": new Item("Junk", "Broken bot", "%", "gray", 0, 1),
         "matter": new Item("Matter", "A pile of stuff", "m", "gray", 0, 100),
         // Tools
+        "broom": new Item("Broom", "Sweeps the floor", "i", "cyberyellow", 0, 0, 0, -10, -1),
         "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
-        "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1),
-        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1)
+        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1),
+        "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1)
     },
     "maps": {
         "bot_bar": `!
