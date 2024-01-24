@@ -81,33 +81,3 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
 
     return state;
 }
-
-export function maps_create_arena(state: State): State {
-    let rotMap = new ROT.Map.Arena(CHUNK_SIZE.width, CHUNK_SIZE.height);
-    let tiles = [];
-    rotMap.create(function(x, y, wall) {
-        let tileType = wall ? MANIFEST.tiles.wall : MANIFEST.tiles.void;
-        tiles[y*CHUNK_SIZE.width + x] = tiles_create(tileType);
-    })
-
-    let map = new Map(
-        "arena",
-        CHUNK_SIZE.width,
-        CHUNK_SIZE.height,
-        tiles
-    );
-
-    map.setTile(1, 0, MANIFEST.tiles.portal, {mapId: "bot_station", x: 26, y: 7});
-
-    state.maps["arena"] = map
-
-    state = entities_create(state, "enemy0", MANIFEST.entities.Cleaner, "arena", 8, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy1", MANIFEST.entities.Cleaner, "arena", 9, 8, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy2", MANIFEST.entities.Cleaner, "arena", 11, 11, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy3", MANIFEST.entities.Cleaner, "arena", 6, 6, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = entities_create(state, "enemy4", MANIFEST.entities.Cleaner, "arena", 12, 12, {faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange})
-    state = items_create(state, MANIFEST.items.energy, "arena", 7, 7)
-    state = items_create(state, MANIFEST.items.battery, "arena", 14, 14)
-
-    return state;
-}
