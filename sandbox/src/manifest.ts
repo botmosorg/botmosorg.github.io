@@ -161,10 +161,11 @@ export const MANIFEST = {
         "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
-        "Cleaner": new Spirit("Cleaner", "Advanced bot purging malfunctioning bots", "C", 50),
-        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, needs to play as WorkBot first, brotherhood of ultimate warriors", "W", 200),
+        "Cleaner": new Spirit("Cleaner", "Bot purging malfunctioning bots", "C", 50),
+        "Deviant": new Spirit("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
+        "Valkyrie": new Spirit("Valkyrie", "Airbourne war logistics", "V", 160),
+        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
         /*
-        "ValkyrBot": "Female Godess from the sky, needs to play as AeroBot first",
         // ...
         "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
         // ...
