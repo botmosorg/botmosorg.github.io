@@ -32,8 +32,10 @@ export function ai_update(state: State): State {
             let path: any = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
             if (!!path) {
                 path = path.slice(1) // First point in the path is current position of entity, skip it
-
-                // TODO check if player is in Line of Sight (distanceToPlayer === path.length)
+                //console.log(`${entityId}: distanceToPlayer:${distanceToPlayer} pathLength:${path.length}`)
+                if (path.length > distanceToPlayer) { // If not in line of sight, void the path
+                    path = null
+                }
             }
             entityAI.path = path;
         }
