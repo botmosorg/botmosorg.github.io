@@ -62,8 +62,11 @@ export function maps_create_overworld(state: State, seed=MAP_SEED): State {
                 // Noise: water+none, plain+grass, plain+tree, mountain
                 const tile = map.getTile(tile_x, tile_y)
                 if (rng.getPercentage() <= 1 && (tile.type === MANIFEST.tiles.void || tile.type === MANIFEST.tiles.tree)) {
-                    const toGenerate = rng.getItem(["pioneer", "junk", "matter"])
+                    const toGenerate = rng.getItem(["pioneer", "deviant", "junk", "matter", "junk", "matter"])
                     switch (toGenerate) {
+                        case "deviant":
+                            state = entities_create(state, map.id + "_deviant_" + tile_x + "_" + tile_y, MANIFEST.entities.Deviant, map.id, tile_x, tile_y, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange })
+                            break
                         case "pioneer":
                             state = entities_create(state, map.id + "_pioneer_" + tile_x + "_" + tile_y, MANIFEST.entities.Pioneer, map.id, tile_x, tile_y, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange })
                             break
