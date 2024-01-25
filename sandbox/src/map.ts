@@ -81,7 +81,7 @@ export class Map {
         this._tiles[tileIndex] = tiles_create(tileType, options);
     }
 
-    pasteOnto(map: Map, xOffset: number=0, yOffset: number=0) {
+    pasteOnto(map: Map, xOffset: number=0, yOffset: number=0): Map {
         for (let j=0; j<map.heightTiles; j++) {
             for (let i=0; i<map.widthTiles; i++) {
                 const tile = map.getTile(i, j)
@@ -90,6 +90,8 @@ export class Map {
                 }
             }
         }
+
+        return this
     }
 
     /**
@@ -229,6 +231,7 @@ export function maps_parse(mapString: string): Map {
                 let options = {}
                 if (tileTypeName.startsWith("portal ")
                         || tileTypeName.startsWith("portalhidden ")
+                        || tileTypeName.startsWith("portallauncher ")
                         || tileTypeName.startsWith("portalstart")) {
                     tileTypeName = components[0]
                     options['mapId'] = components[1]

@@ -83,14 +83,15 @@ export function entityContextualAction(state: State, entity: Entity, command: Co
     const actions = actions_get(state, entity)
     const action = actions[command.key]
 
+    const map = state.maps[entity.mapId]
+    const tile = map.getTile(entity.x, entity.y)
+
     switch (action) {
         case MANIFEST.actions.Enter:
-            const map = state.maps[entity.mapId]
-            const tile = map.getTile(entity.x, entity.y)
             state = _enterPortalOrPlanet(state, entity, tile)
             break
         case MANIFEST.actions.Launch:
-            state = _launchToSpace(state, entity)
+            state = _launchToSpace(state, entity, tile)
         case MANIFEST.actions.Wait:
             break
         default:
@@ -140,6 +141,9 @@ function _enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
             x: entity.x,
             y: entity.y
         }
+    } else {
+        state.lastSpacePositionByEntity[entity.id] = undefined
+        delete state.lastSpacePositionByEntity[entity.id]
     }
 
     const eventPayload: EntityMapUpdatedEvent = {
@@ -162,18 +166,32 @@ function _enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
     return state;
 }
 
-function _launchToSpace(state: State, entity: Entity): State {
+function _launchToSpace(state: State, entity: Entity, tile: any): State {
     if (!!state.lastSpacePositionByEntity[entity.id]) {
         if (entity.id.startsWith("player")) {
             state.currentMapId = state.lastSpacePositionByEntity[entity.id].mapId;
         }
-        entity.mapId = state.lastSpacePositionByEntity[entity.id].mapId;
-        entity.x = state.lastSpacePositionByEntity[entity.id].x;
-        entity.y = state.lastSpacePositionByEntity[entity.id].y;
+
+        const eventPayload: EntityMapUpdatedEvent = {
+            entityId: entity.id,
+            oldMapId: entity.mapId,
+            oldX: entity.x,
+            oldY: entity.y,
+            oldTileType: tile.type,
+            newMapId: state.lastSpacePositionByEntity[entity.id].mapId,
+            newX: state.lastSpacePositionByEntity[entity.id].x,
+            newY: state.lastSpacePositionByEntity[entity.id].y
+        }
+
+        entity.mapId = eventPayload.newMapId;
+        entity.x = eventPayload.newX;
+        entity.y = eventPayload.newY;
         state._energyQueue.push({entityId: entity.id, energyDelta: MANIFEST.actions.Launch.energyDelta})
 
         state.lastSpacePositionByEntity[entity.id] = undefined
         delete state.lastSpacePositionByEntity[entity.id]
+
+        state = publish(state, "entitymap.updated.event", eventPayload)
     }
     return state
 }

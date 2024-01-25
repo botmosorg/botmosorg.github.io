@@ -837,6 +837,29 @@ _##############################################_
 ####################
 `
     },
+    "map_snippets": {
+"launcher": `!
+!!id launcher
+!!size 16 10
+!!_ voidtrue
+!!. void
+!!# wall
+!!~ water
+!!^ movenorth
+!!= chargepad
+!!O portallauncher space 0 0
+__________#__#__
+_________#O##O#_
+_________#^##^#_
+_________#^##^#_
+_________#^##^#_
+_________#^##^#_
+#.########^##^##
+................
+........~.......
+##=##=########.#
+`
+    },
     "names": {
         "BotMoses": "Teaches the new player",
         "Betty": "Gambles a lot",
@@ -863,6 +886,7 @@ _##############################################_
         "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
         "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "O", "black", "gray"), // □
         "portalhidden": new Tile("portalhidden", "Hidden gateway to another map", "#", "gray", "black"),
+        "portallauncher": new Tile("portallauncher", "Launches into space", "O", "cyberyellow", "gray"),
         "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "B", "white"),
         "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
         "_portalstart?": new Tile("_portalstart?", "Not unlocked, yet!", "?", "white"),

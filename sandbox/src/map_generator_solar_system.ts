@@ -1,5 +1,5 @@
 import { MANIFEST, Tile } from "./manifest";
-import { Map, tiles_create } from "./map";
+import { Map, maps_parse, tiles_create } from "./map";
 import { RNG } from "./rng";
 import { maps_create_overworld } from "./rot_map_generator";
 import { State } from "./state";
@@ -13,6 +13,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     state.maps[solarsystem.id] = solarsystem
 
     const rng = new RNG(seed)
+    const launcherRng = new RNG(seed)
     const numberOfPlanets = rng.getItem([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     let consumedRadius = 64 + 64 // Sun + some padding
     let leftoverRadius = 512 - consumedRadius
@@ -35,7 +36,17 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
         const planetMapSize = rng.getItem([16, 24, 32])
         const planetMapSizeHalf = Math.floor(planetMapSize / 2) - 1
         state = maps_create_overworld(state, seed)
-        const planet = state.maps["simplex=" + seed].sample(planetMapSize, planetMapSize).circular()
+        const planetOverworldMap = state.maps["simplex=" + seed]
+
+        // Every world has a launcher, for now
+        let launcherMapString = MANIFEST.map_snippets.launcher
+        launcherMapString = launcherMapString.replace("!!O portallauncher space 0 0", `!!O portallauncher ${solarsystem.id} ${xPlanetCenter} ${yPlanetCenter}`)
+        const launcherMap = maps_parse(launcherMapString)
+        const xLauncher = launcherRng.getItem(range(planetOverworldMap.widthTiles - launcherMap.widthTiles))
+        const yLauncher = launcherRng.getItem(range(planetOverworldMap.heightTiles - launcherMap.heightTiles))
+        planetOverworldMap.pasteOnto(launcherMap, xLauncher, yLauncher)
+
+        const planet = planetOverworldMap.sample(planetMapSize, planetMapSize).circular()
         /*
         let planet = _emptyMap(planetMapSize, planetMapSize, MANIFEST.tiles.voidtrue)
         const tileType = rng.getItem([MANIFEST.tiles.spacerock, MANIFEST.tiles.spacetree, MANIFEST.tiles.spacewater])
