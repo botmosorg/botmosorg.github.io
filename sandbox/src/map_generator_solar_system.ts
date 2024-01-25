@@ -18,7 +18,6 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     let consumedRadius = 64 + 64 // Sun + some padding
     let leftoverRadius = 512 - consumedRadius
     const radiusPerPlanet = Math.floor(leftoverRadius / numberOfPlanets)
-    //console.log("# Planets: " + numberOfPlanets)
 
     solarsystem = _randomizeVoidBackground(solarsystem, rng)
 
