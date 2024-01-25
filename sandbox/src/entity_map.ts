@@ -170,6 +170,7 @@ function _launchToSpace(state: State, entity: Entity): State {
         entity.mapId = state.lastSpacePositionByEntity[entity.id].mapId;
         entity.x = state.lastSpacePositionByEntity[entity.id].x;
         entity.y = state.lastSpacePositionByEntity[entity.id].y;
+        state._energyQueue.push({entityId: entity.id, energyDelta: MANIFEST.actions.Launch.energyDelta})
 
         state.lastSpacePositionByEntity[entity.id] = undefined
         delete state.lastSpacePositionByEntity[entity.id]

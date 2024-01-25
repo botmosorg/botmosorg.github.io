@@ -3,10 +3,15 @@ import { BOTMOS_OPTIONS } from "./config";
 export class Action {
     name: string
     description: string
+    energyDelta: number
 
-    constructor(name: string, description: string) {
+    /**
+     * @param energyDelta Positive: energy gain, negative: energy cost
+     */
+    constructor(name: string, description: string, energyDelta: number=0) {
         this.name = name;
         this.description = description;
+        this.energyDelta = energyDelta;
     }
 }
 export class AI {
@@ -113,7 +118,7 @@ export class Tile {
 export const MANIFEST = {
     "actions": {
         "Enter": new Action("Enter", "Enter a portal or plant atmosphere"),
-        "Launch": new Action("Launch", "Launch into space"),
+        "Launch": new Action("Launch", "Launch into space", -10),
         "Wait": new Action("Wait", "Wait one turn in place")
     },
     "ais": {

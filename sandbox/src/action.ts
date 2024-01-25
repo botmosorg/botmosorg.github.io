@@ -13,7 +13,8 @@ export function actions_get(state: State, entity: Entity): Actions {
         "B": MANIFEST.actions.Wait
     }
 
-    if (!!state.lastSpacePositionByEntity[entity.id]) {
+    if (!!state.lastSpacePositionByEntity[entity.id]
+        && (entity.energy > Math.abs(MANIFEST.actions.Launch.energyDelta))) { // Launching into space
         actions.A = MANIFEST.actions.Launch
     }
 
