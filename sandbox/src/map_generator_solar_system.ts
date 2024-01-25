@@ -68,16 +68,10 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     */
 
     // Bot station
-    solarsystem.setTile(584, 401, MANIFEST.tiles.portal, {mapId: "bot_elevator", x: 11, y: 47})
-    solarsystem.setTile(584, 400, MANIFEST.tiles.wall)
-    solarsystem.setTile(583, 400, MANIFEST.tiles.wall)
-    solarsystem.setTile(585, 400, MANIFEST.tiles.wall)
-    solarsystem.setTile(584, 399, MANIFEST.tiles.wall)
-    solarsystem.setTile(583, 399, MANIFEST.tiles.wall)
-    solarsystem.setTile(585, 399, MANIFEST.tiles.wall)
-    solarsystem.setTile(584, 398, MANIFEST.tiles.wall)
-    solarsystem.setTile(583, 398, MANIFEST.tiles.wall)
-    solarsystem.setTile(585, 398, MANIFEST.tiles.wall)
+    let botStationMapString = MANIFEST.map_snippets.space_bot_station
+    botStationMapString = botStationMapString.replace("!!O portal station 0 0", `!!O portal bot_elevator 11 47`)
+    const botStationMap = maps_parse(botStationMapString)
+    solarsystem.pasteOnto(botStationMap, 583, 398)
 
     return state
 }

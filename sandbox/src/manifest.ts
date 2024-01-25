@@ -858,6 +858,17 @@ _________#^##^#_
 ................
 ........~.......
 ##=##=########.#
+`,
+"space_bot_station": `!
+!!id space_bot_station
+!!size 3 4
+!!_ voidtrue
+!!# wall
+!!O portal station 0 0
+###
+###
+###
+_O_
 `
     },
     "names": {
