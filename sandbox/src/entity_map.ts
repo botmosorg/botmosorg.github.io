@@ -1,7 +1,7 @@
 import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { Event, publish } from "./events";
-import { EquippedItem, items_get_at, items_pickup } from "./item";
+import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { MANIFEST, Command, Tile } from "./manifest";
 import { Map, tiles_is_space_tile } from "./map";
 import { State } from "./state";
@@ -72,6 +72,12 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
 
     } else if (_entity_can_crush_tile(map, entity, tool, dx, dy)) {
         map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
+        const lootChance = state.rng.getPercentage()
+        if (lootChance <= 1) {
+            state = items_create(state, MANIFEST.items.matter, map.id, entity.x + dx, entity.y + dy)
+        } else if (lootChance <= 34) {
+            state = items_create(state, MANIFEST.items.junk, map.id, entity.x + dx, entity.y + dy)
+        }
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
     }

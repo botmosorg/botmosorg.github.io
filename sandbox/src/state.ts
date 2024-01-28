@@ -1,4 +1,4 @@
-import { Command } from "./manifest"
+import { RNG } from "./rng"
 
 export interface State {
     _AIs: object,
@@ -13,6 +13,7 @@ export interface State {
     items: object,
     lastSpacePositionByEntity: object
     maps: object,
+    rng: RNG,
     tools: object,
 }
 
@@ -30,6 +31,7 @@ export function states_create(): State {
         items: {},
         lastSpacePositionByEntity: {},
         maps: {},
+        rng: new RNG(),
         tools: {}
     }
 }
