@@ -53,6 +53,7 @@ export class Map {
     id: string;
     widthTiles: number;
     heightTiles: number;
+    seed: number | null;
     private _tiles: Tile[];
     private _cacheMovementMap: any | null;
 
@@ -60,6 +61,7 @@ export class Map {
         this.id = id;
         this.widthTiles = width_tiles;
         this.heightTiles = height_tiles;
+        this.seed = null
         this._tiles = tiles;
         this._cacheMovementMap = null
     }

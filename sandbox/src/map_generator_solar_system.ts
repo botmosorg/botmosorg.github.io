@@ -1,7 +1,8 @@
 import { MANIFEST, Tile } from "./manifest";
 import { Map, maps_parse, tiles_create } from "./map";
+import { maps_planet_populate } from "./map_spawner";
 import { RNG } from "./rng";
-import { maps_create_overworld } from "./rot_map_generator";
+import { maps_create_planet } from "./rot_map_generator";
 import { State } from "./state";
 import { range } from "./util";
 
@@ -34,7 +35,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
 
         const planetMapSize = rng.getItem([16, 24, 32])
         const planetMapSizeHalf = Math.floor(planetMapSize / 2) - 1
-        state = maps_create_overworld(state, seed)
+        state = maps_create_planet(state, seed)
         const planetOverworldMap = state.maps["simplex=" + seed]
 
         // Every world has a launcher, for now
@@ -44,6 +45,8 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
         const xLauncher = launcherRng.getItem(range(planetOverworldMap.widthTiles - launcherMap.widthTiles))
         const yLauncher = launcherRng.getItem(range(planetOverworldMap.heightTiles - launcherMap.heightTiles))
         planetOverworldMap.pasteOnto(launcherMap, xLauncher, yLauncher)
+
+        state = maps_planet_populate(state, planetOverworldMap)
 
         const planet = planetOverworldMap.sample(planetMapSize, planetMapSize).circular()
         /*
