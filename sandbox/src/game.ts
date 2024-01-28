@@ -69,6 +69,7 @@ export default class Game {
         this.state = items_create(this.state, MANIFEST.items.broom, "bot_prison", 28, 1)
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_prison", 43, 30)
         this.state = items_create(this.state, MANIFEST.items.matter, "bot_prison", 9, 30)
+        this.state = items_create(this.state, MANIFEST.items.pickaxe, "bot_prison", 9, 21)
 
         this.state = items_create(this.state, MANIFEST.items.battery, "bot_dormitory", 13, 8)
         this.state = items_create(this.state, MANIFEST.items.junk, "bot_dormitory_hidden", 1, 2)

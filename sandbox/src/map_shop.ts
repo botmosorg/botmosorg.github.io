@@ -73,11 +73,11 @@ const SHOP_INSTANCE_MAP: string = `!
 #..............................................#
 #.....Hammer...200M............................#
 #..............................................#
+#.....Pickaxe..200M............................#
+#..............................................#
 #.....Battery..200M............................#
 #..............................................#
 #.....Gold.....10000M..........................#
-#..............................................#
-#..............................................#
 #..............................................#
 #..............................................#
 #..............................................#
@@ -113,8 +113,9 @@ export function map_shop_entitymapUpdatedEvent_subscriber(state: State, payload:
 
         // Populate with entities and items
         state = items_create_buyable(state, MANIFEST.items.hammer, map.id, 4, 4, 0, -200)
-        state = items_create_buyable(state, MANIFEST.items.battery, map.id, 4, 6, 0, -200)
-        state = items_create_buyable(state, MANIFEST.items.gold, map.id, 4, 8, 0, -10000)
+        state = items_create_buyable(state, MANIFEST.items.pickaxe, map.id, 4, 6, 0, -200)
+        state = items_create_buyable(state, MANIFEST.items.battery, map.id, 4, 8, 0, -200)
+        state = items_create_buyable(state, MANIFEST.items.gold, map.id, 4, 10, 0, -10000)
 
         state = entities_create(state, map.id + "_shopkeeper", MANIFEST.entities.AeroBot, map.id, 6, 2, {faction: entity.options.faction})
         state = entities_create(state, map.id + "_shopper", MANIFEST.entities.WorkBot, map.id, 1, 12, {faction: entity.options.faction})

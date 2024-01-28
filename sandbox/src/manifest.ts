@@ -158,6 +158,7 @@ export const MANIFEST = {
         "M": new Command("M", "Menu")
     },
     "effects": {
+        "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
     },
     "entities": {
@@ -194,6 +195,7 @@ export const MANIFEST = {
         // Tools
         "broom": new Item("Broom", "Sweeps the floor", "i", "cyberyellow", 0, 0, 0, -10, -1),
         "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
+        "pickaxe": new Item("Pickaxe", "Mines rock", "i", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
         "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1)
     },
