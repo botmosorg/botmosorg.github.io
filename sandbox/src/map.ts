@@ -76,11 +76,14 @@ export class Map {
         return {};
     }
 
-    setTile(x: number, y: number, tileType: TileType, options={}) {
-        this._cacheMovementMap = null;
+    setTile(x: number, y: number, tileType: TileType, options={}): Tile {
+        this._cacheMovementMap = null
 
-        let tileIndex = y * this.widthTiles + x;
-        this._tiles[tileIndex] = tiles_create(tileType, options);
+        let tileIndex = y * this.widthTiles + x
+        const oldTile = this._tiles[tileIndex]
+        this._tiles[tileIndex] = tiles_create(tileType, options)
+
+        return oldTile
     }
 
     pasteOnto(map: Map, xOffset: number=0, yOffset: number=0): Map {

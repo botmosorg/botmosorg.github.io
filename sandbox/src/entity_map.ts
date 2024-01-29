@@ -71,12 +71,14 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
         state._energyQueue.push({entityId: entity.id, energyDelta: -1 * recursion}) // Pushing rocks
 
     } else if (_entity_can_crush_tile(map, entity, tool, dx, dy)) {
-        map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
-        const lootChance = state.rng.getPercentage()
-        if (lootChance <= 1) {
-            state = items_create(state, MANIFEST.items.matter, map.id, entity.x + dx, entity.y + dy)
-        } else if (lootChance <= 34) {
-            state = items_create(state, MANIFEST.items.junk, map.id, entity.x + dx, entity.y + dy)
+        const oldTile = map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
+        if (oldTile.type === MANIFEST.tiles.rock) {
+            const lootChance = state.rng.getPercentage()
+            if (lootChance <= 1) {
+                state = items_create(state, MANIFEST.items.matter, map.id, entity.x + dx, entity.y + dy)
+            } else if (lootChance <= 34) {
+                state = items_create(state, MANIFEST.items.junk, map.id, entity.x + dx, entity.y + dy)
+            }
         }
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
