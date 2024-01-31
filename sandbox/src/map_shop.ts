@@ -118,7 +118,11 @@ export function map_shop_entitymapUpdatedEvent_subscriber(state: State, payload:
         state = items_create_buyable(state, MANIFEST.items.gold, map.id, 4, 10, 0, -10000)
 
         state = entities_create(state, map.id + "_shopkeeper", MANIFEST.entities.AeroBot, map.id, 6, 2, {faction: entity.options.faction})
-        state = entities_create(state, map.id + "_shopper", MANIFEST.entities.WorkBot, map.id, 1, 12, {faction: entity.options.faction})
+        if (payload?.oldMapId.startsWith("bot_stadium")) {
+            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.WorkBot, map.id, 1, 12, {faction: entity.options.faction})
+        } else if (payload?.oldMapId.startsWith("bot_bar")) {
+            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.AeroBot, map.id, 4, 11, {faction: entity.options.faction})
+        }
     }
 
     return state

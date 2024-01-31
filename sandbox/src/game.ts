@@ -59,6 +59,13 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian8", MANIFEST.entities.Cleaner, "bot_station", 26, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.entities.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
+        // Bot bar
+        this.state = entities_create(this.state, "hostess0", MANIFEST.entities.AeroBot, "bot_bar", 2, 4, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "hostess1", MANIFEST.entities.AeroBot, "bot_bar", 4, 8, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "hostess2", MANIFEST.entities.AeroBot, "bot_bar", 10, 7, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "hostess3", MANIFEST.entities.AeroBot, "bot_bar", 21, 3, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, "hostess4", MANIFEST.entities.AeroBot, "bot_bar", 21, 5, {faction: MANIFEST.factions.Spirits})
+
         // Bot prison
         this.state = entities_create(this.state, "cleanerjailer0", MANIFEST.entities.Cleaner, "bot_prison", 18, 11, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorange})
         this.state = entities_create(this.state, "cleanerjailer1", MANIFEST.entities.Cleaner, "bot_prison", 17, 2, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.aggrorange})
