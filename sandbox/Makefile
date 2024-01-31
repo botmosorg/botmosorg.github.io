@@ -14,7 +14,6 @@ install_dependencies: ## Install dependencies
 	bun add @types/web -D
 
 test: ## Execute tests
-	bun test
 	bun test --coverage
 
 todo: ## List all todos
