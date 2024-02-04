@@ -207,9 +207,14 @@ function _launchToSpace(state: State, entity: Entity, tile: any): State {
 export function entities_tile_energy_update(state: State): State {
     for (let entityId in state.entities) {
         let entity = state.entities[entityId]
+        let tool = state.tools[entityId]
         let map = state.maps[entity.mapId]
         let tile = map.getTile(entity.x, entity.y)
-        state._energyQueue.push({entityId, energyDelta: tile.type.energyDelta})
+        let energyDelta = tile.type.energyDelta
+        if (tile.type === MANIFEST.tiles.water && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
+            energyDelta /= 2
+        }
+        state._energyQueue.push({entityId, energyDelta: energyDelta})
     }
 
     return state

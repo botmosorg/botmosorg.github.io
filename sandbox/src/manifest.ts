@@ -159,7 +159,8 @@ export const MANIFEST = {
     },
     "effects": {
         "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
-        "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls")
+        "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls"),
+        "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
         "movableboulder": new Spirit("movableboulder", "A movable rock", "o", 2),
@@ -197,6 +198,7 @@ export const MANIFEST = {
         "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
         "pickaxe": new Item("Pickaxe", "Mines rock", "i", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
         "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1),
+        "trident": new Item("Trident", "Traverse water with less energy cost", "i", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1)
     },
     "maps": {
@@ -811,7 +813,7 @@ _##############################################_
 `,
 "playground": `!
 !!id playground
-!!size 20 20
+!!size 20 24
 !!. void
 !!# wall
 !!= chargepad
@@ -836,8 +838,12 @@ _##############################################_
 #..................#
 #..................#
 #..................#
-#........~.........#
+#.........~........#
 #..................#
+#~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~#
 ####################
 `
     },

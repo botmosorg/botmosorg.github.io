@@ -10,7 +10,7 @@ export function maps_planet_populate(state: State, map: Map): State {
         //map.setTile(126, 121, MANIFEST.tiles.portal, {mapId: "bot_elevator", x: 11, y: 47})
         state = entities_create(state, "batteryvalkyrie0", MANIFEST.entities.Valkyrie, map.id, 130, 127, {faction: MANIFEST.factions.Spirits})
         state = entities_create(state, "batteryvalkyrie1", MANIFEST.entities.Valkyrie, map.id, 124, 127, {faction: MANIFEST.factions.Spirits})
-        state = items_create(state, MANIFEST.items.battery, map.id, 127, 130)
+        state = items_create(state, MANIFEST.items.trident, map.id, 127, 130)
 
     } else {
         // Spawn entities and items randomly

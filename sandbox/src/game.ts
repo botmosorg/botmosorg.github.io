@@ -23,7 +23,6 @@ export default class Game {
         this.state = subscribe(this.state, "entitymap.updated.event", entity_map_entitymapUpdatedEvent_subscriber)
         this.state = subscribe(this.state, "entitymap.updated.event", map_shop_entitymapUpdatedEvent_subscriber)
 
-        //this.state = maps_create_arena(this.state)
         this.state = maps_create_solar_system(this.state)
 
         for (let mapId in MANIFEST.maps) {
@@ -60,6 +59,8 @@ export default class Game {
         this.state = entities_create(this.state, "cleanerguardian9", MANIFEST.entities.Cleaner, "bot_station", 28, 9, {faction: MANIFEST.factions.Guardians, ai: MANIFEST.ais.guardian})
 
         // Bot bar
+        this.state = entities_create_box(this.state, "bot_bar", 14, 3)
+        this.state = entities_create_box(this.state, "bot_bar", 14, 12)
         this.state = entities_create(this.state, "hostess0", MANIFEST.entities.AeroBot, "bot_bar", 2, 4, {faction: MANIFEST.factions.Spirits})
         this.state = entities_create(this.state, "hostess1", MANIFEST.entities.AeroBot, "bot_bar", 4, 8, {faction: MANIFEST.factions.Spirits})
         this.state = entities_create(this.state, "hostess2", MANIFEST.entities.AeroBot, "bot_bar", 10, 7, {faction: MANIFEST.factions.Spirits})
@@ -92,12 +93,10 @@ export default class Game {
             }
         }
 
-        this.state = entities_create_box(this.state, "bot_bar", 14, 3)
-        this.state = entities_create_box(this.state, "bot_bar", 14, 12)
-
         // TODO Playground
         this.state = entities_create_boulder(this.state, "playground", 9, 9)
         this.state = entities_create_boulder(this.state, "playground", 10, 9)
+        this.state = items_create(this.state, MANIFEST.items.trident, "playground", 9, 17)
         for (let x=1; x<=18; x++) {
             this.state = items_create(this.state, MANIFEST.items.battery, "playground", x, 18)
         }
