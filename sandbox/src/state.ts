@@ -15,6 +15,7 @@ export interface State {
     maps: object,
     rng: RNG,
     tools: object,
+    tvs: object
 }
 
 export function states_create(): State {
@@ -32,6 +33,7 @@ export function states_create(): State {
         lastSpacePositionByEntity: {},
         maps: {},
         rng: new RNG(),
-        tools: {}
+        tools: {},
+        tvs: {}
     }
 }

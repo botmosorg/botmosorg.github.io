@@ -56,6 +56,7 @@ export class Map {
     seed: number | null;
     private _tiles: Tile[];
     private _cacheMovementMap: any | null;
+    _tvCount: number;
 
     constructor(id: string, width_tiles: number, height_tiles: number, tiles: Tile[]=[]) {
         this.id = id;
@@ -64,6 +65,7 @@ export class Map {
         this.seed = null
         this._tiles = tiles;
         this._cacheMovementMap = null
+        this._tvCount = 0
     }
 
     getTile(x: number, y: number): Tile | any {
@@ -84,6 +86,18 @@ export class Map {
         this._tiles[tileIndex] = tiles_create(tileType, options)
 
         return oldTile
+    }
+
+    setTvMessage(message: string) {
+        if (!!this._tvCount) {
+            let tvIndex = 0;
+            for (const tile of this._tiles) {
+                if (tile.type === MANIFEST.tiles.tv && tvIndex < message.length) {
+                    tile.options['sign'] = message[tvIndex]
+                    tvIndex++
+                }
+            }
+        }
     }
 
     pasteOnto(map: Map, xOffset: number=0, yOffset: number=0): Map {
@@ -188,6 +202,7 @@ export class Map {
                 movementMap[y][x] = 0;
                 if (tileType === MANIFEST.tiles.rock
                     || tileType === MANIFEST.tiles.portalclosed
+                    || tileType === MANIFEST.tiles.tv
                     || tileType.name.startsWith("wall")) {
                     movementMap[y][x] = 1;
                 }
@@ -207,6 +222,7 @@ export function maps_parse(mapString: string): Map {
     let height = 0
     let meta = {}
     let tiles: any[] = [];
+    let tvCount = 0;
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i]
         if (line.startsWith(metaCharacter)) {
@@ -229,7 +245,7 @@ export function maps_parse(mapString: string): Map {
             for (let j = 0; j < line.length; j++) {
                 let character = line[j];
                 let tileTypeName = meta[character];
-                if (!!!tileTypeName && BOTMOS_OPTIONS.debug) {
+                if (BOTMOS_OPTIONS.debug && !!!tileTypeName) {
                     console.log("DEBUG Broken map: " + mapId)
                 }
                 let components = tileTypeName.split(" ")
@@ -247,15 +263,31 @@ export function maps_parse(mapString: string): Map {
                     tileTypeName = "wall"
                     options['sign'] = components[1]
                 }
+                if (tileTypeName.startsWith("tv ") && components.length >= 2) {
+                    tileTypeName = "tv"
+                    options['tvScreen'] = tvCount
+                    if (components.length === 3) {
+                        options['sign'] = components[2][tvCount]
+                    }
+                    tvCount++
+                }
                 tiles.push(tiles_create(MANIFEST.tiles[tileTypeName], options))
             }
         }
     }
 
-    return new Map(
+    if (BOTMOS_OPTIONS.debug && !(tvCount === 0 || tvCount === 12)) {
+        console.log("DEBUG Broken map: " + mapId + " (invalid TV size " + tvCount + ", allowed are 0 or 12 characters per map)")
+    }
+
+    const createdMap = new Map(
         mapId,
         width,
         height,
         tiles
     );
+
+    createdMap._tvCount = tvCount;
+
+    return createdMap;
 }
