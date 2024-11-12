@@ -41,6 +41,23 @@ class Effect {
         this.description = description
     }
 }
+export class Entity {
+    name: string;
+    description: string;
+    icon: string;
+    color: string;
+    energyMax: number;
+    unlockCondition: null;
+
+    constructor(name: string, description: string, icon: string, energyMax: number=100) {
+        this.name = name;
+        this.description = description;
+        this.icon = icon;
+        this.energyMax = energyMax;
+        this.color = "white"; // Default white, different color = different faction or fashion
+        this.unlockCondition = null;
+    }
+}
 class Faction {
     name: string;
     description: string;
@@ -78,23 +95,6 @@ export class Item {
         this.damage = damage
         this.energyCost = energyCost
         this.effects = effects
-    }
-}
-export class Spirit {
-    name: string;
-    description: string;
-    icon: string;
-    color: string;
-    energyMax: number;
-    unlockCondition: null;
-
-    constructor(name: string, description: string, icon: string, energyMax: number=100) {
-        this.name = name;
-        this.description = description;
-        this.icon = icon;
-        this.energyMax = energyMax;
-        this.color = "white"; // Default white, different color = different faction or fashion
-        this.unlockCondition = null;
     }
 }
 export class Tile {
@@ -163,15 +163,15 @@ export const MANIFEST = {
         "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
-        "movableboulder": new Spirit("movableboulder", "A movable rock", "o", 2),
-        "movablebox": new Spirit("movablebox", "A movable box", "x", 2),
-        "Spirit":  new Spirit("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
-        "AeroBot": new Spirit("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
-        "WorkBot": new Spirit("WorkBot", "Basic factory worker", "B"),
-        "Cleaner": new Spirit("Cleaner", "Bot purging malfunctioning bots", "C", 50),
-        "Deviant": new Spirit("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
-        "Valkyrie": new Spirit("Valkyrie", "Airbourne war logistics", "V", 160),
-        "Pioneer": new Spirit("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
+        "movableboulder": new Entity("movableboulder", "A movable rock", "o", 2),
+        "movablebox": new Entity("movablebox", "A movable box", "x", 2),
+        "Spirit":  new Entity("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
+        "AeroBot": new Entity("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
+        "WorkBot": new Entity("WorkBot", "Basic factory worker", "B"),
+        "Cleaner": new Entity("Cleaner", "Bot purging malfunctioning bots", "C", 50),
+        "Deviant": new Entity("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
+        "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
+        "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
         /*
         // ...
         "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
@@ -205,6 +205,14 @@ export const MANIFEST = {
         "bot_bar": `!
 !!id bot_bar
 !!size 28 16
+!!spawn 14 3 movablebox
+!!spawn 14 12 movablebox
+!!spawn 2 4 AeroBot faction=Spirits
+!!spawn 4 8 AeroBot faction=Spirits
+!!spawn 10 7 AeroBot faction=Spirits
+!!spawn 21 3 AeroBot faction=Spirits
+!!spawn 21 5 AeroBot faction=Spirits
+!!spawn 10 11 shocker
 !!. void
 !!_ voidtrue
 !!~ water
@@ -234,6 +242,7 @@ O.....=..+.....#____#=....=#
 "bot_dormitory": `!
 !!id bot_dormitory
 !!size 32 32
+!!spawn 13 8 battery
 !!. void
 !!~ water
 !!# wall
@@ -277,6 +286,8 @@ O.....=..+.....#____#=....=#
 "bot_dormitory_hidden": `!
 !!id bot_dormitory_hidden
 !!size 4 4
+!!spawn 1 2 junk
+!!spawn 2 2 battery
 !!. void
 !!# wall
 !!~ water
@@ -289,6 +300,7 @@ O.....=..+.....#____#=....=#
 "bot_elevator": `!
 !!id bot_elevator
 !!size 32 48
+!!spawn 12 3 hammer
 !!# wall
 !!s wallstatue
 !!+ wallweak
@@ -352,6 +364,57 @@ _________##E###_________________
 "bot_factory": `!
 !!id bot_factory
 !!size 48 32
+!!spawn 45 19 wrench
+!!spawn 4 13 battery
+!!spawn 2 2 junk
+!!spawn 2 3 junk
+!!spawn 2 4 junk
+!!spawn 2 5 junk
+!!spawn 2 6 junk
+!!spawn 2 7 junk
+!!spawn 2 8 junk
+!!spawn 3 2 junk
+!!spawn 3 3 junk
+!!spawn 3 4 junk
+!!spawn 3 5 junk
+!!spawn 3 6 junk
+!!spawn 3 7 junk
+!!spawn 3 8 junk
+!!spawn 4 2 junk
+!!spawn 4 3 junk
+!!spawn 4 4 junk
+!!spawn 4 5 junk
+!!spawn 4 6 junk
+!!spawn 4 7 junk
+!!spawn 4 8 junk
+!!spawn 5 2 junk
+!!spawn 5 3 junk
+!!spawn 5 4 junk
+!!spawn 5 5 junk
+!!spawn 5 6 junk
+!!spawn 5 7 junk
+!!spawn 5 8 junk
+!!spawn 6 2 junk
+!!spawn 6 3 junk
+!!spawn 6 4 junk
+!!spawn 6 5 junk
+!!spawn 6 6 junk
+!!spawn 6 7 junk
+!!spawn 6 8 junk
+!!spawn 7 2 junk
+!!spawn 7 3 junk
+!!spawn 7 4 junk
+!!spawn 7 5 junk
+!!spawn 7 6 junk
+!!spawn 7 7 junk
+!!spawn 7 8 junk
+!!spawn 8 2 junk
+!!spawn 8 3 junk
+!!spawn 8 4 junk
+!!spawn 8 5 junk
+!!spawn 8 6 junk
+!!spawn 8 7 junk
+!!spawn 8 8 junk
 !!# wall
 !!+ wallweak
 !!~ water
@@ -399,6 +462,16 @@ _________##E###_________________
 "bot_prison": `!
 !!id bot_prison
 !!size 48 34
+!!spawn 18 11 Cleaner faction=Guardians ai=aggrorange
+!!spawn 17 2 Cleaner faction=Guardians ai=aggrorange
+!!spawn 24 5 Cleaner faction=Guardians ai=aggrorange
+!!spawn 29 24 Cleaner faction=Guardians ai=aggrorangeshort
+!!spawn 34 22 AeroBot faction=Spirits
+!!spawn 9 22 WorkBot faction=Spirits
+!!spawn 28 1 broom
+!!spawn 43 30 battery
+!!spawn 9 30 matter
+!!spawn 9 21 pickaxe
 !!# wall
 !!+ wallweak
 !!s wallstatue
@@ -483,6 +556,17 @@ _##############################################_
 "bot_station": `!
 !!id bot_station
 !!size 32 32
+!!spawn 10 9 Cleaner faction=Guardians ai=guardian
+!!spawn 12 9 Cleaner faction=Guardians ai=guardian
+!!spawn 14 9 Cleaner faction=Guardians ai=guardian
+!!spawn 16 9 Cleaner faction=Guardians ai=guardian
+!!spawn 18 9 Cleaner faction=Guardians ai=guardian
+!!spawn 20 9 Cleaner faction=Guardians ai=guardian
+!!spawn 22 9 Cleaner faction=Guardians ai=guardian
+!!spawn 24 9 Cleaner faction=Guardians ai=guardian
+!!spawn 26 9 Cleaner faction=Guardians ai=guardian
+!!spawn 28 9 Cleaner faction=Guardians ai=guardian
+!!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer
 !!. void
 !!~ water
 !!# wall
@@ -689,6 +773,19 @@ _##############################################_
 "manual": `!
 !!id manual
 !!size 80 54
+!!spawn 4 26 Spirit faction=Spirits
+!!spawn 4 27 AeroBot faction=Spirits
+!!spawn 4 28 WorkBot faction=Spirits
+!!spawn 4 29 Cleaner faction=Spirits
+!!spawn 4 30 Pioneer faction=Spirits
+!!spawn 54 36 Spirit faction=Pyrates ai=aggrorange
+!!spawn 4 36 junk
+!!spawn 12 36 goo
+!!spawn 4 37 matter
+!!spawn 4 38 gold
+!!spawn 4 39 energy
+!!spawn 4 40 battery
+!!spawn 4 41 wrench
 !!# wall
 !!+ wallweak
 !!. voidtrue
@@ -816,6 +913,27 @@ _##############################################_
 "playground": `!
 !!id playground
 !!size 20 24
+!!spawn 9 9 movableboulder
+!!spawn 10 9 movableboulder
+!!spawn 9 17 trident
+!!spawn 1 18 battery
+!!spawn 2 18 battery
+!!spawn 3 18 battery
+!!spawn 4 18 battery
+!!spawn 5 18 battery
+!!spawn 6 18 battery
+!!spawn 7 18 battery
+!!spawn 8 18 battery
+!!spawn 9 18 battery
+!!spawn 10 18 battery
+!!spawn 11 18 battery
+!!spawn 12 18 battery
+!!spawn 13 18 battery
+!!spawn 14 18 battery
+!!spawn 15 18 battery
+!!spawn 16 18 battery
+!!spawn 17 18 battery
+!!spawn 18 18 battery
 !!. void
 !!# wall
 !!= chargepad

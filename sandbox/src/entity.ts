@@ -1,5 +1,5 @@
 import { debug_log } from "./debug";
-import { MANIFEST, Spirit as EntityType } from "./manifest";
+import { MANIFEST, Entity as EntityType } from "./manifest";
 import { State } from "./state";
 
 export interface Entity {
@@ -34,14 +34,6 @@ export function entities_create(state: State, id: string, type: EntityType, mapI
     state.entities[entity.id] = entity
 
     return state
-}
-
-export function entities_create_boulder(state: State, mapId: string, x: number, y: number): State {
-    return entities_create(state, "boulder," + mapId + "," + x + "," + y, MANIFEST.entities.movableboulder, mapId, x, y, {faction: MANIFEST.factions.Gaia})
-}
-
-export function entities_create_box(state: State, mapId: string, x: number, y: number): State {
-    return entities_create(state, "box," + mapId + "," + x + "," + y, MANIFEST.entities.movablebox, mapId, x, y, {faction: MANIFEST.factions.Equipment})
 }
 
 export function entities_destroy(state: State, entityId: string) {

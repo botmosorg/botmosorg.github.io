@@ -3,6 +3,7 @@ import { BOTMOS_OPTIONS } from "./config";
 import { entities_destroy, entities_get_by } from "./entity";
 import { items_destroy, items_get_by } from "./item";
 import { MANIFEST, Tile as TileType } from "./manifest";
+import { spawn, SpawnCommand } from "./spawn";
 import { State } from "./state";
 
 //const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
@@ -27,6 +28,20 @@ export function tiles_create(type: TileType, options={}): Tile {
 
 export function tiles_is_space_tile(tile: Tile): boolean {
     return tile.type.name.startsWith("space")
+}
+
+export function maps_create_all_manual(state: State): State {
+    for (let mapId in MANIFEST.maps) {
+        let map = maps_parse(MANIFEST.maps[mapId])
+        state.maps[mapId] = map
+
+        for (const spawnCommand of map._spawnCommands) {
+            state = spawn(state, spawnCommand)
+        }
+        map._spawnCommands = []
+    }
+
+    return state
 }
 
 export function maps_destroy(state: State, mapId: string): State {
@@ -56,6 +71,7 @@ export class Map {
     seed: number | null;
     private _tiles: Tile[];
     private _cacheMovementMap: any | null;
+    _spawnCommands: SpawnCommand[];
     _tvCount: number;
 
     constructor(id: string, width_tiles: number, height_tiles: number, tiles: Tile[]=[]) {
@@ -65,6 +81,7 @@ export class Map {
         this.seed = null
         this._tiles = tiles;
         this._cacheMovementMap = null
+        this._spawnCommands = []
         this._tvCount = 0
     }
 
@@ -221,6 +238,7 @@ export function maps_parse(mapString: string): Map {
     let width = 0
     let height = 0
     let meta = {}
+    let spawnCommands: SpawnCommand[] = [];
     let tiles: any[] = [];
     let tvCount = 0;
     for (let i = 0; i < lines.length; i++) {
@@ -234,6 +252,19 @@ export function maps_parse(mapString: string): Map {
                 let dims = line.split(" ").slice(1)
                 width = Number(dims[0])
                 height = Number(dims[1])
+            } else if (line.startsWith(metaCharacter + "!spawn")) {
+                // Spawn command, must come somewhere after map id command
+                let argumentArray = line.split(" ").slice(1)
+                let options = {}
+                if (argumentArray.length > 3) {
+                    let optionsArray = argumentArray.slice(3)
+                    for (const option of optionsArray) {
+                        const keyValue = option.split("=")
+                        options[keyValue[0]] = keyValue[1]
+                    }
+                }
+                spawnCommands.push(new SpawnCommand(mapId, Number(argumentArray[0]), Number(argumentArray[1]), argumentArray[2], options))
+
             } else if (line.startsWith(metaCharacter + "!")) {
                 // Map character commands
                 let character = line[2]
@@ -292,6 +323,7 @@ export function maps_parse(mapString: string): Map {
     );
 
     createdMap._tvCount = tvCount;
+    createdMap._spawnCommands = spawnCommands;
 
     return createdMap;
 }
