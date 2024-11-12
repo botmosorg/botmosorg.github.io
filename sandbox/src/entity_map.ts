@@ -125,6 +125,11 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
         state = _enterPortalOrPlanet(state, entity, tile)
     }
 
+    // Terminal
+    if (tile.type === MANIFEST.tiles.terminal) {
+        map.setTvMessage("OBEYWORKHELP")
+    }
+
     // Move{north, east, south, west} tile
     if (tile.type.name.startsWith('move')) {
         switch (tile.type.name) {
@@ -237,9 +242,10 @@ function _entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boo
     let y = entity.y + dy;
     let tileType = map.getTile(x, y).type;
     return x >= 0 && x < map.widthTiles && y >= 0 && y < map.heightTiles
-        && tileType !== MANIFEST.tiles.rock
-        && tileType !== MANIFEST.tiles.portalclosed
-        && !tileType.name.startsWith('wall');
+        && !(tileType === MANIFEST.tiles.rock
+             || tileType === MANIFEST.tiles.portalclosed
+             || tileType === MANIFEST.tiles.tv
+             || tileType.name.startsWith('wall'));
 }
 
 function _entity_can_crush_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number) {

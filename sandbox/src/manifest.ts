@@ -492,6 +492,7 @@ _##############################################_
 !!> moveeast
 !!v movesouth
 !!< movewest
+!!$ terminal bot_station_tv
 !!° tv bot_station_tv OBEYWORKKILL
 !!C portalclosed
 !!A portal bot_prison 18 15
@@ -505,7 +506,7 @@ _##############################################_
 !!h portalhidden bot_factory 10 0
 ##############°°°°##############
 #...##########°°°°##########...#
-#.......######°°°°######.......#
+#.......##$###°°°°######.......#
 #...........########...........#
 #...####.++....CC........####..#
 #...####.++..............####..#
@@ -919,6 +920,7 @@ _O_
         "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".", "white"),
         "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".", "cyberyellow"),
         "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),
+        "terminal": new Tile("terminal", "A computer terminal", "$", "cyberyellow"),
         "tv": new Tile("tv", "A big billboard screen", "", "black", "cyberyellow"),
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
