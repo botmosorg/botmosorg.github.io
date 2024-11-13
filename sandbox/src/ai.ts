@@ -62,7 +62,7 @@ function _entityIdsToUpdate(state: State) {
     let entityIdsToUpdate: string[] = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        if (!entity.id.startsWith("player") && !!entity.options.ai) {
+        if (!!entity.options.ai && !entity.id.startsWith("player")) {
             entityIdsToUpdate.push(entity.id)
         }
     }
