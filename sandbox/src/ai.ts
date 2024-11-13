@@ -39,6 +39,11 @@ export function ai_update(state: State): State {
             }
             entityAI.path = path;
         }
+
+        // New TV message AI, only follow the message if entity is told to OBEY
+        if (!!entity.message && entity.message.includes("OBEY")) {
+            //console.log('Entity ' + entity.id + ' is OBEYing')
+        }
     }
 
     // Let entities follow paths
