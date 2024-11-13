@@ -12,6 +12,7 @@ export interface Entity {
     energyMax: number,
     gold: number,
     matter: number,
+    message: string | null,
     options: any
 }
 
@@ -26,6 +27,7 @@ export function entities_create(state: State, id: string, type: EntityType, mapI
         "energyMax": 10,
         "gold": 0,
         "matter": 0,
+        "message": null,
         "options": options
     }
 

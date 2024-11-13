@@ -55,6 +55,10 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     const map = state.maps[entity.mapId]
     const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
     const tool: EquippedItem | undefined = state.tools[entity.id]
+
+    // Passive: witness map's TV messages
+    entity.message = map.tvMessage
+
     if (!!entity_at_target_position) {
         if (isMoveableObject(entity_at_target_position)) {
             if (!isMoveableObject(entity) && recursion < 1) { // Boulder/box doesn't move another boulder/box
@@ -127,7 +131,7 @@ function _entity_move(state: State, map: any, entity: Entity, dx: number, dy: nu
 
     // Terminal
     if (tile.type === MANIFEST.tiles.terminal) {
-        map.setTvMessage("OBEYWORKHELP")
+        map.setTvMessage("OBEYWORKKILL")
     }
 
     // Move{north, east, south, west} tile

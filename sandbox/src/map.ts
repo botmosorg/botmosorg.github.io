@@ -73,6 +73,7 @@ export class Map {
     private _cacheMovementMap: any | null;
     _spawnCommands: SpawnCommand[];
     _tvCount: number;
+    tvMessage: string | null;
 
     constructor(id: string, width_tiles: number, height_tiles: number, tiles: Tile[]=[]) {
         this.id = id;
@@ -83,6 +84,7 @@ export class Map {
         this._cacheMovementMap = null
         this._spawnCommands = []
         this._tvCount = 0
+        this.tvMessage = null
     }
 
     getTile(x: number, y: number): Tile | any {
@@ -114,6 +116,10 @@ export class Map {
                     tvIndex++
                 }
             }
+            if (message === "") {
+                message = null
+            }
+            this.tvMessage = message
         }
     }
 

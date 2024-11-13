@@ -577,7 +577,7 @@ _##############################################_
 !!v movesouth
 !!< movewest
 !!$ terminal bot_station_tv
-!!° tv bot_station_tv OBEYWORKKILL
+!!° tv bot_station_tv
 !!C portalclosed
 !!A portal bot_prison 18 15
 !!B portal bot_bar 0 5
