@@ -241,6 +241,7 @@ export function maps_parse(mapString: string): Map {
     let spawnCommands: SpawnCommand[] = [];
     let tiles: any[] = [];
     let tvCount = 0;
+    let tvMessage = ""
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i]
         if (line.startsWith(metaCharacter)) {
@@ -300,9 +301,8 @@ export function maps_parse(mapString: string): Map {
                 }
                 if (tileTypeName.startsWith("tv ") && components.length >= 2) {
                     tileTypeName = "tv"
-                    options['tvScreen'] = tvCount
                     if (components.length === 3) {
-                        options['sign'] = components[2][tvCount]
+                        tvMessage = components[2]
                     }
                     tvCount++
                 }
@@ -323,6 +323,7 @@ export function maps_parse(mapString: string): Map {
     );
 
     createdMap._tvCount = tvCount;
+    createdMap.setTvMessage(tvMessage);
     createdMap._spawnCommands = spawnCommands;
 
     return createdMap;
