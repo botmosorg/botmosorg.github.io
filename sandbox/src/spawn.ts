@@ -1,4 +1,4 @@
-import { ais_destroy } from "./ai";
+import { ais_create, ais_destroy } from "./ai";
 import { entities_create, entities_destroy } from "./entity";
 import { items_create, items_equip } from "./item";
 import { MANIFEST } from "./manifest";
@@ -45,6 +45,14 @@ export class SpawnCommand {
     }
 }
 
+/**
+ * High-level function to create (spawn) entities or items.
+ * Should be used in favor of low-level functions like entities_create, items_create, ais_create etc.
+ *
+ * @param state
+ * @param command
+ * @returns
+ */
 export function spawn(state: State, command: SpawnCommand): State {
     if (_isEntityName(command.entityOrItemName)) {
         // Entities
@@ -61,6 +69,10 @@ export function spawn(state: State, command: SpawnCommand): State {
 
         if (Object.hasOwn(options, "equip") && _isItemName(options["equip"])) {
             state = items_equip(state, entityId, MANIFEST.items[options["equip"]])
+        }
+
+        if (Object.hasOwn(options, "ai")) {
+            state = ais_create(state, entityId, options["ai"])
         }
 
     } else if (_isItemName(command.entityOrItemName)) {

@@ -3,6 +3,7 @@ import { items_create } from "./item";
 import { MANIFEST } from "./manifest";
 import { Map } from "./map";
 import { RNG } from "./rng";
+import { spawn, SpawnCommand } from "./spawn";
 import { State } from "./state";
 
 export function maps_planet_populate(state: State, map: Map): State {
@@ -20,19 +21,15 @@ export function maps_planet_populate(state: State, map: Map): State {
                 // Noise: water+none, plain+grass, plain+tree, mountain
                 const tile = map.getTile(tile_x, tile_y)
                 if (rng.getPercentage() <= 1 && (tile.type === MANIFEST.tiles.void || tile.type === MANIFEST.tiles.tree)) {
-                    const toGenerate = rng.getItem(["pioneer", "deviant", "junk", "matter", "junk", "matter"])
+                    const toGenerate = rng.getItem(["Pioneer", "Deviant", "junk", "matter", "junk", "matter"])
                     switch (toGenerate) {
-                        case "deviant":
-                            state = entities_create(state, map.id + "_deviant_" + tile_x + "_" + tile_y, MANIFEST.entities.Deviant, map.id, tile_x, tile_y, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange })
-                            break
-                        case "pioneer":
-                            state = entities_create(state, map.id + "_pioneer_" + tile_x + "_" + tile_y, MANIFEST.entities.Pioneer, map.id, tile_x, tile_y, { faction: MANIFEST.factions.Pyrates, ai: MANIFEST.ais.aggrorange })
+                        case "Deviant":
+                        case "Pioneer":
+                            state = spawn(state, new SpawnCommand(map.id, tile_x, tile_y, toGenerate, { faction: "Pyrates", ai: "aggrorange" }))
                             break
                         case "junk":
-                            state = items_create(state, MANIFEST.items.junk, map.id, tile_x, tile_y)
-                            break
                         case "matter":
-                            state = items_create(state, MANIFEST.items.matter, map.id, tile_x, tile_y)
+                            state = spawn(state, new SpawnCommand(map.id, tile_x, tile_y, toGenerate))
                             break
                     }
                 }

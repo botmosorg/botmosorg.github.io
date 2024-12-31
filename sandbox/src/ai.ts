@@ -9,14 +9,6 @@ import { distance } from "./util";
 export function ai_update(state: State): State {
     let entityIdsToUpdate = _entityIdsToUpdate(state)
 
-    // Create AI if needed
-    for (let i=0; i<entityIdsToUpdate.length; i++) {
-        let entityId = entityIdsToUpdate[i];
-        if (!state._AIs.hasOwnProperty(entityId)) {
-            state._AIs[entityId] = _ai_create(state, entityId, state.entities[entityId].options.ai)
-        }
-    }
-
     // Compute paths
     let playerEntity = state.entities[players_get_current_id()]
     for (let i=0; i<entityIdsToUpdate.length; i++) {
@@ -67,7 +59,7 @@ function _entityIdsToUpdate(state: State) {
     let entityIdsToUpdate: string[] = []
     for (let i=0; i<entities.length; i++) {
         let entity = entities[i];
-        if (!!entity.options.ai && !entity.id.startsWith("player")) {
+        if (!!entity.options.ai) {
             entityIdsToUpdate.push(entity.id)
         }
     }
@@ -84,8 +76,9 @@ interface _AI {
     path: [] | null
 }
 
-function _ai_create(state: State, entityId: string, aiType: AI): _AI {
+export function ais_create(state: State, entityId: string, aiType: AI): State {
     let entity = state.entities[entityId]
+
     let aggroRange = 8
     switch (aiType) {
         case MANIFEST.ais.aggrorange: aggroRange = 8; break;
@@ -93,7 +86,8 @@ function _ai_create(state: State, entityId: string, aiType: AI): _AI {
         case MANIFEST.ais.guardian: aggroRange = 1; break;
         default:
     }
-    return {
+
+    state._AIs[entityId] = {
         entityId: entityId,
         type: aiType,
         aggroRange: aggroRange,
@@ -102,6 +96,8 @@ function _ai_create(state: State, entityId: string, aiType: AI): _AI {
         startY: entity.y,
         path: null
     }
+
+    return state
 }
 
 export function ais_destroy(state: State, entityId: string): State {
