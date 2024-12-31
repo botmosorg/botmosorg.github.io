@@ -1,4 +1,4 @@
-import { ai_destroy } from "./ai";
+import { ais_destroy } from "./ai";
 import { entities_create, entities_destroy } from "./entity";
 import { items_create, items_equip } from "./item";
 import { MANIFEST } from "./manifest";
@@ -8,7 +8,7 @@ export function despawn_update(state: State): State {
     let entityIdtoDespawn: string | undefined = undefined
     while (typeof(entityIdtoDespawn = state._despawnQueue.shift()) !== 'undefined') {
         state = entities_destroy(state, entityIdtoDespawn)
-        state = ai_destroy(state, entityIdtoDespawn)
+        state = ais_destroy(state, entityIdtoDespawn)
     }
 
     return state

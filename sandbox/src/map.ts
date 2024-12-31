@@ -1,4 +1,4 @@
-import { ai_destroy } from "./ai";
+import { ais_destroy } from "./ai";
 import { BOTMOS_OPTIONS } from "./config";
 import { entities_destroy, entities_get_by } from "./entity";
 import { items_destroy, items_get_by } from "./item";
@@ -55,7 +55,7 @@ export function maps_destroy(state: State, mapId: string): State {
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i]
         state = entities_destroy(state, entity.id)
-        state = ai_destroy(state, entity.id)
+        state = ais_destroy(state, entity.id)
     }
 
     state.maps[mapId] = undefined

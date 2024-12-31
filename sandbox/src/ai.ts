@@ -104,7 +104,7 @@ function _ai_create(state: State, entityId: string, aiType: AI): _AI {
     }
 }
 
-export function ai_destroy(state: State, entityId: string): State {
+export function ais_destroy(state: State, entityId: string): State {
     state._AIs[entityId] = undefined
     delete state._AIs[entityId]
 
