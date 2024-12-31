@@ -132,12 +132,13 @@ export const MANIFEST = {
      */
     "colors": {
         "black": "#000",
+        "brown": "brown",
         "cybercyan": "#4deeea",
         "cyberyellow": "#ffe700",
         "cybermagenta": "#f000ff",
         "cybergreen": "#74ee15",
         "cyberblue": "#001eff",
-        "brown": "brown",
+        "darkgray": "#222",
         "gray": "#777",
         "white": "#fff"
     },
@@ -1032,9 +1033,9 @@ _O_
         "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
         "_portalstart?": new Tile("_portalstart?", "Not unlocked, yet!", "?", "white"),
         "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
-        "spacetree": new Tile("spacetree", "Forest as seen from space", "", "brown", "brown"),
+        "spacetree": new Tile("spacetree", "Forest as seen from space", "t", "brown", "darkgray"),
         "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~", "cybercyan", "cyberblue"),
-        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", "", "gray", "gray"),
+        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", "", "darkgray", "darkgray"),
         "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".", "white"),
         "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".", "cyberyellow"),
         "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),
