@@ -30,8 +30,6 @@ function lookup_color(name: string) {
     return MANIFEST.colors[name];
 }
 function rot_render(state: State, camera: any) {
-    ROT_DISPLAY.clear()
-
     let currentMapId = state.currentMapId;
     let map = state.maps[currentMapId];
 
@@ -113,6 +111,7 @@ function rot_render(state: State, camera: any) {
     }
 
     // Actually draw on display from tile/item/entity hash table
+    ROT_DISPLAY.clear()
     for (const [key, value] of Object.entries(renderHashTable)) {
         const coordinates = key.split(',')
         ROT_DISPLAY.draw(Number(coordinates[0]), Number(coordinates[1]), value)
@@ -139,6 +138,15 @@ function rot_render(state: State, camera: any) {
         UI_LINE.innerText = line
         UI_LINE.style.background = "#000"
         UI_ELEMENT.replaceChildren(UI_LINE)
+
+        // Red border when low energy
+        if (playerEntity.energy / playerEntity.energyMax <= 0.2) {
+            UI_LINE.style.color = "#000"
+            UI_LINE.style.background = "#f00"
+        } else {
+            UI_LINE.style.color = "#74ee15"
+            UI_LINE.style.background = "#000"
+        }
     }
 
     // Render menu
