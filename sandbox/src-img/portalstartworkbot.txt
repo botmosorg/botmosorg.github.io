@@ -5,7 +5,7 @@
 #!c #4deeeaff
 #!b #001effff
 #!y #ffe700ff
-#!  #ffffff00
+#!_ #ffffff00
 #!0 #000000FF
 #!f #ffffffff
 # brown
@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-mm            mm
-mm            mm
-  mm        mm
-  mm        mm
-    mm    mm
-    mm    mm
-      mmmm
-      mmmm
-      mmmm
-      mmmm
-    mm    mm
-    mm    mm
-  mm        mm
-  mm        mm
-mm            mm
-mm            mm
+________________
+________________
+____ffffffff____
+___ffffffffff___
+__ffffffffffff__
+__fffddffffddf__
+__fffddffffddf__
+__ffffffffffff__
+__ffffffffffff__
+__ffffffffffff__
+__ffffffffffff__
+__ffffffffffff__
+__ffffffffffff__
+__fff______fff__
+__fff______fff__
+__fff______fff__

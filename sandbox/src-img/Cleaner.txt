@@ -20,9 +20,9 @@ ________________
 ________________
 ____mmmmmmmm____
 ____ffffffff____
-__ ffffffffff___
-_mmmmmmmmmmfff__
-_mmmmffmmmmfff__
+___ffffffffff __
+__fffmmmmmmmmmm_
+__fffmmmmffmmmm_
 __ffffffffffff__
 __ffffffffffff__
 __ffffffffffff__

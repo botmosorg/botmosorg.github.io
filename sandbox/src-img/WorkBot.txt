@@ -18,8 +18,8 @@ ________________
 ____ffffffff____
 ___ffffffffff___
 __ffffffffffff__
-__fggffffggfff__
-__fggffffggfff__
+__fffggffffggf__
+__fffggffffggf__
 __ffffffffffff__
 __ffffffffffff__
 __ffffffffffff__
