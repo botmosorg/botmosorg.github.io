@@ -1,0 +1,31 @@
+#
+#!size 16 16
+#!r #FF0000FF
+#!g #74ee15ff
+#!c #4deeeaff
+#!b #001effff
+#!y #ffe700ff
+#!_ #ffffff00
+#!0 #000000FF
+#!f #ffffffff
+# brown
+#!w #a52a2aff
+#!m #f000ffff
+#!a #777777ff
+#!d #222222ff
+________________
+_____ffff_______
+____gggggf______
+____ggfggf______
+____ffffff______
+____ffffff______
+____fffffff_____
+____fffffff_____
+____ffffffff____
+____fffffffff___
+___ffffffffff___
+___ffffffffff___
+___fff__fff_f___
+____ff__ff__ff__
+_____f__f___ff__
+_____f__f____f__

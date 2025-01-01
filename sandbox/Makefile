@@ -3,15 +3,19 @@
 all: build ## Main task for local dev
 	python3 -m http.server
 
-build: test ## Bunbles and minifies the project
+build: src-img/tilemap.ts test ## Bunbles and minifies the project
 	bun script/bundle.ts
 
 clean: ## Cleans all artifacts
 	rm -rf build/
 
+src-img/tilemap.ts: src-img/*.txt ## Creates tilemap from src-img
+	cd src-img/ && bash create-images.sh
+
 install_dependencies: ## Install dependencies
 	bun install -d bun-types
 	bun add @types/web -D
+	PIPENV_PIPFILE=src-img/Pipfile pipenv install
 
 test: ## Execute tests
 	bun test --coverage

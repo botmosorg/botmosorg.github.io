@@ -132,7 +132,7 @@ export const MANIFEST = {
      */
     "colors": {
         "black": "#000",
-        "brown": "brown",
+        "brown": "#a52a2a",
         "cybercyan": "#4deeea",
         "cyberyellow": "#ffe700",
         "cybermagenta": "#f000ff",
@@ -190,17 +190,17 @@ export const MANIFEST = {
     "items": {
         "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
         "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
-        "gold": new Item("Gold", "Precious shiny!", "g", "cyberyellow", 0, 0, 1),
-        "goo": new Item("Goo", "A minor matter source", "g", "gray", 0, 1),
+        "gold": new Item("Gold", "Precious shiny!", "gg", "cyberyellow", 0, 0, 1),
+        "goo": new Item("Goo", "A minor matter source", "goo", "gray", 0, 1),
         "junk": new Item("Junk", "Broken bot", "%", "gray", 0, 1),
         "matter": new Item("Matter", "A pile of stuff", "m", "gray", 0, 100),
         // Tools
-        "broom": new Item("Broom", "Sweeps the floor", "i", "cyberyellow", 0, 0, 0, -10, -1),
-        "hammer": new Item("Hammer", "Tears down weak walls", "i", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
-        "pickaxe": new Item("Pickaxe", "Mines rock", "i", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
-        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "i", "cyberyellow", 0, 0, 0, 10, -1),
-        "trident": new Item("Trident", "Traverse water with less energy cost", "i", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
-        "wrench": new Item("Wrench", "Basic WorkBot tool", "i", "cyberyellow", 0, 0, 0, -10, -1)
+        "broom": new Item("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1),
+        "hammer": new Item("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
+        "pickaxe": new Item("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
+        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1),
+        "trident": new Item("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
+        "wrench": new Item("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1)
     },
     "maps": {
         "bot_bar": `!
@@ -681,6 +681,65 @@ _##############################################_
 #~~~~~~~~~~~~~~~~~~#
 #(##################
 `,
+"botmos_hull_selection_tiles": `!
+!!id botmos_hull_selection
+!!size 20 20
+!!. void
+!!_ voidtrue
+!!~ water
+!!^ rock
+!!# wall
+!!+ wallweak
+!!B wall B
+!!o wall o
+!!t wall t
+!!M wall M
+!!s wall s
+!!C wall C
+!!h wall h
+!!e wall e
+!!y wall y
+!!u wall u
+!!r wall r
+!!l wall l
+!!a wall a
+!!n wall n
+!!r wall r
+!!d wall d
+!!i wall i
+!!= chargepad
+!!^ movenorth
+!!> moveeast
+!!v movesouth
+!!< movewest
+!![ portal credits 0 5
+!!] portal manual 0 5
+!!( portalhidden playground 1 0
+!!1 portalstartaerobot bot_factory 4 15
+!!2 portalstartworkbot bot_factory 4 16
+!!? _portalstart?
+!!D portal bot_station 0 29
+##_____Bo####_____##
+#..................#
+#..................#
+#..................#
+#..................#
+#..................]
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+#..................#
+####################
+`,
 "credits": `!
 !!id credits
 !!size 80 20
@@ -744,8 +803,9 @@ _##############################################_
 !!x wall x
 !!y wall y
 !!z wall z
+!!0 wall 0
 !!, wall ,
-!!/ wall /
+!!/ wall |
 !!; wall :
 !!( wall (
 !!) wall )
@@ -763,7 +823,7 @@ _##############################################_
 #^..Dependencies..............................................................^#
 #^|...rot:js,_BSD_License,_by_Ondrej_Zara_and_contributors....................^#
 #^....EasyStar:js,_MIT_License,_by_Bryce_Neal_and_contributors................^#
-#^|...........................................................................^#
+#^|...monogram_font,_CC0/Public_Domain,_by_datagoblin.........................^#
 #^............................................................................^#
 #^|...........................................................................^#
 #^..>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.^#
@@ -851,7 +911,7 @@ _##############################################_
 !!y wall y
 !!z wall z
 !!, wall ,
-!!/ wall /
+!!/ wall |
 !!( portal manual 9 16
 !!) portal manual 4 16
 !!] portalclosed
@@ -1006,15 +1066,15 @@ _O_
         "BotMoses": "Teaches the new player",
         "Betty": "Gambles a lot",
         "Bender": "From the future, bowl head",
-        "Drak": "A now retired PioneerBot, who teaches the new player combat lessons",
+        "Drak": "A now retired Pioneer, who teaches the new player combat lessons",
         "Oz": "A machinery wizard"
     },
     "tiles": {
         "void": BOTMOS_OPTIONS.showGrid ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
-        "voidtrue": new Tile("voidtrue", "Really nothing here and you shouldn't get there ever!"),
+        "voidtrue": new Tile("voidtrue", "Really nothing here and you shouldn't get there ever!", "_"),
         "voidhidden": new Tile("voidhidden", "Looks like a wall, but isn't!", '#', "gray", "black"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
-        "rock": new Tile("rock", "Hidden treasures may await", "^", "white", "gray"), // ▲ alternatively
+        "rock": new Tile("rock", "Hidden treasures may await", "'", "white", "gray"), // ▲ alternatively
         "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "black"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
         "wallstatue": new Tile("wallstatue", "A small statue", 's', "gray", "black"),
@@ -1026,21 +1086,21 @@ _O_
         "movesouth": new Tile("movesouth", "Moves you south", "v", "cyberyellow"),
         "movewest": new Tile("movewest", "Moves you west", "<", "cyberyellow"),
         "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
-        "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "O", "black", "gray"), // □
+        "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "Oc", "black", "gray"), // □
         "portalhidden": new Tile("portalhidden", "Hidden gateway to another map", "#", "gray", "black"),
         "portallauncher": new Tile("portallauncher", "Launches into space", "O", "cyberyellow", "gray"),
         "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "B", "white"),
         "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "A", "white"),
         "_portalstart?": new Tile("_portalstart?", "Not unlocked, yet!", "?", "white"),
-        "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "^", "white", "gray"),
-        "spacetree": new Tile("spacetree", "Forest as seen from space", "t", "brown", "darkgray"),
-        "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~", "cybercyan", "cyberblue"),
-        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", "", "darkgray", "darkgray"),
-        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".", "white"),
-        "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".", "cyberyellow"),
-        "sun": new Tile("sun", "It's hot, really hot!", "", "cyberyellow", "cyberyellow", -100),
+        "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "'s", "white", "gray"),
+        "spacetree": new Tile("spacetree", "Forest as seen from space", "ts", "brown", "darkgray"),
+        "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~s", "cybercyan", "cyberblue"),
+        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", ".s", "darkgray", "darkgray"),
+        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".w", "white"),
+        "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".y", "cyberyellow"),
+        "sun": new Tile("sun", "It's hot, really hot!", "§", "cyberyellow", "cyberyellow", -100),
         "terminal": new Tile("terminal", "A computer terminal", "$", "cyberyellow"),
-        "tv": new Tile("tv", "A big billboard screen", "", "black", "cyberyellow"),
+        "tv": new Tile("tv", "A big billboard screen", "!", "black", "cyberyellow"),
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */

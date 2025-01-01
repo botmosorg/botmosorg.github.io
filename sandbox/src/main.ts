@@ -1,7 +1,7 @@
 import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config";
 import Game from "./game";
 import { onKeyDown } from "./input";
-import { draw, resize } from "./rot_renderer";
+import { draw, resize } from "./rot_renderer_tile";
 import { State } from "./state";
 
 let game = new Game();
@@ -75,4 +75,4 @@ if (BOTMOS_OPTIONS.debug) {
 }
 // DEBUG API End
 
-window.focus(); // focus on the canvas
+document.body.focus(); // focus on the canvas
