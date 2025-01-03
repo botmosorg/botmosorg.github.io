@@ -5,6 +5,7 @@ for tile in *.txt; do
 done
 wait
 
+#mogrify -scale 200% -interpolate Integer *.png
 convert *.png +append ../build/tiles.png
 
 # Create tileMap

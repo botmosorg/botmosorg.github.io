@@ -8,8 +8,10 @@ build: src-img/tilemap.ts test ## Bunbles and minifies the project
 
 clean: ## Cleans all artifacts
 	rm -rf build/
+	rm src-img/tilemap.ts
 
 src-img/tilemap.ts: src-img/*.txt ## Creates tilemap from src-img
+	mkdir -p build/
 	cd src-img/ && bash create-images.sh
 
 install_dependencies: ## Install dependencies
