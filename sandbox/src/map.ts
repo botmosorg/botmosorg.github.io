@@ -301,9 +301,11 @@ export function maps_parse(mapString: string): Map {
                     tileTypeName = "wall"
                     options['sign'] = components[1]
                 }
-                if (tileTypeName.startsWith("terminal ") && components.length >= 2) {
+                if (tileTypeName.startsWith("terminal ")) {
                     tileTypeName = "terminal"
-                    options['screen'] = components[1]
+                    if (components.length >= 2) {
+                        options['screen'] = components[1]
+                    }
                 }
                 if (tileTypeName.startsWith("tv ") && components.length >= 2) {
                     tileTypeName = "tv"
