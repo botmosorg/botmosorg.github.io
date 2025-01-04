@@ -39,7 +39,7 @@ export const ROT_OPTIONS = {
     tileHeight: FONT_SIZE,
     tileSet: null,
     tileMap: null,
-    //tileColorize: true,
+    tileColorize: true,
     //transpose: true,
     //forceSquareRatio: true
 }

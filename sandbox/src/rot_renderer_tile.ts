@@ -45,7 +45,9 @@ function rot_render(state: State, camera: any) {
         camera.y = 0
     }
 
-    const renderHashTable = {}
+    const renderHashTable: { [key: string]: Array<string>; } = {}
+    const renderHashTableFg: { [key: string]: Array<string>; } = {}
+    const renderHashTableBg: { [key: string]: Array<string>; } = {}
 
     // Render map
     for (let y=0; y < camera.height; y++) {
@@ -65,7 +67,10 @@ function rot_render(state: State, camera: any) {
                 }
             }
             if (!!icon) {
-                renderHashTable[[xPadding + x, yPadding + y].toString()] = [icon]
+                const key = [xPadding + x, yPadding + y].toString()
+                renderHashTable[key] = [icon]
+                renderHashTableFg[key] = ["transparent"]
+                renderHashTableBg[key] = ["transparent"]
             }
         }
     }
@@ -79,34 +84,43 @@ function rot_render(state: State, camera: any) {
         const key = [itemRenderX, itemRenderY].toString()
         if (renderHashTable[key]) {
             renderHashTable[key].push(item.type.icon)
+            renderHashTableFg[key].push("transparent")
+            renderHashTableBg[key].push("transparent")
         } else {
             renderHashTable[key] = [item.type.icon]
+            renderHashTableFg[key] = ["transparent"]
+            renderHashTableBg[key] = ["transparent"]
         }
     }
 
     // Render entities
     const playerId = players_get_current_id()
     const playerEntity = state.entities[playerId]
-    //const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
+    const playerFaction = ((playerEntity || {}).options || {}).faction || undefined;
     const entities = entities_get_by(state, currentMapId);
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
         const entityRenderX = xPadding + entity.x-camera.x
         const entityRenderY = yPadding + entity.y-camera.y
-        /*
-        let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
+
+        let entityColor = playerFaction === entity.options.faction ? "transparent" : lookup_color(entity.options.faction.color)
         if (BOTMOS_OPTIONS.highlightEnemy && !isMoveableObject(entity)) {
-            entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
+                                                                     // cybergreen                 // cybermagenta
+            entityColor = playerFaction === entity.options.faction ? "rgba(116, 238, 21, 0.5)" : "rgba(240, 0, 255, 0.5)";
         }
         if (entity === playerEntity) {
-            entityColor = MANIFEST.colors.white
+            entityColor = "transparent"
         }
-        */
+
         const key = [entityRenderX, entityRenderY].toString()
         if (renderHashTable[key]) {
             renderHashTable[key].push(entity.type.icon)
+            renderHashTableFg[key].push(entityColor)
+            renderHashTableBg[key].push("transparent")
         } else {
             renderHashTable[key] = [entity.type.icon]
+            renderHashTableFg[key] = [entityColor]
+            renderHashTableBg[key] = ["transparent"]
         }
     }
 
@@ -114,7 +128,7 @@ function rot_render(state: State, camera: any) {
     ROT_DISPLAY.clear()
     for (const [key, value] of Object.entries(renderHashTable)) {
         const coordinates = key.split(',')
-        ROT_DISPLAY.draw(Number(coordinates[0]), Number(coordinates[1]), value)
+        ROT_DISPLAY.draw(Number(coordinates[0]), Number(coordinates[1]), value, renderHashTableFg[key], renderHashTableBg[key])
     }
 
     // Render UI line
