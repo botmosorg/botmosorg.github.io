@@ -162,6 +162,7 @@ export const MANIFEST = {
 
     },
     "effects": {
+        "Recharger": new Effect("Recharger", "Doubles energy gained from chargepads"),
         "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls"),
         "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
@@ -201,7 +202,7 @@ export const MANIFEST = {
         "broom": new Item("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1),
         "hammer": new Item("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
         "pickaxe": new Item("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
-        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1),
+        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
         "trident": new Item("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1)
     },
