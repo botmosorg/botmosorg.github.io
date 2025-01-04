@@ -158,6 +158,9 @@ export const MANIFEST = {
         "2": new Command("2", "Tertiary action, second quick slot"), // unused
         "M": new Command("M", "Menu")
     },
+    "dialogs": {
+
+    },
     "effects": {
         "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls"),
@@ -1104,5 +1107,8 @@ _O_
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */
+    },
+    "uitexts": {
+
     }
 }
