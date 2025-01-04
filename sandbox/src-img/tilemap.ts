@@ -111,6 +111,7 @@ export const TILEMAP = {
   "wallz_": [109*16, 0],
   "wallZ": [110*16, 0],
   "water": [111*16, 0],
-  "WorkBot": [112*16, 0],
-  "wrench": [113*16, 0],
+  "watersewage": [112*16, 0],
+  "WorkBot": [113*16, 0],
+  "wrench": [114*16, 0],
 }
