@@ -222,7 +222,7 @@ export const MANIFEST = {
 !!_ voidtrue
 !!~ water
 !!# wall
-!!s wallstatue
+!!s wallstatueaerobot
 !!+ wallweak
 !!= chargepad
 !!O portal bot_station 23 16
@@ -311,7 +311,7 @@ O.....=..+.....#____#=....=#
 !!size 32 48
 !!spawn 12 3 hammer
 !!# wall
-!!s wallstatue
+!!s wallstatuepioneer
 !!+ wallweak
 !!. void
 !!_ voidtrue
@@ -489,7 +489,7 @@ _________##E###_________________
 !!spawn 9 21 pickaxe
 !!# wall
 !!+ wallweak
-!!s wallstatue
+!!s wallstatuecleaner
 !!. void
 !!, voidhidden
 !!_ voidtrue
@@ -548,7 +548,7 @@ _##############################################_
 !!> moveeast
 !!v movesouth
 !!< movewest
-!!s wallstatue
+!!s wallstatueworkbot
 !!O portal bot_station 10 16
 !!S portalhidden shop_instance 1 14
 ################################################
@@ -1084,7 +1084,10 @@ _O_
         "rock": new Tile("rock", "Hidden treasures may await", "'", "white", "gray"), // ▲ alternatively
         "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "black"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
-        "wallstatue": new Tile("wallstatue", "A small statue", 's', "gray", "black"),
+        "wallstatueaerobot": new Tile("wallstatueaerobot", "A small statue looking like an AeroBot", 'sa', "gray", "black"),
+        "wallstatuecleaner": new Tile("wallstatuecleaner", "A small statue looking like a Cleaner", 'sc', "gray", "black"),
+        "wallstatuepioneer": new Tile("wallstatuepioneer", "A small statue looking like a Pioneer", 'sp', "gray", "black"),
+        "wallstatueworkbot": new Tile("wallstatueworkbot", "A small statue looking like a WorkBot", 'sb', "gray", "black"),
         "wallweak": new Tile("wallweak", "A weakened wall", '+', "gray", "black"),
         "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),

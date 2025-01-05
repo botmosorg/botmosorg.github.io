@@ -10,7 +10,7 @@ const SHOP_INSTANCE_MAP: string = `!
 !!size 48 16
 !!# wall
 !!. void
-!!; wallstatue
+!!; wallstatueworkbot
 !!A wall A
 !!B wall B
 !!C wall C

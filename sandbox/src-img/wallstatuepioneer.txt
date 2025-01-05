@@ -5,7 +5,7 @@
 #!c #4deeeaff
 #!b #001effff
 #!y #ffe700ff
-#!  #00000000
+#!_ #00000000
 #!0 #000000FF
 #!f #ffffffff
 # brown
@@ -15,15 +15,15 @@
 #!d #222222ff
 0000000000000000
 0000000000000000
-0000aaaaaaaa0000
-000aaaaaaaaaa000
-00aaaaaaaaaaaa00
-00a00aaaa00aaa00
-00a00aaaa00aaa00
 00aaaaaaaaaaaa00
 00aaaaaaaaaaaa00
-00aaaaaaaaaaaa00
-00aaaaaaaaaaaa00
+0ddddddddddaaaa0
+0ddddddddddaaaa0
+00aaaaaaaaaaaaa0
+00aaaaaaaaaaaaa0
+00aaaaaaaaaaaaa0
+00aaaaaaaaaaaaa0
+00aaaaaaaaaaaaa0
 00aaaaaaaaaaaa00
 00aaaaaaaaaaaa00
 00aaa000000aaa00
