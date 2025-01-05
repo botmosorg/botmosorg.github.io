@@ -15,8 +15,8 @@
 #!d #222222ff
 ________________
 _______ffff_____
-______fggfgg____
-___f__fggfgg__f_
+______fccfcc____
+___f__fccfcc__f_
 ___f___ffff___f_
 ___ff___ff___ff_
 ___fff__ff__fff_
