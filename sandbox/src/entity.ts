@@ -1,4 +1,6 @@
 import { debug_log } from "./debug";
+import { t } from "./l10n";
+import { log } from "./log";
 import { MANIFEST, Entity as EntityType } from "./manifest";
 import { State } from "./state";
 
@@ -83,9 +85,13 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
 
 export function interactOrCombat(state: State, entityA: Entity, entityB: Entity) {
     if (entityA.options.faction === entityB.options.faction) {
-        //debug_log("Interaction!")
+        // Interaction
+        if (!!entityB.options.dialog) {
+            const name = !!entityB?.options?.name ? entityB.options.name : entityB.type.name
+            state = log(state, name + ": " + t(entityB.options.dialog))
+        }
     } else {
-        //debug_log("COMBAT!")
+        // Combat
         const entityId = entityA.id
         const otherEntityId = entityB.id
         state._combatQueue.push({entityId, otherEntityId})

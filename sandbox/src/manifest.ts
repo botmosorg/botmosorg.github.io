@@ -159,7 +159,14 @@ export const MANIFEST = {
         "M": new Command("M", "Menu")
     },
     "dialogs": {
-
+        "bot_bar_aerobot_backstage": "Huh? How did you get here?",
+        "bot_bar_aerobot_charger": "Feel free to recharge on those chargepads and enjoy the show.",
+        "bot_bar_aerobot_spa_down": "Have you been to our shop, yet?",
+        "bot_bar_aerobot_spa_up": "Ahhhh, so refreshing!",
+        "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
+        "shop_instance_aerobot_shopper": "It's shiny!!!",
+        "shop_instance_shopkeeper": "Welcome! What does your engine desire?",
+        "shop_instance_workbot_shopper": "This shop is not so secret after all..."
     },
     "effects": {
         "Recharger": new Effect("Recharger", "Doubles energy gained from chargepads"),
@@ -210,11 +217,11 @@ export const MANIFEST = {
 !!size 28 16
 !!spawn 14 3 movablebox
 !!spawn 14 12 movablebox
-!!spawn 2 4 AeroBot faction=Spirits
-!!spawn 4 8 AeroBot faction=Spirits
-!!spawn 10 7 AeroBot faction=Spirits
-!!spawn 21 3 AeroBot faction=Spirits
-!!spawn 21 5 AeroBot faction=Spirits
+!!spawn 2 4 AeroBot faction=Spirits dialog=bot_bar_aerobot_welcome
+!!spawn 4 8 AeroBot faction=Spirits dialog=bot_bar_aerobot_charger
+!!spawn 10 7 AeroBot faction=Spirits dialog=bot_bar_aerobot_backstage
+!!spawn 21 3 AeroBot faction=Spirits dialog=bot_bar_aerobot_spa_up
+!!spawn 21 5 AeroBot faction=Spirits dialog=bot_bar_aerobot_spa_down
 !!spawn 10 11 shocker
 !!. void
 !!_ voidtrue
