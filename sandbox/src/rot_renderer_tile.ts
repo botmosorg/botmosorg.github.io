@@ -50,12 +50,8 @@ function rot_render(state: State, camera: any) {
         for (let x=0; x<camera.width; x++) {
             let tile = map.getTile(camera.x+x, camera.y+y)
 
-            //var bg_color = MANIFEST.colors.black;
-            //var fg_color = MANIFEST.colors.white;
             let icon = ""
             if (!!tile && !!tile.type) {
-                //bg_color = lookup_color(tile.type.bg)
-                //fg_color = lookup_color(tile.type.fg)
                 if (!!tile.options.sign) {
                     icon = "#" + tile.options.sign
                 } else {
@@ -184,4 +180,3 @@ function _create_tileMap(): any {
 
     return tilemap
 }
-
