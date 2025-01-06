@@ -1,5 +1,6 @@
 import { debug_log } from "./debug";
 import { Entity, isMoveableObject } from "./entity";
+import { log } from "./log";
 import { MANIFEST, Item as ItemType } from "./manifest";
 import { State } from "./state";
 
@@ -147,6 +148,10 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
 export function items_equip(state: State, entityId: string, itemType: ItemType) {
     let equippedItem: EquippedItem = {type: itemType}
     state.tools[entityId] = equippedItem
+
+    if (entityId.startsWith("player")) {
+        state = log(state, `Equipped ${itemType.name}.`)
+    }
 
     return state
 }

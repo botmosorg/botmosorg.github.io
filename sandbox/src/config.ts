@@ -5,6 +5,8 @@ const FONT_SIZE = 16
 export const BOTMOS_OPTIONS = {
     cameraWidth: Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE),
     cameraHeight: Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE),
+    chatLogMaxSize: 100,
+    chatLogMaxDisplaySize: 5,
     debug: true,
     fontSize: FONT_SIZE,
     highlightEnemy: true,

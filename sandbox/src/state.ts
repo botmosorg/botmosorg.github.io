@@ -7,7 +7,8 @@ export interface State {
     _energyQueue: Array<{entityId: string, energyDelta: number}>
     _eventSubscribers: object,
     _menuOpen: boolean,
-    actionLog: Array<string>
+    actionLog: Array<string>,
+    chatLog: Array<string>,
     currentMapId: string,
     entities: object,
     items: object,
@@ -27,6 +28,7 @@ export function states_create(): State {
         _eventSubscribers: {},
         _menuOpen: false,
         actionLog: [],
+        chatLog: [],
         currentMapId: "",
         entities: {},
         items: {},

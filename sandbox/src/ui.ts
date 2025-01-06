@@ -8,12 +8,15 @@ import { State } from "./state"
 const UI_ELEMENT = document.createElement("div")
 UI_ELEMENT.id = "ui"
 document.body.appendChild(UI_ELEMENT)
+const UI_CHATLOG_ELEMENT = document.createElement("div")
+UI_CHATLOG_ELEMENT.id = "uichatlog"
+document.body.appendChild(UI_CHATLOG_ELEMENT)
 
 export async function drawUI(state: State, cameraY: number=0) { // dirty hack: UI should not rely on camera
     const playerId = players_get_current_id()
     const playerEntity = state.entities[playerId]
 
-    // Render UI line
+    // Render status line
     if (!!playerEntity && BOTMOS_OPTIONS.showUI) {
         let equippedItemText = ''
         const equippedItem = items_get_equipped(state, playerId)
@@ -70,6 +73,12 @@ export async function drawUI(state: State, cameraY: number=0) { // dirty hack: U
             UI_LINE.innerText = lines[i]
             UI_ELEMENT.appendChild(UI_LINE)
         }
+    }
+
+    // Render chat log
+    if (state.chatLog.length) {
+        const lines = state.chatLog.slice(-BOTMOS_OPTIONS.chatLogMaxDisplaySize)
+        UI_CHATLOG_ELEMENT.innerText = lines.join("\n");
     }
 
     // Render debug lines
