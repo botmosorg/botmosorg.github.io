@@ -26,7 +26,7 @@ export default class Game {
         this.state = maps_create_all_manual(this.state)
 
         this.state.currentMapId = "botmos_hull_selection"
-        this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+        this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits, name: "Player"})
 
         return this.state
     }
@@ -49,7 +49,7 @@ export default class Game {
             debug_log("Game over! " + this.state.actionLog.length + " Turns: " + this.state.actionLog.join(''))
 
             this.state.currentMapId = "botmos_hull_selection"
-            this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits})
+            this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits, name: "Player"})
         }
 
         return this.state

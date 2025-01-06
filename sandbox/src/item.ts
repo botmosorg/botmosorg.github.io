@@ -117,8 +117,6 @@ export function items_get_equipped(state: State, entityId: string): EquippedItem
 }
 
 export function items_pickup(state: State, entity: Entity, item: Item): State {
-    //debug_log("Pickup item " + item.id + " by " + entity.id)
-
     if (isMoveableObject(entity)) { // Boulders and boxes don't pick up items
         return state
     }
@@ -135,6 +133,10 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
             entity.energyMax += item.energy
         }
         state._energyQueue.push({entityId: entity.id, energyDelta: item.energy})
+
+        if (entity.id.startsWith("player")) {
+            state = log(state, `Picked up ${item.type.name}.`)
+        }
     }
 
     entity.gold += item.gold

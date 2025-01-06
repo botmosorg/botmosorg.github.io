@@ -225,7 +225,9 @@ export function entities_tile_energy_update(state: State): State {
         } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
             energyDelta /= 2
         }
-        state._energyQueue.push({entityId, energyDelta: energyDelta})
+        if (energyDelta !== 0) {
+            state._energyQueue.push({entityId, energyDelta: energyDelta})
+        }
     }
 
     return state

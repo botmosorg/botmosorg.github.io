@@ -175,8 +175,8 @@ export const MANIFEST = {
         "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
-        "movableboulder": new Entity("movableboulder", "A movable rock", "o", 2),
-        "movablebox": new Entity("movablebox", "A movable box", "x", 2),
+        "movableboulder": new Entity("Boulder", "A movable rock", "o", 2),
+        "movablebox": new Entity("Box", "A movable box", "x", 2),
         "Spirit":  new Entity("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
         "AeroBot": new Entity("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
         "WorkBot": new Entity("WorkBot", "Basic factory worker", "B"),
