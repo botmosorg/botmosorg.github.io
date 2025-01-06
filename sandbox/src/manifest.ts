@@ -185,10 +185,8 @@ export const MANIFEST = {
         */
     },
     "factions": {
-        "Equipment": new Faction("Equipment", "For boxes etc.", "gray"),
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
-        "Gaia": new Faction("Gaia", "For rocks etc.", "brown"),
         "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {

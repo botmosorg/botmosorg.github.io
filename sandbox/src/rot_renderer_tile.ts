@@ -99,7 +99,7 @@ function rot_render(state: State, camera: any) {
         const entityRenderX = xPadding + entity.x-camera.x
         const entityRenderY = yPadding + entity.y-camera.y
 
-        let entityColor = playerFaction === entity.options.faction ? "transparent" : lookup_color(entity.options.faction.color)
+        let entityColor = "transparent" // default for boulders or boxes
         if (BOTMOS_OPTIONS.highlightEnemy && !isMoveableObject(entity)) {
                                                                      // cybergreen                 // cybermagenta
             entityColor = playerFaction === entity.options.faction ? "rgba(116, 238, 21, 0.5)" : "rgba(240, 0, 255, 0.5)";

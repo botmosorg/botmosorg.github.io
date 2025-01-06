@@ -31,12 +31,6 @@ export class SpawnCommand {
         this.y = y;
         this.entityOrItemName = entityOrItemName;
         this.options = options;
-
-        if (entityOrItemName === "movablebox" && !Object.hasOwn(this.options, "faction")) {
-            this.options["faction"] = "Equipment"
-        } else if (entityOrItemName === "movableboulder" && !Object.hasOwn(this.options, "faction")) {
-            this.options["faction"] = "Gaia"
-        }
     }
 
     generateId(): string {
