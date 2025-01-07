@@ -14,6 +14,7 @@ export interface Entity {
     gold: number,
     matter: number,
     message: string | null,
+    interactions: number,
     options: any
 }
 
@@ -29,6 +30,7 @@ export function entities_create(state: State, id: string, type: EntityType, mapI
         "gold": 0,
         "matter": 0,
         "message": null,
+        "interactions": 0,
         "options": options
     }
 
@@ -83,17 +85,27 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
 }
 
 export function interactOrCombat(state: State, entityA: Entity, entityB: Entity) {
+    if (entityA === entityB) { // Weird AI bug not moving when using entityInteractOrMove (with dx and dy === 0), thus NPCs would interact with themselves
+        return state
+    }
+
     if (entityA.options.faction === entityB.options.faction) {
         // Interaction
         if (!!entityB.options.dialog) {
             const name = !!entityB?.options?.name ? entityB.options.name : entityB.type.name
+            //console.log("Interacting %o %o", entityA, entityB)
             state = log(state, name + ": " + t(entityB.options.dialog))
+            entityB.interactions++;
         }
     } else {
         // Combat
         const entityId = entityA.id
         const otherEntityId = entityB.id
         state._combatQueue.push({entityId, otherEntityId})
+    }
+
+    if (entityB.interactions >= 3 && entityB.options?.ai === MANIFEST.ais.interactenrage) { // Little easter egg for the manual ;)
+        entityB.options.faction = MANIFEST.factions.Pyrates // TODO currently hardcoded to a hostile to player faction, ideally some hostile faction to entityA
     }
 
     return state

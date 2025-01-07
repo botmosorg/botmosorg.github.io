@@ -124,7 +124,8 @@ export const MANIFEST = {
     "ais": {
         "aggrorange": new AI("aggrorange", "Idles at a position and engages the player when coming into range"),
         "aggrorangeshort": new AI("aggrorangeshort", "Idles at a position and engages the player when coming into shorter range"),
-        "guardian": new AI("guardian", "Idles at a position and only fights back if engaged")
+        "guardian": new AI("guardian", "Idles at a position and only fights back if engaged"),
+        "interactenrage": new AI("interactenrage", "Gets hostile when getting talked to too often!")
     },
     /**
      * From: https://www.color-hex.com/color-palette/8618
@@ -165,6 +166,12 @@ export const MANIFEST = {
         "bot_bar_aerobot_spa_down": "Have you been to our shop, yet?",
         "bot_bar_aerobot_spa_up": "Ahhhh, so refreshing!",
         "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
+        "bot_station_pioneer": "You shall not pass!",
+        "manual_spirit": "Weeee!",
+        "manual_aerobot": "Huh? Why don't you have a hull?",
+        "manual_workbot": "Work, work!",
+        "manual_cleaner": "Follow the rules! Okay?",
+        "manual_pioneer": "Don't talk to me, weakling!",
         "shop_instance_aerobot_shopper": "It's shiny!!!",
         "shop_instance_shopkeeper": "Welcome! What does your engine desire?",
         "shop_instance_workbot_shopper": "This shop is not so secret after all..."
@@ -587,7 +594,7 @@ _##############################################_
 !!spawn 24 9 Cleaner faction=Guardians ai=guardian
 !!spawn 26 9 Cleaner faction=Guardians ai=guardian
 !!spawn 28 9 Cleaner faction=Guardians ai=guardian
-!!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer
+!!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer dialog=bot_station_pioneer
 !!. void
 !!~ water
 !!# wall
@@ -846,11 +853,11 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 "manual": `!
 !!id manual
 !!size 80 54
-!!spawn 4 26 Spirit faction=Spirits
-!!spawn 4 27 AeroBot faction=Spirits
-!!spawn 4 28 WorkBot faction=Spirits
-!!spawn 4 29 Cleaner faction=Spirits
-!!spawn 4 30 Pioneer faction=Spirits
+!!spawn 4 26 Spirit faction=Spirits dialog=manual_spirit
+!!spawn 4 27 AeroBot faction=Spirits dialog=manual_aerobot
+!!spawn 4 28 WorkBot faction=Spirits dialog=manual_workbot
+!!spawn 4 29 Cleaner faction=Spirits dialog=manual_cleaner
+!!spawn 4 30 Pioneer faction=Spirits dialog=manual_pioneer equip=hammer ai=interactenrage
 !!spawn 54 36 Spirit faction=Pyrates ai=aggrorange
 !!spawn 4 36 junk
 !!spawn 12 36 goo

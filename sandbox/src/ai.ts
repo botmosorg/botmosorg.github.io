@@ -84,6 +84,7 @@ export function ais_create(state: State, entityId: string, aiType: AI): State {
         case MANIFEST.ais.aggrorange: aggroRange = 8; break;
         case MANIFEST.ais.aggrorangeshort: aggroRange = 2; break;
         case MANIFEST.ais.guardian: aggroRange = 1; break;
+        case MANIFEST.ais.interactenrage: aggroRange = 2; break;
         default:
     }
 
