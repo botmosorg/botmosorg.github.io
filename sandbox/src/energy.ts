@@ -19,13 +19,11 @@ export function energy_update(state: State): State {
         let entity = state.entities[entityId]
         state._despawnQueue.push(entityId);
         const entityName = !!entity?.options?.name ? entity.options.name : entity.type.name
-        let despawnMsg = `${entityName} destroyed.`
         if (!isMoveableObject(entity)) { // Boulders and boxes don't leave remains
             const matter = Math.max(1, Math.floor(entity.energyMax / 3))
             state = items_create_junk(state, matter, entity.mapId, entity.x, entity.y)
-            despawnMsg = `${entityName} destroyed leaving behind Junk.`
+            state = log(state, `${entityName} destroyed leaving behind Junk.`)
         }
-        state = log(state, despawnMsg)
     }
 
     return state

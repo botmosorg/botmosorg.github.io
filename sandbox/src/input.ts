@@ -16,7 +16,8 @@ const _BM_INPUT = {
     b: false,
     one: false,
     two: false,
-    menu: false
+    menu: false,
+    slash: false
 }
 
 let _inputQueue: Command[] = []
@@ -65,6 +66,11 @@ document.body.addEventListener("keydown", function(e) {
             break;
         case 'm':
             _BM_INPUT.menu = true;
+            _preventDefaultAndStopPropagation(e);
+            break;
+        case '#':
+        case '/':
+            _BM_INPUT.slash = true;
             _preventDefaultAndStopPropagation(e);
             break;
         default:
@@ -122,6 +128,10 @@ document.body.addEventListener("keyup", function(e) {
             _BM_INPUT.menu = false;
             _preventDefaultAndStopPropagation(e);
             break;
+        case '#':
+        case '/':
+            _BM_INPUT.slash = false;
+            _preventDefaultAndStopPropagation(e);
         default:
     }
 })
@@ -220,6 +230,9 @@ function _updateInputQueue() {
 
     if (_BM_INPUT.menu) {
         action = MANIFEST.commands.M;
+    }
+    if (_BM_INPUT.slash) {
+        action = MANIFEST.commands['#'];
     }
 
     _lastAction = action;

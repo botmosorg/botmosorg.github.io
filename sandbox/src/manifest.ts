@@ -156,7 +156,8 @@ export const MANIFEST = {
         "B": new Command("B", "Take a break, cancel"), // B/Y/Z/space bar
         "1": new Command("1", "Secondary action, first quick slot"), // unused
         "2": new Command("2", "Tertiary action, second quick slot"), // unused
-        "M": new Command("M", "Menu")
+        "M": new Command("M", "Menu"),
+        "#": new Command("#", "Open prompt") // # or /
     },
     "dialogs": {
         "bot_bar_aerobot_backstage": "Huh? How did you get here?",
@@ -937,7 +938,7 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #^|.Move_around_using_arrow_keys_or_WASD......................................^#
 #^..Alternatively,_click/touch_on_the_top/left/bottom/right_screen_area.......^#
 #^|...........................................................................^#
-#^..M_or_click/touch_on_the_screen_center_to_open_the_menu....................^#
+#^..M_or_click/touch_on_the_screen_center_to_hide/show_the_message_log........^#
 #^|...........................................................................^#
 #^..Y_or_Z_or_Spacebar_or_click/touch_top_screen_corners_to_skip_one_turn.....^#
 #^|...........................................................................^#

@@ -1,4 +1,3 @@
-import { debug_log } from "./debug";
 import { t } from "./l10n";
 import { log } from "./log";
 import { MANIFEST, Entity as EntityType } from "./manifest";

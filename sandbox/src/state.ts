@@ -26,7 +26,7 @@ export function states_create(): State {
         _despawnQueue: [],
         _energyQueue: [],
         _eventSubscribers: {},
-        _menuOpen: false,
+        _menuOpen: true,
         actionLog: [],
         chatLog: [],
         currentMapId: "",

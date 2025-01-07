@@ -1,18 +1,6 @@
-import { BOTMOS_OPTIONS } from "./config"
+import { State } from "./state"
 
-export function debug_log(text: string) {
-    if (BOTMOS_OPTIONS.debug) {
-        console.log(text)
-    }
-    //debug_overlay(text);
-}
-
-// Max latest lines are shown
-export const DEBUG_LINES: string[] = []
-const LATEST_N_LINES = 2
-function debug_overlay(line: string) {
-    DEBUG_LINES.push(line)
-    while (DEBUG_LINES.length > LATEST_N_LINES) {
-        DEBUG_LINES.shift()
-    }
+export function debug_entity_position(state: State, entityId: string): string {
+    const entity = state.entities[entityId]
+    return `DEBUG: ${entityId} at ${entity.mapId},${entity.x},${entity.y}`
 }

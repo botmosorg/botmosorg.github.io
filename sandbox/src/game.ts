@@ -1,7 +1,8 @@
-import { debug_log } from "./debug";
+import { debug_entity_position } from "./debug";
 import { entities_create } from "./entity";
 import { entity_act, entity_map_entitymapUpdatedEvent_subscriber } from "./entity_map";
 import { subscribe } from "./events";
+import { log } from "./log";
 import { Command, MANIFEST } from "./manifest";
 import { maps_create_all_manual } from "./map"
 import { maps_create_solar_system } from "./map_generator_solar_system";
@@ -31,22 +32,27 @@ export default class Game {
         return this.state
     }
 
-    update(action: Command | null): State {
+    update(action: Command | null, headless=false): State {
         let player = this.state.entities[players_get_current_id()]
         if (!!player) {
             if (!!action) {
-                if (action === MANIFEST.commands.M) {
-                    this.state._menuOpen = !this.state._menuOpen
-                } else {
-                    this.state = entity_act(this.state, player, action)
-                    this.state = systems_per_turn_update(this.state)
+                switch (action) {
+                    case MANIFEST.commands.M:
+                        this.state._menuOpen = !this.state._menuOpen
+                        break
+                    case MANIFEST.commands["#"]:
+                        this.state = log(this.state, debug_entity_position(this.state, players_get_current_id()))
+                        break
+                    default:
+                        this.state = entity_act(this.state, player, action)
+                        this.state = systems_per_turn_update(this.state)
                 }
 
                 this.state.actionLog.push(action.key)
-                //debug_log("Turn: " + this.actionLog.length + ", act: " + action.key + ", plr: (" + player.energy + "/" + player.energyMax + " | " + player.x + "," + player.y + ")")
             }
         } else {
-            debug_log("Game over! " + this.state.actionLog.length + " Turns: " + this.state.actionLog.join(''))
+            this.state = log(this.state, `Game over! ${this.state.actionLog.length} turns.`)
+            console.log(`Game over! ${this.state.actionLog.length} turns: ${this.state.actionLog.join('')}`)
 
             this.state.currentMapId = "botmos_hull_selection"
             this.state = entities_create(this.state, players_get_current_id(), MANIFEST.entities.Spirit, this.state.currentMapId, 9, 5, {faction: MANIFEST.factions.Spirits, name: "Player"})
@@ -58,7 +64,7 @@ export default class Game {
     play(actions: string): State {
         for (let i=0; i<actions.length; i++) {
             const action = actions[i]
-            this.update(MANIFEST.commands[action])
+            this.update(MANIFEST.commands[action], true)
         }
 
         return this.state
