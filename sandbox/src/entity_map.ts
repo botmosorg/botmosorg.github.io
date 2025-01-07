@@ -2,6 +2,7 @@ import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { Event, publish } from "./events";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
+import { log } from "./log";
 import { MANIFEST, Command, Tile } from "./manifest";
 import { Map, tiles_is_space_tile } from "./map";
 import { State } from "./state";
@@ -237,8 +238,14 @@ export function entity_map_entitymapUpdatedEvent_subscriber(state: State, payloa
     const entity = state.entities[payload.entityId]
 
     switch (payload.oldTileType) {
-        case MANIFEST.tiles.portalstartaerobot: state = entities_set_type(state, entity, MANIFEST.entities.AeroBot); break;
-        case MANIFEST.tiles.portalstartworkbot: state = entities_set_type(state, entity, MANIFEST.entities.WorkBot); break;
+        case MANIFEST.tiles.portalstartaerobot:
+            state = entities_set_type(state, entity, MANIFEST.entities.AeroBot);
+            state = log(state, `Booting up as an ${MANIFEST.entities.AeroBot.name}...`)
+            break;
+        case MANIFEST.tiles.portalstartworkbot:
+            state = entities_set_type(state, entity, MANIFEST.entities.WorkBot);
+            state = log(state, `Booting up as a ${MANIFEST.entities.WorkBot.name}...`)
+            break;
         default:
     }
 
