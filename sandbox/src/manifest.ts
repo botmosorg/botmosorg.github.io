@@ -166,6 +166,8 @@ export const MANIFEST = {
         "bot_bar_aerobot_spa_down": "Have you been to our shop, yet?",
         "bot_bar_aerobot_spa_up": "Ahhhh, so refreshing!",
         "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
+        "bot_prison_aerobot": "I'm innocent! I'm innocent! I'm innocent! Beep!",
+        "bot_prison_workbot": "Thanks for freeing me! Guess I don't need this Pickaxe anymore...",
         "bot_station_pioneer": "You shall not pass!",
         "manual_spirit": "Weeee!",
         "manual_aerobot": "Huh? Why don't you have a hull?",
@@ -494,8 +496,8 @@ _________##E###_________________
 !!spawn 17 2 Cleaner faction=Guardians ai=aggrorange
 !!spawn 24 5 Cleaner faction=Guardians ai=aggrorange
 !!spawn 29 24 Cleaner faction=Guardians ai=aggrorangeshort
-!!spawn 34 22 AeroBot faction=Spirits
-!!spawn 9 22 WorkBot faction=Spirits
+!!spawn 34 22 AeroBot faction=Spirits dialog=bot_prison_aerobot
+!!spawn 9 22 WorkBot faction=Spirits dialog=bot_prison_workbot
 !!spawn 28 1 broom
 !!spawn 43 30 battery
 !!spawn 9 30 matter
