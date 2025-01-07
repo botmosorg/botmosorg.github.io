@@ -168,6 +168,7 @@ export const MANIFEST = {
         "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
         "bot_prison_aerobot": "I'm innocent! I'm innocent! I'm innocent! Beep!",
         "bot_prison_workbot": "Thanks for freeing me! Guess I don't need this Pickaxe anymore...",
+        "bot_stadium_botracing": "Now this is botracing!",
         "bot_station_pioneer": "You shall not pass!",
         "manual_spirit": "Weeee!",
         "manual_aerobot": "Huh? Why don't you have a hull?",
@@ -551,14 +552,14 @@ _#,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,#_
 _##############################################_
 `,
 "bot_stadium": `!
-!Now this is botracing!
 !!id bot_stadium
 !!size 48 16
+!!spawn 26 2 WorkBot faction=Spirits dialog=bot_stadium_botracing
 !!# wall
 !!+ wallweak
 !!. void
 !!= chargepad
-!!~ water
+!!~ watersewage
 !!^ movenorth
 !!> moveeast
 !!v movesouth
