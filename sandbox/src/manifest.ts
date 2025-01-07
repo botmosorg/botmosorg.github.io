@@ -166,6 +166,10 @@ export const MANIFEST = {
         "bot_bar_aerobot_spa_down": "Have you been to our shop, yet?",
         "bot_bar_aerobot_spa_up": "Ahhhh, so refreshing!",
         "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
+        "bot_dormitory_aerobot_down": "Would you please go to your own pod?",
+        "bot_dormitory_aerobot_up": "Pod, sweet pod!",
+        "bot_dormitory_workbot_left": "This pod is taken, go away!",
+        "bot_dormitory_workbot_right": "Brzzzt! Brzzzt!",
         "bot_prison_aerobot": "I'm innocent! I'm innocent! I'm innocent! Beep!",
         "bot_prison_workbot": "Thanks for freeing me! Guess I don't need this Pickaxe anymore...",
         "bot_stadium_botracing": "Now this is botracing!",
@@ -264,10 +268,10 @@ O.....=..+.....#____#=....=#
 !!id bot_dormitory
 !!size 32 32
 !!spawn 13 8 battery
-!!spawn 4 11 AeroBot faction=Spirits
-!!spawn 23 27 AeroBot faction=Spirits
-!!spawn 8 18 WorkBot faction=Spirits
-!!spawn 26 18 WorkBot faction=Spirits
+!!spawn 4 11 AeroBot faction=Spirits dialog=bot_dormitory_aerobot_up
+!!spawn 23 27 AeroBot faction=Spirits dialog=bot_dormitory_aerobot_down ai=interactenrage equip=shocker
+!!spawn 8 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_left ai=interactenrage
+!!spawn 26 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_right
 !!. void
 !!~ water
 !!# wall
