@@ -87,6 +87,10 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
         }
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
+    } else if (_entity_can_open_tile(map, entity, tool, dx, dy)) { // E.g. open sewer portals
+        state = _entity_move(state, map, entity, dx, dy)
+        state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost}) // Wrenching cost
+
     }
 
     return state
@@ -259,11 +263,12 @@ function _entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boo
     return x >= 0 && x < map.widthTiles && y >= 0 && y < map.heightTiles
         && !(tileType === MANIFEST.tiles.rock
              || tileType === MANIFEST.tiles.portalclosed
+             || tileType === MANIFEST.tiles.portalsewers
              || tileType === MANIFEST.tiles.tv
              || tileType.name.startsWith('wall'));
 }
 
-function _entity_can_crush_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number) {
+function _entity_can_crush_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number): boolean {
     const x = entity.x + dx;
     const y = entity.y + dy;
     const tileType = map.getTile(x, y).type;
@@ -271,6 +276,18 @@ function _entity_can_crush_tile(map: Map, entity: Entity, tool: EquippedItem | u
     if (!!tool) {
         return (tool.type.effects.includes(MANIFEST.effects.WallCrusher.name) && tileType === MANIFEST.tiles.wallweak)
             || (tool.type.effects.includes(MANIFEST.effects.RockCrusher.name) && tileType === MANIFEST.tiles.rock)
+    }
+
+    return false
+}
+
+function _entity_can_open_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number): boolean {
+    const x = entity.x + dx;
+    const y = entity.y + dy;
+    const tileType = map.getTile(x, y).type;
+
+    if (!!tool) {
+        return (tool.type.effects.includes(MANIFEST.effects.Screwing.name) && tileType === MANIFEST.tiles.portalsewers)
     }
 
     return false

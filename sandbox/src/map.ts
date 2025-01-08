@@ -225,6 +225,7 @@ export class Map {
                 movementMap[y][x] = 0;
                 if (tileType === MANIFEST.tiles.rock
                     || tileType === MANIFEST.tiles.portalclosed
+                    || tileType === MANIFEST.tiles.portalsewers
                     || tileType === MANIFEST.tiles.tv
                     || tileType.name.startsWith("wall")) {
                     movementMap[y][x] = 1;
@@ -290,6 +291,7 @@ export function maps_parse(mapString: string): Map {
                 let options = {}
                 if (tileTypeName.startsWith("portal ")
                         || tileTypeName.startsWith("portalhidden ")
+                        || tileTypeName.startsWith("portalsewers ")
                         || tileTypeName.startsWith("portallauncher ")
                         || tileTypeName.startsWith("portalstart")) {
                     tileTypeName = components[0]
