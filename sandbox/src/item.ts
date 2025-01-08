@@ -1,4 +1,3 @@
-import { debug_log } from "./debug";
 import { Entity, isMoveableObject } from "./entity";
 import { log } from "./log";
 import { MANIFEST, Item as ItemType } from "./manifest";
