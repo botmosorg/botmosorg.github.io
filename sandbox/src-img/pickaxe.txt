@@ -15,17 +15,17 @@
 #!d #222222ff
 ________________
 ________________
+_________aaa____
+__________yya___
+__________ayya__
+_________ ayya__
+__a_aaaaaaaayya_
+_ayyyyyyyyyayya_
+_ayyyyyyyyyayya_
+__a_aaaaaaaayya_
+__________ayya__
+__________ayya__
+__________yya___
+_________aaa____
 ________________
 ________________
-________________
-________________
-__ayaaaaaaaaya__
-__aaaaaaaaaaaa__
-__yaayyyyyyaay__
-__yaayyyyyyaay__
-__yyyyyaayyyyy__
-__yyyyyyyyyyyy__
-__yyyyyaayyyyy__
-__yyyyyaayyyyy__
-__yyyyyyyyyyyy__
-__yyyyyyyyyyyy__

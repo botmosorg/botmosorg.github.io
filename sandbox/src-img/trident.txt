@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-________________
-________________
-________________
-________________
-________________
-________________
-__ayaaaaaaaaya__
-__aaaaaaaaaaaa__
-__yaayyyyyyaay__
-__yaayyyyyyaay__
-__yyyyyaayyyyy__
-__yyyyyyyyyyyy__
-__yyyyyaayyyyy__
-__yyyyyaayyyyy__
-__yyyyyyyyyyyy__
-__yyyyyyyyyyyy__
+___y___yy___y___
+___yy__yy__yy___
+___yy__yy__yy___
+___ayyayyayya___
+_____ayyyya_____
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+_______yy_______
+______ayya______
+_______aa_______

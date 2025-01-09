@@ -219,6 +219,7 @@ export const MANIFEST = {
     },
     "items": {
         "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
+        "chest": new Item("Chest", "A chest. What might be inside?", "i", "cyberyellow"),
         "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
         "gold": new Item("Gold", "Precious shiny!", "gg", "cyberyellow", 0, 0, 1),
         "goo": new Item("Goo", "A minor matter source", "goo", "gray", 0, 1),
