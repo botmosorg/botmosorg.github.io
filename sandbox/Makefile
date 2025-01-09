@@ -1,4 +1,4 @@
-.PHONY: all build clean install_dependencies test todo help
+.PHONY: all build clean install_dependencies statistics test todo help
 
 all: build ## Main task for local dev
 	python3 -m http.server
@@ -18,6 +18,9 @@ install_dependencies: ## Install dependencies
 	bun install -d bun-types
 	bun add @types/web -D
 	PIPENV_PIPFILE=src-img/Pipfile pipenv install
+
+statistics: ## Print project statistics
+	@bun script/project_statistics.ts
 
 test: ## Execute tests
 	bun test --coverage
