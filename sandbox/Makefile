@@ -21,6 +21,14 @@ install_dependencies: ## Install dependencies
 
 statistics: ## Print project statistics
 	@bun script/project_statistics.ts
+	@echo ''
+	@echo '## Docs and Code'
+	@echo ''
+	@echo -n '* Design/project management document size in lines: '
+	@cat ../../MANIFEST.md | wc -l
+	@echo -n '* TODO count in the codebase: '
+	@grep -rin "todo" src/ test/ | wc -l
+	@git log --pretty='format:%cd' --date=format:'%Y' | uniq -c | awk '{print "* Year "$$2": "$$1" commits"}'
 
 test: ## Execute tests
 	bun test --coverage
