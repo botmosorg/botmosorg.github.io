@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-________________
-_______ffff_____
-______fccfcc____
-___f__fccfcc__f_
-___f___ffff___f_
-___ff___ff___ff_
-___fff__ff__fff_
-___f_ff_ff_ff_f_
-___f__ffffff__f_
-___f__ffffff__f_
-_____ffffffff___
-_____ffffffff___
-_____fff__fff___
-______ff__ff____
-_______f__f_____
-_______f__f_____
+_______0000_____
+______0ffff0____
+_____0fccfcc0___
+__0f_0fccfcc0_f0
+__0f__0ffff0__f0
+__0ff__0ff0__ff0
+__0fff_0ff0_fff0
+__0f_ff0ff0ff_f0
+__0f__ffffff__f0
+__0f__ffffff__f0
+____0ffffffff0__
+____0ffffffff0__
+____0fff__fff0__
+_____0ff__ff0___
+______0f__f0____
+______0f__f0____

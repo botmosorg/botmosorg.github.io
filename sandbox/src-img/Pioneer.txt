@@ -14,18 +14,18 @@
 #!a #777777ff
 #!d #222222ff
 ________________
-________________
-__ffffffffffff__
-__ffffffffffff__
-_ffffcccccccccc_
-_ffffcccccccccc_
-_fffffffffffff__
-_fffffffffffff__
-_fffffffffffff__
-_fffffffffffff__
-_fffffffffffff__
-__ffffffffffff__
-__ffffffffffff__
-__fff______fff__
-__fff______fff__
-__fff______fff__
+__000000000000__
+_0ffffffffffff0_
+_0ffffffffffff0_
+0ffffcccccccccc0
+0ffffcccccccccc0
+0fffffffffffff0_
+0fffffffffffff0_
+0fffffffffffff0_
+0fffffffffffff0_
+0fffffffffffff0_
+_0ffffffffffff0_
+_0ffffffffffff0_
+_0fff______fff0_
+_0fff______fff0_
+_0fff______fff0_
