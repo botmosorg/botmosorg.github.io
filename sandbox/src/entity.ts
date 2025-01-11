@@ -89,7 +89,7 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
         return state
     }
 
-    if (entityA.options.faction === entityB.options.faction) {
+    if (entityA.options.faction === entityB.options.faction || entityB.type === MANIFEST.entities.Graffiti) {
         // Interaction
         if (!!entityB.options.dialog) {
             const name = !!entityB?.options?.name ? entityB.options.name : entityB.type.name

@@ -178,6 +178,7 @@ export const MANIFEST = {
         "bot_prison_aerobot": "I'm innocent! I'm innocent! I'm innocent! Beep!",
         "bot_prison_workbot": "Thanks for freeing me! Guess I don't need this Pickaxe anymore...",
         "bot_stadium_botracing": "Now this is botracing!",
+        "bot_station_graffiti": "Yo! The factory has a hidden backdoor!",
         "bot_station_pioneer": "You shall not pass!",
         "manual_spirit": "Weeee!",
         "manual_aerobot": "Huh? Why don't you have a hull?",
@@ -203,6 +204,7 @@ export const MANIFEST = {
         "WorkBot": new Entity("WorkBot", "Basic factory worker", "B"),
         "Cleaner": new Entity("Cleaner", "Bot purging malfunctioning bots", "C", 50),
         "Deviant": new Entity("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
+        "Graffiti": new Entity("Graffiti", "Writing on the wall", "z", 2),
         "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
         "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
         /*
@@ -612,6 +614,7 @@ _##############################################_
 !!spawn 26 9 Cleaner faction=Guardians ai=guardian
 !!spawn 28 9 Cleaner faction=Guardians ai=guardian
 !!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer dialog=bot_station_pioneer
+!!spawn 27 17 Graffiti dialog=bot_station_graffiti
 !!. void
 !!~ water
 !!# wall
