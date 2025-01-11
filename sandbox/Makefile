@@ -22,8 +22,10 @@ install_dependencies: ## Install dependencies
 statistics: ## Print project statistics
 	@bun script/project_statistics.ts
 	@echo ''
-	@echo '## Docs and Code'
+	@echo '## Artifacts, Docs and Code'
 	@echo ''
+	@echo -n '* Web build size: '
+	@du -bch ./build/ index.html | grep total | awk '{print $$1;}'
 	@echo -n '* Design/project management document size in lines: '
 	@cat ../../MANIFEST.md | wc -l
 	@echo -n '* TODO count in the codebase: '
