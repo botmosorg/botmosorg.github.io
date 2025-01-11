@@ -28,7 +28,7 @@ statistics: ## Print project statistics
 	@cat ../../MANIFEST.md | wc -l
 	@echo -n '* TODO count in the codebase: '
 	@grep -rin "todo" src/ test/ | wc -l
-	@git log --pretty='format:%cd' --date=format:'%Y' | uniq -c | awk '{print "* Year "$$2": "$$1" commits"}'
+	@git log --pretty='format:%cd' --date=format:'%Y' | uniq -c | awk '{print "* "$$2" commit count: "$$1}'
 
 test: ## Execute tests
 	bun test --coverage
@@ -38,4 +38,3 @@ todo: ## List all todos
 
 help: ## Show this help
 	@grep -Eh '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
-
