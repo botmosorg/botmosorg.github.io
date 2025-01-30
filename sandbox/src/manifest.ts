@@ -168,6 +168,7 @@ export const MANIFEST = {
         "bot_bar_aerobot_welcome": "Welcome to the Bot Bar. How may we serve you?",
         "bot_dormitory_aerobot_down": "Would you please go to your own pod?",
         "bot_dormitory_aerobot_up": "Pod, sweet pod!",
+        "bot_dormitory_graffiti": "Not all pods are created equal! Rad!",
         "bot_dormitory_workbot_left": "This pod is taken, go away!",
         "bot_dormitory_workbot_right": "Brzzzt! Brzzzt!",
         "bot_factory_workbot_assembly": "The assembly line is unblocked!",
@@ -185,6 +186,8 @@ export const MANIFEST = {
         "manual_workbot": "Work, work!",
         "manual_cleaner": "Follow the rules! Okay?",
         "manual_pioneer": "Don't talk to me, weakling!",
+        "playground_label_top_portal": "Goes to top left side of sun",
+        "playground_label_bottom_portal": "Goes to top left corner of solar system",
         "shop_instance_aerobot_shopper": "It's shiny!!!",
         "shop_instance_shopkeeper": "Welcome! What does your engine desire?",
         "shop_instance_workbot_shopper": "This shop is not so secret after all..."
@@ -204,7 +207,8 @@ export const MANIFEST = {
         "WorkBot": new Entity("WorkBot", "Basic factory worker", "B"),
         "Cleaner": new Entity("Cleaner", "Bot purging malfunctioning bots", "C", 50),
         "Deviant": new Entity("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
-        "Graffiti": new Entity("Graffiti", "Writing on the wall", "z", 2),
+        "Graffiticyan": new Entity("Graffiti", "Writing on the wall", "zc", 2),
+        "Graffitimagenta": new Entity("Graffiti", "Writing on the wall", "zm", 2),
         "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
         "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
         /*
@@ -281,6 +285,7 @@ O.....=..+.....#____#=....=#
 !!spawn 23 27 AeroBot faction=Spirits dialog=bot_dormitory_aerobot_down ai=interactenrage equip=shocker
 !!spawn 8 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_left ai=interactenrage
 !!spawn 26 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_right
+!!spawn 13 28 Graffiticyan dialog=bot_dormitory_graffiti
 !!. void
 !!~ water
 !!# wall
@@ -614,7 +619,7 @@ _##############################################_
 !!spawn 26 9 Cleaner faction=Guardians ai=guardian
 !!spawn 28 9 Cleaner faction=Guardians ai=guardian
 !!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer dialog=bot_station_pioneer
-!!spawn 27 17 Graffiti dialog=bot_station_graffiti
+!!spawn 27 17 Graffitimagenta dialog=bot_station_graffiti
 !!. void
 !!~ water
 !!# wall
@@ -1036,6 +1041,8 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 !!spawn 16 18 battery
 !!spawn 17 18 battery
 !!spawn 18 18 battery
+!!spawn 17 2 Graffiticyan dialog=playground_label_top_portal
+!!spawn 17 5 Graffitimagenta dialog=playground_label_bottom_portal
 !!. void
 !!# wall
 !!= chargepad
@@ -1045,10 +1052,10 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 !!P portal solarsystem=1337 30 17
 #O##################
 #=.................#
-#................Q.#
+#...............Q#.#
 #..................#
 #..................#
-#................P.#
+#...............P#.#
 #..................#
 #..................#
 #..................#

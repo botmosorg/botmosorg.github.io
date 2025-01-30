@@ -89,7 +89,7 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
         return state
     }
 
-    if (entityA.options.faction === entityB.options.faction || entityB.type === MANIFEST.entities.Graffiti) {
+    if (entityA.options.faction === entityB.options.faction || isGraffiti(entityB)) {
         // Interaction
         if (!!entityB.options.dialog) {
             const name = !!entityB?.options?.name ? entityB.options.name : entityB.type.name
@@ -114,4 +114,9 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
 export function isMoveableObject(entity: Entity) {
     return entity.type === MANIFEST.entities.movableboulder
         || entity.type === MANIFEST.entities.movablebox;
+}
+
+export function isGraffiti(entity: Entity) {
+    return entity.type === MANIFEST.entities.Graffiticyan
+        || entity.type === MANIFEST.entities.Graffitimagenta
 }
