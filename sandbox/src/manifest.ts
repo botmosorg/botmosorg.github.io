@@ -197,6 +197,7 @@ export const MANIFEST = {
         "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
         "Screwing": new Effect("Screwing", "Unscrews the sewer portal covers"),
         "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls"),
+        "WaterImmunity": new Effect("Water Immunity", "No damage taken from water"),
         "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
@@ -235,8 +236,10 @@ export const MANIFEST = {
         "matter": new Item("Matter", "A pile of stuff", "m", "gray", 0, 100),
         // Tools
         "broom": new Item("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1), // DEPRECATED: replace with 'Mop' item to clear graffiti
+        "cheat": new Item("Cheat", "Most powerful tool, totally legit", "icheat", "cyberyellow", 0, 0, 0, -500, -1, ["Recharger", "Rock Crusher", "Screwing", "Wall Crusher", "Water Shield"]),
         "hammer": new Item("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
         "pickaxe": new Item("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
+        "ratbite": new Item("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["Water Immunity"]),
         "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
         "trident": new Item("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
         "wrench": new Item("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
@@ -465,7 +468,7 @@ _________##E###_________________
 !!spawn 25 18 WorkBot faction=Spirits dialog=bot_factory_workbot_assembly
 !!spawn 43 29 WorkBot faction=Spirits dialog=bot_factory_workbot_sewers
 !!spawn 35 3 WorkBot faction=Spirits name=ForeBot dialog=bot_factory_workbot_forebot equip=wrench ai=interactenrage
-!!spawn 19 27 RoboRat faction=Critters ai=aggrorangeshort
+!!spawn 19 27 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!# wall
 !!+ wallweak
 !!~ water
@@ -685,6 +688,9 @@ s~............................~#
 !!id bot_station_sewers
 !!size 32 32
 !!spawn 25 17 battery
+!!spawn 4 15 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
+!!spawn 12 23 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
+!!spawn 6 6 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!. void
 !!- water
 !!~ watersewage
@@ -1025,7 +1031,7 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 !!size 20 24
 !!spawn 9 9 movableboulder
 !!spawn 10 9 movableboulder
-!!spawn 9 17 trident
+!!spawn 9 17 cheat
 !!spawn 1 18 battery
 !!spawn 2 18 battery
 !!spawn 3 18 battery
