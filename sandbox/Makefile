@@ -24,8 +24,10 @@ statistics: ## Print project statistics
 	@echo ''
 	@echo '## Artifacts, Docs and Code'
 	@echo ''
-	@echo -n '* Web build size: '
+	@echo -n '* Web build size (Bytes): '
 	@du -bch ./build/ index.html | grep total | awk '{print $$1;}'
+	@echo -n '* TypeScript LOC: '
+	@wc --total=only -l src/*.ts
 	@echo -n '* Design/project management document size in lines: '
 	@cat ../../MANIFEST.md | wc -l
 	@echo -n '* TODO count in the codebase: '
