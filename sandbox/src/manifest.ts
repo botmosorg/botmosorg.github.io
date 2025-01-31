@@ -211,6 +211,7 @@ export const MANIFEST = {
         "Graffitimagenta": new Entity("Graffiti", "Writing on the wall", "zm", 2),
         "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
         "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
+        "RoboRat": new Entity("RoboRat", "Minor self-assembled critter", "r", 5)
         /*
         // ...
         "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
@@ -219,6 +220,7 @@ export const MANIFEST = {
         */
     },
     "factions": {
+        "Critters": new Faction("Critters", "Small pests", "cyberyellow"),
         "Spirits": new Faction("Spirits", "Default player faction", "white"),
         "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
         "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
@@ -463,6 +465,7 @@ _________##E###_________________
 !!spawn 25 18 WorkBot faction=Spirits dialog=bot_factory_workbot_assembly
 !!spawn 43 29 WorkBot faction=Spirits dialog=bot_factory_workbot_sewers
 !!spawn 35 3 WorkBot faction=Spirits name=ForeBot dialog=bot_factory_workbot_forebot equip=wrench ai=interactenrage
+!!spawn 19 27 RoboRat faction=Critters ai=aggrorangeshort
 !!# wall
 !!+ wallweak
 !!~ water
