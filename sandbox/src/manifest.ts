@@ -181,6 +181,7 @@ export const MANIFEST = {
         "bot_prison_workbot": "Thanks for freeing me! Guess I don't need this Pickaxe anymore...",
         "bot_stadium_botracing": "Now this is botracing!",
         "bot_station_graffiti": "Yo! The factory has a hidden backdoor!",
+        "bot_station_graffiti_statues": "One statue isn't like the others! Ey!",
         "bot_station_pioneer": "You shall not pass!",
         "manual_spirit": "Weeee!",
         "manual_aerobot": "Huh? Why don't you have a hull?",
@@ -211,6 +212,7 @@ export const MANIFEST = {
         "Deviant": new Entity("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
         "Graffiticyan": new Entity("Graffiti", "Writing on the wall", "zc", 2),
         "Graffitimagenta": new Entity("Graffiti", "Writing on the wall", "zm", 2),
+        "Graffitiyellow": new Entity("Graffiti", "Writing on the wall", "zy", 2),
         "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
         "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
         "RoboRat": new Entity("RoboRat", "Minor self-assembled critter", "r", 5)
@@ -629,6 +631,7 @@ _##############################################_
 !!spawn 28 9 Cleaner faction=Guardians ai=guardian
 !!spawn 8 3 Pioneer faction=Guardians ai=aggrorangeshort equip=hammer dialog=bot_station_pioneer
 !!spawn 27 17 Graffitimagenta dialog=bot_station_graffiti
+!!spawn 9 16 Graffitiyellow dialog=bot_station_graffiti_statues
 !!. void
 !!~ water
 !!# wall

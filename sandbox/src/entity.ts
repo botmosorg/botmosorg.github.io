@@ -119,4 +119,5 @@ export function isMoveableObject(entity: Entity) {
 export function isGraffiti(entity: Entity) {
     return entity.type === MANIFEST.entities.Graffiticyan
         || entity.type === MANIFEST.entities.Graffitimagenta
+        || entity.type === MANIFEST.entities.Graffitiyellow
 }

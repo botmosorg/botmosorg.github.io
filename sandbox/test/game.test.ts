@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import Game from "../src/game";
 
-const ENTITY_COUNT = 1357
+const ENTITY_COUNT = 1358
 
 describe('Game', () => {
     test('should play until player death', () => {
