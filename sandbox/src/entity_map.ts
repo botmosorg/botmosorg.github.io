@@ -220,17 +220,25 @@ function _launchToSpace(state: State, entity: Entity, tile: any): State {
 
 export function entities_tile_energy_update(state: State): State {
     for (let entityId in state.entities) {
-        let entity = state.entities[entityId]
+        let entity: Entity = state.entities[entityId]
         let tool = state.tools[entityId]
         let map = state.maps[entity.mapId]
         let tile = map.getTile(entity.x, entity.y)
         let energyDelta = tile.type.energyDelta
+
         if (tile.type === MANIFEST.tiles.chargepad && tool?.type.effects.includes(MANIFEST.effects.Recharger.name)) {
             energyDelta *= 2
         } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
             energyDelta /= 2
-        } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) {
+        } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) { // TODO: this case doesn't work if tool has both WaterShield and WaterImmunity
             energyDelta = 0
+        } else if (tile.type === MANIFEST.tiles.drain) {
+            const goldCost = Math.min(entity.gold, 1)
+            const matterCost = Math.min(entity.matter, 500)
+
+            // TODO: maybe log what happened to the player?
+            entity.gold -= goldCost
+            entity.matter -= matterCost
         }
 
         if (energyDelta !== 0) {

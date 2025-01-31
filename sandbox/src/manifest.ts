@@ -172,6 +172,7 @@ export const MANIFEST = {
         "bot_dormitory_workbot_left": "This pod is taken, go away!",
         "bot_dormitory_workbot_right": "Brzzzt! Brzzzt!",
         "bot_factory_workbot_assembly": "The assembly line is unblocked!",
+        "bot_factory_workbot_drain": "Don't come too close to the drain or you'll lose your stuff!",
         "bot_factory_workbot_forebot": "What are you doing here? Get back to work!",
         "bot_factory_workbot_sewers": "Sewage water is spilling over again.",
         "bot_factory_workbot_workwork": "Work, work!",
@@ -467,6 +468,7 @@ _________##E###_________________
 !!spawn 15 18 WorkBot faction=Spirits dialog=bot_factory_workbot_workwork
 !!spawn 25 18 WorkBot faction=Spirits dialog=bot_factory_workbot_assembly
 !!spawn 43 29 WorkBot faction=Spirits dialog=bot_factory_workbot_sewers
+!!spawn 1 19 WorkBot faction=Spirits dialog=bot_factory_workbot_drain
 !!spawn 35 3 WorkBot faction=Spirits name=ForeBot dialog=bot_factory_workbot_forebot equip=wrench ai=interactenrage
 !!spawn 19 27 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!# wall
@@ -474,6 +476,7 @@ _________##E###_________________
 !!~ water
 !!- watersewage
 !!. void
+!!* drain
 !!^ movenorth
 !!> moveeast
 !!v movesouth
@@ -497,10 +500,10 @@ _________##E###_________________
 #..vv.<.<.<<...........+.......................#
 #..............................................#
 #..............................................#
-#++#+###########################################
-#+++.>.>.>.>.>.>.>.>.>~>.>.>.>.>.>.>.>.>.>.>.>.#
-#+++.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>~>.>.>.>.P
-#++#+###########################################
+#vv#+###########################################
+#**+.>.>.>.>.>.>.>.>.>~>.>.>.>.>.>.>.>.>.>.>.>.#
+#**+.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>~>.>.>.>.P
+#**#+###########################################
 #........$+....$+......$+......$+......$+......#
 #..^^..........................................#
 #..............................................#
@@ -1132,6 +1135,7 @@ _O_
         "voidhidden": new Tile("voidhidden", "Looks like a wall, but isn't!", '#', "gray", "black"),
         "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
         "watersewage": new Tile("watersewage", "Rust, goo and other dangers await", "~~", "cyberyellow", "cybergreen", -4),
+        "drain": new Tile("drain", "Drains gold, matter and some of your energy", "*", "cybermagenta", "black", -5),
         "rock": new Tile("rock", "Hidden treasures may await", "'", "white", "gray"), // ▲ alternatively
         "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "black"),
         "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
