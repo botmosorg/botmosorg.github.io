@@ -1123,6 +1123,19 @@ _________#^##^#_
 ###
 ###
 _O_
+`,
+"square_falcon": `!
+!!id square_falcon
+!!size 7 6
+!!_ voidtrue
+!!# wall
+!!O portalclosed
+######_
+#######
+####O__
+#######
+######_
+__##___
 `
     },
     "names": {

@@ -75,6 +75,10 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     const botStationMap = maps_parse(botStationMapString)
     solarsystem.pasteOnto(botStationMap, 583, 398)
 
+    // Square falcon
+    const squareFalconMap = maps_parse(MANIFEST.map_snippets.square_falcon)
+    solarsystem.pasteOnto(squareFalconMap, 590, 373)
+
     return state
 }
 
