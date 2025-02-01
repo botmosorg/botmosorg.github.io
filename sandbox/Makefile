@@ -10,9 +10,9 @@ clean: ## Cleans all artifacts
 	rm -rf build/
 	rm src-img/tilemap.ts
 
-src-img/tilemap.ts: src-img/*.txt ## Creates tilemap from src-img
+src-img/tilemap.ts: src-img/*.txt src-img/_create-images.sh ## Creates tilemap from src-img
 	mkdir -p build/
-	cd src-img/ && bash create-images.sh
+	cd src-img/ && bash _create-images.sh
 
 install_dependencies: ## Install dependencies
 	bun install -d bun-types
