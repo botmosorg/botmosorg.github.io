@@ -105,7 +105,7 @@ function _create_sprite_element(): HTMLElement {
 function _create_text_element(): HTMLElement {
     const textElement = document.createElement("span")
     textElement.style.display = "inline-block"
-    textElement.style.marginLeft = "16px" // 8px
+    textElement.style.marginLeft = `${BOTMOS_OPTIONS.fontSize / 2}px` // 8px 16px
     return textElement
 }
 

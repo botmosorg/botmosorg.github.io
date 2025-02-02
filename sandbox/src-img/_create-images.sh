@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SPRITE_SIZE="32"
+SPRITE_SIZE="16"
 
 for tile in *.txt; do
     pipenv run python . -i $tile -o "${tile%.*}.png" &
