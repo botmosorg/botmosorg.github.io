@@ -141,6 +141,11 @@ export const MANIFEST = {
         "cyberblue": "#001eff",
         "darkgray": "#222",
         "gray": "#777",
+        "mutedcyan": "#2cc9c5",
+        "mutedyellow": "#b0a216",
+        "mutedmagenta": "#a716b0",
+        "mutedgreen": "#5ca821",
+        "mutedblue": "#1628b0",
         "white": "#fff"
     },
     "colorcoding": {
@@ -657,9 +662,9 @@ _##############################################_
 !!w portalsewers bot_station_sewers 1 0
 !!r portalsewers bot_station_sewers 31 1
 !!z portalsewers bot_station_sewers 30 31
-#w############°°°°##############
-#~..##########°°°°##########..~r
-#.......##$###°°°°######.......#
+#w##############################
+#~..########################..~r
+#.......################.......#
 #...........########...........#
 #...####.++....CC........####..#
 #...####.++..............####..#

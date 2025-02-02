@@ -4,7 +4,7 @@
 #!g #74ee15ff
 #!c #4deeeaff
 #!b #001effff
-#!y #ffe700ff
+#!y #b0a216ff
 #!  #00000000
 #!0 #000000FF
 #!f #ffffffff

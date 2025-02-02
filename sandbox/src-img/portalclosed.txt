@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-aammmmmmmmmmmmaa
-aammmmmmmmmmmmaa
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-mmaaaaaaaaaaaamm
-aammmmmmmmmmmmaa
-aammmmmmmmmmmmaa
+bbmmmmmmmmmmmmbb
+bbmmmmmmmmmmmmbb
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+mmbbbbbbbbbbbbmm
+bbmmmmmmmmmmmmbb
+bbmmmmmmmmmmmmbb

@@ -4,7 +4,7 @@
 #!g #74ee15ff
 #!c #4deeeaff
 #!b #001effff
-#!y #ffe700ff
+#!y #b0a216ff
 #!  #00000000
 #!0 #000000FF
 #!f #ffffffff
@@ -13,8 +13,8 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-aayyyyyyyyyyyyaa
-aayyyyyyyyyyyyaa
+bbyyyyyyyyyyyybb
+bbyyyyyyyyyyyybb
 yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
@@ -27,5 +27,5 @@ yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
-aayyyyyyyyyyyyaa
-aayyyyyyyyyyyyaa
+bbyyyyyyyyyyyybb
+bbyyyyyyyyyyyybb
