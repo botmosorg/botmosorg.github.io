@@ -130,6 +130,7 @@ export const MANIFEST = {
     /**
      * From: https://www.color-hex.com/color-palette/8618
      * Further inspiration: https://colorcodes.io/neon-color-codes/
+     * Muted colors based on cyber colors, 2 shades down: https://colordesigner.io/color-palette-builder
      */
     "colors": {
         "black": "#000",
