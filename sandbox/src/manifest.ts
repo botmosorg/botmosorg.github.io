@@ -1184,7 +1184,7 @@ __##___
         "spacetree": new Tile("spacetree", "Forest as seen from space", "ts", "brown", "darkgray"),
         "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~s", "cybercyan", "cyberblue"),
         "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", ".s", "darkgray", "darkgray"),
-        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".w", "white"),
+        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".f", "white"),
         "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".y", "cyberyellow"),
         "sun": new Tile("sun", "It's hot, really hot!", "§", "cyberyellow", "cyberyellow", -100),
         "terminal": new Tile("terminal", "A computer terminal", "$", "cyberyellow"),
