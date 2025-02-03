@@ -1,10 +1,10 @@
 #
 #!size 16 16
 #!r #FF0000FF
-#!g #74ee15ff
+#!g #5ca821ff
 #!c #4deeeaff
 #!b #001effff
-#!y #ffe700ff
+#!y #b0a216ff
 #!  #00000000
 #!0 #000000FF
 #!f #ffffffff
