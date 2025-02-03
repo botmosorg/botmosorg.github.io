@@ -2,7 +2,7 @@
 #!size 16 16
 #!r #FF0000FF
 #!g #74ee15ff
-#!c #4deeeaff
+#!c #2cc9c5ff
 #!b #001effff
 #!y #ffe700ff
 #!  #ffffff00
@@ -10,7 +10,7 @@
 #!f #ffffffff
 # brown
 #!w #a52a2aff
-#!m #f000ffff
+#!m #a716b0ff
 #!a #777777ff
 #!d #222222ff
 0000000000000000
