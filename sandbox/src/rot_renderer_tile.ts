@@ -13,6 +13,8 @@ import { drawUI } from "./ui.js";
 https://ondras.github.io/rot.js/hp/
 */
 
+const ALTERNATE_TILE_SUFFIX = '_a'
+
 const tileSet = document.createElement("img")
 tileSet.src = "build/tiles.png"
 
@@ -25,9 +27,10 @@ document.body.appendChild(ROT_DISPLAY.getContainer())
 function lookup_color(name: string) {
     return MANIFEST.colors[name];
 }
-function rot_render(state: State, camera: any) {
+function rot_render(state: State, camera: any, alternateTilemap: boolean=false) {
     let currentMapId = state.currentMapId;
     let map = state.maps[currentMapId];
+    let suffix = (alternateTilemap) ? ALTERNATE_TILE_SUFFIX : ''
 
     // Center maps smaller than camera by adjusting camera
     let xPadding = 0
@@ -60,7 +63,7 @@ function rot_render(state: State, camera: any) {
             }
             if (!!icon) {
                 const key = [xPadding + x, yPadding + y].toString()
-                renderHashTable[key] = [icon]
+                renderHashTable[key] = [icon + suffix]
                 renderHashTableFg[key] = ["transparent"]
                 renderHashTableBg[key] = ["transparent"]
             }
@@ -75,11 +78,11 @@ function rot_render(state: State, camera: any) {
         const itemRenderY = yPadding + item.y-camera.y
         const key = [itemRenderX, itemRenderY].toString()
         if (renderHashTable[key]) {
-            renderHashTable[key].push(item.type.icon)
+            renderHashTable[key].push(item.type.icon + suffix)
             renderHashTableFg[key].push("transparent")
             renderHashTableBg[key].push("transparent")
         } else {
-            renderHashTable[key] = [item.type.icon]
+            renderHashTable[key] = [item.type.icon + suffix]
             renderHashTableFg[key] = ["transparent"]
             renderHashTableBg[key] = ["transparent"]
         }
@@ -106,11 +109,11 @@ function rot_render(state: State, camera: any) {
 
         const key = [entityRenderX, entityRenderY].toString()
         if (renderHashTable[key]) {
-            renderHashTable[key].push(entity.type.icon)
+            renderHashTable[key].push(entity.type.icon + suffix)
             renderHashTableFg[key].push(entityColor)
             renderHashTableBg[key].push("transparent")
         } else {
-            renderHashTable[key] = [entity.type.icon]
+            renderHashTable[key] = [entity.type.icon + suffix]
             renderHashTableFg[key] = [entityColor]
             renderHashTableBg[key] = ["transparent"]
         }
@@ -125,15 +128,20 @@ function rot_render(state: State, camera: any) {
 }
 
 let lastCameraPosition = {x: 0, y: 0}
+let alternate = 0
 export async function draw(state: State) {
     const maybePlayerEntity = state.entities[players_get_current_id()]
     const cameraPosition = !!maybePlayerEntity ? maybePlayerEntity : lastCameraPosition
     const camera = camera_follow(cameraPosition)
 
-    rot_render(state, camera)
+    rot_render(state, camera, alternate % 2 == 0)
     drawUI(state, camera.y) // dirty hack: UI should not rely on camera
 
     lastCameraPosition = cameraPosition
+    alternate++
+    if (alternate >= 128) {
+        alternate = 0
+    }
 }
 
 export async function resize(rotOptions: any) {
@@ -162,21 +170,53 @@ function camera_follow(entity: { x: number, y: number }): { x: number, y: number
 
 function _create_tileMap(): any {
     const tilemap = {}
-    for (const [key, value] of Object.entries(TILEMAP)) {
-        if (key.startsWith("wall") && (key.length === 5 || key.length === 6)) {
-            // Character/letter walls
-            tilemap['#' + key.substring(4, 5)] = value
-        } else {
-            if (Object.hasOwn(MANIFEST.tiles, key)) {
-                tilemap[MANIFEST.tiles[key].icon] = value
-            } else if (Object.hasOwn(MANIFEST.entities, key)) {
-                tilemap[MANIFEST.entities[key].icon] = value
-            } else if (Object.hasOwn(MANIFEST.items, key)) {
-                tilemap[MANIFEST.items[key].icon] = value
-            }
+    for (let [key, value] of Object.entries(TILEMAP)) {
+        let isAlternateTile = key.endsWith(ALTERNATE_TILE_SUFFIX)
+        let suffix = ''
+        if (isAlternateTile) {
+            key = key.substring(0, key.length - ALTERNATE_TILE_SUFFIX.length)
+            suffix = ALTERNATE_TILE_SUFFIX
         }
 
+        if (key.startsWith("wall") && (key.length === 5 || key.length === 6)) {
+            // Character/letter walls
+            tilemap['#' + key.substring(4, 5) + suffix] = value
+        } else {
+            if (Object.hasOwn(MANIFEST.tiles, key)) {
+                tilemap[MANIFEST.tiles[key].icon + suffix] = value
+            } else if (Object.hasOwn(MANIFEST.entities, key)) {
+                tilemap[MANIFEST.entities[key].icon + suffix] = value
+            } else if (Object.hasOwn(MANIFEST.items, key)) {
+                tilemap[MANIFEST.items[key].icon + suffix] = value
+            }
+        }
+    }
+
+    // Add alternates for entries which don't have defined alternates
+    for (let [key, value] of Object.entries(tilemap)) {
+        if (!key.endsWith(ALTERNATE_TILE_SUFFIX) && !Object.hasOwn(tilemap, key + ALTERNATE_TILE_SUFFIX)) {
+            tilemap[key + ALTERNATE_TILE_SUFFIX] = value
+        }
     }
 
     return tilemap
 }
+
+const fps = 2;
+const changeEvery = 1000 / fps;
+let elapsed = changeEvery;
+
+let start = null;
+let loop = (timestamp) => {
+  if (!start) start = timestamp;
+  let dt = timestamp - start;
+  start = timestamp;
+  elapsed += dt;
+
+  if (elapsed > changeEvery) {
+  }
+
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
