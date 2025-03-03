@@ -202,6 +202,7 @@ function _create_tileMap(): any {
     return tilemap
 }
 
+/*
 const fps = 2;
 const changeEvery = 1000 / fps;
 let elapsed = changeEvery;
@@ -220,3 +221,4 @@ let loop = (timestamp) => {
 }
 
 requestAnimationFrame(loop);
+*/
