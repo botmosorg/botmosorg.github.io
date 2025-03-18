@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-bbbbbbbbbbbbbbbb
-bddddddddddddddb
-bdbbbbbbbbbbbbdb
-bdbdbbbbbbbbdbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbbbbbbbbbbbbdb
-bdbdbbbbbbbbdbdb
-bdbbbbbbbbbbbbdb
-bddddddddddddddb
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+adddddddddddddda
+adaaaaaaaaaaaada
+adadaaaaaaaadada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adaaaaaaaaaaaada
+adadaaaaaaaadada
+adaaaaaaaaaaaada
+adddddddddddddda
+aaaaaaaaaaaaaaaa

@@ -13,8 +13,8 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-bbyyyyyyyyyyyybb
-bbyyyyyyyyyyyybb
+aayyyyyyyyyyyyaa
+aayyyyyyyyyyyyaa
 yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
@@ -27,5 +27,5 @@ yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
 yyddddddddddddyy
-bbyyyyyyyyyyyybb
-bbyyyyyyyyyyyybb
+aayyyyyyyyyyyyaa
+aayyyyyyyyyyyyaa
