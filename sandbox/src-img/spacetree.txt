@@ -1,7 +1,7 @@
 #
 #!size 16 16
 #!r #FF0000FF
-#!g #74ee15ff
+#!g #5ca821ff
 #!c #2cc9c5ff
 #!b #001effff
 #!y #ffe700ff
@@ -14,18 +14,18 @@
 #!a #777777ff
 #!d #222222ff
 dddddddddddddddd
-dddddccccddddddd
-dddcccccccdddddd
-ddcccccmcccddddd
-dcccmcccccccdddd
-dcccccccccccccdd
-dccmccccmcccdddd
-ddccccccccdddddd
+dddddggggddddddd
+dddgggggggdddddd
+ddgggggmgggddddd
+dgggmgggggggdddd
+dgggggggggggggdd
+dggmggggmgggdddd
+ddggggggggdddddd
 ddddwwdddddddddd
 ddddwwdddddddddd
 dddwwwdddddddddd
 ddddwwdddddddddd
 ddddwwdddddddddd
-ddddwwwddddccddd
-ddddwwddddccccdd
-ddddwwdddddccddd
+ddddwwwddddggddd
+ddddwwddddggggdd
+ddddwwdddddggddd
