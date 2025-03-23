@@ -123,7 +123,6 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
         return state
     }
 
-    // TODO externalize
     if (_is_tool(item)) {
         state = items_equip(state, entity.id, item.type)
 

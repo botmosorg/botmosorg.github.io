@@ -236,7 +236,6 @@ export function entities_tile_energy_update(state: State): State {
             const goldCost = Math.min(entity.gold, MANIFEST.constants.DRAIN_GOLD_COST)
             const matterCost = Math.min(entity.matter, MANIFEST.constants.DRAIN_MATTER_COST)
 
-            // TODO: maybe log what happened to the player?
             entity.gold -= goldCost
             entity.matter -= matterCost
         }
