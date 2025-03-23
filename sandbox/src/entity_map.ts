@@ -1,6 +1,6 @@
 import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
-import { Event, publish } from "./events";
+import { Event, publish } from "./event";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
 import { MANIFEST, CommandType, TileType } from "./manifest";

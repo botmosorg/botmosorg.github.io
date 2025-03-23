@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Event, publish, subscribe } from "../src/events";
+import { Event, publish, subscribe } from "../src/event";
 import { State, states_create } from "../src/state";
 
 interface MapUpdatedEvent extends Event {

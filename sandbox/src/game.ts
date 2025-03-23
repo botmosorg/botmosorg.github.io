@@ -1,7 +1,7 @@
 import { debug_entity_position } from "./debug";
 import { entities_create } from "./entity";
 import { entity_act, entity_map_entitymapUpdatedEvent_subscriber } from "./entity_map";
-import { subscribe } from "./events";
+import { subscribe } from "./event";
 import { log } from "./log";
 import { CommandType, MANIFEST } from "./manifest";
 import { maps_create_all_manual } from "./map"
