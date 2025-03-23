@@ -58,7 +58,7 @@ export class EntityType {
         this.unlockCondition = null;
     }
 }
-class Faction {
+class FactionType {
     name: string;
     description: string;
     color: string;
@@ -234,10 +234,10 @@ export const MANIFEST = {
         */
     },
     "factions": {
-        "Critters": new Faction("Critters", "Small pests", "cyberyellow"),
-        "Spirits": new Faction("Spirits", "Default player faction", "white"),
-        "Pyrates": new Faction("Pyrates", "Default enemy faction", "cybermagenta"),
-        "Guardians": new Faction("Guardians", "Bot station guardians", "cybercyan")
+        "Critters": new FactionType("Critters", "Small pests", "cyberyellow"),
+        "Spirits": new FactionType("Spirits", "Default player faction", "white"),
+        "Pyrates": new FactionType("Pyrates", "Default enemy faction", "cybermagenta"),
+        "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {
         "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
