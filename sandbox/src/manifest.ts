@@ -23,7 +23,7 @@ export class AIType {
         this.description = description;
     }
 }
-export class Command {
+export class CommandType {
     key: string;
     description: string;
 
@@ -155,16 +155,16 @@ export const MANIFEST = {
         "cyberyellow": "Item or special effect color"
     },
     "commands": {
-        "N": new Command("N", "Move/interact/combat north"),
-        "E": new Command("E", "Move/interact/combat east"),
-        "S": new Command("S", "Move/interact/combat south"),
-        "W": new Command("W", "Move/interact/combat west"),
-        "A": new Command("A", "Primary action, confirm"), // A/X
-        "B": new Command("B", "Take a break, cancel"), // B/Y/Z/space bar
-        "1": new Command("1", "Secondary action, first quick slot"), // unused
-        "2": new Command("2", "Tertiary action, second quick slot"), // unused
-        "M": new Command("M", "Menu"),
-        "#": new Command("#", "Open prompt") // # or /
+        "N": new CommandType("N", "Move/interact/combat north"),
+        "E": new CommandType("E", "Move/interact/combat east"),
+        "S": new CommandType("S", "Move/interact/combat south"),
+        "W": new CommandType("W", "Move/interact/combat west"),
+        "A": new CommandType("A", "Primary action, confirm"), // A/X
+        "B": new CommandType("B", "Take a break, cancel"), // B/Y/Z/space bar
+        "1": new CommandType("1", "Secondary action, first quick slot"), // unused
+        "2": new CommandType("2", "Tertiary action, second quick slot"), // unused
+        "M": new CommandType("M", "Menu"),
+        "#": new CommandType("#", "Open prompt") // # or /
     },
     "constants": {
         "DRAIN_MATTER_COST": 500,

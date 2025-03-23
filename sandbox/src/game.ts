@@ -3,7 +3,7 @@ import { entities_create } from "./entity";
 import { entity_act, entity_map_entitymapUpdatedEvent_subscriber } from "./entity_map";
 import { subscribe } from "./events";
 import { log } from "./log";
-import { Command, MANIFEST } from "./manifest";
+import { CommandType, MANIFEST } from "./manifest";
 import { maps_create_all_manual } from "./map"
 import { maps_create_solar_system } from "./map_generator_solar_system";
 import { map_shop_entitymapUpdatedEvent_subscriber } from "./map_shop";
@@ -32,7 +32,7 @@ export default class Game {
         return this.state
     }
 
-    update(action: Command | null, headless=false): State {
+    update(action: CommandType | null, headless=false): State {
         let player = this.state.entities[players_get_current_id()]
         if (!!player) {
             if (!!action) {

@@ -1,4 +1,4 @@
-import { MANIFEST, Command } from "./manifest";
+import { MANIFEST, CommandType } from "./manifest";
 
 /**
  * All keys ever supported:
@@ -20,7 +20,7 @@ const _BM_INPUT = {
     slash: false
 }
 
-let _inputQueue: Command[] = []
+let _inputQueue: CommandType[] = []
 let _callback = undefined
 let _timeOfLastActionInMs: number = 0
 
@@ -79,7 +79,7 @@ document.body.addEventListener("keydown", function(e) {
     _triggerCallback(_get_action())
 })
 
-function _triggerCallback(command: Command) {
+function _triggerCallback(command: CommandType) {
     const currentTimeInMs = Date.now();
     if (_callback !== undefined && currentTimeInMs - _timeOfLastActionInMs >= 80) {
         _timeOfLastActionInMs = currentTimeInMs
@@ -182,9 +182,9 @@ function _preventDefaultAndStopPropagation(e) {
     e.stopPropagation();
 }
 
-let _lastAction: Command | null = null;
+let _lastAction: CommandType | null = null;
 function _updateInputQueue() {
-    let action: Command | null = null;
+    let action: CommandType | null = null;
 
     if (_BM_INPUT.right) {
         action = MANIFEST.commands.E;
@@ -241,7 +241,7 @@ function _updateInputQueue() {
     }
 }
 
-function _get_action(): Command {
+function _get_action(): CommandType {
     _updateInputQueue();
     let action = _inputQueue.shift() || null;
     _inputQueue = [];

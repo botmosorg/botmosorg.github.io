@@ -3,7 +3,7 @@ import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveabl
 import { Event, publish } from "./events";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
-import { MANIFEST, Command, Tile } from "./manifest";
+import { MANIFEST, CommandType, Tile } from "./manifest";
 import { Map, tiles_is_space_tile } from "./map";
 import { State } from "./state";
 
@@ -18,7 +18,7 @@ export interface EntityMapUpdatedEvent extends Event {
     newY: number,
 }
 
-export function entity_act(state: State, entity: Entity, command: Command): State {
+export function entity_act(state: State, entity: Entity, command: CommandType): State {
     switch (command) {
         case MANIFEST.commands.N:
             state = entityInteractOrMove(state, entity, 0, -1)
@@ -96,7 +96,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
     return state
 }
 
-export function entityContextualAction(state: State, entity: Entity, command: Command): State {
+export function entityContextualAction(state: State, entity: Entity, command: CommandType): State {
     const actions = actions_get(state, entity)
     const action = actions[command.key]
 
