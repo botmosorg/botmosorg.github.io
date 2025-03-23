@@ -6,14 +6,6 @@ import { MANIFEST, TileType } from "./manifest";
 import { spawn, SpawnCommand } from "./spawn";
 import { State } from "./state";
 
-//const MAX_MAP_SIZE = 65536; // Should be enough space for a map in a 2D roguelite
-
-export const CHUNK_SIZE = {
-    "width": 16, // in tiles
-    "height": 16
-}
-export const MAP_SIZE = CHUNK_SIZE // in chunks
-
 interface Tile {
     type: TileType,
     options: object
@@ -223,11 +215,7 @@ export class Map {
                 let tileType = tile.type;
                 // 0 movable, 1 movement blocked
                 movementMap[y][x] = 0;
-                if (tileType === MANIFEST.tiles.rock
-                    || tileType === MANIFEST.tiles.portalclosed
-                    || tileType === MANIFEST.tiles.portalsewers
-                    || tileType === MANIFEST.tiles.tv
-                    || tileType.name.startsWith("wall")) {
+                if (_isBlockingMovement(tileType)) {
                     movementMap[y][x] = 1;
                 }
             }
@@ -290,10 +278,10 @@ export function maps_parse(mapString: string): Map {
                 let components = tileTypeName.split(" ")
                 let options = {}
                 if (tileTypeName.startsWith("portal ")
-                        || tileTypeName.startsWith("portalhidden ")
-                        || tileTypeName.startsWith("portalsewers ")
-                        || tileTypeName.startsWith("portallauncher ")
-                        || tileTypeName.startsWith("portalstart")) {
+                    || tileTypeName.startsWith("portalhidden ")
+                    || tileTypeName.startsWith("portalsewers ")
+                    || tileTypeName.startsWith("portallauncher ")
+                    || tileTypeName.startsWith("portalstart")) {
                     tileTypeName = components[0]
                     options['mapId'] = components[1]
                     options['x'] = Number(components[2])
@@ -337,4 +325,12 @@ export function maps_parse(mapString: string): Map {
     createdMap._spawnCommands = spawnCommands;
 
     return createdMap;
+}
+
+function _isBlockingMovement(tileType: TileType) {
+    return tileType === MANIFEST.tiles.rock
+        || tileType === MANIFEST.tiles.portalclosed
+        || tileType === MANIFEST.tiles.portalsewers
+        || tileType === MANIFEST.tiles.tv
+        || tileType.name.startsWith("wall")
 }

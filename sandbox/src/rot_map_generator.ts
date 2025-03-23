@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 import { MANIFEST } from "./manifest";
-import { CHUNK_SIZE, Map, MAP_SIZE, tiles_create } from "./map";
+import { Map, tiles_create } from "./map";
 import { State } from "./state.js";
 
 export const MAP_SEED = 1337
@@ -9,8 +9,8 @@ let _noise_skew = 55;
 export function maps_create_planet(state: State, seed=MAP_SEED): State {
     ROT.RNG.setSeed(seed);
     let rot_noise = new ROT.Noise.Simplex();
-    const mapWidthInTiles = CHUNK_SIZE.width*MAP_SIZE.width
-    const mapHeightInTiles = CHUNK_SIZE.height*MAP_SIZE.height
+    const mapWidthInTiles = 256
+    const mapHeightInTiles = 256
     let tiles = [];
     for (let tile_y=0; tile_y<mapHeightInTiles; tile_y++) {
         for (let tile_x=0; tile_x<mapWidthInTiles; tile_x++) {
