@@ -235,6 +235,7 @@ export const MANIFEST = {
     },
     "factions": {
         "Critters": new FactionType("Critters", "Small pests", "cyberyellow"),
+        "Enraged": new FactionType("Enraged", "Always hostile faction", "cybermagenta"),
         "Spirits": new FactionType("Spirits", "Default player faction", "white"),
         "Pyrates": new FactionType("Pyrates", "Default enemy faction", "cybermagenta"),
         "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan")

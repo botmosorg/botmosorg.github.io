@@ -104,8 +104,9 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
         state._combatQueue.push({entityId, otherEntityId})
     }
 
-    if (entityB.interactions >= 3 && entityB.options?.ai === MANIFEST.ais.interactenrage) { // Little easter egg for the manual ;)
-        entityB.options.faction = MANIFEST.factions.Pyrates // TODO currently hardcoded to a hostile to player faction, ideally some hostile faction to entityA
+    // Interact enrage
+    if (entityB.interactions >= 3 && entityB.options?.ai === MANIFEST.ais.interactenrage) {
+        entityB.options.faction = MANIFEST.factions.Enraged
     }
 
     return state
