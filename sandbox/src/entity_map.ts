@@ -3,7 +3,7 @@ import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveabl
 import { Event, publish } from "./events";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
-import { MANIFEST, CommandType, Tile } from "./manifest";
+import { MANIFEST, CommandType, TileType } from "./manifest";
 import { Map, tiles_is_space_tile } from "./map";
 import { State } from "./state";
 
@@ -12,7 +12,7 @@ export interface EntityMapUpdatedEvent extends Event {
     oldMapId: string,
     oldX: number,
     oldY: number,
-    oldTileType: Tile
+    oldTileType: TileType
     newMapId: string,
     newX: number,
     newY: number,

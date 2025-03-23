@@ -1,4 +1,4 @@
-import { MANIFEST, Tile } from "./manifest";
+import { MANIFEST, TileType } from "./manifest";
 import { Map, maps_parse, tiles_create } from "./map";
 import { maps_planet_populate } from "./map_spawner";
 import { RNG } from "./rng";
@@ -82,7 +82,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     return state
 }
 
-function _emptyMap(widthTiles: number, heightTiles: number, tileType: Tile): Map {
+function _emptyMap(widthTiles: number, heightTiles: number, tileType: TileType): Map {
     const tiles = []
     for (let i=0; i < widthTiles*heightTiles; i++) {
         tiles.push(tiles_create(tileType))
@@ -112,7 +112,7 @@ function _randomizeVoidBackground(map: Map, rng: RNG): Map {
 }
 
 // Based on https://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#Python
-function _circle(map: Map, x0: number, y0: number, radius: number, tileType: Tile): Map {
+function _circle(map: Map, x0: number, y0: number, radius: number, tileType: TileType): Map {
     let f = 1 - radius
     let ddf_x = 1
     let ddf_y = -2 * radius
@@ -148,7 +148,7 @@ function _circle(map: Map, x0: number, y0: number, radius: number, tileType: Til
 }
 
 // Based on https://rosettacode.org/wiki/Flood_fill#Python
-function _fill(map: Map, x: number, y: number, tileType: Tile): Map {
+function _fill(map: Map, x: number, y: number, tileType: TileType): Map {
     const xsize = map.widthTiles
     const ysize = map.heightTiles
 

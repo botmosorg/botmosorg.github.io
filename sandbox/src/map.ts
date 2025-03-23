@@ -2,7 +2,7 @@ import { ais_destroy } from "./ai";
 import { BOTMOS_OPTIONS } from "./config";
 import { entities_destroy, entities_get_by } from "./entity";
 import { items_destroy, items_get_by } from "./item";
-import { MANIFEST, Tile as TileType } from "./manifest";
+import { MANIFEST, TileType } from "./manifest";
 import { spawn, SpawnCommand } from "./spawn";
 import { State } from "./state";
 

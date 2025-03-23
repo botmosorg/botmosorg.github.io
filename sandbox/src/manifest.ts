@@ -97,7 +97,7 @@ export class ItemType {
         this.effects = effects
     }
 }
-export class Tile {
+export class TileType {
     name: any;
     description: any;
     icon: any;
@@ -1156,43 +1156,43 @@ __##___
         "Oz": "A machinery wizard"
     },
     "tiles": {
-        "void": BOTMOS_OPTIONS.showGrid ? new Tile("void", "Just nothing here", ".", "gray") : new Tile("void", "Just nothing here"),
-        "voidtrue": new Tile("voidtrue", "Really nothing here and you shouldn't get there ever!", "_"),
-        "voidhidden": new Tile("voidhidden", "Looks like a wall, but isn't!", '#', "gray", "black"),
-        "water": new Tile("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
-        "watersewage": new Tile("watersewage", "Rust, goo and other dangers await", "~~", "cyberyellow", "cybergreen", -4),
-        "drain": new Tile("drain", "Drains gold, matter and some of your energy", "*", "cybermagenta", "black", -5),
-        "rock": new Tile("rock", "Hidden treasures may await", "'", "white", "gray"), // ▲ alternatively
-        "tree": new Tile("tree", "Lots of trees make a forest", "t", "brown", "black"),
-        "wall": new Tile("wall", "A strong wall", '#', "gray", "black"),
-        "wallstatueaerobot": new Tile("wallstatueaerobot", "A small statue looking like an AeroBot", 'sa', "gray", "black"),
-        "wallstatuecleaner": new Tile("wallstatuecleaner", "A small statue looking like a Cleaner", 'sc', "gray", "black"),
-        "wallstatuepioneer": new Tile("wallstatuepioneer", "A small statue looking like a Pioneer", 'sp', "gray", "black"),
-        "wallstatueworkbot": new Tile("wallstatueworkbot", "A small statue looking like a WorkBot", 'sb', "gray", "black"),
-        "wallweak": new Tile("wallweak", "A weakened wall", '+', "gray", "black"),
-        "chargepad": new Tile("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
+        "void": BOTMOS_OPTIONS.showGrid ? new TileType("void", "Just nothing here", ".", "gray") : new TileType("void", "Just nothing here"),
+        "voidtrue": new TileType("voidtrue", "Really nothing here and you shouldn't get there ever!", "_"),
+        "voidhidden": new TileType("voidhidden", "Looks like a wall, but isn't!", '#', "gray", "black"),
+        "water": new TileType("water", "Rust and other dangers await", "~", "cybercyan", "cyberblue", -2), // ≋ alternatively
+        "watersewage": new TileType("watersewage", "Rust, goo and other dangers await", "~~", "cyberyellow", "cybergreen", -4),
+        "drain": new TileType("drain", "Drains gold, matter and some of your energy", "*", "cybermagenta", "black", -5),
+        "rock": new TileType("rock", "Hidden treasures may await", "'", "white", "gray"), // ▲ alternatively
+        "tree": new TileType("tree", "Lots of trees make a forest", "t", "brown", "black"),
+        "wall": new TileType("wall", "A strong wall", '#', "gray", "black"),
+        "wallstatueaerobot": new TileType("wallstatueaerobot", "A small statue looking like an AeroBot", 'sa', "gray", "black"),
+        "wallstatuecleaner": new TileType("wallstatuecleaner", "A small statue looking like a Cleaner", 'sc', "gray", "black"),
+        "wallstatuepioneer": new TileType("wallstatuepioneer", "A small statue looking like a Pioneer", 'sp', "gray", "black"),
+        "wallstatueworkbot": new TileType("wallstatueworkbot", "A small statue looking like a WorkBot", 'sb', "gray", "black"),
+        "wallweak": new TileType("wallweak", "A weakened wall", '+', "gray", "black"),
+        "chargepad": new TileType("chargepad", "Recharges energy and health", "=", "cyberyellow", "black", 2),
         //"chest": new Tile("chest", "A chest. What might be inside?", "c", "cyberyellow"),
-        "movenorth": new Tile("movenorth", "Moves you north", "^^", "cyberyellow"),
-        "moveeast": new Tile("moveeast", "Moves you east", ">>", "cyberyellow"),
-        "movesouth": new Tile("movesouth", "Moves you south", "vv", "cyberyellow"),
-        "movewest": new Tile("movewest", "Moves you west", "<<", "cyberyellow"),
-        "portal": new Tile("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
-        "portalclosed": new Tile("portalclosed", "Closed gateway to another map", "Oc", "black", "gray"), // □
-        "portalhidden": new Tile("portalhidden", "Hidden gateway to another map", "#", "gray", "black"),
-        "portallauncher": new Tile("portallauncher", "Launches into space", "O", "cyberyellow", "gray"),
-        "portalsewers": new Tile("portalsewers", "Needs some tool to open", "#~", "gray", "black"),
-        "portalstartworkbot": new Tile("portalstartworkbot", "Start playing as a WorkBot", "OB", "white"),
-        "portalstartaerobot": new Tile("portalstartaerobot", "Start playing as a AeroBot", "OA", "white"),
-        "_portalstart?": new Tile("_portalstart?", "Not unlocked, yet!", "O?", "white"),
-        "spacerock": new Tile("spacerock", "Mountains as seen from space, non-blocking!", "'s", "white", "gray"),
-        "spacetree": new Tile("spacetree", "Forest as seen from space", "ts", "brown", "darkgray"),
-        "spacewater": new Tile("spacewater", "Water as seen from space, not dangerous!", "~s", "cybercyan", "cyberblue"),
-        "spacevoid": new Tile("spacevoid", "Void/ground as seen from space", ".s", "darkgray", "darkgray"),
-        "spacevoidstarwhite": new Tile("spacevoidstarwhite", "Space with a white background star", ".f", "white"),
-        "spacevoidstaryellow": new Tile("spacevoidstaryellow", "Space with a yellow background star", ".y", "cyberyellow"),
-        "sun": new Tile("sun", "It's hot, really hot!", "§", "cyberyellow", "cyberyellow", -100),
-        "terminal": new Tile("terminal", "A computer terminal", "$", "cyberyellow"),
-        "tv": new Tile("tv", "A big billboard screen", "!", "black", "cyberyellow"),
+        "movenorth": new TileType("movenorth", "Moves you north", "^^", "cyberyellow"),
+        "moveeast": new TileType("moveeast", "Moves you east", ">>", "cyberyellow"),
+        "movesouth": new TileType("movesouth", "Moves you south", "vv", "cyberyellow"),
+        "movewest": new TileType("movewest", "Moves you west", "<<", "cyberyellow"),
+        "portal": new TileType("portal", "Gateway to another map", "O", "cyberyellow", "gray"), // □
+        "portalclosed": new TileType("portalclosed", "Closed gateway to another map", "Oc", "black", "gray"), // □
+        "portalhidden": new TileType("portalhidden", "Hidden gateway to another map", "#", "gray", "black"),
+        "portallauncher": new TileType("portallauncher", "Launches into space", "O", "cyberyellow", "gray"),
+        "portalsewers": new TileType("portalsewers", "Needs some tool to open", "#~", "gray", "black"),
+        "portalstartworkbot": new TileType("portalstartworkbot", "Start playing as a WorkBot", "OB", "white"),
+        "portalstartaerobot": new TileType("portalstartaerobot", "Start playing as a AeroBot", "OA", "white"),
+        "_portalstart?": new TileType("_portalstart?", "Not unlocked, yet!", "O?", "white"),
+        "spacerock": new TileType("spacerock", "Mountains as seen from space, non-blocking!", "'s", "white", "gray"),
+        "spacetree": new TileType("spacetree", "Forest as seen from space", "ts", "brown", "darkgray"),
+        "spacewater": new TileType("spacewater", "Water as seen from space, not dangerous!", "~s", "cybercyan", "cyberblue"),
+        "spacevoid": new TileType("spacevoid", "Void/ground as seen from space", ".s", "darkgray", "darkgray"),
+        "spacevoidstarwhite": new TileType("spacevoidstarwhite", "Space with a white background star", ".f", "white"),
+        "spacevoidstaryellow": new TileType("spacevoidstaryellow", "Space with a yellow background star", ".y", "cyberyellow"),
+        "sun": new TileType("sun", "It's hot, really hot!", "§", "cyberyellow", "cyberyellow", -100),
+        "terminal": new TileType("terminal", "A computer terminal", "$", "cyberyellow"),
+        "tv": new TileType("tv", "A big billboard screen", "!", "black", "cyberyellow"),
         /*
         "grass": new Structure("grass", "Grass, sometimes stuff is hidden here", ".", "darkgreen")
         */
