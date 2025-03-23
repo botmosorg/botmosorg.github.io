@@ -215,7 +215,7 @@ export class Map {
                 let tileType = tile.type;
                 // 0 movable, 1 movement blocked
                 movementMap[y][x] = 0;
-                if (_isBlockingMovement(tileType)) {
+                if (tiles_is_blocking_movement(tileType)) {
                     movementMap[y][x] = 1;
                 }
             }
@@ -327,7 +327,7 @@ export function maps_parse(mapString: string): Map {
     return createdMap;
 }
 
-function _isBlockingMovement(tileType: TileType) {
+export function tiles_is_blocking_movement(tileType: TileType) {
     return tileType === MANIFEST.tiles.rock
         || tileType === MANIFEST.tiles.portalclosed
         || tileType === MANIFEST.tiles.portalsewers
