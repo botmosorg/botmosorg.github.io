@@ -32,7 +32,7 @@ export class CommandType {
         this.description = description;
     }
 }
-class Effect {
+class EffectType {
     name: string
     description: string
 
@@ -205,12 +205,12 @@ export const MANIFEST = {
         "shop_instance_workbot_shopper": "This shop is not so secret after all..."
     },
     "effects": {
-        "Recharger": new Effect("Recharger", "Doubles energy gained from chargepads"),
-        "RockCrusher": new Effect("Rock Crusher", "Mines rock"),
-        "Screwing": new Effect("Screwing", "Unscrews the sewer portal covers"),
-        "WallCrusher": new Effect("Wall Crusher", "Tears down weak walls"),
-        "WaterImmunity": new Effect("Water Immunity", "No damage taken from water"),
-        "WaterShield": new Effect("Water Shield", "Reduces damage taken from water")
+        "Recharger": new EffectType("Recharger", "Doubles energy gained from chargepads"),
+        "RockCrusher": new EffectType("Rock Crusher", "Mines rock"),
+        "Screwing": new EffectType("Screwing", "Unscrews the sewer portal covers"),
+        "WallCrusher": new EffectType("Wall Crusher", "Tears down weak walls"),
+        "WaterImmunity": new EffectType("Water Immunity", "No damage taken from water"),
+        "WaterShield": new EffectType("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
         "movableboulder": new Entity("Boulder", "A movable rock", "o", 2),
