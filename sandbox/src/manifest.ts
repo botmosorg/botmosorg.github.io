@@ -166,6 +166,10 @@ export const MANIFEST = {
         "M": new Command("M", "Menu"),
         "#": new Command("#", "Open prompt") // # or /
     },
+    "constants": {
+        "DRAIN_MATTER_COST": 500,
+        "DRAIN_GOLD_COST": 1
+    },
     "dialogs": {
         "bot_bar_aerobot_backstage": "Huh? How did you get here?",
         "bot_bar_aerobot_charger": "Feel free to recharge on those chargepads and enjoy the show.",

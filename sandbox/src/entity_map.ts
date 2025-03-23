@@ -233,8 +233,8 @@ export function entities_tile_energy_update(state: State): State {
         } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) { // TODO: this case doesn't work if tool has both WaterShield and WaterImmunity
             energyDelta = 0
         } else if (tile.type === MANIFEST.tiles.drain) {
-            const goldCost = Math.min(entity.gold, 1)
-            const matterCost = Math.min(entity.matter, 500)
+            const goldCost = Math.min(entity.gold, MANIFEST.constants.DRAIN_GOLD_COST)
+            const matterCost = Math.min(entity.matter, MANIFEST.constants.DRAIN_MATTER_COST)
 
             // TODO: maybe log what happened to the player?
             entity.gold -= goldCost
