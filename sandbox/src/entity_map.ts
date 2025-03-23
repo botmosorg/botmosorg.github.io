@@ -4,7 +4,7 @@ import { Event, publish } from "./event";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
 import { MANIFEST, CommandType, TileType } from "./manifest";
-import { Map, tiles_is_blocking_movement, tiles_is_space_tile } from "./map";
+import { Map, tiles_is_blocking_movement, tiles_is_space_tile, tiles_is_water } from "./map";
 import { State } from "./state";
 
 export interface EntityMapUpdatedEvent extends Event {
@@ -227,9 +227,9 @@ export function entities_tile_energy_update(state: State): State {
 
         if (tile.type === MANIFEST.tiles.chargepad && tool?.type.effects.includes(MANIFEST.effects.Recharger.name)) {
             energyDelta *= 2
-        } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
+        } else if (tiles_is_water(tile.type) && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
             energyDelta /= 2
-        } else if ((tile.type === MANIFEST.tiles.water || tile.type === MANIFEST.tiles.watersewage) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) { // TODO: this case doesn't work if tool has both WaterShield and WaterImmunity
+        } else if (tiles_is_water(tile.type) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) { // TODO: this case doesn't work if tool has both WaterShield and WaterImmunity
             energyDelta = 0
         } else if (tile.type === MANIFEST.tiles.drain) {
             const goldCost = Math.min(entity.gold, MANIFEST.constants.DRAIN_GOLD_COST)

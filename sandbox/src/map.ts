@@ -334,3 +334,8 @@ export function tiles_is_blocking_movement(tileType: TileType) {
         || tileType === MANIFEST.tiles.tv
         || tileType.name.startsWith("wall")
 }
+
+export function tiles_is_water(tileType: TileType) {
+    return tileType === MANIFEST.tiles.water
+        || tileType === MANIFEST.tiles.watersewage
+}
