@@ -69,7 +69,7 @@ class FactionType {
         this.color = color;
     }
 }
-export class Item {
+export class ItemType {
     name: string;
     description: string;
     icon: string;
@@ -240,22 +240,22 @@ export const MANIFEST = {
         "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan")
     },
     "items": {
-        "battery": new Item("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
-        "chest": new Item("Chest", "A chest. What might be inside?", "i", "cyberyellow"),
-        "energy": new Item("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
-        "gold": new Item("Gold", "Precious shiny!", "gg", "cyberyellow", 0, 0, 1),
-        "goo": new Item("Goo", "A minor matter source", "goo", "gray", 0, 1),
-        "junk": new Item("Junk", "Broken bot", "%", "gray", 0, 1),
-        "matter": new Item("Matter", "A pile of stuff", "m", "gray", 0, 100),
+        "battery": new ItemType("Battery", "Increases maximum energy", "b", "cyberyellow", 10),
+        "chest": new ItemType("Chest", "A chest. What might be inside?", "i", "cyberyellow"),
+        "energy": new ItemType("Energy", "Energy pack", "e", "cyberyellow", 10) ,// 🗲
+        "gold": new ItemType("Gold", "Precious shiny!", "gg", "cyberyellow", 0, 0, 1),
+        "goo": new ItemType("Goo", "A minor matter source", "goo", "gray", 0, 1),
+        "junk": new ItemType("Junk", "Broken bot", "%", "gray", 0, 1),
+        "matter": new ItemType("Matter", "A pile of stuff", "m", "gray", 0, 100),
         // Tools
-        "broom": new Item("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1), // DEPRECATED: replace with 'Mop' item to clear graffiti
-        "cheat": new Item("Cheat", "Most powerful tool, totally legit", "icheat", "cyberyellow", 0, 0, 0, -500, -1, ["Recharger", "Rock Crusher", "Screwing", "Wall Crusher", "Water Shield"]),
-        "hammer": new Item("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
-        "pickaxe": new Item("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
-        "ratbite": new Item("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["Water Immunity"]),
-        "shocker": new Item("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
-        "trident": new Item("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
-        "wrench": new Item("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
+        "broom": new ItemType("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1), // DEPRECATED: replace with 'Mop' item to clear graffiti
+        "cheat": new ItemType("Cheat", "Most powerful tool, totally legit", "icheat", "cyberyellow", 0, 0, 0, -500, -1, ["Recharger", "Rock Crusher", "Screwing", "Wall Crusher", "Water Shield"]),
+        "hammer": new ItemType("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
+        "pickaxe": new ItemType("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
+        "ratbite": new ItemType("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["Water Immunity"]),
+        "shocker": new ItemType("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
+        "trident": new ItemType("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
+        "wrench": new ItemType("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
     },
     "maps": {
         "bot_bar": `!

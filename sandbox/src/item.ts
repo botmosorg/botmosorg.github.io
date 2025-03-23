@@ -1,6 +1,6 @@
 import { Entity, isMoveableObject } from "./entity";
 import { log } from "./log";
-import { MANIFEST, Item as ItemType } from "./manifest";
+import { MANIFEST, ItemType } from "./manifest";
 import { State } from "./state";
 
 export interface Item {
