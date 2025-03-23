@@ -1,6 +1,6 @@
 import { BOTMOS_OPTIONS } from "./config";
 
-export class Action {
+export class ActionType {
     name: string
     description: string
     energyDelta: number
@@ -14,7 +14,7 @@ export class Action {
         this.energyDelta = energyDelta;
     }
 }
-export class AI {
+export class AIType {
     name: string;
     description: string;
 
@@ -117,15 +117,15 @@ export class Tile {
 
 export const MANIFEST = {
     "actions": {
-        "Enter": new Action("Enter", "Enter a portal or plant atmosphere"),
-        "Launch": new Action("Launch", "Launch into space", -10),
-        "Wait": new Action("Wait", "Wait one turn in place")
+        "Enter": new ActionType("Enter", "Enter a portal or plant atmosphere"),
+        "Launch": new ActionType("Launch", "Launch into space", -10),
+        "Wait": new ActionType("Wait", "Wait one turn in place")
     },
     "ais": {
-        "aggrorange": new AI("aggrorange", "Idles at a position and engages the player when coming into range"),
-        "aggrorangeshort": new AI("aggrorangeshort", "Idles at a position and engages the player when coming into shorter range"),
-        "guardian": new AI("guardian", "Idles at a position and only fights back if engaged"),
-        "interactenrage": new AI("interactenrage", "Gets hostile when getting talked to too often!")
+        "aggrorange": new AIType("aggrorange", "Idles at a position and engages the player when coming into range"),
+        "aggrorangeshort": new AIType("aggrorangeshort", "Idles at a position and engages the player when coming into shorter range"),
+        "guardian": new AIType("guardian", "Idles at a position and only fights back if engaged"),
+        "interactenrage": new AIType("interactenrage", "Gets hostile when getting talked to too often!")
     },
     /**
      * From: https://www.color-hex.com/color-palette/8618

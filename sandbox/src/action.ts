@@ -1,10 +1,10 @@
 import { Entity } from "./entity";
-import { Action, MANIFEST } from "./manifest";
+import { ActionType, MANIFEST } from "./manifest";
 import { State } from "./state";
 
 export interface Actions {
-    A: Action,
-    B: Action
+    A: ActionType,
+    B: ActionType
 }
 
 export function actions_get(state: State, entity: Entity): Actions {

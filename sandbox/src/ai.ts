@@ -1,7 +1,7 @@
 import { a_star } from "./easystar_astar";
 import { entities_get_by } from "./entity";
 import { entityInteractOrMove } from "./entity_map";
-import { MANIFEST, AI } from "./manifest";
+import { MANIFEST, AIType } from "./manifest";
 import { players_get_current_id } from "./player";
 import { State } from "./state";
 import { distance } from "./util";
@@ -76,7 +76,7 @@ interface _AI {
     path: [] | null
 }
 
-export function ais_create(state: State, entityId: string, aiType: AI): State {
+export function ais_create(state: State, entityId: string, aiType: AIType): State {
     let entity = state.entities[entityId]
 
     let aggroRange = 8
