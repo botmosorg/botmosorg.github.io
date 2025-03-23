@@ -5,5 +5,5 @@ export function t(key: string): string {
         return MANIFEST.dialogs[key]
     }
 
-    return `TODO: ${key} needs localization!`
+    return `FIXME: ${key} needs localization!`
 }

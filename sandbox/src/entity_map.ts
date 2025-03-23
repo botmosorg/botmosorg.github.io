@@ -44,14 +44,13 @@ export function entity_act(state: State, entity: Entity, command: CommandType): 
     return state;
 }
 
-export function entityInteractOrMove(state: State, entity: Entity, dx: number, dy: number, recursion=0): State { // TODO dirty hack with the recursion
-    // Check for collision:
+export function entityInteractOrMove(state: State, entity: Entity, dx: number, dy: number, recursion=0): State { // Dirty hack with the recursion for moveable objects
     /*
     entity -> combat (hostile), interact (friendly)
     tile -> mine (rock), block movement (wall)
 
     if movement can happen:
-    move, pickup items on-tile movement, go through portals on-tile movement
+        move, pickup items on-tile movement, go through portals on-tile movement
     */
     const map = state.maps[entity.mapId]
     const entity_at_target_position = entities_get_at(state, map.id, entity.x + dx, entity.y + dy)
