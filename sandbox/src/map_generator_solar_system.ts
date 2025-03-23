@@ -60,7 +60,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
         //console.log("PASTED! " + xPlanetCenter + " " + yPlanetCenter)
     }
 
-    // TODO sampling test
+    // TODO sampling test, write test case
     /*
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular())
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17)
