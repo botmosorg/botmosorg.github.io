@@ -1,6 +1,6 @@
 import { t } from "./l10n";
 import { log } from "./log";
-import { MANIFEST, Entity as EntityType } from "./manifest";
+import { MANIFEST, EntityType } from "./manifest";
 import { State } from "./state";
 
 export interface Entity {

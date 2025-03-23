@@ -41,7 +41,7 @@ class EffectType {
         this.description = description
     }
 }
-export class Entity {
+export class EntityType {
     name: string;
     description: string;
     icon: string;
@@ -213,19 +213,19 @@ export const MANIFEST = {
         "WaterShield": new EffectType("Water Shield", "Reduces damage taken from water")
     },
     "entities": {
-        "movableboulder": new Entity("Boulder", "A movable rock", "o", 2),
-        "movablebox": new Entity("Box", "A movable box", "x", 2),
-        "Spirit":  new Entity("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
-        "AeroBot": new Entity("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
-        "WorkBot": new Entity("WorkBot", "Basic factory worker", "B"),
-        "Cleaner": new Entity("Cleaner", "Bot purging malfunctioning bots", "C", 50),
-        "Deviant": new Entity("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
-        "Graffiticyan": new Entity("Graffiti", "Writing on the wall", "zc", 2),
-        "Graffitimagenta": new Entity("Graffiti", "Writing on the wall", "zm", 2),
-        "Graffitiyellow": new Entity("Graffiti", "Writing on the wall", "zy", 2),
-        "Valkyrie": new Entity("Valkyrie", "Airbourne war logistics", "V", 160),
-        "Pioneer": new Entity("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
-        "RoboRat": new Entity("RoboRat", "Minor self-assembled critter", "r", 5)
+        "movableboulder": new EntityType("Boulder", "A movable rock", "o", 2),
+        "movablebox": new EntityType("Box", "A movable box", "x", 2),
+        "Spirit":  new EntityType("Spirit", "You are back in the machine mind, pick a new hull!", "@", 10),
+        "AeroBot": new EntityType("AeroBot", "Basic server, serving energy goo and such to bots", "A", 80),
+        "WorkBot": new EntityType("WorkBot", "Basic factory worker", "B"),
+        "Cleaner": new EntityType("Cleaner", "Bot purging malfunctioning bots", "C", 50),
+        "Deviant": new EntityType("Deviant", "Unaligned, divergent bot roaming the BotMos", "D", 120),
+        "Graffiticyan": new EntityType("Graffiti", "Writing on the wall", "zc", 2),
+        "Graffitimagenta": new EntityType("Graffiti", "Writing on the wall", "zm", 2),
+        "Graffitiyellow": new EntityType("Graffiti", "Writing on the wall", "zy", 2),
+        "Valkyrie": new EntityType("Valkyrie", "Airbourne war logistics", "V", 160),
+        "Pioneer": new EntityType("Pioneer", "Absolute slayer bots, brotherhood of ultimate warriors", "W", 200),
+        "RoboRat": new EntityType("RoboRat", "Minor self-assembled critter", "r", 5)
         /*
         // ...
         "RichBot": "Shiny metal ass, owns a spacestation, is the brain so to say",
