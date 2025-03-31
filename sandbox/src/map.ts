@@ -6,7 +6,7 @@ import { MANIFEST, TileType } from "./manifest";
 import { spawn, SpawnCommand } from "./spawn";
 import { State } from "./state";
 
-interface Tile {
+export interface Tile {
     type: TileType,
     options: object
 }

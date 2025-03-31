@@ -21,7 +21,8 @@ const _BM_INPUT = {
 }
 
 let _inputQueue: CommandType[] = []
-let _callback = undefined
+let _keyDownCallback = undefined
+let _mouseOverCallback = undefined
 let _timeOfLastActionInMs: number = 0
 
 /**
@@ -81,9 +82,9 @@ document.body.addEventListener("keydown", function(e) {
 
 function _triggerCallback(command: CommandType) {
     const currentTimeInMs = Date.now();
-    if (_callback !== undefined && currentTimeInMs - _timeOfLastActionInMs >= 80) {
+    if (_keyDownCallback !== undefined && currentTimeInMs - _timeOfLastActionInMs >= MANIFEST.constants.MIN_TURN_SPEED_IN_MS) {
         _timeOfLastActionInMs = currentTimeInMs
-        _callback(command)
+        _keyDownCallback(command)
     }
 }
 
@@ -248,6 +249,17 @@ function _get_action(): CommandType {
     return action;
 }
 
+document.body.addEventListener("mousemove", function(e) {
+    if (e.defaultPrevented) {
+        return; // Do nothing if event already handled
+    }
+
+    if (_keyDownCallback !== undefined) {
+        _mouseOverCallback(e)
+        _preventDefaultAndStopPropagation(e)
+    }
+})
+
 /**
  * Gamepad controls
  *
@@ -306,5 +318,9 @@ window.addEventListener("gamepaddisconnected", (e) => {
 });
 
 export function onKeyDown(callback: Function) {
-    _callback = callback
+    _keyDownCallback = callback
+}
+
+export function onMouseMove(callback: Function) {
+    _mouseOverCallback = callback
 }

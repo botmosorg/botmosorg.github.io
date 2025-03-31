@@ -1,7 +1,8 @@
 import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config";
 import Game from "./game";
-import { onKeyDown } from "./input";
+import { onKeyDown, onMouseMove } from "./input";
 import { draw, resize } from "./rot_renderer_tile";
+import { drawTooltip } from "./rot_ui";
 import { State } from "./state";
 
 let game = new Game();
@@ -26,6 +27,8 @@ window.onresize = function() {
 onKeyDown(function(action) {
     draw(game.update(action));
 })
+
+onMouseMove(drawTooltip)
 
 // API Start
 if (!!!(window as any).BMActionLog) {

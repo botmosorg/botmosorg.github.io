@@ -16,11 +16,17 @@ const UI_LINE = document.createElement("div")
 UI_LINE.replaceChildren(UI_HULL_ELEMENT, UI_TOOL_ELEMENT, UI_LINE_TEXT_ELEMENT)
 UI_ELEMENT.replaceChildren(UI_LINE)
 
+const UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT = document.createElement("div")
+UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT.style.display = "flex"
+UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT.style.justifyContent = "space-between"
 const UI_CHATLOG_ELEMENT = document.createElement("div")
 UI_CHATLOG_ELEMENT.id = "uichatlog"
-UI_ELEMENT.appendChild(UI_CHATLOG_ELEMENT)
+const UI_TOOLTIP_ELEMENT = document.createElement("div")
+UI_TOOLTIP_ELEMENT.id = "uitooltip"
+UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT.replaceChildren(UI_CHATLOG_ELEMENT, UI_TOOLTIP_ELEMENT)
+UI_ELEMENT.appendChild(UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT)
 
-export async function drawUI(state: State, cameraY: number=0) { // dirty hack: UI should not rely on camera
+export async function drawUI(state: State, cameraY: number=0) { // TODO dirty hack: UI should not rely on camera
     if (!BOTMOS_OPTIONS.showUI) {
         return
     }
@@ -117,4 +123,8 @@ function _set_sprite(element: HTMLElement, spriteId: string | null) {
     } else {
         element.style.width = `0px`
     }
+}
+
+export function getTooltipContainer() {
+    return UI_TOOLTIP_ELEMENT
 }

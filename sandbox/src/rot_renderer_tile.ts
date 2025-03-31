@@ -1,17 +1,27 @@
 import * as ROT from "../lib/rot.js"
 
 import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
-import { items_get_by } from "./item";
-import { entities_get_by, isGraffiti, isMoveableObject } from "./entity";
+import { Item, items_get_at, items_get_by } from "./item";
+import { entities_get_at, entities_get_by, Entity, isGraffiti, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
 import { players_get_current_id } from "./player";
 import { State } from "./state.js";
 import { TILEMAP } from "../src-img/tilemap.js";
 import { drawUI } from "./ui.js";
+import { Tile } from "./map.js";
 
 /*
 https://ondras.github.io/rot.js/hp/
 */
+
+export interface GameObjectsAtMapPosition {
+    mapId: string,
+    x: number,
+    y: number,
+    tile: Tile,
+    entity: Entity,
+    item: Item
+}
 
 const ALTERNATE_TILE_SUFFIX = '_a'
 
@@ -21,13 +31,14 @@ tileSet.src = "build/tiles.png"
 ROT_OPTIONS.tileSet = tileSet;
 ROT_OPTIONS.tileMap = _create_tileMap()
 
-const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
+export const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
-function lookup_color(name: string) {
-    return MANIFEST.colors[name];
-}
+let xMapCoordsOffset = 0
+let yMapCoordsOffset = 0
+let lastState = undefined
 function rot_render(state: State, camera: any, alternateTilemap: boolean=false) {
+    lastState = state
     let currentMapId = state.currentMapId;
     let map = state.maps[currentMapId];
     let suffix = (alternateTilemap) ? ALTERNATE_TILE_SUFFIX : ''
@@ -43,6 +54,8 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
         yPadding = Math.floor((camera.height - map.heightTiles) / 2)
         camera.y = 0
     }
+    xMapCoordsOffset = camera.x - xPadding
+    yMapCoordsOffset = camera.y - yPadding
 
     const renderHashTable: { [key: string]: Array<string>; } = {}
     const renderHashTableFg: { [key: string]: Array<string>; } = {}
@@ -149,6 +162,29 @@ export async function resize(rotOptions: any) {
     //rotOptions.tileMap = _create_tileMap()
 
     //ROT_DISPLAY.setOptions(rotOptions)
+}
+
+// For tooltips
+export function displayCoordinatesToMapCoordinates(displayCoords: Array<number>): Array<number> {
+    return [displayCoords[0] + xMapCoordsOffset, displayCoords[1] + yMapCoordsOffset]
+}
+export function mapCoordinatesToGameObjects(mapCoords: Array<number>): GameObjectsAtMapPosition {
+    const currentMapId = lastState.currentMapId
+    const map = lastState.maps[currentMapId]
+    const x = mapCoords[0]
+    const y = mapCoords[1]
+    const tile = map.getTile(x, y)
+    const entity = entities_get_at(lastState, currentMapId, x, y)
+    const item = items_get_at(lastState, currentMapId, x, y)
+
+    return {
+        "mapId": currentMapId,
+        "x": mapCoords[0],
+        "y": mapCoords[1],
+        "tile": tile,
+        "entity": entity,
+        "item": item
+    }
 }
 
 function camera_follow(entity: { x: number, y: number }): { x: number, y: number, width: number, height: number } {

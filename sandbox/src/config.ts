@@ -12,6 +12,7 @@ export const BOTMOS_OPTIONS = {
     highlightEnemy: true,
     showGrid: true,
     showUI: true,
+    showTooltip: true,
     zoom: 1
 }
 

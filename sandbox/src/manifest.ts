@@ -168,7 +168,8 @@ export const MANIFEST = {
     },
     "constants": {
         "DRAIN_MATTER_COST": 500,
-        "DRAIN_GOLD_COST": 1
+        "DRAIN_GOLD_COST": 1,
+        "MIN_TURN_SPEED_IN_MS": 80
     },
     "dialogs": {
         "bot_bar_aerobot_backstage": "Huh? How did you get here?",
