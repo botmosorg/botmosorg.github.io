@@ -25,7 +25,7 @@ export async function drawTooltip(e) {
             if (tooltipText !== "") tooltipText += "\n";
             tooltipText += gameObjects.item.type.name
         }
-        if (!!gameObjects.tile?.type) {
+        if (!!gameObjects.tile?.type && !gameObjects.tile?.type.name.includes("void")) {
             if (tooltipText !== "") tooltipText += "\n";
             tooltipText += gameObjects.tile.type.name
         }
