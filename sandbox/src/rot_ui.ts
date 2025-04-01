@@ -17,19 +17,24 @@ export async function drawTooltip(e) {
         //console.log(gameObjects)
 
         let tooltipText = ""
-        if (!!gameObjects.tile?.type) {
-            tooltipText = gameObjects.tile.type.name + " (" + gameObjects.tile.type.description + ")"
-        }
         if (!!gameObjects.entity) {
-            tooltipText += "\n" + gameObjects.entity.type.name + " (" + gameObjects.entity.type.description + ")"
+            const entityName = !!gameObjects.entity?.options?.name ? gameObjects.entity.options.name : gameObjects.entity.type.name
+            tooltipText += entityName
         }
         if (!!gameObjects.item) {
-            tooltipText += "\n" + gameObjects.item.type.name + " (" + gameObjects.item.type.description + ")"
+            if (tooltipText !== "") tooltipText += "\n";
+            tooltipText += gameObjects.item.type.name
+        }
+        if (!!gameObjects.tile?.type) {
+            if (tooltipText !== "") tooltipText += "\n";
+            tooltipText += gameObjects.tile.type.name
         }
 
         const tooltipElement = getTooltipContainer()
         if (tooltipText !== "") {
             tooltipElement.innerText = tooltipText
+            tooltipElement.style.left = e.x + 20 + 'px'
+            tooltipElement.style.top = e.y + 20 + 'px'
             tooltipElement.style.display = "inline-block"
         } else {
             tooltipElement.style.display = "none"

@@ -26,6 +26,10 @@ UI_TOOLTIP_ELEMENT.id = "uitooltip"
 UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT.replaceChildren(UI_CHATLOG_ELEMENT, UI_TOOLTIP_ELEMENT)
 UI_ELEMENT.appendChild(UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT)
 
+const UI_MOUSE_TOOLTIP_ELEMENT = document.createElement("div")
+UI_MOUSE_TOOLTIP_ELEMENT.id = "uimousetooltip"
+document.body.appendChild(UI_MOUSE_TOOLTIP_ELEMENT)
+
 export async function drawUI(state: State, cameraY: number=0) { // TODO dirty hack: UI should not rely on camera
     if (!BOTMOS_OPTIONS.showUI) {
         return
@@ -126,5 +130,5 @@ function _set_sprite(element: HTMLElement, spriteId: string | null) {
 }
 
 export function getTooltipContainer() {
-    return UI_TOOLTIP_ELEMENT
+    return UI_MOUSE_TOOLTIP_ELEMENT
 }
