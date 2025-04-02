@@ -73,7 +73,7 @@ export const TILEMAP = {
   "spacewater": [71*16, 0],
   "Spirit_a": [72*16, 0],
   "Spirit": [73*16, 0],
-  "sun": [74*16, 0],
+  "star": [74*16, 0],
   "terminal": [75*16, 0],
   "tree": [76*16, 0],
   "trident": [77*16, 0],
