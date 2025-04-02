@@ -16,16 +16,16 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     const rng = new RNG(seed)
     const launcherRng = new RNG(seed)
     const numberOfPlanets = rng.getItem([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    let consumedRadius = 64 + 64 // Sun + some padding
+    let consumedRadius = 64 + 64 // Star + some padding
     let leftoverRadius = 512 - consumedRadius
     const radiusPerPlanet = Math.floor(leftoverRadius / numberOfPlanets)
 
     solarsystem = _randomizeVoidBackground(solarsystem, rng)
 
-    let sun = _emptyMap(128, 128, MANIFEST.tiles.voidtrue)
-    _circle(sun, 63, 63, 62, MANIFEST.tiles.sun)
-    _fill(sun, 63, 63, MANIFEST.tiles.sun)
-    solarsystem.pasteOnto(sun, 512 - 64, 512 - 64)
+    let star = _emptyMap(128, 128, MANIFEST.tiles.voidtrue)
+    _circle(star, 63, 63, 62, MANIFEST.tiles.star)
+    _fill(star, 63, 63, MANIFEST.tiles.star)
+    solarsystem.pasteOnto(star, 512 - 64, 512 - 64)
 
     for (let radius=consumedRadius; radius < 512; radius+=radiusPerPlanet) {
         let xPlanetCenter = rng.getItem([-1, 1]) * rng.getItem(range(radius))
