@@ -24,8 +24,8 @@ tttttttttttttttt
 tttttttttttttttt
 tttttttt00000000
 tttttttt0fffff00
-tttttttt0f000ff0
+tttttttt00000ff0
 tttttttt000ff000
-tttttttt0ff000f0
+tttttttt0ff00000
 tttttttt0ffffff0
 tttttttt00000000
