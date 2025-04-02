@@ -23,9 +23,9 @@ tttttttttttttttt
 tttttttttttttttt
 tttttttttttttttt
 tttttttt00000000
+tttttttt000fff00
 tttttttt00ffff00
-tttttttt000ff000
-tttttttt000ff000
-tttttttt000ff000
+tttttttt000fff00
+tttttttt000fff00
 tttttttt0ffffff0
 tttttttt00000000
