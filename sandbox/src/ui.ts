@@ -42,13 +42,16 @@ export async function drawUI(state: State, cameraY: number=0) { // TODO dirty ha
     let uiLineText = ''
     if (!!playerEntity) {
         _set_sprite(UI_HULL_ELEMENT, playerEntity.type.name)
+        UI_HULL_ELEMENT.dataset.tooltip = "Your hull: " + playerEntity.type.name
 
         let equippedItemText = ''
         const equippedItem = items_get_equipped(state, playerId)
         if (!!equippedItem) {
             _set_sprite(UI_TOOL_ELEMENT, equippedItem.type.name.toLowerCase())
+            UI_TOOL_ELEMENT.dataset.tooltip = "Your tool: " + equippedItem.type.name
         } else {
             _set_sprite(UI_TOOL_ELEMENT, null)
+            UI_TOOL_ELEMENT.dataset.tooltip = undefined
         }
 
         let matterText = ''
