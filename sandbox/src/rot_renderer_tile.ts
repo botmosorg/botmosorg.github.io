@@ -1,6 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
-import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
+import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS, ShowEnergyIndicators } from "./config";
 import { Item, items_get_at, items_get_by } from "./item";
 import { entities_get_at, entities_get_by, Entity, isGraffiti, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
@@ -110,7 +110,6 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
         const entity = entities[i];
         const entityRenderX = xPadding + entity.x-camera.x
         const entityRenderY = yPadding + entity.y-camera.y
-        const energyOverlayNumber = Math.ceil((entity.energy / entity.energyMax) * 10)
 
         let entityColor = "transparent" // default for boulders, boxes or graffiti
         if (BOTMOS_OPTIONS.highlightEnemy && !!playerFaction && !isMoveableObject(entity) && !isGraffiti(entity)) {
@@ -126,21 +125,25 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
             renderHashTable[key].push(entity.type.icon + suffix)
             renderHashTableFg[key].push(entityColor)
             renderHashTableBg[key].push("transparent")
-            if (energyOverlayNumber < 10) {
-                renderHashTable[key].push("_" + energyOverlayNumber)
-                renderHashTableFg[key].push("transparent")
-                renderHashTableBg[key].push("transparent")
-            }
+
         } else {
             renderHashTable[key] = [entity.type.icon + suffix]
             renderHashTableFg[key] = [entityColor]
             renderHashTableBg[key] = ["transparent"]
-            if (energyOverlayNumber < 10) {
-                renderHashTable[key].push("_" + energyOverlayNumber)
+        }
+
+        // Energy indicator overlay: either bars (top of entity) or numbers (bottom right corner)
+        if (BOTMOS_OPTIONS.showEnergy !== ShowEnergyIndicators.NONE) {
+            const resolutionBase = BOTMOS_OPTIONS.showEnergy === ShowEnergyIndicators.BARS ? 16 : 10;
+            const tilePrefix = BOTMOS_OPTIONS.showEnergy === ShowEnergyIndicators.BARS ? "__" : "_";
+            const energyOverlayNumber = Math.ceil((entity.energy / entity.energyMax) * resolutionBase)
+            if (energyOverlayNumber < resolutionBase) {
+                renderHashTable[key].push(tilePrefix + energyOverlayNumber)
                 renderHashTableFg[key].push("transparent")
                 renderHashTableBg[key].push("transparent")
             }
         }
+
     }
 
     // Actually draw on display from tile/item/entity hash table

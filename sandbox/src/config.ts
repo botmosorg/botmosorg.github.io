@@ -2,6 +2,11 @@ const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth :
 const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
 
 const FONT_SIZE = 16
+export enum ShowEnergyIndicators {
+    NONE,
+    BARS,
+    NUMBERS
+}
 export const BOTMOS_OPTIONS = {
     cameraWidth: Math.floor(WINDOW_WIDTH_IN_PX / FONT_SIZE),
     cameraHeight: Math.floor(WINDOW_HEIGHT_IN_PX / FONT_SIZE),
@@ -13,6 +18,7 @@ export const BOTMOS_OPTIONS = {
     showGrid: true,
     showUI: true,
     showTooltip: true,
+    showEnergy: ShowEnergyIndicators.BARS,
     zoom: 1
 }
 
