@@ -143,7 +143,6 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
                 renderHashTableBg[key].push("transparent")
             }
         }
-
     }
 
     // Actually draw on display from tile/item/entity hash table
