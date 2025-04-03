@@ -29,7 +29,7 @@ statistics: ## Print project statistics
 	@echo -n '* TypeScript LOC: '
 	@wc --total=only -l src/*.ts
 	@echo -n '* Design/project management document size in lines: '
-	@cat ../../MANIFEST.md | wc -l
+	@cat ../../BACKLOG.md | wc -l
 	@echo -n '* TODO count in the codebase: '
 	@grep -rin "todo" src/ test/ | wc -l
 	@git log --pretty='format:%cd' --date=format:'%Y' | uniq -c | awk '{print "* "$$2" commit count: "$$1}'
