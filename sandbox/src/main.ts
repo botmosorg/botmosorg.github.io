@@ -20,7 +20,7 @@ window.onresize = async function() {
     ROT_OPTIONS.width = Math.floor(BOTMOS_OPTIONS.cameraWidth * (1 / BOTMOS_OPTIONS.zoom))
     ROT_OPTIONS.height = Math.floor(BOTMOS_OPTIONS.cameraHeight * (1 / BOTMOS_OPTIONS.zoom))
 
-    await resize(ROT_OPTIONS)
+    await resize()
     draw(game.state)
 }
 

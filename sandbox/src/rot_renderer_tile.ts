@@ -167,10 +167,7 @@ export async function draw(state: State) {
     }
 }
 
-export async function resize(rotOptions: any) {
-    //rotOptions.tileSet = tileSet;
-    //rotOptions.tileMap = _create_tileMap()
-
+export async function resize() {
     ROT_DISPLAY._backend.setOptions(ROT_OPTIONS) // Trigger tile-gl backend's _updateSize method
 }
 
