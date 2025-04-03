@@ -35,10 +35,12 @@ export class CommandType {
 class EffectType {
     name: string
     description: string
+    tooltip: string
 
-    constructor(name: string, description: string) {
+    constructor(name: string, description: string, tooltip: string="") {
         this.name = name
         this.description = description
+        this.tooltip = tooltip
     }
 }
 export class EntityType {
