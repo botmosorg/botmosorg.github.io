@@ -48,7 +48,8 @@ export async function drawUI(state: State, cameraY: number=0) { // TODO dirty ha
         const equippedItem = items_get_equipped(state, playerId)
         if (!!equippedItem) {
             _set_sprite(UI_TOOL_ELEMENT, equippedItem.type.name.toLowerCase())
-            UI_TOOL_ELEMENT.dataset.tooltip = "Player tool: " + equippedItem.type.name
+            const itemType = equippedItem.type
+            UI_TOOL_ELEMENT.dataset.tooltip = `Player tool: ${itemType.name} (${Math.abs(itemType.damage)} damage, ${itemType.energyCost} energy)`
         } else {
             _set_sprite(UI_TOOL_ELEMENT, null)
             UI_TOOL_ELEMENT.dataset.tooltip = undefined
