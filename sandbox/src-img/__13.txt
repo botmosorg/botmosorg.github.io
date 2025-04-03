@@ -15,7 +15,7 @@
 #!d #222222ff
 gggggggggggggttt
 gggggggggggggttt
-0000000000000000
+gggggggggggggttt
 tttttttttttttttt
 tttttttttttttttt
 tttttttttttttttt

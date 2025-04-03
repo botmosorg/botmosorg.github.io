@@ -13,9 +13,9 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-wttttttttttttttt
-wttttttttttttttt
-0000000000000000
+rttttttttttttttt
+rttttttttttttttt
+rttttttttttttttt
 tttttttttttttttt
 tttttttttttttttt
 tttttttttttttttt
