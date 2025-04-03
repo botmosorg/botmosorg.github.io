@@ -11,7 +11,7 @@ window.onload = function() {
     draw(game.init())
 }
 
-window.onresize = function() {
+window.onresize = async function() {
     const WINDOW_WIDTH_IN_PX = (typeof window !== 'undefined') ? window.innerWidth : 0
     const WINDOW_HEIGHT_IN_PX = (typeof window !== 'undefined') ? window.innerHeight : 0
 
@@ -20,7 +20,7 @@ window.onresize = function() {
     ROT_OPTIONS.width = Math.floor(BOTMOS_OPTIONS.cameraWidth * (1 / BOTMOS_OPTIONS.zoom))
     ROT_OPTIONS.height = Math.floor(BOTMOS_OPTIONS.cameraHeight * (1 / BOTMOS_OPTIONS.zoom))
 
-    resize(ROT_OPTIONS)
+    await resize(ROT_OPTIONS)
     draw(game.state)
 }
 

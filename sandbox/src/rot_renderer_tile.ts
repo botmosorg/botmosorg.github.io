@@ -15,9 +15,6 @@ https://ondras.github.io/rot.js/hp/
 */
 
 export interface GameObjectsAtMapPosition {
-    mapId: string,
-    x: number,
-    y: number,
     tile: Tile,
     entity: Entity,
     item: Item
@@ -67,7 +64,7 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
             let tile = map.getTile(camera.x+x, camera.y+y)
 
             let icon = ""
-            if (!!tile && !!tile.type) {
+            if (!!tile?.type) {
                 if (!!tile.options.sign) {
                     icon = "#" + tile.options.sign
                 } else {
@@ -174,7 +171,7 @@ export async function resize(rotOptions: any) {
     //rotOptions.tileSet = tileSet;
     //rotOptions.tileMap = _create_tileMap()
 
-    //ROT_DISPLAY.setOptions(rotOptions)
+    ROT_DISPLAY._backend.setOptions(ROT_OPTIONS) // Trigger tile-gl backend's _updateSize method
 }
 
 // For tooltips
@@ -182,6 +179,14 @@ export function displayCoordinatesToMapCoordinates(displayCoords: Array<number>)
     return [displayCoords[0] + xMapCoordsOffset, displayCoords[1] + yMapCoordsOffset]
 }
 export function mapCoordinatesToGameObjects(mapCoords: Array<number>): GameObjectsAtMapPosition {
+    if (!!!lastState) {
+        return {
+            "tile": null,
+            "entity": null,
+            "item": null
+        }
+    }
+
     const currentMapId = lastState.currentMapId
     const map = lastState.maps[currentMapId]
     const x = mapCoords[0]
@@ -191,9 +196,6 @@ export function mapCoordinatesToGameObjects(mapCoords: Array<number>): GameObjec
     const item = items_get_at(lastState, currentMapId, x, y)
 
     return {
-        "mapId": currentMapId,
-        "x": mapCoords[0],
-        "y": mapCoords[1],
         "tile": tile,
         "entity": entity,
         "item": item

@@ -29,7 +29,7 @@ export async function drawTooltip(e) {
             if (tooltipText !== "") tooltipText += "\n";
             tooltipText += gameObjects.item.type.name
         }
-        if (!!gameObjects.tile?.type && gameObjects.tile?.type.tooltip !== "") {
+        if (!!gameObjects?.tile?.type && gameObjects.tile?.type.tooltip !== "") {
             if (tooltipText !== "") tooltipText += "\n";
             tooltipText += gameObjects.tile.type.tooltip
         }
