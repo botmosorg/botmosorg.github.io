@@ -13,10 +13,10 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-yyyyyyyyyttttttt
-yyyyyyyyyttttttt
-yyyyyyyyyttttttt
-tttttttttttttttt
+yyyyyyyyy0tttttt
+yyyyyyyyy0tttttt
+yyyyyyyyy0tttttt
+0000000000tttttt
 tttttttttttttttt
 tttttttttttttttt
 tttttttttttttttt
