@@ -145,12 +145,24 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
     return state
 }
 
-export function items_equip(state: State, entityId: string, itemType: ItemType) {
-    let equippedItem: EquippedItem = {type: itemType}
-    state.tools[entityId] = equippedItem
+export function items_equip(state: State, entityId: string, itemType: ItemType | null | undefined) {
+    if (!!itemType) {
+        // Equip
+        const equippedItem: EquippedItem = {type: itemType}
+        state.tools[entityId] = equippedItem
 
-    if (entityId.startsWith("player")) {
-        state = log(state, `Equipped ${itemType.name}.`)
+        if (entityId.startsWith("player")) {
+            state = log(state, `Equipped ${itemType.name}.`)
+        }
+
+    } else if (!!state.tools[entityId] && !!!itemType) {
+        // Unequip
+        const unequippedItemType = state.tools[entityId].type
+        state.tools[entityId] = undefined
+
+        if (entityId.startsWith("player")) {
+            state = log(state, `Unequipped ${unequippedItemType}.`)
+        }
     }
 
     return state
