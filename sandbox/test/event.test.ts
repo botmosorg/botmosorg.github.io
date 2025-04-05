@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Event, publish, subscribe } from "../src/event";
+import { Event, EventType, publish, subscribe } from "../src/event";
 import { State, states_create } from "../src/state";
 
 interface MapUpdatedEvent extends Event {
@@ -15,11 +15,11 @@ function handler(state: State, payload: MapUpdatedEvent): State {
 
 describe('Event', () => {
     test('should subscribe and publish', () => {
-        let state = subscribe(states_create(), "map.updated.event", handler)
+        let state = subscribe(states_create(), EventType.entitymap_updated_event, handler)
         const eventPayload: MapUpdatedEvent = {oldMapId: "foo", newMapId: "bar"}
 
-        state = publish(state, "entity.deleted.event", {})
-        state = publish(state, "map.updated.event", eventPayload)
+        state = publish(state, EventType.item_equipped_event, {})
+        state = publish(state, EventType.entitymap_updated_event, eventPayload)
 
         expect(counter).toBe(1)
     })

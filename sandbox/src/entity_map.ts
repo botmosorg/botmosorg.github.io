@@ -1,6 +1,6 @@
 import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
-import { Event, publish } from "./event";
+import { Event, EventType, publish } from "./event";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
 import { MANIFEST, CommandType, TileType } from "./manifest";
@@ -182,7 +182,7 @@ function _enterPortalOrPlanet(state: State, entity: Entity, tile: any): State {
     entity.x = tile.options.x;
     entity.y = tile.options.y;
 
-    state = publish(state, "entitymap.updated.event", eventPayload)
+    state = publish(state, EventType.entitymap_updated_event, eventPayload)
 
     return state;
 }
@@ -212,7 +212,7 @@ function _launchToSpace(state: State, entity: Entity, tile: any): State {
         state.lastSpacePositionByEntity[entity.id] = undefined
         delete state.lastSpacePositionByEntity[entity.id]
 
-        state = publish(state, "entitymap.updated.event", eventPayload)
+        state = publish(state, EventType.entitymap_updated_event, eventPayload)
     }
     return state
 }
