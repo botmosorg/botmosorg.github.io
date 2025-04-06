@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-mm            mm
-mm            mm
-  mm        mm
-  mm        mm
-    mm    mm
-    mm    mm
-      mmmm
-      mmmm
-      mmmm
-      mmmm
-    mm    mm
-    mm    mm
-  mm        mm
-  mm        mm
-mm            mm
-mm            mm
+0000000ff0000000
+000000ffff000000
+00000ffffff00000
+0aa0ffffffff0000
+aaaaaaffaafa00a0
+aaaaaaafaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaadaaa
+aaaaaaaaaaadaaaa
+aaaaaaaaaadaaaaa
+aadaaaaaaaaaaaaa
+aaadaaaaaaaaaaaa
+aaaadaaaaaaaaaaa
+aaaaaaaaadaaaaaa
+aaaaaaaadaaaaaaa
+aaaaaaaaaaaaaaaa
