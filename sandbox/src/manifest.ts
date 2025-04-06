@@ -36,11 +36,13 @@ export class EffectType {
     name: string
     description: string
     tooltip: string
+    icon: string
 
-    constructor(name: string, description: string, tooltip: string="") {
+    constructor(name: string, description: string, tooltip: string="", icon: string) {
         this.name = name
         this.description = description
         this.tooltip = tooltip
+        this.icon = icon
     }
 }
 export class EntityType {
@@ -151,6 +153,7 @@ export const MANIFEST = {
         "mutedmagenta": "#a716b0",
         "mutedgreen": "#5ca821",
         "mutedblue": "#1628b0",
+        "red": "#f00",
         "white": "#fff"
     },
     "colorcoding": {
@@ -210,12 +213,12 @@ export const MANIFEST = {
         "shop_instance_workbot_shopper": "This shop is not so secret after all..."
     },
     "effects": {
-        "Recharger": new EffectType("Recharger", "Doubles energy gained from chargepads"),
-        "RockCrusher": new EffectType("Rock Crusher", "Mines rock"),
-        "Screwing": new EffectType("Screwing", "Unscrews the sewer portal covers"),
-        "WallCrusher": new EffectType("Wall Crusher", "Tears down weak walls"),
-        "WaterImmunity": new EffectType("Water Immunity", "No damage taken from water"),
-        "WaterShield": new EffectType("Water Shield", "Reduces damage taken from water")
+        "Recharger": new EffectType("Recharger", "Doubles energy gained from chargepads", "[Recharger]: Doubles energy gained from chargepads", "fx_re"),
+        "RockCrusher": new EffectType("RockCrusher", "Mines rock", "[Rock Crusher]: Enables rock mining", "fx_rc"),
+        "Screwing": new EffectType("Screwing", "Unscrews the sewer portal covers", "[Screwing]: Opens sewer gates", "fx_sc"),
+        "WallCrusher": new EffectType("WallCrusher", "Tears down weak walls", "[Wall Crusher]: Enables weak wall destruction", "fx_wc"),
+        "WaterImmunity": new EffectType("WaterImmunity", "No damage taken from water", "[Water Immunity]: Prevents water damage", "fx_wi"),
+        "WaterShield": new EffectType("WaterShield", "Reduces damage taken from water", "[Water Shield]: Reduces water damage", "fx_ws")
     },
     "entities": {
         "movableboulder": new EntityType("Boulder", "A movable rock", "o", 2),

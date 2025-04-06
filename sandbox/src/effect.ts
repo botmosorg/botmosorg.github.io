@@ -8,6 +8,10 @@ export interface Effect {
     source: ItemType | undefined // If it's from an equipped item or not, meaning the effect will fade if the item is unequipped
 }
 
+export function effects_get(state: State, entityId: string): Array<Effect> {
+    return Object.values(state.effects[entityId])
+}
+
 export function effects_entity_has_effect(state: State, entityId: string, effect: EffectType): boolean {
     return !!state.effects[entityId] && state.effects[entityId].hasOwnProperty(effect.name)
 }

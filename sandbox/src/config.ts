@@ -19,6 +19,7 @@ export const BOTMOS_OPTIONS = {
     showUI: true,
     showTooltip: true,
     showEnergy: ShowEnergyIndicators.BARS,
+    uiEffectsMaxDisplaySize: 8,
     zoom: 1
 }
 

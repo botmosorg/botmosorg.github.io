@@ -1,6 +1,7 @@
 import { TILEMAP } from "../src-img/tilemap"
 import { actions_get } from "./action"
 import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config"
+import { effects_get } from "./effect"
 import { items_get_equipped } from "./item"
 import { players_get_current_id } from "./player"
 import { State } from "./state"
@@ -11,9 +12,14 @@ document.body.appendChild(UI_ELEMENT)
 const UI_HULL_ELEMENT = _create_sprite_element()
 const UI_TOOL_ELEMENT = _create_sprite_element()
 const UI_LINE_TEXT_ELEMENT = _create_text_element()
+UI_LINE_TEXT_ELEMENT.style.marginRight = `${BOTMOS_OPTIONS.fontSize / 2}px`
+const UI_EFFECTS_ELEMENTS = []
+for (let i=0; i<BOTMOS_OPTIONS.uiEffectsMaxDisplaySize; i++) {
+    UI_EFFECTS_ELEMENTS.push(_create_sprite_element())
+}
 
 const UI_LINE = document.createElement("div")
-UI_LINE.replaceChildren(UI_HULL_ELEMENT, UI_TOOL_ELEMENT, UI_LINE_TEXT_ELEMENT)
+UI_LINE.replaceChildren(UI_HULL_ELEMENT, UI_TOOL_ELEMENT, UI_LINE_TEXT_ELEMENT, ...UI_EFFECTS_ELEMENTS)
 UI_ELEMENT.replaceChildren(UI_LINE)
 
 const UI_CHATLOG_AND_TOOLTIP_CONTAINER_ELEMENT = document.createElement("div")
@@ -53,6 +59,14 @@ export async function drawUI(state: State, cameraY: number=0) { // TODO dirty ha
         } else {
             _set_sprite(UI_TOOL_ELEMENT, null)
             UI_TOOL_ELEMENT.dataset.tooltip = undefined
+        }
+
+        const effects = effects_get(state, playerId)
+        for (let i=0; i<BOTMOS_OPTIONS.uiEffectsMaxDisplaySize; i++) {
+            const effectTypeName = effects[i]?.type.name || null
+            const effectTooltip = effects[i]?.type.tooltip || undefined
+            _set_sprite(UI_EFFECTS_ELEMENTS[i], effectTypeName)
+            UI_EFFECTS_ELEMENTS[i].dataset.tooltip = effectTooltip
         }
 
         let matterText = ''
