@@ -103,6 +103,9 @@ export async function drawUI(state: State, cameraY: number=0) { // TODO dirty ha
     } else {
         _set_sprite(UI_HULL_ELEMENT, null)
         _set_sprite(UI_TOOL_ELEMENT, null)
+        for (let i=0; i<BOTMOS_OPTIONS.uiEffectsMaxDisplaySize; i++) {
+            _set_sprite(UI_EFFECTS_ELEMENTS[i], null)
+        }
 
         uiLineText = "Game over!"
         UI_LINE.style.color = "#000"
