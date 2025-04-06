@@ -1,4 +1,5 @@
 import { Entity, isMoveableObject } from "./entity";
+import { Event, EventType, publish } from "./event";
 import { log } from "./log";
 import { MANIFEST, ItemType } from "./manifest";
 import { State } from "./state";
@@ -16,6 +17,12 @@ export interface Item {
 
 export interface EquippedItem {
     type: ItemType
+}
+
+export interface ItemEquippedEvent extends Event {
+    entityId: string,
+    oldEquippedItem: EquippedItem | undefined,
+    newEquippedItem: EquippedItem | undefined,
 }
 
 export function items_create(state: State, type: ItemType, mapId: string, x=0, y=0): State {
@@ -146,24 +153,35 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
 }
 
 export function items_equip(state: State, entityId: string, itemType: ItemType | null | undefined) {
+    const currentEquippedItem = state.tools[entityId]
+    let newEquippedItem: EquippedItem | undefined = undefined
+
     if (!!itemType) {
         // Equip
-        const equippedItem: EquippedItem = {type: itemType}
-        state.tools[entityId] = equippedItem
+        newEquippedItem = {type: itemType}
+        state.tools[entityId] = newEquippedItem
 
         if (entityId.startsWith("player")) {
             state = log(state, `Equipped ${itemType.name}.`)
         }
 
-    } else if (!!state.tools[entityId] && !!!itemType) {
+    } else if (!!currentEquippedItem) {
         // Unequip
-        const unequippedItemType = state.tools[entityId].type
-        state.tools[entityId] = undefined
+        const unequippedItemType = currentEquippedItem.type
+        state.tools[entityId] = newEquippedItem
 
         if (entityId.startsWith("player")) {
             state = log(state, `Unequipped ${unequippedItemType}.`)
         }
     }
+
+    const eventPayload: ItemEquippedEvent = {
+        entityId: entityId,
+        oldEquippedItem: currentEquippedItem,
+        newEquippedItem: newEquippedItem,
+    }
+
+    state = publish(state, EventType.item_equipped_event, eventPayload)
 
     return state
 }
