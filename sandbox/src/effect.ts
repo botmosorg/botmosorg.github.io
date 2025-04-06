@@ -1,4 +1,4 @@
-import { ItemEquippedEvent } from "./item";
+import { ItemEquippedEvent, ItemPickedupEvent } from "./item";
 import { EffectType, ItemType, MANIFEST } from "./manifest";
 import { State } from "./state";
 
@@ -41,6 +41,17 @@ export function effect_itemEquippedEvent_subscriber(state: State, payload: ItemE
                 type: effectType,
                 source: itemType
             }
+        }
+    }
+
+    return state
+}
+
+export function effect_itemPickedupEvent_subscriber(state: State, payload: ItemPickedupEvent): State {
+    const itemType = payload.type
+    for (const effectName of itemType.effects) {
+        state.effects[payload.entityId][effectName] = {
+            type: MANIFEST.effects[effectName]
         }
     }
 

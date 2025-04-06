@@ -25,6 +25,11 @@ export interface ItemEquippedEvent extends EventPayload {
     newEquippedItem: EquippedItem | undefined,
 }
 
+export interface ItemPickedupEvent extends EventPayload {
+    entityId: string,
+    type: ItemType
+}
+
 export function items_create(state: State, type: ItemType, mapId: string, x=0, y=0): State {
     const id = _items_id_create(mapId, x, y)
     const item = {
@@ -142,6 +147,13 @@ export function items_pickup(state: State, entity: Entity, item: Item): State {
         if (entity.id.startsWith("player")) {
             state = log(state, `Picked up ${item.type.name}.`)
         }
+
+        const eventPayload: ItemPickedupEvent = {
+            entityId: entity.id,
+            type: item.type
+        }
+
+        state = publish(state, EventType.item_pickedup_event, eventPayload)
     }
 
     entity.gold += item.gold

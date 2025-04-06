@@ -14,18 +14,18 @@
 #!a #777777ff
 #!d #222222ff
 ________________
-__________aaaa__
-_________ayyyya_
-__aaaaaaayyyyya_
-_ayyyyyyyya_____
-_ayyyyyyyya_____
-__aaaaaaayyyyya_
-_________ayyyya_
-__________aaaa__
 ________________
-___yyy__________
-___yay__________
-___yyy_____yyy__
-___________yay__
-___________yyy__
+___aaaaaaaaaa___
+__ayyyyyyyyyya__
+__ayyyyyyyyyya__
+__ayyyyyyyyyya__
+__ayyyyyyyyyya__
+__ayyyyyyyyyya__
+__ayyyyyyyyyya__
+__yyyyyyyyyyyy__
+__y__yyyyyy__y__
+__y__y____y__y__
+__y__y____y__y__
+_____y____y_____
+________________
 ________________

@@ -227,6 +227,8 @@ export function entities_tile_energy_update(state: State): State {
 
         if (tile.type === MANIFEST.tiles.chargepad && effects_entity_has_effect(state, entityId, MANIFEST.effects.Recharger)) {
             energyDelta *= 2
+        } else if (tile.type === MANIFEST.tiles.tree && effects_entity_has_effect(state, entityId, MANIFEST.effects.BioAbsorber)) {
+            energyDelta = 1
         } else if (tiles_is_water(tile.type) && effects_entity_has_effect(state, entityId, MANIFEST.effects.WaterImmunity)) { // Water Immunity has precedence over Water Shield
             energyDelta = 0
         } else if (tiles_is_water(tile.type) && effects_entity_has_effect(state, entityId, MANIFEST.effects.WaterShield)) {

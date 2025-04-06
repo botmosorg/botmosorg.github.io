@@ -213,6 +213,7 @@ export const MANIFEST = {
         "shop_instance_workbot_shopper": "This shop is not so secret after all..."
     },
     "effects": {
+        "BioAbsorber": new EffectType("BioAbsorber", "Gain energy while on trees", "[Bio Absorber]: Regenerates energy on trees", "fx_ba"),
         "Recharger": new EffectType("Recharger", "Doubles energy gained from chargepads", "[Recharger]: Doubles energy gained from chargepads", "fx_re"),
         "RockCrusher": new EffectType("RockCrusher", "Mines rock", "[Rock Crusher]: Enables rock mining", "fx_rc"),
         "Screwing": new EffectType("Screwing", "Unscrews the sewer portal covers", "[Screwing]: Opens sewer gates", "fx_sc"),
@@ -264,6 +265,7 @@ export const MANIFEST = {
         "ratbite": new ItemType("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["WaterImmunity"]),
         "shocker": new ItemType("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
         "trident": new ItemType("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["WaterShield"]),
+        "upgradeBioAbsorber": new ItemType("Bio Absorber Upgrade", "Grants [BioAbsorber] effect", "iu_ba", "cyberyellow", 0, 0, 0, 0, 0, ["BioAbsorber"]),
         "wrench": new ItemType("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
     },
     "maps": {
@@ -1057,6 +1059,7 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 !!spawn 9 9 movableboulder
 !!spawn 10 9 movableboulder
 !!spawn 9 17 cheat
+!!spawn 9 15 upgradeBioAbsorber
 !!spawn 1 18 battery
 !!spawn 2 18 battery
 !!spawn 3 18 battery

@@ -3,6 +3,7 @@ import { State } from "./state";
 export enum EventType {
     entitymap_updated_event,
     item_equipped_event,
+    item_pickedup_event,
 }
 
 // Event payloads need to extend this
