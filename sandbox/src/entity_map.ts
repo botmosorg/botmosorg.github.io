@@ -1,13 +1,13 @@
 import { actions_get } from "./action";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
-import { Event, EventType, publish } from "./event";
+import { EventPayload, EventType, publish } from "./event";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
 import { MANIFEST, CommandType, TileType } from "./manifest";
 import { Map, tiles_is_blocking_movement, tiles_is_space_tile, tiles_is_water } from "./map";
 import { State } from "./state";
 
-export interface EntityMapUpdatedEvent extends Event {
+export interface EntityMapUpdatedEvent extends EventPayload {
     entityId: string,
     oldMapId: string,
     oldX: number,

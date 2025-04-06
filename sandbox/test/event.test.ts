@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
-import { Event, EventType, publish, subscribe } from "../src/event";
+import { EventPayload, EventType, publish, subscribe } from "../src/event";
 import { State, states_create } from "../src/state";
 
-interface MapUpdatedEvent extends Event {
+interface MapUpdatedEvent extends EventPayload {
     oldMapId: string,
     newMapId: string
 }

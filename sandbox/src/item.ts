@@ -1,5 +1,5 @@
 import { Entity, isMoveableObject } from "./entity";
-import { Event, EventType, publish } from "./event";
+import { EventPayload, EventType, publish } from "./event";
 import { log } from "./log";
 import { MANIFEST, ItemType } from "./manifest";
 import { State } from "./state";
@@ -19,7 +19,7 @@ export interface EquippedItem {
     type: ItemType
 }
 
-export interface ItemEquippedEvent extends Event {
+export interface ItemEquippedEvent extends EventPayload {
     entityId: string,
     oldEquippedItem: EquippedItem | undefined,
     newEquippedItem: EquippedItem | undefined,

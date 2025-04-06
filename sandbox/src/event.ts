@@ -6,10 +6,10 @@ export enum EventType {
 }
 
 // Event payloads need to extend this
-export interface Event {
+export interface EventPayload {
 }
 
-export function publish(state: State, event: EventType, payload: Event): State {
+export function publish(state: State, event: EventType, payload: EventPayload): State {
     const subscribers = state._eventSubscribers[event]
     if (!!subscribers) {
         for (let i=0; i<subscribers.length; i++) {
@@ -21,7 +21,7 @@ export function publish(state: State, event: EventType, payload: Event): State {
     return state
 }
 
-export function subscribe(state: State, event: EventType, handler: Function): State {
+export function subscribe(state: State, event: EventType, handler: (state: State, payload: EventPayload) => State): State {
     if (event in state._eventSubscribers) {
     } else {
         state._eventSubscribers[event] = []
