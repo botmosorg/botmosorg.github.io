@@ -215,6 +215,7 @@ export const MANIFEST = {
     "effects": {
         "BioAbsorber": new EffectType("BioAbsorber", "Gain energy while on trees", "[Bio Absorber]: Regenerates energy on trees", "fx_ba"),
         "Recharger": new EffectType("Recharger", "Doubles energy gained from chargepads", "[Recharger]: Doubles energy gained from chargepads", "fx_re"),
+        "Recuperation": new EffectType("Recuperation", "Reduces tool energy cost", "[Recuperation]: Reduces tool energy cost (max. -1)", "fx_cu"),
         "RockCrusher": new EffectType("RockCrusher", "Mines rock", "[Rock Crusher]: Enables rock mining", "fx_rc"),
         "Screwing": new EffectType("Screwing", "Unscrews the sewer portal covers", "[Screwing]: Opens sewer gates", "fx_sc"),
         "WallCrusher": new EffectType("WallCrusher", "Tears down weak walls", "[Wall Crusher]: Enables weak wall destruction", "fx_wc"),
@@ -266,6 +267,7 @@ export const MANIFEST = {
         "shocker": new ItemType("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
         "trident": new ItemType("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["WaterShield"]),
         "upgradeBioAbsorber": new ItemType("Bio Absorber Upgrade", "Grants [BioAbsorber] effect", "iu_ba", "cyberyellow", 0, 0, 0, 0, 0, ["BioAbsorber"]),
+        "upgradeRecuperation": new ItemType("Recuperation Upgrade", "Grants [Recuperation] effect", "iu_cu", "cyberyellow", 0, 0, 0, 0, 0, ["Recuperation"]),
         "wrench": new ItemType("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
     },
     "maps": {
@@ -608,6 +610,7 @@ _##############################################_
 !!id bot_stadium
 !!size 48 16
 !!spawn 26 2 WorkBot faction=Spirits dialog=bot_stadium_botracing
+!!spawn 22 4 upgradeRecuperation
 !!# wall
 !!+ wallweak
 !!. void

@@ -8,7 +8,7 @@ export interface Effect {
     source: ItemType | undefined // If it's from an equipped item or not, meaning the effect will fade if the item is unequipped
 }
 
-export function effects_get(state: State, entityId: string): Array<Effect> {
+export function effects_entity_get_all(state: State, entityId: string): Array<Effect> {
     return Object.values(state.effects[entityId])
 }
 

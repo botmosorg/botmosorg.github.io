@@ -1,5 +1,7 @@
+import { effects_entity_has_effect } from "./effect";
 import { items_get_equipped } from "./item";
 import { log } from "./log";
+import { MANIFEST } from "./manifest";
 import { State } from "./state";
 
 export function combat_update(state: State): State {
@@ -10,6 +12,9 @@ export function combat_update(state: State): State {
         const equippedItem = items_get_equipped(state, combatants.entityId)
         if (!!equippedItem) {
             energyCostOfAttack = equippedItem.type.energyCost
+            if (effects_entity_has_effect(state, combatants.entityId, MANIFEST.effects.Recuperation)) {
+                energyCostOfAttack = Math.min(-1, energyCostOfAttack + 1)
+            }
             energyDamageDone = -1 * Math.abs(equippedItem.type.damage)
         }
 

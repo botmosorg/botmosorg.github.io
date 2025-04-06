@@ -85,15 +85,23 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
                 state = items_create(state, MANIFEST.items.junk, map.id, entity.x + dx, entity.y + dy)
             }
         }
-        state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
+        state._energyQueue.push({entityId: entity.id, energyDelta: _toolEnergyCost(state, entity, tool)})
 
     } else if (_entity_can_open_tile(state, map, entity, dx, dy)) { // E.g. open sewer portals
         state = _entity_move(state, map, entity, dx, dy)
-        state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost}) // Wrenching cost
+        state._energyQueue.push({entityId: entity.id, energyDelta: _toolEnergyCost(state, entity, tool)}) // Wrenching cost
 
     }
 
     return state
+}
+
+function _toolEnergyCost(state: State, entity: Entity, tool: EquippedItem) {
+    let energyCost = tool.type.energyCost
+    if (effects_entity_has_effect(state, entity.id, MANIFEST.effects.Recuperation)) {
+        energyCost = Math.min(-1, energyCost + 1)
+    }
+    return energyCost
 }
 
 export function entityContextualAction(state: State, entity: Entity, command: CommandType): State {

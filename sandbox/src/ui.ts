@@ -1,7 +1,7 @@
 import { TILEMAP } from "../src-img/tilemap"
 import { actions_get } from "./action"
 import { BOTMOS_OPTIONS, ROT_OPTIONS } from "./config"
-import { effects_get } from "./effect"
+import { effects_entity_get_all } from "./effect"
 import { items_get_equipped } from "./item"
 import { players_get_current_id } from "./player"
 import { State } from "./state"
@@ -61,7 +61,7 @@ export async function drawUI(state: State, cameraY: number=0) { // TODO dirty ha
             UI_TOOL_ELEMENT.dataset.tooltip = undefined
         }
 
-        const effects = effects_get(state, playerId)
+        const effects = effects_entity_get_all(state, playerId)
         for (let i=0; i<BOTMOS_OPTIONS.uiEffectsMaxDisplaySize; i++) {
             const effectTypeName = effects[i]?.type.name || null
             const effectTooltip = effects[i]?.type.tooltip || undefined
