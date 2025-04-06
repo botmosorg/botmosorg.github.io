@@ -48,6 +48,9 @@ export function entities_destroy(state: State, entityId: string) {
     state.tools[entityId] = undefined
     delete state.tools[entityId]
 
+    state.effects[entityId] = undefined
+    delete state.effects[entityId]
+
     return state;
 }
 
@@ -81,6 +84,8 @@ export function entities_set_type(state: State, entity: Entity, newType: EntityT
     if (!isMoveableObject(entity)) {
         state.tools[entity.id] = undefined
     }
+
+    state.effects[entity.id] = {}
 
     return state
 }

@@ -1,4 +1,5 @@
 import { actions_get } from "./action";
+import { effects_entity_has_effect } from "./effect";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { EventPayload, EventType, publish } from "./event";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
@@ -74,7 +75,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
         state = _entity_move(state, map, entity, dx, dy)
         state._energyQueue.push({entityId: entity.id, energyDelta: -1 * recursion}) // Pushing rocks
 
-    } else if (_entity_can_crush_tile(map, entity, tool, dx, dy)) {
+    } else if (_entity_can_crush_tile(state, map, entity, dx, dy)) {
         const oldTile = map.setTile(entity.x + dx, entity.y + dy, MANIFEST.tiles.void)
         if (oldTile.type === MANIFEST.tiles.rock) {
             const lootChance = state.rng.getPercentage()
@@ -86,7 +87,7 @@ export function entityInteractOrMove(state: State, entity: Entity, dx: number, d
         }
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost})
 
-    } else if (_entity_can_open_tile(map, entity, tool, dx, dy)) { // E.g. open sewer portals
+    } else if (_entity_can_open_tile(state, map, entity, dx, dy)) { // E.g. open sewer portals
         state = _entity_move(state, map, entity, dx, dy)
         state._energyQueue.push({entityId: entity.id, energyDelta: tool.type.energyCost}) // Wrenching cost
 
@@ -220,16 +221,15 @@ function _launchToSpace(state: State, entity: Entity, tile: any): State {
 export function entities_tile_energy_update(state: State): State {
     for (let entityId in state.entities) {
         let entity: Entity = state.entities[entityId]
-        let tool = state.tools[entityId]
         let map = state.maps[entity.mapId]
         let tile = map.getTile(entity.x, entity.y)
         let energyDelta = tile.type.energyDelta
 
-        if (tile.type === MANIFEST.tiles.chargepad && tool?.type.effects.includes(MANIFEST.effects.Recharger.name)) {
+        if (tile.type === MANIFEST.tiles.chargepad && effects_entity_has_effect(state, entityId, MANIFEST.effects.Recharger)) {
             energyDelta *= 2
-        } else if (tiles_is_water(tile.type) && tool?.type.effects.includes(MANIFEST.effects.WaterImmunity.name)) { // Water Immunity has precedence over Water Shield
+        } else if (tiles_is_water(tile.type) && effects_entity_has_effect(state, entityId, MANIFEST.effects.WaterImmunity)) { // Water Immunity has precedence over Water Shield
             energyDelta = 0
-        } else if (tiles_is_water(tile.type) && tool?.type.effects.includes(MANIFEST.effects.WaterShield.name)) {
+        } else if (tiles_is_water(tile.type) && effects_entity_has_effect(state, entityId, MANIFEST.effects.WaterShield)) {
             energyDelta /= 2
         } else if (tile.type === MANIFEST.tiles.drain) {
             const goldCost = Math.min(entity.gold, MANIFEST.constants.DRAIN_GOLD_COST)
@@ -273,27 +273,19 @@ function _entity_can_move(map: Map, entity: Entity, dx: number, dy: number): boo
         && !tiles_is_blocking_movement(tileType);
 }
 
-function _entity_can_crush_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number): boolean {
+function _entity_can_crush_tile(state: State, map: Map, entity: Entity, dx: number, dy: number): boolean {
     const x = entity.x + dx;
     const y = entity.y + dy;
     const tileType = map.getTile(x, y).type;
 
-    if (!!tool) {
-        return (tool.type.effects.includes(MANIFEST.effects.WallCrusher.name) && tileType === MANIFEST.tiles.wallweak)
-            || (tool.type.effects.includes(MANIFEST.effects.RockCrusher.name) && tileType === MANIFEST.tiles.rock)
-    }
-
-    return false
+    return (effects_entity_has_effect(state, entity.id, MANIFEST.effects.WallCrusher) && tileType === MANIFEST.tiles.wallweak)
+        || (effects_entity_has_effect(state, entity.id, MANIFEST.effects.RockCrusher) && tileType === MANIFEST.tiles.rock)
 }
 
-function _entity_can_open_tile(map: Map, entity: Entity, tool: EquippedItem | undefined, dx: number, dy: number): boolean {
+function _entity_can_open_tile(state: State, map: Map, entity: Entity, dx: number, dy: number): boolean {
     const x = entity.x + dx;
     const y = entity.y + dy;
     const tileType = map.getTile(x, y).type;
 
-    if (!!tool) {
-        return (tool.type.effects.includes(MANIFEST.effects.Screwing.name) && tileType === MANIFEST.tiles.portalsewers)
-    }
-
-    return false
+    return (effects_entity_has_effect(state, entity.id, MANIFEST.effects.Screwing) && tileType === MANIFEST.tiles.portalsewers)
 }

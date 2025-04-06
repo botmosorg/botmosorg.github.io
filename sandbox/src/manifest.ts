@@ -32,7 +32,7 @@ export class CommandType {
         this.description = description;
     }
 }
-class EffectType {
+export class EffectType {
     name: string
     description: string
     tooltip: string
@@ -255,12 +255,12 @@ export const MANIFEST = {
         "matter": new ItemType("Matter", "A pile of stuff", "m", "gray", 0, 100),
         // Tools
         "broom": new ItemType("Broom", "Sweeps the floor", "ib", "cyberyellow", 0, 0, 0, -10, -1), // DEPRECATED: replace with 'Mop' item to clear graffiti
-        "cheat": new ItemType("Cheat", "Most powerful tool, totally legit", "icheat", "cyberyellow", 0, 0, 0, -500, -1, ["Recharger", "Rock Crusher", "Screwing", "Wall Crusher", "Water Shield"]),
-        "hammer": new ItemType("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["Wall Crusher"]),
-        "pickaxe": new ItemType("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["Rock Crusher"]),
-        "ratbite": new ItemType("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["Water Immunity"]),
+        "cheat": new ItemType("Cheat", "Most powerful tool, totally legit", "icheat", "cyberyellow", 0, 0, 0, -500, -1, ["Recharger", "RockCrusher", "Screwing", "WallCrusher", "WaterShield"]),
+        "hammer": new ItemType("Hammer", "Tears down weak walls", "ih", "cyberyellow", 0, 0, 0, -15, -2, ["WallCrusher"]),
+        "pickaxe": new ItemType("Pickaxe", "Mines rock", "ip", "cyberyellow", 0, 0, 0, -13, -2, ["RockCrusher"]),
+        "ratbite": new ItemType("Rat Bite", "Only rats have this", "irb", "cyberyellow", 0, 0, 0, -5, -1, ["WaterImmunity"]),
         "shocker": new ItemType("Shocker", "Injects Bots with new energy, basic AeroBot tool", "is", "cyberyellow", 0, 0, 0, 10, -1, ["Recharger"]),
-        "trident": new ItemType("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["Water Shield"]),
+        "trident": new ItemType("Trident", "Traverse water with less energy cost", "it", "cyberyellow", 0, 0, 0, -20, -3, ["WaterShield"]),
         "wrench": new ItemType("Wrench", "Basic WorkBot tool", "iw", "cyberyellow", 0, 0, 0, -10, -1, ["Screwing"])
     },
     "maps": {

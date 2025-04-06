@@ -1,4 +1,5 @@
 import { debug_entity_position } from "./debug";
+import { effect_itemEquippedEvent_subscriber } from "./effect";
 import { entities_create } from "./entity";
 import { entity_act, entity_map_entitymapUpdatedEvent_subscriber } from "./entity_map";
 import { EventType, subscribe } from "./event";
@@ -22,6 +23,7 @@ export default class Game {
 
         this.state = subscribe(this.state, EventType.entitymap_updated_event, entity_map_entitymapUpdatedEvent_subscriber)
         this.state = subscribe(this.state, EventType.entitymap_updated_event, map_shop_entitymapUpdatedEvent_subscriber)
+        this.state = subscribe(this.state, EventType.item_equipped_event, effect_itemEquippedEvent_subscriber)
 
         this.state = maps_create_solar_system(this.state)
         this.state = maps_create_all_manual(this.state)
