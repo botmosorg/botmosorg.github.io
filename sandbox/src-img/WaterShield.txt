@@ -2,8 +2,8 @@
 #!size 16 16
 #!r #FF0000FF
 #!g #74ee15ff
-#!c #4deeeaff
-#!b #001effff
+#!c #2cc9c5ff
+#!b #1628b0ff
 #!y #ffe700ff
 #!  #00000000
 #!0 #000000FF
@@ -13,19 +13,19 @@
 #!m #f000ffff
 #!a #777777ff
 #!d #222222ff
-mm            mm
-mm            mm
-  mm        mm
-  mm        mm
-    mm    mm
-    mm    mm
-      mmmm
-      mmmm
-      mmmm
-      mmmm
-    mm    mm
-    mm    mm
-  mm        mm
-  mm        mm
-mm            mm
-mm            mm
+bbbbbbbbbbbcbbbb
+cbbbbbbbbbbccbbb
+bcbbbbbbbbbcbccc
+bbcccbbbcccbbbbb
+bbbbbcccbbbbbbbb
+bbbbbbbcbbbbbbbb
+bbbbbbbcbbbbbbbb
+bbbbbbbcbbbbbbbb
+bbbbccccbbcccccc
+ccccbbbbccbbbbbb
+bbcbbbbbbbcbbbbb
+bbcbbccccbcbbbbb
+bbcccbbbbcbbbbbb
+bbbcbbbbbcbbbbbb
+bbcbbbbbbccbbbbb
+bcbbbbbbbbcbbbbb

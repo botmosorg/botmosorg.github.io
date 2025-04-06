@@ -714,7 +714,7 @@ s~............................~#
 "bot_station_sewers": `!
 !!id bot_station_sewers
 !!size 32 32
-!!spawn 25 17 battery
+!!spawn 25 17 upgradeBioAbsorber
 !!spawn 4 15 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!spawn 12 23 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!spawn 6 6 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
