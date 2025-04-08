@@ -1,3 +1,4 @@
+import { FactionRelation, factions_entity_relation, factions_entity_set } from "./faction";
 import { t } from "./l10n";
 import { log } from "./log";
 import { MANIFEST, EntityType } from "./manifest";
@@ -95,7 +96,8 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
         return state
     }
 
-    if (entityA.options.faction === entityB.options.faction || isGraffiti(entityB)) {
+    const relation = factions_entity_relation(entityA, entityB)
+    if (relation === FactionRelation.FRIENDLY || isGraffiti(entityB)) {
         // Interaction
         if (!!entityB.options.dialog) {
             const name = !!entityB?.options?.name ? entityB.options.name : entityB.type.name
@@ -103,7 +105,7 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
             state = log(state, name + ": " + t(entityB.options.dialog))
             entityB.interactions++;
         }
-    } else {
+    } else if (relation === FactionRelation.HOSTILE) {
         // Combat
         const entityId = entityA.id
         const otherEntityId = entityB.id
@@ -112,7 +114,7 @@ export function interactOrCombat(state: State, entityA: Entity, entityB: Entity)
 
     // Interact enrage
     if (entityB.interactions >= 3 && entityB.options?.ai === MANIFEST.ais.interactenrage) {
-        entityB.options.faction = MANIFEST.factions.Enraged
+        factions_entity_set(entityB, MANIFEST.factions.Enraged)
     }
 
     return state

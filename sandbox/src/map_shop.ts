@@ -1,5 +1,6 @@
 import { entities_create } from "./entity";
 import { EntityMapUpdatedEvent } from "./entity_map";
+import { factions_entity_get } from "./faction";
 import { items_create_buyable } from "./item";
 import { MANIFEST } from "./manifest";
 import { maps_destroy, maps_parse } from "./map";
@@ -37,11 +38,11 @@ export function map_shop_entitymapUpdatedEvent_subscriber(state: State, payload:
         state = items_create_buyable(state, MANIFEST.items.battery, map.id, 4, 8, 0, -200)
         state = items_create_buyable(state, MANIFEST.items.gold, map.id, 4, 10, 1, -10000)
 
-        state = entities_create(state, map.id + "_shopkeeper", MANIFEST.entities.AeroBot, map.id, 6, 2, {faction: entity.options.faction, dialog: "shop_instance_shopkeeper", name: "Shopkeeper"})
+        state = entities_create(state, map.id + "_shopkeeper", MANIFEST.entities.AeroBot, map.id, 6, 2, {faction: factions_entity_get(entity), dialog: "shop_instance_shopkeeper", name: "Shopkeeper"})
         if (payload?.oldMapId.startsWith("bot_stadium")) {
-            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.WorkBot, map.id, 1, 12, {faction: entity.options.faction, dialog: "shop_instance_workbot_shopper"})
+            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.WorkBot, map.id, 1, 12, {faction: factions_entity_get(entity), dialog: "shop_instance_workbot_shopper"})
         } else if (payload?.oldMapId.startsWith("bot_bar")) {
-            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.AeroBot, map.id, 4, 11, {faction: entity.options.faction, dialog: "shop_instance_aerobot_shopper"})
+            state = entities_create(state, map.id + "_shopper", MANIFEST.entities.AeroBot, map.id, 4, 11, {faction: factions_entity_get(entity), dialog: "shop_instance_aerobot_shopper"})
         }
     }
 

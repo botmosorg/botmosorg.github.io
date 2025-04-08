@@ -62,15 +62,19 @@ export class EntityType {
         this.unlockCondition = null;
     }
 }
-class FactionType {
-    name: string;
-    description: string;
-    color: string;
+export class FactionType {
+    name: string
+    description: string
+    color: string
+    friendly: Set<string>
+    hostile: Set<string>
 
-    constructor(name: string, description: string, color: string) {
-        this.name = name;
-        this.description = description;
-        this.color = color;
+    constructor(name: string, description: string, color: string, friendly: Set<string>, hostile: Set<string>) {
+        this.name = name
+        this.description = description
+        this.color = color
+        this.friendly = friendly
+        this.hostile = hostile
     }
 }
 export class ItemType {
@@ -244,11 +248,13 @@ export const MANIFEST = {
         */
     },
     "factions": {
-        "Critters": new FactionType("Critters", "Small pests", "cyberyellow"),
-        "Enraged": new FactionType("Enraged", "Always hostile faction", "cybermagenta"),
-        "Spirits": new FactionType("Spirits", "Default player faction", "white"),
-        "Pyrates": new FactionType("Pyrates", "Default enemy faction", "cybermagenta"),
-        "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan")
+        "Critters": new FactionType("Critters", "Small pests", "cyberyellow", new Set(), new Set(["*"])),
+        "Drifters": new FactionType("Drifters", "Bots disconnected from a mothership/overmind", "cybergreen", new Set(), new Set(["Guardians", "Workers"])),
+        "Enraged": new FactionType("Enraged", "Always hostile faction", "cybermagenta", new Set(), new Set(["*"])),
+        "Spirits": new FactionType("Spirits", "Default player faction", "white", new Set(["*"]), new Set("Critters")), // Deprecated?
+        "Pyrates": new FactionType("Pyrates", "Default enemy faction", "cybermagenta", new Set(), new Set(["*"])),
+        "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan", new Set(), new Set(["Workers"])),
+        "Workers": new FactionType("Workers", "Bot station workers", "white", new Set(), new Set(["Guardians"]))
     },
     "items": {
         "battery": new ItemType("Battery", "Increases maximum energy", "b", "cyberyellow", 10),

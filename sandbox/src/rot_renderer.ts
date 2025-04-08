@@ -1,7 +1,6 @@
 import * as ROT from "../lib/rot.js"
 
 import { BOTMOS_OPTIONS, MAX_MAP_SIZE, ROT_OPTIONS } from "./config";
-import { DEBUG_LINES } from "./debug";
 import { items_get_by, items_get_equipped } from "./item";
 import { entities_get_by, isMoveableObject } from "./entity";
 import { MANIFEST } from "./manifest";
@@ -57,7 +56,7 @@ function rot_render(state: State, camera) {
     for (let i=0; i<entities.length; i++) {
         const entity = entities[i];
         let entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.white : lookup_color(entity.options.faction.color)
-        if (BOTMOS_OPTIONS.highlightEnemy && !isMoveableObject(entity)) {
+        if (BOTMOS_OPTIONS.highlightFriendEnemy && !isMoveableObject(entity)) {
             entityColor = playerFaction === entity.options.faction ? MANIFEST.colors.cybergreen : MANIFEST.colors.cybermagenta;
         }
         if (entity === playerEntity) {
@@ -107,12 +106,6 @@ function rot_render(state: State, camera) {
         for (let i=0; i<lines.length; i++) {
             ROT_DISPLAY.drawText(0, i, "%c{#74ee15}%b{black}"+lines[i], camera.width);
         }
-    }
-
-    // Render debug lines
-    for (let i=0; i<DEBUG_LINES.length; i++) {
-        let line = DEBUG_LINES[i];
-        ROT_DISPLAY.drawText(0, i, "%c{green}%b{black}"+line, camera.width);
     }
 }
 

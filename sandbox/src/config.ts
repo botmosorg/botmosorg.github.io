@@ -14,7 +14,7 @@ export const BOTMOS_OPTIONS = {
     chatLogMaxDisplaySize: 8, // 10
     debug: true,
     fontSize: FONT_SIZE,
-    highlightEnemy: true,
+    highlightFriendEnemy: true,
     showGrid: true,
     showUI: true,
     showTooltip: true,

@@ -9,6 +9,7 @@ import { State } from "./state.js";
 import { TILEMAP } from "../src-img/tilemap.js";
 import { drawUI } from "./ui.js";
 import { Tile } from "./map.js";
+import { FactionRelation, factions_entity_relation } from "./faction.js";
 
 /*
 https://ondras.github.io/rot.js/hp/
@@ -109,12 +110,9 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
         const entityRenderY = yPadding + entity.y-camera.y
 
         let entityColor = "transparent" // default for boulders, boxes or graffiti
-        if (BOTMOS_OPTIONS.highlightEnemy && !!playerFaction && !isMoveableObject(entity) && !isGraffiti(entity)) {
-                                                                     // cybergreen                 // cybermagenta
-            entityColor = playerFaction === entity.options.faction ? "rgba(116, 238, 21, 0.5)" : "rgba(240, 0, 255, 0.5)";
-        }
-        if (entity === playerEntity) {
-            entityColor = "transparent"
+        if (BOTMOS_OPTIONS.highlightFriendEnemy && !isMoveableObject(entity) && !isGraffiti(entity) && entity !== playerEntity) {
+                                                                                                        // cybergreen                 // cybermagenta
+            entityColor = factions_entity_relation(playerEntity, entity) === FactionRelation.FRIENDLY ? "rgba(116, 238, 21, 0.5)" : "rgba(240, 0, 255, 0.5)";
         }
 
         const key = [entityRenderX, entityRenderY].toString()
@@ -236,6 +234,8 @@ function _create_tileMap(): any {
                 tilemap[MANIFEST.entities[key].icon + suffix] = value
             } else if (Object.hasOwn(MANIFEST.items, key)) {
                 tilemap[MANIFEST.items[key].icon + suffix] = value
+            } else if (Object.hasOwn(MANIFEST.effects, key)) {
+                tilemap[MANIFEST.effects[key].icon + suffix] = value
             } else {
                 tilemap[key + suffix] = value // For overlay numbers
             }

@@ -1,6 +1,7 @@
 import { a_star } from "./easystar_astar";
 import { entities_get_by } from "./entity";
 import { entityInteractOrMove } from "./entity_map";
+import { FactionRelation, factions_entity_relation } from "./faction";
 import { MANIFEST, AIType } from "./manifest";
 import { players_get_current_id } from "./player";
 import { State } from "./state";
@@ -14,11 +15,15 @@ export function ai_update(state: State): State {
     for (let i=0; i<entityIdsToUpdate.length; i++) {
         let entityId = entityIdsToUpdate[i];
         let entity = state.entities[entityId]
+        if (playerEntity === entity) {
+            continue
+        }
+
         let entityAI = state._AIs[entityId]
 
         // First rough distance check, before
         let distanceToPlayer = distance(playerEntity.x, playerEntity.y, entity.x, entity.y)
-        if (playerEntity.options.faction !== entity.options.faction
+        if (factions_entity_relation(playerEntity, entity) === FactionRelation.HOSTILE
             && distanceToPlayer <= entityAI.aggroRange) {
             let movementMap = state.maps[state.currentMapId].asMovementMap() // TODO check for other entity positions to prevent lining up
             let path: any = a_star(movementMap, entity.x, entity.y, playerEntity.x, playerEntity.y)
