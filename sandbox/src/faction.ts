@@ -11,6 +11,10 @@ export function factions_entity_relation(entityA: Entity, entityB: Entity): Fact
     const factionA: FactionType = factions_entity_get(entityA)
     const factionB: FactionType = factions_entity_get(entityB)
 
+    if (factionA === undefined || factionB === undefined) {
+        return FactionRelation.NEUTRAL
+    }
+
     if (factionA === factionB) {
         return FactionRelation.FRIENDLY
     } else if (factionA.friendly.has(factionB.name) || factionB.friendly.has(factionA.name)) {
