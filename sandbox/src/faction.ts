@@ -11,14 +11,14 @@ export function factions_entity_relation(entityA: Entity, entityB: Entity): Fact
     const factionA: FactionType = factions_entity_get(entityA)
     const factionB: FactionType = factions_entity_get(entityB)
 
-    if (factionA.friendly.has(factionB.name) || factionB.friendly.has(factionA.name)) {
+    if (factionA === factionB) {
+        return FactionRelation.FRIENDLY
+    } else if (factionA.friendly.has(factionB.name) || factionB.friendly.has(factionA.name)) {
         return FactionRelation.FRIENDLY
     } else if (factionA.hostile.has(factionB.name) || factionB.hostile.has(factionA.name)) {
         return FactionRelation.HOSTILE
-    /*
     } else if (factionA.friendly.has("*") || factionB.friendly.has("*")) {
         return FactionRelation.FRIENDLY
-    */
     } else if (factionA.hostile.has("*") || factionB.hostile.has("*")) {
         return FactionRelation.HOSTILE
     }

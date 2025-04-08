@@ -251,7 +251,7 @@ export const MANIFEST = {
         "Critters": new FactionType("Critters", "Small pests", "cyberyellow", new Set(), new Set(["*"])),
         "Drifters": new FactionType("Drifters", "Bots disconnected from a mothership/overmind", "cybergreen", new Set(), new Set(["Guardians", "Workers"])),
         "Enraged": new FactionType("Enraged", "Always hostile faction", "cybermagenta", new Set(), new Set(["*"])),
-        "Spirits": new FactionType("Spirits", "Default player faction", "white", new Set(["*"]), new Set("Critters")), // Deprecated?
+        "Spirits": new FactionType("Spirits", "Default player faction", "white", new Set(), new Set()), // Deprecated?
         "Pyrates": new FactionType("Pyrates", "Default enemy faction", "cybermagenta", new Set(), new Set(["*"])),
         "Guardians": new FactionType("Guardians", "Bot station guardians", "cybercyan", new Set(), new Set(["Workers"])),
         "Workers": new FactionType("Workers", "Bot station workers", "white", new Set(), new Set(["Guardians"]))
@@ -282,11 +282,11 @@ export const MANIFEST = {
 !!size 28 16
 !!spawn 14 3 movablebox
 !!spawn 14 12 movablebox
-!!spawn 2 4 AeroBot faction=Spirits dialog=bot_bar_aerobot_welcome
-!!spawn 4 8 AeroBot faction=Spirits dialog=bot_bar_aerobot_charger
-!!spawn 10 7 AeroBot faction=Spirits dialog=bot_bar_aerobot_backstage
-!!spawn 21 3 AeroBot faction=Spirits dialog=bot_bar_aerobot_spa_up
-!!spawn 21 5 AeroBot faction=Spirits dialog=bot_bar_aerobot_spa_down
+!!spawn 2 4 AeroBot faction=Workers dialog=bot_bar_aerobot_welcome
+!!spawn 4 8 AeroBot faction=Workers dialog=bot_bar_aerobot_charger
+!!spawn 10 7 AeroBot faction=Workers dialog=bot_bar_aerobot_backstage
+!!spawn 21 3 AeroBot faction=Workers dialog=bot_bar_aerobot_spa_up
+!!spawn 21 5 AeroBot faction=Workers dialog=bot_bar_aerobot_spa_down
 !!spawn 10 11 shocker
 !!. void
 !!_ voidtrue
@@ -318,10 +318,10 @@ O.....=..+.....#____#=....=#
 !!id bot_dormitory
 !!size 32 32
 !!spawn 13 8 battery
-!!spawn 4 11 AeroBot faction=Spirits dialog=bot_dormitory_aerobot_up
-!!spawn 23 27 AeroBot faction=Spirits dialog=bot_dormitory_aerobot_down ai=interactenrage equip=shocker
-!!spawn 8 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_left ai=interactenrage
-!!spawn 26 18 WorkBot faction=Spirits dialog=bot_dormitory_workbot_right
+!!spawn 4 11 AeroBot faction=Workers dialog=bot_dormitory_aerobot_up
+!!spawn 23 27 AeroBot faction=Workers dialog=bot_dormitory_aerobot_down ai=interactenrage equip=shocker
+!!spawn 8 18 WorkBot faction=Workers dialog=bot_dormitory_workbot_left ai=interactenrage
+!!spawn 26 18 WorkBot faction=Workers dialog=bot_dormitory_workbot_right
 !!spawn 13 28 Graffiticyan dialog=bot_dormitory_graffiti
 !!. void
 !!~ water
@@ -495,12 +495,12 @@ _________##E###_________________
 !!spawn 8 6 junk
 !!spawn 8 7 junk
 !!spawn 8 8 junk
-!!spawn 40 19 WorkBot faction=Spirits dialog=bot_factory_workbot_wrench
-!!spawn 15 18 WorkBot faction=Spirits dialog=bot_factory_workbot_workwork
-!!spawn 25 18 WorkBot faction=Spirits dialog=bot_factory_workbot_assembly
-!!spawn 43 29 WorkBot faction=Spirits dialog=bot_factory_workbot_sewers
-!!spawn 1 19 WorkBot faction=Spirits dialog=bot_factory_workbot_drain
-!!spawn 35 3 WorkBot faction=Spirits name=ForeBot dialog=bot_factory_workbot_forebot equip=wrench ai=interactenrage
+!!spawn 40 19 WorkBot faction=Workers dialog=bot_factory_workbot_wrench
+!!spawn 15 18 WorkBot faction=Workers dialog=bot_factory_workbot_workwork
+!!spawn 25 18 WorkBot faction=Workers dialog=bot_factory_workbot_assembly
+!!spawn 43 29 WorkBot faction=Workers dialog=bot_factory_workbot_sewers
+!!spawn 1 19 WorkBot faction=Workers dialog=bot_factory_workbot_drain
+!!spawn 35 3 WorkBot faction=Workers name=ForeBot dialog=bot_factory_workbot_forebot equip=wrench ai=interactenrage
 !!spawn 19 27 RoboRat faction=Critters ai=aggrorangeshort equip=ratbite
 !!# wall
 !!+ wallweak
@@ -557,8 +557,8 @@ _________##E###_________________
 !!spawn 17 2 Cleaner faction=Guardians ai=aggrorange
 !!spawn 24 5 Cleaner faction=Guardians ai=aggrorange
 !!spawn 29 24 Cleaner faction=Guardians ai=aggrorangeshort
-!!spawn 34 22 AeroBot faction=Spirits dialog=bot_prison_aerobot
-!!spawn 9 22 WorkBot faction=Spirits dialog=bot_prison_workbot
+!!spawn 34 22 AeroBot faction=Workers dialog=bot_prison_aerobot
+!!spawn 9 22 WorkBot faction=Workers dialog=bot_prison_workbot
 !!spawn 28 1 broom
 !!spawn 43 30 battery
 !!spawn 9 30 matter
@@ -615,7 +615,7 @@ _##############################################_
 "bot_stadium": `!
 !!id bot_stadium
 !!size 48 16
-!!spawn 26 2 WorkBot faction=Spirits dialog=bot_stadium_botracing
+!!spawn 26 2 WorkBot faction=Workers dialog=bot_stadium_botracing
 !!spawn 22 4 upgradeRecuperation
 !!# wall
 !!+ wallweak
@@ -930,7 +930,7 @@ s-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 !!spawn 4 28 WorkBot faction=Spirits dialog=manual_workbot
 !!spawn 4 29 Cleaner faction=Spirits dialog=manual_cleaner
 !!spawn 4 30 Pioneer faction=Spirits dialog=manual_pioneer equip=hammer ai=interactenrage
-!!spawn 54 36 Spirit faction=Pyrates ai=aggrorange
+!!spawn 54 36 Spirit faction=Critters ai=aggrorange
 !!spawn 4 36 junk
 !!spawn 12 36 goo
 !!spawn 4 37 matter
