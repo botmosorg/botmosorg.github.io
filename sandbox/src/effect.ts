@@ -13,7 +13,7 @@ export function effects_entity_get_all(state: State, entityId: string): Array<Ef
 }
 
 export function effects_entity_has_effect(state: State, entityId: string, effect: EffectType): boolean {
-    return !!state.effects[entityId] && state.effects[entityId].hasOwnProperty(effect.name)
+    return !!state.effects[entityId] && Object.hasOwn(state.effects[entityId], effect.name)
 }
 
 export function effects_update(state: State): State {
