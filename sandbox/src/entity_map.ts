@@ -2,9 +2,10 @@ import { actions_get } from "./action";
 import { effects_entity_has_effect } from "./effect";
 import { Entity, entities_get_at, entities_set_type, interactOrCombat, isMoveableObject } from "./entity";
 import { EventPayload, EventType, publish } from "./event";
+import { factions_entity_set } from "./faction";
 import { EquippedItem, items_create, items_get_at, items_pickup } from "./item";
 import { log } from "./log";
-import { MANIFEST, CommandType, TileType } from "./manifest";
+import { MANIFEST, CommandType, TileType, FactionType } from "./manifest";
 import { Map, tiles_is_blocking_movement, tiles_is_space_tile, tiles_is_water } from "./map";
 import { State } from "./state";
 
@@ -263,10 +264,12 @@ export function entity_map_entitymapUpdatedEvent_subscriber(state: State, payloa
     switch (payload.oldTileType) {
         case MANIFEST.tiles.portalstartaerobot:
             state = entities_set_type(state, entity, MANIFEST.entities.AeroBot);
+            factions_entity_set(entity, MANIFEST.factions.Workers)
             state = log(state, `Booting up as an ${MANIFEST.entities.AeroBot.name}...`)
             break;
         case MANIFEST.tiles.portalstartworkbot:
             state = entities_set_type(state, entity, MANIFEST.entities.WorkBot);
+            factions_entity_set(entity, MANIFEST.factions.Workers)
             state = log(state, `Booting up as a ${MANIFEST.entities.WorkBot.name}...`)
             break;
         default:

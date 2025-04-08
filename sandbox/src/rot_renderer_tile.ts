@@ -111,8 +111,14 @@ function rot_render(state: State, camera: any, alternateTilemap: boolean=false) 
 
         let entityColor = "transparent" // default for boulders, boxes or graffiti
         if (BOTMOS_OPTIONS.highlightFriendEnemy && !isMoveableObject(entity) && !isGraffiti(entity) && entity !== playerEntity) {
-                                                                                                        // cybergreen                 // cybermagenta
-            entityColor = factions_entity_relation(playerEntity, entity) === FactionRelation.FRIENDLY ? "rgba(116, 238, 21, 0.5)" : "rgba(240, 0, 255, 0.5)";
+            switch(factions_entity_relation(playerEntity, entity)) {
+                case FactionRelation.FRIENDLY:
+                    entityColor = "rgba(116, 238, 21, 0.5)" // cybergreen
+                    break
+                case FactionRelation.HOSTILE:
+                    entityColor = "rgba(240, 0, 255, 0.5)" // cybermagenta
+                    break
+            }
         }
 
         const key = [entityRenderX, entityRenderY].toString()

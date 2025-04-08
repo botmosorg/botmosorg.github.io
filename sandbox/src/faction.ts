@@ -8,16 +8,22 @@ export enum FactionRelation {
 }
 
 export function factions_entity_relation(entityA: Entity, entityB: Entity): FactionRelation {
-    const factionA = factions_entity_get(entityA)
-    const factionB = factions_entity_get(entityB)
+    const factionA: FactionType = factions_entity_get(entityA)
+    const factionB: FactionType = factions_entity_get(entityB)
 
-    if (factionA === factionB) {
+    if (factionA.friendly.has(factionB.name) || factionB.friendly.has(factionA.name)) {
         return FactionRelation.FRIENDLY
-    } else {
+    } else if (factionA.hostile.has(factionB.name) || factionB.hostile.has(factionA.name)) {
+        return FactionRelation.HOSTILE
+    /*
+    } else if (factionA.friendly.has("*") || factionB.friendly.has("*")) {
+        return FactionRelation.FRIENDLY
+    */
+    } else if (factionA.hostile.has("*") || factionB.hostile.has("*")) {
         return FactionRelation.HOSTILE
     }
 
-    //return FactionRelation.NEUTRAL
+    return FactionRelation.NEUTRAL
 }
 
 export function factions_entity_get(entity: Entity): FactionType {
