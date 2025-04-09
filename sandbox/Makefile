@@ -27,7 +27,7 @@ statistics: ## Print project statistics
 	@echo -n '* Web build size (Bytes): '
 	@du -bch ./build/ index.html | grep total | awk '{print $$1;}'
 	@echo -n '* TypeScript LOC: '
-	@wc --total=only -l src/*.ts
+	@wc -l src/*.ts | tail -1 | awk '{print $$1}'
 	@echo -n '* Design/project management document size in lines: '
 	@cat ../../BACKLOG.md | wc -l
 	@echo -n '* TODO count in the codebase: '
