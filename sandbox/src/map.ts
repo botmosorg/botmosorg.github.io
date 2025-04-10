@@ -224,6 +224,23 @@ export class Map {
         this._cacheMovementMap = movementMap;
         return movementMap;
     }
+
+    static createEmptyMap(widthTiles: number, heightTiles: number, tileType: TileType) {
+        const tiles = []
+        for (let i=0; i < widthTiles*heightTiles; i++) {
+            tiles.push(tiles_create(tileType))
+        }
+
+        const mapId = "__transient" + widthTiles + "x" + heightTiles + "x" + tileType.name
+        const map = new Map(
+            mapId,
+            widthTiles,
+            heightTiles,
+            tiles
+        );
+
+        return map
+    }
 }
 
 export function maps_parse(mapString: string): Map {

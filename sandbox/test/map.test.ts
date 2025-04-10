@@ -106,3 +106,24 @@ describe('maps_parse', function () {
         expect(map.getTile(8, 0).options.sign).toEqual("M");
     });
 });
+
+describe('maps_parse', function () {
+    test('should sample and paste maps', function () {
+        const map = maps_parse(mapString);
+
+        expect(map.id).toEqual("preloader");
+        expect(map.widthTiles).toEqual(16);
+        expect(map.heightTiles).toEqual(16);
+        expect(map.getTile(0, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).options.mapId).toEqual("arena");
+        expect(map.getTile(15, 2).options.x).toEqual(1);
+        expect(map.getTile(15, 2).options.y).toEqual(0);
+        expect(map.getTile(8, 8).type.name).toEqual("void");
+        expect(map.getTile(15, 15).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).options.sign).toEqual("B");
+        expect(map.getTile(8, 0).type.name).toEqual("wall");
+        expect(map.getTile(8, 0).options.sign).toEqual("M");
+    });
+});

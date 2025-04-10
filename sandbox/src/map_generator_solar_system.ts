@@ -9,7 +9,7 @@ import { range } from "./util";
 const MAP_SEED = 1337
 
 export function maps_create_solar_system(state: State, seed: number=MAP_SEED): State {
-    let solarsystem = _emptyMap(1024, 1024, MANIFEST.tiles.void)
+    let solarsystem = Map.createEmptyMap(1024, 1024, MANIFEST.tiles.void)
     solarsystem.id = "solarsystem=" + seed
     state.maps[solarsystem.id] = solarsystem
 
@@ -22,7 +22,7 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
 
     solarsystem = _randomizeVoidBackground(solarsystem, rng)
 
-    let star = _emptyMap(128, 128, MANIFEST.tiles.voidtrue)
+    let star = Map.createEmptyMap(128, 128, MANIFEST.tiles.voidtrue)
     _circle(star, 63, 63, 62, MANIFEST.tiles.star)
     _fill(star, 63, 63, MANIFEST.tiles.star)
     solarsystem.pasteOnto(star, 512 - 64, 512 - 64)
@@ -61,13 +61,11 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     }
 
     // TODO sampling test, write test case
-    /*
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular())
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32).circular(), 0, 42)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128).circular(), 0, 75)
     solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256).circular(), 0, 204)
-    */
 
     // Bot station
     let botStationMapString = MANIFEST.map_snippets.space_bot_station
@@ -80,23 +78,6 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
     solarsystem.pasteOnto(squareFalconMap, 590, 373)
 
     return state
-}
-
-function _emptyMap(widthTiles: number, heightTiles: number, tileType: TileType): Map {
-    const tiles = []
-    for (let i=0; i < widthTiles*heightTiles; i++) {
-        tiles.push(tiles_create(tileType))
-    }
-
-    const mapId = "__temp"
-    const map = new Map(
-        mapId,
-        widthTiles,
-        heightTiles,
-        tiles
-    );
-
-    return map
 }
 
 function _randomizeVoidBackground(map: Map, rng: RNG): Map {
