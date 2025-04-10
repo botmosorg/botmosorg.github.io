@@ -87,30 +87,7 @@ describe('Map', function () {
         expect(movementMap[13][7]).toEqual(0) // tree
         expect(movementMap[2][0]).toEqual(0) // portal
     })
-})
 
-describe('maps_parse', function () {
-    test('should parse map', function () {
-        const map = maps_parse(mapString);
-
-        expect(map.id).toEqual("preloader");
-        expect(map.widthTiles).toEqual(16);
-        expect(map.heightTiles).toEqual(16);
-        expect(map.getTile(0, 2).type.name).toEqual("portal");
-        expect(map.getTile(15, 2).type.name).toEqual("portal");
-        expect(map.getTile(15, 2).options.mapId).toEqual("arena");
-        expect(map.getTile(15, 2).options.x).toEqual(1);
-        expect(map.getTile(15, 2).options.y).toEqual(0);
-        expect(map.getTile(8, 8).type.name).toEqual("void");
-        expect(map.getTile(15, 15).type.name).toEqual("wall");
-        expect(map.getTile(7, 0).type.name).toEqual("wall");
-        expect(map.getTile(7, 0).options.sign).toEqual("B");
-        expect(map.getTile(8, 0).type.name).toEqual("wall");
-        expect(map.getTile(8, 0).options.sign).toEqual("M");
-    });
-});
-
-describe('Map', function () {
     test('should sample and paste maps', function () {
         let state: State = states_create()
         const solarsystem: Map = Map.createEmptyMap(512, 512, MANIFEST.tiles.void)
@@ -160,5 +137,26 @@ describe('Map', function () {
         expect(solarsystem.getTile(36, 241).type.name).toEqual("spacetree");
         expect(solarsystem.getTile(37, 240).type.name).toEqual("spacevoid");
         expect(solarsystem.getTile(255, 336).type.name).toEqual("void");
+    })
+})
+
+describe('maps_parse', function () {
+    test('should parse map', function () {
+        const map = maps_parse(mapString);
+
+        expect(map.id).toEqual("preloader");
+        expect(map.widthTiles).toEqual(16);
+        expect(map.heightTiles).toEqual(16);
+        expect(map.getTile(0, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).type.name).toEqual("portal");
+        expect(map.getTile(15, 2).options.mapId).toEqual("arena");
+        expect(map.getTile(15, 2).options.x).toEqual(1);
+        expect(map.getTile(15, 2).options.y).toEqual(0);
+        expect(map.getTile(8, 8).type.name).toEqual("void");
+        expect(map.getTile(15, 15).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).type.name).toEqual("wall");
+        expect(map.getTile(7, 0).options.sign).toEqual("B");
+        expect(map.getTile(8, 0).type.name).toEqual("wall");
+        expect(map.getTile(8, 0).options.sign).toEqual("M");
     });
 });
