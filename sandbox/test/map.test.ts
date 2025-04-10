@@ -110,7 +110,7 @@ describe('maps_parse', function () {
     });
 });
 
-describe('maps_parse', function () {
+describe('Map', function () {
     test('should sample and paste maps', function () {
         let state: State = states_create()
         const solarsystem: Map = Map.createEmptyMap(512, 512, MANIFEST.tiles.void)
