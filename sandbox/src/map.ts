@@ -131,6 +131,17 @@ export class Map {
     /**
      * Only do this for square maps!
      *
+     * For 6x6 map, this returns a 5x5 square and 1 tile voidtrue border below and right
+     * For 8x8 map. this returns something like this (# ... original tile, . ... voidtrue):
+     *     .#####..
+     *     #######.
+     *     #######.
+     *     #######.
+     *     #######.
+     *     #######.
+     *     .#####..
+     *     ........
+     *
      * @returns This map but in circular shape
      */
     circular(): Map {

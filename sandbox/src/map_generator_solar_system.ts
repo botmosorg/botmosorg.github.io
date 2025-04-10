@@ -60,13 +60,6 @@ export function maps_create_solar_system(state: State, seed: number=MAP_SEED): S
         //console.log("PASTED! " + xPlanetCenter + " " + yPlanetCenter)
     }
 
-    // TODO sampling test, write test case
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(16, 16).circular())
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(24, 24).circular(), 0, 17)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(32, 32).circular(), 0, 42)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(128, 128).circular(), 0, 75)
-    solarsystem.pasteOnto(state.maps["simplex=1337"].sample(256, 256).circular(), 0, 204)
-
     // Bot station
     let botStationMapString = MANIFEST.map_snippets.space_bot_station
     botStationMapString = botStationMapString.replace("!!O portal station 0 0", `!!O portal bot_elevator 11 47`)
