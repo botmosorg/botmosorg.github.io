@@ -28,6 +28,8 @@ statistics: ## Print project statistics
 	@du -bch ./build/ index.html | grep total | awk '{print $$1;}'
 	@echo -n '* TypeScript LOC: '
 	@wc -l src/*.ts | tail -1 | awk '{print $$1}'
+	@echo -n '* Line coverage (percent): '
+	@bun test --coverage 2>&1 >/dev/null | grep "All files" | awk '{print $$6}'
 	@echo -n '* Design/project management document size in lines: '
 	@cat ../../BACKLOG.md | wc -l
 	@echo -n '* TODO count in the codebase: '
