@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+	<title>BotMos</title>
+	<style>
+html {
+	/* Disable scrolling */
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+body {
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 18px; /* 18px 32px */
+	line-height: 1.5;
+	color: #74ee15;
+	background: #000;
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+canvas {
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+}
+a {
+	color: #ffe700;
+}
+#ui {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column-reverse;
+  user-select: none;
+}
+#uichatlog {
+  display: inline-block;
+  font-size: 14px; /* 14px 24px */
+  line-height: 1;
+  font-weight: normal;
+  align-self: flex-end;
+}
+#uitooltip {
+  display: none;
+  font-size: 14px; /* 14px 24px */
+  line-height: 1;
+  font-weight: normal;
+  background-color: #000;
+  border: 1px solid #74ee15;
+  padding: 1px;
+  align-self: flex-end;
+}
+#uimousetooltip {
+  display: none;
+  font-size: 14px; /* 14px 24px */
+  line-height: 1;
+  font-weight: normal;
+  background-color: #000;
+  border: 1px solid #74ee15;
+  padding: 3px;
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
+}
+	</style>
+</head>
+<body>
+	<script type="module" src="build/main.js"></script>
+	<noscript>Please activate JavaScript to play this game! Or go <a href="../">back</a>.</noscript>
+</body>
+</html>
