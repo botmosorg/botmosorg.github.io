@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
+<title>BotMos</title>
+
+<style>
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: #FFB019;
+    background: #070707;
+    margin: 1rem auto;
+    padding: 0 .6rem 1rem .6rem;
+    scroll-behavior: smooth;
+}
+a {
+    color: gold;
+}
+img { max-width: 100%; }
+
+.leaderboard-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 320px;
+    margin: 1rem auto;
+    text-align: left;
+}
+.leaderboard-form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.leaderboard-form label {
+    font-size: 0.9rem;
+    color: #FFB019;
+}
+.leaderboard-form input[type="text"],
+.leaderboard-form input[type="password"],
+.leaderboard-form input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+    background: #141414;
+    border: 1px solid #FFB019;
+    color: #FFB019;
+    padding: 0.5rem 0.6rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+.leaderboard-form input:focus {
+    outline: 1px solid gold;
+    border-color: gold;
+}
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-wrapper input {
+    padding-right: 2.4rem !important;
+}
+.password-toggle {
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #FFB019;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+}
+.password-toggle:hover {
+    color: gold;
+}
+.leaderboard-form button[type="submit"] {
+    background: #FFB019;
+    color: #070707;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+.leaderboard-form button[type="submit"]:hover {
+    background: gold;
+}
+.leaderboard-form button.clear-session-btn {
+    background: #141414;
+    color: #FFB019;
+    border: 1px solid #FFB019;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+.leaderboard-form button.clear-session-btn:hover {
+    background: #242424;
+    border-color: gold;
+    color: gold;
+}
+</style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>BotMos</h1>
+
+        <a href="sandbox/">
+            <img src="bot.png" alt="A bot" />
+        </a>
+
+        <p>
+            2D space roguelike in neon colors<br>
+            with robots operated by spirits,<br>
+            spaceships and lots of explorable planets
+        </p>
+        <p>
+            <a href="sandbox/">Development Sandbox</a><br>
+            <a href="sandbox/?b=300">Want to play using a phone gamepad covering part of your screen? Try this!</a><br>
+            <a href="https://www.twitch.tv/botmoses/">Twitch</a>
+        </p>
+        <hr>
+    </div>
+    <div style="text-align: center;">
+        <h2>BotMos: <a href="leaderboard.html">Leaderboard</a> Run</h2>
+        <form id="leaderboard-form" class="leaderboard-form" action="sandbox/" method="get">
+            <div class="field">
+                <label for="username"><b>Username</b> (public, optional, without you are Anonymous)</label>
+                <input type="text" id="username" name="username" maxlength="16" placeholder="Username">
+            </div>
+            <div class="field">
+                <label for="password"><b>Password</b> (optional, to claim/verify your username)</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" maxlength="128" placeholder="Password">
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Toggle password visibility" title="Toggle password visibility">
+                        <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg id="eye-closed" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="field">
+                <label for="bottom"><b>Bottom margin</b> (optional, in case you are using a phone gamepad over your screen)</label>
+                <input type="number" id="bottom" name="b" min="0" placeholder="e.g. 300">
+            </div>
+            <div>
+                <p style="font-size: 0.6rem;">You agree that your run is uploaded, processed and attributed to your username. Your username, salted password hash and consent are stored in sessionStorage. If set, your username and salted password hash are stored in a private GitHub repository. The leaderboard is not updated in real-time, but on a schedule. Inappropriate submissions may be filtered.</p>
+            </div>
+            <button type="submit">Start Run</button>
+            <button type="button" id="clear-session" class="clear-session-btn" style="display: none;">Clear BotMos Session Storage</button>
+        </form>
+        <hr>
+    </div>
+    <div style="text-align: center;">
+        <a href="traces/"><h2>BotMos: Tr@ces</h2></a>
+
+        <p>
+            Roguelite audio adventure
+        </p>
+        <hr>
+        <a href="about.html">About</a>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById('togglePassword');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const eyeOpen = document.getElementById('eye-open');
+        const eyeClosed = document.getElementById('eye-closed');
+
+        if (toggleBtn && passwordInput) {
+            toggleBtn.addEventListener('click', function () {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                eyeOpen.style.display = isPassword ? 'none' : 'block';
+                eyeClosed.style.display = isPassword ? 'block' : 'none';
+            });
+        }
+
+        if (usernameInput) {
+            usernameInput.addEventListener('input', function () {
+                usernameInput.setCustomValidity('');
+            });
+        }
+        if (passwordInput) {
+            passwordInput.addEventListener('input', function () {
+                passwordInput.setCustomValidity('');
+            });
+        }
+
+        async function hashPassword(password, salt) {
+            const text = (salt || 'botmos_salt') + ':' + password;
+            if (window.crypto && crypto.subtle) {
+                const data = new TextEncoder().encode(text);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                return Array.from(new Uint8Array(hashBuffer))
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join('');
+            }
+            let hash = 0;
+            for (let i = 0; i < text.length; i++) {
+                hash = ((hash << 5) - hash) + text.charCodeAt(i);
+                hash |= 0;
+            }
+            return Math.abs(hash).toString(16);
+        }
+
+        const leaderboardForm = document.getElementById('leaderboard-form');
+        if (leaderboardForm) {
+            leaderboardForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const username = usernameInput?.value.trim() || '';
+                const password = passwordInput?.value || '';
+                const bottom = document.getElementById('bottom')?.value.trim() || '';
+
+                if (usernameInput) usernameInput.setCustomValidity('');
+                if (passwordInput) passwordInput.setCustomValidity('');
+
+                if (username.length > 16) {
+                    if (usernameInput) {
+                        usernameInput.setCustomValidity('Username must be at most 16 characters long.');
+                        usernameInput.reportValidity();
+                    }
+                    return;
+                }
+
+                if (password.length > 128) {
+                    if (passwordInput) {
+                        passwordInput.setCustomValidity('Password must be at most 128 characters long.');
+                        passwordInput.reportValidity();
+                    }
+                    return;
+                }
+
+                let hashedPassword = '';
+                if (password) {
+                    const salt = username ? 'botmos:' + username.toLowerCase() : 'botmos_salt';
+                    hashedPassword = await hashPassword(password, salt);
+                }
+
+                try {
+                    sessionStorage.setItem('botmos_session', JSON.stringify({
+                        username: username || '',
+                        passwordHash: hashedPassword || '',
+                        uploadToLeaderboard: true
+                    }));
+                } catch (err) {
+                    console.warn('Unable to write to sessionStorage:', err);
+                }
+
+                const params = new URLSearchParams();
+                if (bottom) {
+                    params.set('b', bottom);
+                }
+
+                const qs = params.toString();
+                window.location.href = 'sandbox/' + (qs ? '?' + qs : '');
+            });
+        }
+
+        const clearSessionBtn = document.getElementById('clear-session');
+        function updateClearSessionButtonVisibility() {
+            if (!clearSessionBtn) return;
+            try {
+                if (sessionStorage.getItem('botmos_session') !== null) {
+                    clearSessionBtn.style.display = 'block';
+                } else {
+                    clearSessionBtn.style.display = 'none';
+                }
+            } catch (err) {
+                clearSessionBtn.style.display = 'none';
+            }
+        }
+
+        if (clearSessionBtn) {
+            clearSessionBtn.addEventListener('click', function () {
+                try {
+                    sessionStorage.removeItem('botmos_session');
+                } catch (err) {
+                    console.warn('Unable to clear sessionStorage:', err);
+                }
+                updateClearSessionButtonVisibility();
+            });
+            updateClearSessionButtonVisibility();
+        }
+    </script>
+</body>
+</html>
