@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
+<title>Leaderboard | BotMos</title>
+<style>
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: #FFB019;
+    background: #070707;
+    margin: 1rem auto;
+    padding: 0 .6rem 1rem .6rem;
+    max-width: 1100px;
+    scroll-behavior: smooth;
+}
+a {
+    color: gold;
+}
+img { max-width: 100%; }
+
+.header-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.header-container h1 {
+    margin-bottom: 0.25rem;
+}
+.nav-links {
+    margin: 0.5rem 0 0.75rem 0;
+}
+.nav-links a {
+    margin: 0 0.5rem;
+}
+.generated-info {
+    font-size: 0.85rem;
+    color: #d89614;
+    margin: 0.25rem 0 1rem 0;
+}
+
+.tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+.tab-btn {
+    background: #141414;
+    color: #FFB019;
+    border: 1px solid #FFB019;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+}
+.tab-btn:hover {
+    background: #242424;
+    border-color: gold;
+    color: gold;
+}
+.tab-btn.active {
+    background: #FFB019;
+    color: #070707;
+    border-color: gold;
+}
+
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+.tab-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.tab-header h2 {
+    margin-bottom: 0.25rem;
+}
+.category-desc {
+    font-size: 0.9rem;
+    color: #d89614;
+    margin-top: 0;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0 2rem 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #FFB019;
+    background: #0d0d0d;
+}
+th, td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #242424;
+    font-size: 0.95rem;
+    vertical-align: top;
+}
+th {
+    background: #141414;
+    color: #FFB019;
+    border-bottom: 2px solid #FFB019;
+    text-align: left;
+    white-space: nowrap;
+}
+tr:nth-child(even) {
+    background: #111111;
+}
+tr:hover {
+    background: #1a1a1a;
+}
+.rank-col {
+    text-align: center;
+    font-weight: bold;
+    color: gold;
+    width: 3.5rem;
+}
+.user-col {
+    font-weight: 500;
+    white-space: nowrap;
+}
+.verified-badge {
+    display: inline-block;
+    vertical-align: -0.15em;
+    margin-left: 0.35rem;
+    color: gold;
+    width: 0.95em;
+    height: 0.95em;
+}
+.date-col {
+    white-space: nowrap;
+    color: #d89614;
+}
+.num-col {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.empty-col {
+    text-align: center;
+    padding: 2rem;
+    color: #888888;
+    font-style: italic;
+}
+.replay-col {
+    text-align: center;
+    white-space: nowrap;
+}
+.replay-btn {
+    display: inline-block;
+    vertical-align: top;
+    background: #141414;
+    color: #FFB019;
+    border: 1px solid #FFB019;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+.replay-btn:hover {
+    background: #FFB019;
+    color: #070707;
+    border-color: gold;
+}
+
+details.run-details {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 0 0.35rem;
+    font-size: 0.85rem;
+    text-align: left;
+}
+details.run-details summary {
+    cursor: pointer;
+    color: #d89614;
+    user-select: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.2;
+    padding: 0.2rem 0.55rem;
+    background: #141414;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    list-style: none;
+    transition: all 0.15s ease-in-out;
+}
+details.run-details summary::-webkit-details-marker {
+    display: none;
+}
+details.run-details summary:hover {
+    color: gold;
+    border-color: #FFB019;
+    background: #1f1f1f;
+}
+details.run-details[open] summary {
+    background: #282008;
+    color: gold;
+    border-color: #FFB019;
+}
+.details-content {
+    margin-top: 0.4rem;
+    padding: 0.4rem;
+    background: #080808;
+    border: 1px solid #282828;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 0;
+    border: 1px solid #282828;
+    background: #0d0d0d;
+}
+.details-table th, .details-table td {
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #202020;
+    font-size: 0.8rem;
+}
+.details-table th {
+    background: #161616;
+    color: #FFB019;
+    border-bottom: 1px solid #FFB019;
+    white-space: nowrap;
+}
+.details-table tr:nth-child(even) {
+    background: #111111;
+}
+.details-table tr.current-upload {
+    background: #231c08;
+    font-weight: 500;
+}
+.details-table tr:hover {
+    background: #1c1c1c;
+}
+.upload-idx {
+    text-align: center;
+    font-weight: bold;
+    color: #d89614;
+}
+.active-badge {
+    color: gold;
+    font-size: 0.85em;
+}
+.server-id {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #999999;
+}
+
+footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+.version-info {
+    font-size: 0.85rem;
+    color: #d89614;
+    margin: 0.25rem 0;
+}
+</style>
+</head>
+<body>
+    <div class="header-container">
+        <h1><a href="index.html">BotMos</a> Leaderboard</h1>
+    </div>
+
+    <div class="tabs-nav">
+        <button type="button" class="tab-btn active" id="btn-tab-1-gold" onclick="openTab('tab-1-gold')">1 Gold</button>
+        <button type="button" class="tab-btn" id="btn-tab-most-gold" onclick="openTab('tab-most-gold')">Most Gold</button>
+        <button type="button" class="tab-btn" id="btn-tab-cheater-corner" onclick="openTab('tab-cheater-corner')">Cheater Corner</button>
+    </div>
+
+    <div id="tab-1-gold" class="tab-content active">
+        <div class="tab-header">
+            <p class="category-desc">Least amount of turns to reach the first gold coin.</p>
+        </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="rank-col">#</th>
+              <th>Username</th>
+              <th>Date</th>
+              <th class="num-col">Turns</th>
+              <th class="num-col">Gold</th>
+              <th class="num-col">Game Overs</th>
+              <th class="replay-col">Replay</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="rank-col">1</td>
+            <td class="user-col">oz <svg class="verified-badge" title="Verified user" aria-label="Verified user" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="7 12.5 10.5 16 17 8"></polyline></svg></td>
+            <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+            <td class="num-col">6787</td>
+            <td class="num-col">1</td>
+            <td class="num-col">0</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F92e5d42892505d5933d770a19821a651545f7096c0ab0930f552911544949932.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">3 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr class="current-upload">
+              <td class="upload-idx">1 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="6c2b2d00-b415-4b9a-95a4-08d064438d32">6c2b2d00</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">6787</td>
+              <td class="num-col">1</td>
+              <td class="num-col">0</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">2</td>
+              <td><span class="server-id" title="4e12a14b-b109-4535-9ca5-504d91f64309">4e12a14b</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">7105</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">3</td>
+              <td><span class="server-id" title="1545f522-0661-4a25-940e-d5fe7b495201">1545f522</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">7374</td>
+              <td class="num-col">1</td>
+              <td class="num-col">2</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-most-gold" class="tab-content">
+        <div class="tab-header">
+            <p class="category-desc">Highest total gold collected.</p>
+        </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="rank-col">#</th>
+              <th>Username</th>
+              <th>Date</th>
+              <th class="num-col">Turns</th>
+              <th class="num-col">Gold</th>
+              <th class="num-col">Game Overs</th>
+              <th class="replay-col">Replay</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="rank-col">1</td>
+            <td class="user-col">oz <svg class="verified-badge" title="Verified user" aria-label="Verified user" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="7 12.5 10.5 16 17 8"></polyline></svg></td>
+            <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+            <td class="num-col">7374</td>
+            <td class="num-col">1</td>
+            <td class="num-col">2</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F92e5d42892505d5933d770a19821a651545f7096c0ab0930f552911544949932.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">3 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr>
+              <td class="upload-idx">1</td>
+              <td><span class="server-id" title="6c2b2d00-b415-4b9a-95a4-08d064438d32">6c2b2d00</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">6787</td>
+              <td class="num-col">1</td>
+              <td class="num-col">0</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">2</td>
+              <td><span class="server-id" title="4e12a14b-b109-4535-9ca5-504d91f64309">4e12a14b</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">7105</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr class="current-upload">
+              <td class="upload-idx">3 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="1545f522-0661-4a25-940e-d5fe7b495201">1545f522</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">7374</td>
+              <td class="num-col">1</td>
+              <td class="num-col">2</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          <tr>
+            <td class="rank-col">2</td>
+            <td class="user-col">oz <svg class="verified-badge" title="Verified user" aria-label="Verified user" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="7 12.5 10.5 16 17 8"></polyline></svg></td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">17</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2Fb22cd5313157a776aec025ba58c8cd8d115184bbbfaf1e599cd51022915109fd.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">3</td>
+            <td class="user-col">oz <svg class="verified-badge" title="Verified user" aria-label="Verified user" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="7 12.5 10.5 16 17 8"></polyline></svg></td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">58</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2Fc0374e4ab0b5d21d310097bc0428ce3d2cd2474e2fe5741827aa975659d8ca04.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">4</td>
+            <td class="user-col">Anonymous</td>
+            <td class="date-col">2026-08-29 (0.0.8-dev)</td>
+            <td class="num-col">138</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2Fc475aec653e1a1a28cdd740d636d5e91de36acd6758c981fd1bdee08e494ead4.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">5</td>
+            <td class="user-col">Leverfun</td>
+            <td class="date-col">2026-08-22 (0.0.8-dev)</td>
+            <td class="num-col">289</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F3f371d00ef0d0615d0e12fc3d13cb40377611b436e135e42ee2506b38ee898c2.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">6</td>
+            <td class="user-col">Jailbreak</td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">657</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F94177d7722996168dd33bb36d7472bf95ded74e3e2c7d92b69351e54f27b265e.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">7</td>
+            <td class="user-col">Cleaner</td>
+            <td class="date-col">2026-08-22 (0.0.8-dev)</td>
+            <td class="num-col">821</td>
+            <td class="num-col">0</td>
+            <td class="num-col">2</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F4695b4855e3d46bbd444ab2b4f435217af87832f399c648e0268a3f2e1aaaf8f.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">2 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr>
+              <td class="upload-idx">1</td>
+              <td><span class="server-id" title="0cc3635a-f14a-4af8-970d-932bffa4188c">0cc3635a</span></td>
+              <td class="date-col">2026-08-22 (0.0.8-dev)</td>
+              <td class="num-col">420</td>
+              <td class="num-col">0</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr class="current-upload">
+              <td class="upload-idx">2 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="abc2d6aa-23f3-4485-9dc7-1d4ddb4b54ae">abc2d6aa</span></td>
+              <td class="date-col">2026-08-22 (0.0.8-dev)</td>
+              <td class="num-col">821</td>
+              <td class="num-col">0</td>
+              <td class="num-col">2</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-cheater-corner" class="tab-content">
+        <div class="tab-header">
+            <p class="category-desc">Highest gold counter using the cheat item.</p>
+        </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="rank-col">#</th>
+              <th>Username</th>
+              <th>Date</th>
+              <th class="num-col">Turns</th>
+              <th class="num-col">Gold</th>
+              <th class="num-col">Game Overs</th>
+              <th class="num-col">Cheats</th>
+              <th class="replay-col">Replay</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="rank-col">1</td>
+            <td class="user-col">Anonymous</td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">124</td>
+            <td class="num-col">1</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F21e0a4a41a0898f4aaae00ecfb8a4e8e9078d331de80f64eac6229d70efa2ce8.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">2</td>
+            <td class="user-col">oz <svg class="verified-badge" title="Verified user" aria-label="Verified user" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><polyline points="7 12.5 10.5 16 17 8"></polyline></svg></td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">290</td>
+            <td class="num-col">1</td>
+            <td class="num-col">6</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F90f07f213cdaeed91fca6c2a24d6770069190a20c7b2143f393d85ee73f4fd0a.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">7 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                <th class="num-col">Cheats</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr>
+              <td class="upload-idx">1</td>
+              <td><span class="server-id" title="3dde0d01-9492-4d72-b2b9-9ec13c517e78">3dde0d01</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">129</td>
+              <td class="num-col">1</td>
+              <td class="num-col">0</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">2</td>
+              <td><span class="server-id" title="80f1b8ae-79d1-494a-ab4d-b8acc8e20fb4">80f1b8ae</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">203</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">3</td>
+              <td><span class="server-id" title="00a9510a-bf36-4070-8b7c-693713000061">00a9510a</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">221</td>
+              <td class="num-col">1</td>
+              <td class="num-col">2</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">4</td>
+              <td><span class="server-id" title="f8632f62-7d1b-490d-9272-b7d13342df1e">f8632f62</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">239</td>
+              <td class="num-col">1</td>
+              <td class="num-col">3</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">5</td>
+              <td><span class="server-id" title="51c8a266-cb0b-43e9-b39f-6801287aff56">51c8a266</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">256</td>
+              <td class="num-col">1</td>
+              <td class="num-col">4</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr>
+              <td class="upload-idx">6</td>
+              <td><span class="server-id" title="dba5758c-256c-4565-92ee-d3baadc02b51">dba5758c</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">273</td>
+              <td class="num-col">1</td>
+              <td class="num-col">5</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr class="current-upload">
+              <td class="upload-idx">7 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="b49564d7-dd1c-4c98-b9a7-ec4f7197b861">b49564d7</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">290</td>
+              <td class="num-col">1</td>
+              <td class="num-col">6</td>
+              <td class="num-col">1</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          <tr>
+            <td class="rank-col">3</td>
+            <td class="user-col">Vibin with Richy</td>
+            <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+            <td class="num-col">1177</td>
+            <td class="num-col">1</td>
+            <td class="num-col">1</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F5e4ea6117be7e0e1973770975d9ff2f9f0be8710a6589879a6a1e6cbc8b392e3.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">2 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                <th class="num-col">Cheats</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr>
+              <td class="upload-idx">1</td>
+              <td><span class="server-id" title="f7ad4766-d4d4-4a9a-9415-a3ecf4ff1d77">f7ad4766</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">148</td>
+              <td class="num-col">1</td>
+              <td class="num-col">0</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr class="current-upload">
+              <td class="upload-idx">2 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="18d5fb04-caee-436d-86a8-1e82a4d6943f">18d5fb04</span></td>
+              <td class="date-col">2026-08-21 (0.0.8-dev)</td>
+              <td class="num-col">1177</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          <tr>
+            <td class="rank-col">4</td>
+            <td class="user-col">Bugger Life</td>
+            <td class="date-col">2026-08-22 (0.0.8-dev)</td>
+            <td class="num-col">300</td>
+            <td class="num-col">0</td>
+            <td class="num-col">1</td>
+            <td class="num-col">10</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2Fb9e6e68a7ea8eac32766aeca702313ce42fd3eaed56df30556794a270f72a20a.json" class="replay-btn" title="Replay run in BotMos">Replay</a></td>
+          </tr>
+          <tr>
+            <td class="rank-col">5</td>
+            <td class="user-col">Rat King</td>
+            <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+            <td class="num-col">751</td>
+            <td class="num-col">0</td>
+            <td class="num-col">2</td>
+            <td class="num-col">1</td>
+            <td class="replay-col"><a href="sandbox/?run=https%3A%2F%2Fbotmos.org%2Fleaderboard%2Fpublic%2F1f2a654c9e0f8f00c60160aa91e04a7108e4c7740a32ea86c109676dac219c41.json" class="replay-btn" title="Replay run in BotMos">Replay</a>
+          <details class="run-details">
+            <summary class="details-summary">2 uploads</summary>
+            <div class="details-content">
+              <table class="details-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Upload ID</th>
+                    <th>Date</th>
+                    <th class="num-col">Turns</th>
+                    <th class="num-col">Gold</th>
+                    <th class="num-col">Game Overs</th>
+                <th class="num-col">Cheats</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <tr>
+              <td class="upload-idx">1</td>
+              <td><span class="server-id" title="b43f61c5-deb6-42e7-b420-b708f03ada62">b43f61c5</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">665</td>
+              <td class="num-col">0</td>
+              <td class="num-col">1</td>
+              <td class="num-col">1</td>
+            </tr>
+            <tr class="current-upload">
+              <td class="upload-idx">2 <span class="active-badge" title="Ranked upload">★</span></td>
+              <td><span class="server-id" title="1aa92884-9caa-409b-9168-2bd7bb28f6b5">1aa92884</span></td>
+              <td class="date-col">2026-08-23 (0.0.8-dev)</td>
+              <td class="num-col">751</td>
+              <td class="num-col">0</td>
+              <td class="num-col">2</td>
+              <td class="num-col">1</td>
+            </tr>
+                </tbody>
+              </table>
+            </div>
+          </details></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+        <p><a href="about.html">About</a></p>
+        <p class="version-info">BotMos version: 0.0.8-dev (* non-current versions may have broken replays)</p>
+        <p class="generated-info">Generated: <time datetime="2026-09-05T14:38:41.528Z">2026-09-05 14:38:41 UTC</time></p>
+    </footer>
+
+    <script>
+        function openTab(tabId, updateHash) {
+            if (updateHash === undefined) updateHash = true;
+            var contents = document.querySelectorAll('.tab-content');
+            var buttons = document.querySelectorAll('.tab-btn');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+            for (var j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+            }
+            var target = document.getElementById(tabId);
+            var btn = document.getElementById('btn-' + tabId);
+            if (target) target.classList.add('active');
+            if (btn) btn.classList.add('active');
+            if (updateHash && window.history && window.history.replaceState) {
+                var hash = tabId.replace('tab-', '');
+                window.history.replaceState(null, '', '#' + hash);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            var hash = window.location.hash ? window.location.hash.substring(1) : '';
+            if (hash) {
+                var tabId = 'tab-' + hash;
+                if (document.getElementById(tabId)) {
+                    openTab(tabId, false);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
